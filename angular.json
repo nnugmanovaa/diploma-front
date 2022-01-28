@@ -7,13 +7,25 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
         }
       },
       "root": "projects/mfo-app",
       "sourceRoot": "projects/mfo-app/src",
       "prefix": "mfo",
-      "spec": false,
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -29,7 +41,8 @@
               "projects/mfo-app/src/assets"
             ],
             "styles": [
-              "projects/mfo-app/src/styles.scss"
+              "projects/mfo-app/src/styles.scss",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           },

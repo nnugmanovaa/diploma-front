@@ -9,9 +9,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
-  declarations: [ProfileComponent, RegisterComponent],
+  declarations: [ProfileComponent, RegisterComponent, LoginComponent],
   imports: [
     IMaskModule,
     ProfileRoutingModule,

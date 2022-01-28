@@ -24,7 +24,6 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser(){
-    console.log('form')
     this.registerService.sendOTP(this.registerForm).subscribe(res => {
 
     })

@@ -1,7 +1,7 @@
 @import url(normalize.scss);
 
 body, button, input, textarea, select{
-  font-family: 'Lato', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 body{
@@ -17,9 +17,124 @@ h1{
   line-height: 1.2;
 }
 
+.content-title{
+  font-weight: 600;
+  font-size: 32px;
+  margin-bottom: 20px;
+  line-height: 43px;
+}
+
+form button:active{
+  opacity: .7;
+}
+
+body{
+  .toast {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    position: relative;
+    background-color: #030303;
+  }
+
+  .toast-success {
+    background-color: #2EC764;
+  }
+
+  .toast-error {
+    background-color: #FF6382;
+  }
+
+  .toast-info {
+    background-color: #2f96b4;
+  }
+
+  .toast-wait {
+    background-color: #2f96b4;
+  }
+
+  .toast-warning {
+    background-color: #f89406;
+  }
+}
 
 .container{
   max-width: 1000px;
   margin: 0 auto;
   padding: 0 20px;
+}
+
+
+.profile-page{
+  form {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .label-input {
+    margin-bottom: 20px;
+    label {
+      color: rgba(0, 0, 0, 0.6);
+      font-size: 18px;
+      line-height: 22px;
+      display: block;
+      margin-bottom: 5px;
+      i {
+        color: red;
+      }
+    }
+    input {
+      width: 100%;
+      border: 1px solid #42A8FA;
+      box-sizing: border-box;
+      border-radius: 6px;
+      padding: 15px;
+      font-size: 18px;
+    }
+  }
+
+  .label-checkbox{
+    margin-bottom: 20px;
+    label{
+      display: flex;
+      span{
+        font-size: 14px;
+        // line-height: 24px;
+        letter-spacing: -0.3px;
+        color: rgba(4, 4, 21, 0.6);
+      }
+    }
+  }
+
+  .form-top{
+    text-align: center;
+    h2{
+      font-weight: bold;
+      font-size: 33px;
+      line-height: 43px;
+      margin-bottom: 20px;
+    }
+    a.link{
+      font-size: 24px;
+      color: #42A8FA;
+      margin-bottom: 30px;
+      display: inline-flex;
+    }
+  }
+
+  .btn{
+    background: #42A8FA;
+    width: 100%;
+    border:none;
+    font-size: 24px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: flex;
+    height: 52px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    margin: 30px 0;
+  }
 }

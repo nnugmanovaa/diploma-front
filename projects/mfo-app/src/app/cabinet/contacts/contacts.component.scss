@@ -1,0 +1,19 @@
+ul {
+  margin-bottom: 70px;
+  li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+    .right p {
+      color: rgba(0, 0, 0, 0.6);
+    }
+  }
+}
+
+.bottom-info {
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: -0.3px;
+  color: #8F8F8F;
+}

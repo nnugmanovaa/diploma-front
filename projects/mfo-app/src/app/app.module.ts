@@ -11,7 +11,10 @@ import localeRu from '@angular/common/locales/ru';
 import { HeaderComponent } from './shared/header/header.component';
 
 import { HttpClientModule } from '@angular/common/http';
-
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthInterceptor } from './core/interceptors/auth.interceptors';
 registerLocaleData(localeRu, 'ru');
 
 @NgModule({
@@ -22,9 +25,18 @@ registerLocaleData(localeRu, 'ru');
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'ru' }],
+  providers: [
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi   : true,
+    },
+    { provide: LOCALE_ID, useValue: 'ru' }
+  ],
   bootstrap: [AppComponent]
 })
 

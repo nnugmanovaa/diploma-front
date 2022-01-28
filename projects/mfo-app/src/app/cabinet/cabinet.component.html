@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="sidebar">
+    <ul>
+      <li>
+        <a [routerLink]="['/cabinet/cashed-out']" routerLinkActive="active">Открытый микрокредит</a>
+      </li>
+      <li>
+        <a [routerLink]="['/cabinet/history']" routerLinkActive="active">История микрокредитов</a>
+      </li>
+      <li>
+        <a [routerLink]="['/cabinet/change-password']" routerLinkActive="active">Смена пароля</a>
+      </li>
+      <li>
+        <a [routerLink]="['/cabinet/contacts']" routerLinkActive="active">Связаться с нами</a>
+      </li>
+      <li>
+        <a [routerLink]="['/cabinet/payment-types']" routerLinkActive="active">Способы погашения</a>
+      </li>
+      <li>
+        <a [routerLink]="['/cabinet/deferred-payment']" routerLinkActive="active">Продление микрокредита</a>
+      </li>
+    </ul>
+    <div class="text-center">
+      <div class="btn-custom">Получить<br>микрокредит</div>
+    </div>
+  </div>
+  <div class="right">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<footer>Copyright © 2022 | МФО “Zaimem”</footer>

@@ -1,0 +1,24 @@
+p{
+  margin-bottom: 20px;
+  font-weight: 300;
+  b{
+    font-weight: 600;
+  }
+}
+
+table{
+  width: 100%;
+  letter-spacing: -0.4px;
+  th{
+    background: rgba(66, 168, 250, 0.1);
+    padding: 24px 15px;
+    font-weight: 600;
+    text-align: left;
+  }
+  td{
+    padding: 15px;
+  }
+  tr:nth-child(even){
+    background: rgba(66, 168, 250, 0.1);
+  }
+}

@@ -14,6 +14,35 @@ header{
       gap:40px;
       font-size: 15px;
     }
+    &-cabinet-nav{
+      a{
+        padding: 15px 13px;
+        border-radius: 20px;
+        display: flex;
+        gap:10px;
+        &.active{
+          background: #42A8FA;
+          color: #fff;
+          position: relative;
+          &:after{
+            position: absolute;
+            content: '';
+            bottom:-10px;
+            left:calc(50% - 5px);
+            border-top:10px solid #42A8FA;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+          }
+        }
+        &.settings-page{
+          background: transparent;
+          color: #000;
+          &:after{
+            display: none;
+          }
+        }
+      }
+    }
     &-phone{
       display: flex;
       align-items: center;

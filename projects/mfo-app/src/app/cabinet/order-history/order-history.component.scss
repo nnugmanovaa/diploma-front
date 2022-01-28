@@ -1,0 +1,26 @@
+ul li {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  cursor: pointer;
+  padding: 21px 0 18px;
+  border-bottom: 1px solid #CCC9C9;
+  .center{
+    span{
+      color: rgba(0, 0, 0, 0.6);
+    }
+    p{
+
+    }
+  }
+  .right {
+    margin-left: auto;
+    text-align: right;
+    p{
+      font-weight: 600;
+    }
+    .status{
+      color: #34BE82;
+    }
+  }
+}
