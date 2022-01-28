@@ -1,0 +1,25 @@
+@import url(normalize.scss);
+
+body, button, input, textarea, select{
+  font-family: 'Lato', sans-serif;
+}
+
+body{
+  color: #000000;
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: normal;
+}
+
+h1{
+  font-size: 48px;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+
+.container{
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}

@@ -1,0 +1,33 @@
+<header>
+  <div class="container">
+    <div class="ht">
+      <ul class="ht-nav">
+        <li>
+          <a href="">Как получить</a>
+        </li>
+        <li>
+          <a href="">Как погасить</a>
+        </li>
+        <li>
+          <a href="">Условия</a>
+        </li>
+      </ul>      
+      <a href="tel:+7 (777) 143-15-14" class="ht-phone">
+        <img src="assets/img/call-ico.svg" alt="">
+        <span class="ht-phone-right">
+          <b>+7 (777) 143-15-14</b>
+          <span>Ежедневно с 8.00 до 22.00</span>
+        </span>
+      </a>
+    </div>
+    <div class="hb">
+      <a class="hb-logo" [routerLink]="['/']">
+        <img src="assets/img/logo.svg" alt="">
+      </a>
+      <div class="hb-btns">
+        <a [routerLink]="['/login']" class="hb-btn hb-pay">Оплатить</a>
+        <a [routerLink]="['/login']" class="hb-btn hb-login" *ngIf="!hideLogin">Войти</a>
+      </div>
+    </div>
+  </div>
+</header>

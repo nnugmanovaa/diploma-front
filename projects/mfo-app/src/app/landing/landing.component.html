@@ -1,0 +1,116 @@
+<main class="main">
+  <div class="container">
+    <div class="main-left">
+      <h1>Микрокредит онлайн до 500 000 ₸</h1>
+      <ul>
+        <li>Деньги у вас уже в 11:11</li>
+        <li>1 минута решение по выдаче</li>
+        <li>от 4.8% годовых</li>
+      </ul>
+      <div class="main-left-img">
+        <img src="assets/img/main-img.png" alt="">
+      </div>
+    </div>
+    <div class="main-right">
+      <form ngNativeValidate (ngSubmit)="createRequest()" class="form-calculate">
+        <h2>Получить микрокредит</h2>
+        <div class="custom-slider">
+          <div class="slider-info">
+            <p>Срок микрокредитования</p>
+            <span>{{ form.month }} мес.</span>
+          </div>
+          <ngx-slider [(value)]="form.month" [options]="monthOptions"></ngx-slider>
+          <div class="month-bottom">
+            <p (click)="form.month = 2">от 2 месяцев</p>
+            <p (click)="form.month = 6">6 месяцев</p>
+            <p (click)="form.month = 12">12 месяцев</p>
+          </div>
+        </div>
+        <div class="custom-slider">
+          <div class="slider-info">
+            <p>Сумма микрокредита</p>
+            <span>{{ form.price | currency: 'CLP':'₸' }} </span>
+          </div>
+          <ngx-slider [(value)]="form.price" [options]="priceOptions"></ngx-slider>
+          <div class="month-bottom">
+            <p (click)="form.price = 25000" style="min-width: 80px;">0 ₸</p>
+            <p (click)="form.price = 250000">250 000 ₸</p>
+            <p (click)="form.price = 500000">до 500 000 ₸</p>
+          </div>
+        </div>
+        <div class="form-label">
+          <label>Порядок погашения</label>
+          <select [(ngModel)]="form.type" name="type">
+            <option value="annuity">Аннуитетный</option>
+            <option value="graded">Дифференцированный</option>
+          </select>
+        </div>
+        <div class="form-monthly">
+          <p>Ежемесячный платеж</p>
+          <b>{{ form.price / form.month | currency: 'CLP':'₸' }}</b>
+        </div>
+        <button type="submit">Получить</button>
+      </form>
+    </div>
+  </div>
+</main>
+
+<section class="why-we">
+  <div class="container">
+    <h1>Почему мы?</h1>
+    <ul>
+      <li>
+       <div class="left"><img src="assets/img/why1.svg" alt=""></div>
+       <div class="right">
+         <h2>Всё онлайн</h2>
+         <p>Для заявки нужен <br>только интернет</p>
+       </div>
+      </li>
+      <li>
+       <div class="left"><img src="assets/img/why2.svg" alt=""></div>
+       <div class="right">
+         <h2>Простое оформление</h2>
+         <p>Заполните за 7 минут</p>
+       </div>
+      </li>
+      <li>
+       <div class="left"><img src="assets/img/why3.svg" alt=""></div>
+       <div class="right">
+         <h2>Гибкий срок микрокредитования</h2>
+         <p>от 6 до 60 месяцев</p>
+       </div>
+      </li>
+      <li>
+       <div class="left"><img src="assets/img/why4.svg" alt=""></div>
+       <div class="right">
+         <h2>Удобное погашение</h2>
+         <p>Оплатите онлайн или <br>используйте сеть терминалов</p>
+       </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="how-to-checkout">
+  <div class="container">
+    <h1>Как оформить займ за 5 минут</h1>
+    <p>Оформите займ не входя из дома онлайн на карту или в офисе Zaimem.kz. <br>Нужен только паспорт РК. Оформление займет не более 10 минут, деньги поступят на счет - мгновенно.</p>
+  </div>
+</section>
+
+<section class="how-to-repay">
+  <div class="container">
+    <h1>Как погасить микрокредит</h1>
+  </div>
+</section>
+
+<section class="conditions">
+  <div class="container">
+    <h1>Условия</h1>
+  </div>
+</section>
+
+<footer>
+  <p class="cpr">Copyright © 2022 | МФО “Zaimem”</p>
+</footer>
+

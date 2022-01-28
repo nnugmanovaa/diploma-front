@@ -1,0 +1,33 @@
+<section>
+  <div class="container">
+    <form ngNativeValidate (ngSubmit)="registerUser()">
+      <div class="form-top">
+        <h2>Заявка на микрокредит</h2>
+        <a href="" class="link">Контактная информация</a>
+      </div>
+      <div class="label-input">
+        <label for="">Мобильный телефон <i>*</i></label>
+        <input [imask]="{mask: '+{7}0000000000',lazy: false}" [(ngModel)]="registerForm.msisdn" name="msisdn">
+      </div>
+      <div class="label-input">
+        <label for="">Фамилия</label>
+        <input type="text">
+      </div>
+      <div class="label-input">
+        <label for="">Имя</label>
+        <input type="text">
+      </div>
+      <div class="label-input">
+        <label for="">ИИН</label>
+        <input type="text">
+      </div>
+      <div class="label-checkbox">
+        <label>
+          <input type="checkbox">
+          <span>Я даю свое согласие на сбор, обработку и использование моих персональных данных</span>
+        </label>
+      </div>
+      <button class="btn" type="submit">Далее</button>
+    </form>
+  </div>
+</section>
