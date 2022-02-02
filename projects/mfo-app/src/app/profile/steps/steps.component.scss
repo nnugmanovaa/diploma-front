@@ -1,0 +1,207 @@
+.step-progress {
+  max-width: 400px;
+  margin: 0 auto 20px;
+  p {
+    font-size: 14px;
+    line-height: 17px;
+    color: rgba(0, 0, 0, 0.6);
+    margin-bottom: 10px;
+  }
+  .progress {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    border-radius: 10px;
+    height: 10px;
+    span {
+      height: 10px;
+      background: #42A8FA;
+      border-radius: 10px;
+      display: block;
+      transition: all .3s ease-in-out;
+    }
+  }
+}
+
+.half-form {
+  display: flex;
+  gap: 10px;
+}
+
+p.info-text{
+  text-align: left;
+  margin-bottom: 20px;
+  span{
+    color: #42A8FA;
+    font-weight: 600;
+  }
+}
+
+
+.back-btn{
+  display: inline-flex;
+  gap:12px;
+  font-size: 18px;
+  line-height: 22px;
+  margin-bottom: 20px;
+}
+
+
+// PAYMENTS
+
+.progress-ring__circle {
+  transition: 0.35s stroke-dashoffset;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+.loader {
+  text-align: center;
+}
+.loader{
+  h2{
+    letter-spacing: -0.4px;
+    color: #040415;
+    font-size: 24px;
+    font-weight: 600;
+  }
+  p{
+    font-size: 14px;
+    line-height: 24px;
+    text-align: center;
+    letter-spacing: -0.3px;
+    color: rgba(4, 4, 21, 0.6);
+  }
+}
+.top {
+  display: inline-flex;
+  position: relative;
+  margin-bottom: 50px;
+}
+
+.top .percent {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: 8px;
+  bottom: 8px;
+  font-size: 48px;
+  line-height: 46px;
+  font-weight: 600;
+  color: #040415;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(45, 158, 100, 0.1);
+  border-radius: 50%;
+}
+
+.top svg{
+  position: relative;
+  z-index:10;
+}
+
+.error-result, .success-result {
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
+  .info-text{
+    font-size: 15px;
+    line-height: 26px;
+    letter-spacing: -0.355556px;
+    color: rgba(4, 4, 21, 0.4);
+    margin-bottom: 20px;
+  }
+  .file{
+    letter-spacing: -0.3px;
+    text-decoration-line: underline;
+    color: #42A8FA;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap:12px;
+    text-align: left;
+    cursor: pointer;
+    p, img{
+      margin: 0;
+    }
+  }
+  img {
+    display: inline-flex;
+    margin-bottom: 30px;
+  }
+  h2 {
+    font-size: 22px;
+    line-height: 32px;
+    text-align: center;
+    letter-spacing: -0.4px;
+    color: #040415;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .btn {
+    display: inline-flex;
+    background: #42A8FA;
+    border-radius: 6px;
+    width: 100%;
+    max-width: 400px;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    padding: 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    &.btn-default{
+      background: rgba(0, 0, 0, 0.1);
+      color: #000000;
+      letter-spacing: -0.3px;
+    }
+  }
+}
+
+.modal-content{
+  background: #fff;
+  padding: 30px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  .form-top {
+    p{
+    }
+    h2{
+      font-size: 22px;
+      line-height: 32px;
+      text-align: center;
+      letter-spacing: -0.4px;
+      color: #040415;
+    }
+  }
+  .form-content{
+    .resend-pass{
+      font-size: 18px;
+      line-height: 22px;
+      text-align: center;
+      text-decoration-line: underline;
+      color: #42A8FA;
+      font-weight: 600;
+    }
+    .text-center{
+      text-align: center;
+      max-width: 170px;
+      margin: 0 auto;
+      .btn{
+        width: 100%;
+      }
+      h3{
+        margin-top: 20px;
+        font-size: 25px;
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+      input{
+        font-weight: 600;
+        font-size: 25px;
+        text-align: center;
+      }
+    }
+  }
+}

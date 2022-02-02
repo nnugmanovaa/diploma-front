@@ -1,7 +1,19 @@
-<div class="content">
-  <h2 class="content-title">История микрокредитов</h2>
+<div class="content" *ngIf="list">
+  <div class="top">
+    <h2 class="content-title">История микрокредитов</h2>
+    <div class="dates">
+      <div class="left">
+        <span>c:</span>
+        <input type="date" [(ngModel)]="params.startDate" (ngModelChange)="getOrders()">
+      </div>
+      <div class="right">
+        <span>по:</span>
+        <input type="date" [(ngModel)]="params.endDate" (ngModelChange)="getOrders()">
+      </div>
+    </div>
+  </div>
   <ul>
-    <li *ngFor="let item of list">
+    <li *ngFor="let item of list.content">
       <img src="assets/img/doc.svg" alt="">
       <div class="center">
         <span>Займ №{{ item.orderId }}</span>
@@ -9,8 +21,28 @@
       </div>
       <div class="right">
         <p>{{ item.loanAmount | currency: 'CLP':'₸' }}</p>
-        <div class="status {{ item.status }}">{{ item.status }}</div>
+        <div class="status {{ item.status }}">{{ Status[item.status] }}</div>
       </div>
     </li>
   </ul>
+
+  <p class="empty" *ngIf="list?.empty">нет данных</p>
+
+  <div class="pagination" *ngIf="list.totalPages">
+    <ol>
+      <li (click)="changePage(params.page - 1, !list.first)">
+        <svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 1.5197L8.48329 0L0 8.5L8.48329 17L10 15.4803L3.03342 8.5L10 1.5197Z" fill="#666666"/>
+        </svg>
+      </li>
+      <li *ngFor="let loop3 of counter(list.totalPages) ;let i= index" (click)="changePage(i)" [class.active]="i == params.page">
+        {{ i+1 }}
+      </li>
+      <li (click)="changePage(params.page + 1, !list.last)">
+        <svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 15.4803L1.51671 17L10 8.5L1.51671 0L0 1.5197L6.96658 8.5L0 15.4803Z" fill="#666666"/>
+        </svg>
+      </li>
+    </ol>
+  </div>
 </div>

@@ -1,56 +1,18 @@
 <main class="main">
   <div class="container">
     <div class="main-left">
-      <h1>Микрокредит онлайн до 500 000 ₸</h1>
+      <h1>Микрокредит онлайн<br>до 500 000 ₸</h1>
       <ul>
-        <li>Деньги у вас уже в 11:11</li>
+        <li>Деньги у вас уже в {{ time }}</li>
         <li>1 минута решение по выдаче</li>
         <li>от 4.8% годовых</li>
       </ul>
       <div class="main-left-img">
-        <img src="assets/img/main-img.png" alt="">
+        <img src="assets/img/main-img.png" alt="" class="desctop">
       </div>
     </div>
     <div class="main-right">
-      <form ngNativeValidate (ngSubmit)="createRequest()" class="form-calculate">
-        <h2>Получить микрокредит</h2>
-        <div class="custom-slider">
-          <div class="slider-info">
-            <p>Срок микрокредитования</p>
-            <span>{{ form.month }} мес.</span>
-          </div>
-          <ngx-slider [(value)]="form.month" [options]="monthOptions"></ngx-slider>
-          <div class="month-bottom">
-            <p (click)="form.month = 2">от 2 месяцев</p>
-            <p (click)="form.month = 6">6 месяцев</p>
-            <p (click)="form.month = 12">12 месяцев</p>
-          </div>
-        </div>
-        <div class="custom-slider">
-          <div class="slider-info">
-            <p>Сумма микрокредита</p>
-            <span>{{ form.price | currency: 'CLP':'₸' }} </span>
-          </div>
-          <ngx-slider [(value)]="form.price" [options]="priceOptions"></ngx-slider>
-          <div class="month-bottom">
-            <p (click)="form.price = 25000" style="min-width: 80px;">0 ₸</p>
-            <p (click)="form.price = 250000">250 000 ₸</p>
-            <p (click)="form.price = 500000">до 500 000 ₸</p>
-          </div>
-        </div>
-        <div class="form-label">
-          <label>Порядок погашения</label>
-          <select [(ngModel)]="form.type" name="type">
-            <option value="annuity">Аннуитетный</option>
-            <option value="graded">Дифференцированный</option>
-          </select>
-        </div>
-        <div class="form-monthly">
-          <p>Ежемесячный платеж</p>
-          <b>{{ form.price / form.month | currency: 'CLP':'₸' }}</b>
-        </div>
-        <button type="submit">Получить</button>
-      </form>
+      <mfo-main-form></mfo-main-form>
     </div>
   </div>
 </main>
@@ -91,22 +53,181 @@
   </div>
 </section>
 
-<section class="how-to-checkout">
+<section class="how-to-checkout" id="Checkout">
   <div class="container">
     <h1>Как оформить займ за 5 минут</h1>
     <p>Оформите займ не входя из дома онлайн на карту или в офисе Zaimem.kz. <br>Нужен только паспорт РК. Оформление займет не более 10 минут, деньги поступят на счет - мгновенно.</p>
+    <ul>
+      <li>
+        <img src="assets/img/how1.png" alt="">
+        <h4>Подать заявку</h4>
+        <p>на сайте или по телефону <br>+7 777 143 15 14</p>
+        <span>1 минута</span>
+      </li>
+      <li>
+        <img src="assets/img/how2.png" alt="">
+        <h4>Заполнить анкету</h4>
+        <p>быстро и максимально просто</p>
+        <span>5 минут</span>
+      </li>
+      <li>
+        <img src="assets/img/how3.png" alt="">
+        <h4>Получить решение</h4>
+        <p>Уведомление с одобрением приходят по СМС</p>
+        <span>1 минута</span>
+      </li>
+      <li>
+        <img src="assets/img/how4.png" alt="">
+        <h4>Забрать деньги</h4>
+        <p>На карту - онлайн или наличными в офисе Zaimi</p>
+        <span>+6 способов</span>
+      </li>
+    </ul>
+    <div class="btn" (click)="modal = true;">Оформить займ</div>
   </div>
 </section>
 
-<section class="how-to-repay">
+<section class="how-to-repay" id="Repay">
   <div class="container">
-    <h1>Как погасить микрокредит</h1>
+    <div class="left">
+      <h1>Как погасить микрокредит</h1>
+      <p>Нашим клиентам доступно плановое, частичное и полное досрочное погашение микрокредита:</p>
+      <ul>
+        <li>
+          <div class="top" (click)="show[4] = !show[4]">
+            <p>Возврат микрокредита платежной картой </p> <img src="assets/img/chev.svg" alt="" [class.open]="show[4]">
+          </div>
+          <div class="bottom" *ngIf="show[4]">
+            <p>
+              В настоящее время ТОО «МФО «Payintech» принимает платежи по картам платежных систем VISA и MasterCard. <br>
+              Внимание: Вы можете использовать только свою собственную платежную карту при возврате микрокредита. Для оплаты с помощью платежной карты, необходимо выполнить следующие шаги: <br> <br>
+
+              1. Нажмите на кнопку «Оплатить» в правом верхнем углу <br>
+              2. Введите номер телефона, фамилию заемщика, сумму для оплаты  <br>
+              3. Нажмите на кнопку «Далее» <br>
+              4. Введите данные карты и нажмите на кнопку «Оплатить» <br> <br>
+
+              По умолчанию, в данном поле ввода будет указана сумма ежемесячного платежа. 
+            </p>
+          </div>
+        </li>
+        <li>
+          <div class="top" (click)="show[0] = !show[0]">
+            <p>Электронный кошелёк (Без комиссий)</p> <img src="assets/img/chev.svg" alt="" [class.open]="show[0]">
+          </div>
+          <div class="bottom" *ngIf="show[0]">
+            <p>
+              Для погашения микрокредита через электронный кошелек PITECH: <br><br>
+              1) Зайдите на сайт https://money.pitech.kz/. <br>
+              2) Выберите «МФО Payintech - плановый платеж». <br>
+              3) Введите ИИН и выберите микрокредит, который хотите погасить. <br>
+              4) Введите сумму и нажмите «Оплатить»* <br>
+              <br>
+              *Погашение займа через электронный кошелек PITECH – бесплатно.
+            </p>
+          </div>
+        </li>
+        <li>
+          <div class="top" (click)="show[1] = !show[1]">
+            <p>Электронный кошелёк <img src="assets/img/kassa.svg" alt=""></p> <img src="assets/img/chev.svg" alt="" [class.open]="show[1]">
+          </div>
+          <div class="bottom" *ngIf="show[1]">
+            <p>
+              Для погашения микрокредита через электронный кошелек: <br><br>
+              1) Зайдите на сайт сервиса. <br>
+              2) Выберите «Payintech – плановый платеж». <br>
+              3) Введите ИИН и выберите микрокредит, который хотите погасить. <br>
+              4) Введите сумму и нажите «Оплатить»* <br><br>
+              *Комиссии за погашение взимаются сервисом отдельно.
+            </p>
+          </div>
+        </li>
+        <li>
+          <div class="top" (click)="show[2] = !show[2]">
+            <p>Терминалы <img src="assets/img/kassa.svg" alt=""></p> <img src="assets/img/chev.svg" alt="" [class.open]="show[2]">
+          </div>
+          <div class="bottom" *ngIf="show[2]">
+            <p>
+              Pitech.kz предлагает возможность погашать займы через терминалы Касса 24. <br><br>
+              Касса 24 имеет широкую терминальную сеть по всему Казахстану в 17 000 терминалов. <br><br>
+              Для погашения микрокредита через терминал: <br><br>
+              1) В меню терминала перейдите в раздел «Финансовые организации» <br>
+              2) Выберите «Payintech – плановый платеж». <br>
+              3) Заполните форму оплаты. <br>
+              4) Внесите наличные в купюроприемник*. <br>
+              5) Заберите чек <br><br>
+              *Комиссии за погашение взимаются сервисом отдельно.
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <img src="assets/img/rep1.png" alt="" class="desctop">
   </div>
+  <a [routerLink]="['/payment']" class="btn">Оплатить</a>
 </section>
 
-<section class="conditions">
+<section class="conditions" id="Conditions">
   <div class="container">
     <h1>Условия</h1>
+    <ul>
+      <li>
+        <img src="assets/img/lc1.svg" alt="">
+        <p>Максимальная сумма микрокредита: <br> 500 000 тенге</p>
+      </li>
+      <li>
+        <img src="assets/img/lc2.svg" alt="">
+        <p>Максимальный срок микрокредита: <br>1 год</p>
+      </li>
+      <li>
+        <img src="assets/img/lc3.svg" alt="">
+        <p>Гражданство Республики Казахстан</p>
+      </li>
+      <li>
+        <img src="assets/img/lc4.svg" alt="">
+        <p>Достижение 21 года</p>
+      </li>
+      <li>
+        <img src="assets/img/lc5.svg" alt="">
+        <p>Наличие банковской карты</p>
+      </li>
+      <li>
+        <img src="assets/img/lc6.svg" alt="">
+        <p>Наличие смартфона</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="landing-bottom">
+  <div class="container">
+    <ul>
+      <li>
+        <a class="hb-logo" [routerLink]="['/']" class="desctop">
+          <img src="assets/img/logo.svg" alt="">
+        </a>
+      </li>
+      <li>
+        <h2>Навигация</h2>
+        <a [routerLink]="['/']" fragment="Checkout"><img src="assets/img/link.svg" alt=""> Как получить</a>
+        <a [routerLink]="['/']" fragment="Repay"><img src="assets/img/link.svg" alt=""> Как погасить</a>
+        <a [routerLink]="['/']" fragment="Conditions"><img src="assets/img/link.svg" alt=""> Условия</a>
+      </li>
+      <li>
+        <h2>Общие положения</h2>
+        <a href=""><img src="assets/img/link2.svg" alt="">Лицензия МФО</a>
+        <a href=""><img src="assets/img/link2.svg" alt="">Правила предоставления микрокредитов</a>
+        <a href=""><img src="assets/img/link2.svg" alt="">Политика конфиденциальности и обработки персональных данных</a>
+        <a href=""><img src="assets/img/link2.svg" alt="">Приказ №8 от 10.01.2022 о предоставлении отсрочки</a>
+        <a href=""><img src="assets/img/link2.svg" alt="">Уведомление о предоставлении отсрочки</a>
+      </li>
+      <li>
+        <h2>Контакты</h2>
+        <a href="https://go.2gis.com/ldlhhy" target="_blank"><img src="assets/img/link4.svg" alt=""> г.Алматы, ул Байзакова 280</a>
+        <a href="mailto:info@zaimi.kz"><img src="assets/img/link5.svg" alt="">info@zaimi.kz</a>
+        <a href="tel:+7 777 143-15-14"><img src="assets/img/link3.svg" alt="">+7 777 143-15-14</a>
+      </li>
+    </ul>
   </div>
 </section>
 
@@ -114,3 +235,14 @@
   <p class="cpr">Copyright © 2022 | МФО “Zaimem”</p>
 </footer>
 
+
+<div class="modal" *ngIf="modal">
+  <div class="modal-content">
+    <div class="modal-close" (click)="modal = false;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14.59 8L12 10.59L9.41 8L8 9.41L10.59 12L8 14.59L9.41 16L12 13.41L14.59 16L16 14.59L13.41 12L16 9.41L14.59 8ZM12 2C6.47 2 2 6.47 2 12C2 17.53 6.47 22 12 22C17.53 22 22 17.53 22 12C22 6.47 17.53 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="black"/>
+      </svg>
+    </div>
+    <mfo-main-form></mfo-main-form>
+  </div>
+</div>

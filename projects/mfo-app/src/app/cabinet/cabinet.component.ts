@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cabinet.component.scss']
 })
 export class CabinetComponent implements OnInit {
-
+  modal:boolean = false;
   constructor() { }
 
   ngOnInit(): void {

@@ -1,0 +1,39 @@
+<form ngNativeValidate (ngSubmit)="createRequest()" class="form-calculate">
+  <h2>Получить микрокредит</h2>
+  <div class="custom-slider">
+    <div class="slider-info">
+      <p>Срок микрокредитования</p>
+      <span>{{ form.period }} мес.</span>
+    </div>
+    <ngx-slider (userChange)="calculateForm()" [(value)]="form.period" [options]="monthOptions"></ngx-slider>
+    <div class="month-bottom">
+      <p (click)="form.period = 2;calculateForm()">от 2 месяцев</p>
+      <p (click)="form.period = 6;calculateForm()">6 месяцев</p>
+      <p (click)="form.period = 12;calculateForm()">12 месяцев</p>
+    </div>
+  </div>
+  <div class="custom-slider">
+    <div class="slider-info">
+      <p>Сумма микрокредита</p>
+      <span>{{ form.amount | currency: 'CLP':'₸' }} </span>
+    </div>
+    <ngx-slider (userChange)="calculateForm()" [(value)]="form.amount" [options]="priceOptions"></ngx-slider>
+    <div class="month-bottom">
+      <p (click)="form.amount = 50000;calculateForm()" style="min-width: 80px;">0 ₸</p>
+      <p (click)="form.amount = 250000;calculateForm()">250 000 ₸</p>
+      <p (click)="form.amount = 500000;calculateForm()">до 500 000 ₸</p>
+    </div>
+  </div>
+  <div class="form-label">
+    <label>Порядок погашения</label>
+    <select [(ngModel)]="form.type" (ngModelChange)="calculateForm()" name="type">
+      <option value="ANNUITY_PAYMENTS">Аннуитетный</option>
+      <option value="graded">Дифференцированный</option>
+    </select>
+  </div>
+  <div class="form-monthly">
+    <p>Ежемесячный платеж</p>
+    <b>{{ paymentPerMonth | currency: 'CLP':'₸' }}</b>
+  </div>
+  <button type="submit">Получить</button>
+</form>

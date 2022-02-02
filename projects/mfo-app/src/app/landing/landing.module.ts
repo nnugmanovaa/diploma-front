@@ -4,17 +4,14 @@ import { CommonModule } from '@angular/common';
 import { LandingRoutingModule } from './landing-routing.module';
 import { LandingComponent } from './landing.component';
 
-import { NgxSliderModule } from '@angular-slider/ngx-slider';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MainFormModule } from '../shared/main-form/main-form.module';
 
 @NgModule({
   declarations: [LandingComponent],
   imports: [
     CommonModule,
     LandingRoutingModule,
-    NgxSliderModule,
-    ReactiveFormsModule,
-    FormsModule
+    MainFormModule
   ]
 })
 export class LandingModule { }

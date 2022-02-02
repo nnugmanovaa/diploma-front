@@ -1,0 +1,35 @@
+<section class="profile-page">
+  <div class="container">
+    <form ngNativeValidate (ngSubmit)="payCredit()">
+      <div class="form-top">
+        <p>Погашение микрокредита</p>
+        <h2>Банковской картой</h2>
+      </div>
+      <div class="label-input">
+        <label for="">Мобильный телефон заемщика</label>
+        <input [unmask]="true" [imask]="{mask: '+{7}0000000000',placeholderChar: '_',lazy: false}" [(ngModel)]="payForm.username" name="username" required>
+      </div>
+      <div class="label-input">
+        <label for="">ИИН</label>
+        <input [unmask]="true" type="text" required [imask]="{mask: '000000000000',placeholderChar: '_',lazy: false}">
+      </div>
+
+      <div class="label-input">
+        <label for="">Номер договора</label>
+        <input type="text" required [imask]="{mask: '0-000000000',lazy: false, autoclear: true}">
+      </div>
+
+      <div class="label-input">
+        <label for="">Сумма к оплате </label>
+        <input [imask]="priceMask" [unmask]="true" name="amount" [(ngModel)]="payForm.amount" type="text" required>
+      </div>
+
+      <div class="label-input">
+        <label for="">Сумма платежа</label>
+        <input [imask]="priceMask"  type="text" required>
+      </div>
+    
+      <button class="btn" type="submit">Оплатить</button>
+    </form>
+  </div>
+</section>

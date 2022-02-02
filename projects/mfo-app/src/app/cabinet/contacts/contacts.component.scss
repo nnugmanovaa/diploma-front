@@ -17,3 +17,9 @@ ul {
   letter-spacing: -0.3px;
   color: #8F8F8F;
 }
+
+@media (max-width: 600px){
+  ul{
+    margin-bottom: 20px;
+  }
+}

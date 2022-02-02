@@ -1,33 +1,105 @@
-<section class="profile-page">
+<section class="profile-page" *ngIf="!veriface">
   <div class="container">
-    <form ngNativeValidate (ngSubmit)="registerUser()">
+    <form ngNativeValidate (ngSubmit)="registerUser()" *ngIf="!signUpShow">
       <div class="form-top">
         <h2>Заявка на микрокредит</h2>
-        <a href="" class="link">Контактная информация</a>
+        <p class="link">Контактная информация</p>
       </div>
       <div class="label-input">
         <label for="">Мобильный телефон <i>*</i></label>
-        <input [imask]="{mask: '+{7}0000000000',lazy: false}" [(ngModel)]="registerForm.msisdn" name="msisdn">
+        <input type="tel" [unmask]="true" [imask]="{mask: '+{7}0000000000',lazy: false}" [(ngModel)]="registerForm.msisdn" name="msisdn">
       </div>
       <div class="label-input">
         <label for="">Фамилия</label>
-        <input type="text">
+        <input type="text" required name="lastName" [(ngModel)]="pdfForm.lastName">
       </div>
       <div class="label-input">
         <label for="">Имя</label>
-        <input type="text">
+        <input type="text" required name="firstName" [(ngModel)]="pdfForm.firstName">
+      </div>
+      <div class="label-input">
+        <label for="">Отчество <kbd>(необязательно)</kbd></label>
+        <input type="text" name="patronymic" [(ngModel)]="pdfForm.patronymic">
       </div>
       <div class="label-input">
         <label for="">ИИН</label>
-        <input type="text">
+        <input type="tel" name="iin" [(ngModel)]="pdfForm.iin" required [imask]="{mask: '000000000000',placeholderChar: '_',lazy: false}">
       </div>
       <div class="label-checkbox">
         <label>
-          <input type="checkbox">
+          <input type="checkbox" required>
           <span>Я даю свое согласие на сбор, обработку и использование моих персональных данных</span>
         </label>
       </div>
       <button class="btn" type="submit">Далее</button>
+
+      <div class="text-center">
+        <p>Уже проходили регистрацию?</p>
+        <a [routerLink]="['/profile/login']">Авторизоваться</a>
+      </div>
     </form>
+  </div>
+
+  <div class="container" *ngIf="signUpShow">
+    <form ngNativeValidate (ngSubmit)="signUp()">
+      <div class="form-top">
+        <h2>Установка пароля</h2>
+      </div>
+      <div class="label-input">
+        <label>Установите пароль</label>
+        <input type="password" required [(ngModel)]="singUpForm.password" name="password">
+      </div>
+      <div class="label-input">
+        <label>Подтвердите пароль</label>
+        <input type="password" required [(ngModel)]="singUpForm.confirmPassword" name="confirmPassword">
+      </div>
+      <button class="btn" type="submit">Зарегистрироваться</button>
+    </form>
+  </div>
+
+
+  <div class="modal" *ngIf="showSMSModal">
+    <div class="modal-content">
+      <form ngNativeValidate (ngSubmit)="sendCode()">
+        <div class="form-top">
+          <h2>Подтверждение номера телефона</h2>
+          <p>На номер {{ registerForm.msisdn }} было отправлено SMS с кодом подтверждения. Введите полученный код, чтобы продолжить оформление заявки. <br><br>Если в течении 60 секунд SMS не пришло, проверьте номер телефона и получите код повторно. </p>
+        </div>
+        <div class="form-content">
+          <p>Ознакомлен и даю свое согласие на</p>
+          <div class="file" (click)="openFile()"><img src="assets/img/dot.svg" alt="">сбор и обработку персональных данных</div>
+          <div class="file" (click)="openFile()"><img src="assets/img/dot.svg" alt="">предоставление информации о них в кредитные бюро</div>
+          <div class="file" (click)="openFile()"><img src="assets/img/dot.svg" alt="">выдачу кредитного отчета из кредитного бюро</div>
+          <div class="text-center">
+            <h3>SMS-код</h3>
+            <div class="label-input">
+              <input type="tel" name="code" [imask]="{mask: '000000',lazy: false, placeholderChar: '-'}" [(ngModel)]="code" (ngModelChange)="sendCode()">
+            </div>
+          </div>
+          <div class="resend-pass">Отправить повторно</div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+</section>
+
+<section class="veriface" *ngIf="veriface">
+  <div class="container">
+    <div class="top-info" id="vfInfo">
+      <p *ngIf="verifaceLoad">VeriLive – система определения принадлежности биометрического образца живому человеку и защиты от подделки. Клиент проходит процесс определения живости, где с помощью данных с камеры определяется его реальность. Определение живости способствует сохранности данных от мошенничества и обеспечения целостности биометрических данных. VeriLive ответит на вопрос: "Это настоящий человек?".</p>
+      <div class="btns">
+        <button onclick="onInitButtonClick()"><span id="ChangeText" (click)="veriLive()">Далее</span></button>
+      </div>
+    </div>
+    <div class="top-info" [hidden]="true" id="NextShow">
+      <div class="btns">
+        <button><span (click)="showSignUP()">Далее</span></button>
+      </div>
+    </div>
+    <div id="id_verilive" style="margin: auto;"></div>
+    <textarea id="results" [hidden]="true" [(ngModel)]="vfImage"></textarea>
   </div>
 </section>

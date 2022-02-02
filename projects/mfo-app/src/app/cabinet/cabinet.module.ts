@@ -13,6 +13,7 @@ import { ContactsComponent } from './contacts/contacts.component';
 import { PaymenttypesComponent } from './paymenttypes/paymenttypes.component';
 import { DeferredPaymentComponent } from './deferred-payment/deferred-payment.component';
 import { SettingsComponent } from './settings/settings.component';
+import { MainFormModule } from '../shared/main-form/main-form.module';
 
 @NgModule({
   declarations: [CabinetComponent, CashedOutComponent, OrderHistoryComponent, ChangePasswordComponent, ContactsComponent, PaymenttypesComponent, DeferredPaymentComponent, SettingsComponent],
@@ -21,7 +22,8 @@ import { SettingsComponent } from './settings/settings.component';
     CabinetRoutingModule,
     HttpClientModule,
     ReactiveFormsModule, 
-    FormsModule
+    FormsModule,
+    MainFormModule
   ]
 })
 export class CabinetModule { }

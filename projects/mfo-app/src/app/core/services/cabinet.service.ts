@@ -15,7 +15,7 @@ export class CabinetService {
   constructor(private  httpClient:  HttpClient, private router: Router) {}
 
   getOrders(params: any){
-    return this.httpClient.get<any>(`${this.REST_API_SERVER}/orders/`, {params});
+    return this.httpClient.get<any>(`${this.REST_API_SERVER}/orders`, {params});
   }
 
 }

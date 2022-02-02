@@ -30,22 +30,17 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(req).pipe( tap(() => {},
       (err: any) => {
       if (err instanceof HttpErrorResponse) {
-        if(err.status === 500){
-          alert('500 - Server Error')
-          return;
-        }
+        // if (err.status === 401) {
+        //   localStorage.removeItem('token');
+        //   localStorage.removeItem('user');
+        //   this.router.navigate(['/profile/login']);
+        //   return;
+        // }
 
-        if(err.status === 400 || err.status === 401){
+        if(err.error?.message){
           this.toastr.error(err.error?.message, 'Ошибка!');
           return;
         }
-
-        if (err.status !== 401) {
-          return;
-        }
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        this.router.navigate(['/profile/login']);
       }
     }));
   }

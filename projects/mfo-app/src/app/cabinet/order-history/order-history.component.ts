@@ -2,30 +2,58 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { CabinetService } from '../../core/services/cabinet.service';
 
+export enum Status {
+  APPROVED = 'Одобрен',
+  REJECTED = 'Отклонен',
+  CLOSED = 'Закрыт',
+  CASH_OUT_CARD_INITIALIZED = 'Обналичивание'
+}
+
 @Component({
   selector: 'mfo-order-history',
   templateUrl: './order-history.component.html',
   styleUrls: ['./order-history.component.scss']
-})
+})  
+
 export class OrderHistoryComponent implements OnInit {
   params:any = {
-    endDate:'2021-12-10',
+    startDate:'',
+    endDate:'',
     page:0,
-    size:20,
-    startDate:'2021-08-10',
+    size:6,
     status:'CASHED_OUT_CARD'
   }
 
-  list:any = [];
+  Status:any = Status;
+
+  date:any = null
+
+  list:any = null;
   constructor(private cabinet:CabinetService) { }
 
   ngOnInit(): void {
+    let currentDate = new Date()
+    let start = new Date();
+    start.setMonth(currentDate.getMonth()-12)
+    this.params.startDate = start.toISOString().split('T')[0]
+    this.params.endDate = currentDate.toISOString().split('T')[0]
     this.getOrders();
+  }
+
+  counter(i: number) {
+    return new Array(i);
+  }
+
+  changePage(page:any,change:boolean = true){
+    if(change){
+      this.params.page = page;
+      this.getOrders();
+    }
   }
 
   getOrders(){
     this.cabinet.getOrders(this.params).subscribe(res => {
-      this.list = res.content;
+      this.list = res;
     })
   }
 

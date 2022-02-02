@@ -1,0 +1,42 @@
+p{
+  text-align: left;
+  margin-bottom: 20px;
+  font-size: 17px;
+}
+
+h3{
+  font-size: 24px;
+  line-height: 29px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.login-pass-btn {
+  display: inline-flex;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  text-decoration-line: underline;
+  color: #42A8FA;
+  cursor: pointer;
+  margin-bottom: 16px;
+}
+
+.text-center{
+  text-align: center;
+  max-width: 170px;
+  margin: 0 auto;
+  input{
+    font-weight: 600;
+    font-size: 25px;
+    text-align: center;
+  }
+}
+.resend-pass{
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  text-decoration-line: underline;
+  color: #42A8FA;
+  font-weight: 600;
+}

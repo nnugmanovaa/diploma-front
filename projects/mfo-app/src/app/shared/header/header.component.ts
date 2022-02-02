@@ -13,6 +13,9 @@ export class HeaderComponent implements OnInit {
   showCabinet:boolean = false;
   user:any = null;
   settingsPage:boolean = false;
+
+  showNav:boolean = false;
+
   constructor(private router: Router,
               public authService:AuthService) {
     router.events.forEach((event) => {
@@ -32,6 +35,7 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+
   ngOnInit(): void { 
     this.checkLogin();
   }
@@ -46,6 +50,7 @@ export class HeaderComponent implements OnInit {
   logout(){
     this.authService.logout();
     this.user = null;
+    this.showNav = false;
   }
 
 }

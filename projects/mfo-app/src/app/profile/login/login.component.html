@@ -6,13 +6,13 @@
       </div>
       <div class="label-input">
         <label for="">Мобильный телефон <i>*</i></label>
-        <input [imask]="{mask: '+{7}0000000000',lazy: false}" [(ngModel)]="loginForm.username" name="username">
+        <input type="tel" [unmask]="true" [imask]="{mask: '+{7}0000000000',lazy: false}" required [(ngModel)]="loginForm.username" name="username">
       </div>
       <div class="label-input">
         <label for="">Пароль:</label>
         <input type="password" name="password" required [(ngModel)]="loginForm.password">
       </div>
-      <div class="reset-pass-btn">Забыли пароль?</div>
+      <a class="reset-pass-btn" [routerLink]="['/profile/forgot-pass']">Забыли пароль?</a>
 
       <button class="btn" type="submit">Войти</button>
     </form>

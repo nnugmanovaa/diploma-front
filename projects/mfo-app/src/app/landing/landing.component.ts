@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Options } from '@angular-slider/ngx-slider';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'mfo-landing',
@@ -8,43 +6,20 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
   styleUrls: ['./landing.component.scss']
 })
 export class LandingComponent implements OnInit {
-
-  form:any = {
-    month: 6,
-    price:250000,
-    type: 'annuity'
-  }
-  value: number = 6;
-  monthOptions: Options = {
-    floor: 0,
-    ceil: 12,
-    showSelectionBar: true,
-    minLimit: 2
-  };
-
-  priceOptions:Options = {
-    floor: 0,
-    minLimit: 25000,
-    ceil: 500000,
-    step: 5000,
-    showSelectionBar: true,
-    showTicks: true,
-  }
-
-  constructor(private route: ActivatedRoute,
-              private router: Router,) { }
+  time:any = null;
+  show:any = {};
+  modal:boolean = false;
+  constructor() { }
 
   ngOnInit(): void {
+    this.getMainTime();
   }
 
-  createRequest(){
-    console.log(this.form)
-    this.router.navigate(
-    ['/profile/register'], 
-    {
-      // relativeTo: this.route,
-      queryParams: this.form
-    });
+  getMainTime(){
+    let oldDateObj = new Date();
+    let newDateObj = new Date();
+    newDateObj.setTime(oldDateObj.getTime() + (10 * 60 * 1000));
+    this.time = ("0" + newDateObj.getHours()).slice(-2) + ':' + ("0" + newDateObj.getMinutes()).slice(-2);
   }
-
+  
 }

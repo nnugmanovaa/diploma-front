@@ -1,0 +1,372 @@
+<section class="profile-page" *ngIf="!loading && !resultShow">
+  <div class="container">
+    <div class="step-progress">
+      <div class="back-btn" *ngIf="step > 1" (click)="step = step - 1">
+        <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11.67 1.8701L9.9 0.100098L0 10.0001L9.9 19.9001L11.67 18.1301L3.54 10.0001L11.67 1.8701Z" fill="black"/>
+        </svg>
+        Назад
+      </div>  
+      <p>Шаг {{ step }}/3</p>
+      <div class="progress"><span style="width: calc(33% * {{ step }});"></span></div>
+    </div>
+    <form ngNativeValidate (ngSubmit)="setPasportData()" *ngIf="step == 1">
+      <div class="form-top">
+        <h2>Паспортные данные</h2>
+      </div>
+      <div class="label-input">
+        <label>ИИН</label>
+        <input type="tel" required name="iin" [(ngModel)]="data.iin">
+      </div>
+      <div class="label-input">
+        <label>Фамилия</label>
+        <input type="text" required name="lastName" [(ngModel)]="data.personalInfo.lastName">
+      </div>
+      <div class="label-input">
+        <label>Имя</label>
+        <input type="text" required name="firstName" [(ngModel)]="data.personalInfo.firstName">
+      </div>
+      <div class="label-input">
+        <label>Отчество</label>
+        <input type="text" name="middleName" [(ngModel)]="data.personalInfo.middleName">
+      </div>
+      <div class="label-input">
+        <label>Дата рождения</label>
+        <input type="date" required name="birthDate" [(ngModel)]="data.personalInfo.birthDate">
+      </div>
+      <div class="label-input">
+        <label>Номер удостоверения</label>
+        <input type="text" required name="idNumber" [(ngModel)]="data.personalInfo.nationalIdDocument.idNumber">
+      </div>
+      <div class="label-input">
+        <label>Национальность</label>
+        <input type="text" required name="nationality" [(ngModel)]="data.personalInfo.nationalIdDocument.nationality">
+      </div>
+      <div class="label-input">
+        <label>Кем выдан</label>
+        <select name="issuedBy" required [(ngModel)]="data.personalInfo.nationalIdDocument.issuedBy">
+          <option value="МИНИСТЕРСТВО ВНУТРЕННИХ ДЕЛ РК">МВД РК</option>
+          <option value="Министерства юстиции Республики Казахстан">МЮ РК</option>
+        </select>
+      </div>
+      <div class="label-input">
+        <label>Дата выдачи</label>
+        <input type="date" required name="issuedDate" [(ngModel)]="data.personalInfo.nationalIdDocument.issuedDate">
+      </div>
+      <div class="label-input">
+        <label>Дата окончания</label>
+        <input type="date" required name="expireDate" [(ngModel)]="data.personalInfo.nationalIdDocument.expireDate">
+      </div>
+      <div class="label-input">
+        <label>Вы ИПДЛ или родственник?</label>
+        <select  required [(ngModel)]="data.personalInfo.IPDL" name="IPDL">
+          <option value="yes">Да</option>
+          <option value="no">Нет</option>
+        </select>
+      </div>
+      <button type="submit" class="btn">Подтвердить</button>
+    </form>
+
+    <form ngNativeValidate (ngSubmit)="setAdressData()" *ngIf="step == 2">
+      <div class="form-top">
+        <h2>Адресные данные</h2>
+      </div>
+      <div class="label-input">
+        <label>Область</label>
+        <select required name="district" [(ngModel)]="selectedDistrict" 
+        (ngModelChange)="getCities()">
+          <option [value]="">Выберите</option>
+          <option *ngFor="let item of districts" [ngValue]="item">{{ item.name_ru }}</option>
+        </select>
+      </div>
+      <div class="label-input">
+        <label [class.disabled]="!cities">Регион/село/город</label>
+        <select required name="city" [(ngModel)]="selectedCity" [disabled]="!cities" 
+        (ngModelChange)="setPostalCode()">
+          <option [value]="">Выберите</option>
+          <option *ngFor="let item of cities" [ngValue]="item">{{ item.name_ru }}</option>
+        </select>
+      </div>
+
+      <div class="label-input">
+        <label>Индекс</label>
+        <input type="text" required name="postalCode" [(ngModel)]="data.personalInfo.registrationAddress.postalCode">
+      </div>
+
+      <div class="label-input">
+        <label>Улица/мкрн</label>
+        <input type="text" required name="street" [(ngModel)]="data.personalInfo.registrationAddress.street">
+      </div>
+
+      <div class="half-form">
+        <div class="label-input">
+          <label>№ дома</label>
+          <input type="text" required name="house" [(ngModel)]="data.personalInfo.registrationAddress.house">
+        </div>
+
+        <div class="label-input">
+          <label>Кв/офис</label>
+          <input type="text" required name="apartment" [(ngModel)]="data.personalInfo.registrationAddress.apartment">
+        </div>
+      </div>
+
+      <div class="label-toggle">
+        <p>
+          <img src="assets/img/point.svg" alt="">
+          Адрес проживания совпадает с адресом прописки  
+        </p>
+        <label>
+          <input type="checkbox" name="sameAdress" [(ngModel)]="data.personalInfo.sameAdress">
+          <span></span>
+        </label>
+      </div>
+
+      <ng-container *ngIf="!data.personalInfo.sameAdress">
+        <div class="form-top">
+          <h2>Адрес проживания</h2>
+        </div>
+
+        <div class="label-input">
+          <label>Область</label>
+          <select required name="selectedDistrictResidence" [(ngModel)]="selectedDistrictResidence" 
+          (ngModelChange)="getResCities()">
+            <option [value]="">Выберите</option>
+            <option *ngFor="let item of districts" [ngValue]="item">{{ item.name_ru }}</option>
+          </select>
+        </div>
+        <div class="label-input">
+          <label [class.disabled]="!cities">Регион/село/город</label>
+          <select required name="selectedCityResidence" [(ngModel)]="selectedCityResidence" [disabled]="!cities" 
+          (ngModelChange)="setPostalCode(true)">
+            <option [value]="">Выберите</option>
+            <option *ngFor="let item of citiesres" [ngValue]="item">{{ item.name_ru }}</option>
+          </select>
+        </div>
+
+        <div class="label-input">
+          <label>Индекс</label>
+          <input type="text" required name="residenceAddresspostalCode" [(ngModel)]="data.personalInfo.residenceAddress.postalCode">
+        </div>
+
+        <div class="label-input">
+          <label>Улица/мкрн</label>
+          <input type="text" required name="residenceAddressstreet" [(ngModel)]="data.personalInfo.residenceAddress.street">
+        </div>
+
+        <div class="half-form">
+          <div class="label-input">
+            <label>№ дома</label>
+            <input type="text" required name="residenceAddresshouse" [(ngModel)]="data.personalInfo.residenceAddress.house">
+          </div>
+
+          <div class="label-input">
+            <label>Кв/офис</label>
+            <input type="text" required name="residenceAddressapartment" [(ngModel)]="data.personalInfo.residenceAddress.apartment">
+          </div>
+        </div>
+      </ng-container>
+
+      <div class="label-input">
+        <label>Период проживания по этому адресу</label>
+        <select name="" id="">
+          <option value="">Выберите</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn">Подтвердить</button>
+    </form>
+
+    <form ngNativeValidate (ngSubmit)="finishStep()" *ngIf="step == 3">
+      <div class="form-top">
+        <h2>Сведения о работе</h2>
+        <p class="info-text">Получите <span>+30% к вероятности одобрения микрокредита</span>, заполнив все поля.</p>
+      </div>
+      
+      <div class="label-input">
+        <label>Образование</label>
+        <select name="education" [(ngModel)]="data.personalInfo.education" >
+          <option value="">Выберите</option>
+          <option value="Среднее">Среднее</option>
+          <option value="Среднее специальное">Среднее специальное</option>
+          <option value="Незаконченное высшее">Незаконченное высшее</option>
+          <option value="Высшее">Высшее</option>
+          <option value="Магистратура, 2-ое высшее, Ученая степень и пр">Магистратура, 2-ое высшее, Ученая степень и пр.</option>
+        </select>
+      </div>
+
+      <div class="label-input">
+        <label>Занятость</label>
+        <select name="typeOfWork" [(ngModel)]="data.personalInfo.typeOfWork">
+          <option value="">Выберите</option>
+          <option value="Сотрудник компании">Сотрудник компании</option>
+          <option value="Индивидуальный предприниматель">Индивидуальный предприниматель</option>
+          <option value="Безработный">Безработный</option>
+          <option value="Студент">Студент</option>
+          <option value="Пенсионер">Пенсионер</option>
+          <option value="Владелец компании">Владелец компании</option>
+          <option value="Пенсионер (сотрудник компании)">Пенсионер (сотрудник компании)</option>
+          <option value="Пенсионер (индивидуальный предприниматель)">Пенсионер (индивидуальный предприниматель)</option>
+          <option value="В декретном отпуске">В декретном отпуске</option>
+        </select>
+      </div>
+
+      <div class="label-input">
+        <label>Вид деятельности</label>
+        <select name="employment" [(ngModel)]="data.personalInfo.employment">
+          <option value="">Выберите</option>
+          <option value="Информационные технологии/телекоммуникации">Информационные технологии/телекоммуникации</option>
+          <option value="Финансы, банки, страхование, консалтинг">Финансы, банки, страхование, консалтинг</option>
+          <option value="ТЭК">ТЭК</option>
+          <option value="Сервис и Услуги">Сервис и Услуги</option>
+          <option value="Армия">Армия</option>
+          <option value="Охранная деятельность">Охранная деятельность</option>
+          <option value="Добывающий сектор">Добывающий сектор</option>
+          <option value="Культура и искусство">Культура и искусство</option>
+          <option value="Медицина">Медицина</option>
+          <option value="Наука и Образование">Наука и Образование</option>
+          <option value="Государственная служба">Государственная служба</option>
+          <option value="Торговля">Торговля</option>
+          <option value="Промышленность">Промышленность</option>
+          <option value="Строительство и недвижимость">Строительство и недвижимость</option>
+          <option value="Транспорт">Транспорт</option>
+          <option value="Другое">Другое</option>
+        </select>
+      </div>
+
+      <div class="label-input">
+        <label>Должность</label>
+        <input type="text" name="workPosition" [(ngModel)]="data.personalInfo.workPosition">
+      </div>
+
+      <div class="label-input">
+        <label>Название организации</label>
+        <input type="text" name="employer" [(ngModel)]="data.personalInfo.employer">
+      </div>
+
+      <div class="label-input">
+        <label>Рабочий телефон</label>
+        <input type="tel" required name="workPhoneNum" [(ngModel)]="data.personalInfo.workPhoneNum">
+      </div>
+
+
+      <div class="label-input">
+        <label>Опыт работы</label>
+        <input type="number" name="workExperience" [(ngModel)]="data.personalInfo.workExperience">
+      </div>
+
+      <div class="label-input">
+        <label>Ваш ежемесячный доход</label>
+        <input type="tel" name="monthlyIncome" [unmask]="true" [(ngModel)]="data.personalInfo.monthlyIncome" [imask]="priceMask" >
+      </div>
+
+      <div class="label-input">
+        <label>Ваш ежемесячный дополнительный доход</label>
+        <input type="tel" name="additionalMonthlyIncome" [unmask]="true" [(ngModel)]="data.personalInfo.additionalMonthlyIncome" [imask]="priceMask" >
+      </div>
+
+      <div class="label-input">
+        <label>Семейное положение</label>
+        <select name="maritalStatus" [(ngModel)]="data.personalInfo.maritalStatus">
+          <option value="">Выберите</option>
+          <option value="Не женат / Не замужем">Не женат / Не замужем</option>
+          <option value="Женат / Замужем">Женат / Замужем</option>
+          <option value="Вдовец / Вдова">Вдовец / Вдова</option>
+          <option value="Разведен / Разведена">Разведен / Разведена</option>
+          <option value="Гражданский брак">Гражданский брак</option>
+        </select>
+      </div>
+
+      <div class="label-input">
+        <label>Количество детей</label>
+        <select name="numberOfKids" [(ngModel)]="data.personalInfo.numberOfKids">
+          <option value="">Выберите</option>
+          <option [value]="0">0</option>
+          <option [value]="1">1</option>
+          <option [value]="2">2</option>
+          <option [value]="3">3</option>
+          <option [value]="4">4</option>
+        </select>
+      </div>
+
+
+      <button type="submit" class="btn">Рассчитать</button>
+    </form>
+  </div>
+</section>
+
+<ng-container *ngIf="loading">
+  <div class="loader">
+    <div class="top">
+      <svg
+       class="progress-ring"
+       width="270"
+       height="270"
+       >
+        <circle
+          class="progress-ring__circle"
+          stroke="#34BE82"
+          stroke-width="15"
+          fill="transparent"
+          r="120"
+          cx="135"
+          cy="135" style="{{stroke}}"/>
+      </svg>
+      <div class="percent">{{ percent }}%</div>
+    </div>
+    <h2>Идет обработка заявки</h2>
+    <p>Пожалуйста, дождитесь результата</p>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="resultShow">
+  <div class="error-result" *ngIf="errorResult">
+    <img src="assets/img/error.svg" alt="">
+    <h2>К сожалению, Вам отказано в <br> запрашиваемой сумме</h2>
+    <div class="btn" [routerLink]="['/cabinet/history']">Отменить оформление займа</div>
+  </div>
+  <div class="success-result" *ngIf="successResult">
+    <img src="assets/img/success.svg" alt="">
+    <h2>
+      Ваша заявка одобрена.<br>
+      Сумма займа:  {{ data.loanAmount | currency: 'CLP':'₸' }} <br>
+      Срок займа: {{ data.loanPeriod }} месяцев
+    </h2>
+    <p class="info-text">Вам необходимо ознакомиться и подписать документы ниже, путем ввода одноразового пароля (SMS-код)</p>
+
+    <div class="file" (click)="getAnketa()"><img src="assets/img/dot.svg" alt="">Заявление-анкета</div>
+    <div class="file" (click)="getContract()"><img src="assets/img/dot.svg" alt="">Договор о предоставлении микрокредита с графиком погашения</div>
+    <br>
+    <div class="btn" (click)="sendOTP()">Подписать</div>
+    <div class="btn btn-default" [routerLink]="['/cabinet/history']">Отменить оформление займа</div>
+  </div>
+</ng-container>
+
+<div class="profile-page">
+ <div class="modal" *ngIf="showSMSModal">
+    <div class="modal-content">
+      <form ngNativeValidate (ngSubmit)="sendCode()">
+        <div class="form-top">
+          <h2>Подтверждение SMS-кода</h2>
+          <p>Для окончания оформления займа просим ввести в SMS-код</p>
+        </div>
+        <div class="form-content">
+          <div class="text-center">
+            <h3>SMS-код</h3>
+            <div class="label-input">
+              <input type="tel" name="code" [imask]="{mask: '000000',lazy: false, placeholderChar: '-'}" [(ngModel)]="code">
+            </div>
+          </div>
+          <button type="submit" class="btn">Подтвердить</button>
+          <div class="resend-pass">Отправить повторно</div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

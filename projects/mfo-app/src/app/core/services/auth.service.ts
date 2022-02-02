@@ -10,15 +10,14 @@ export class AuthService {
 
   private REST_API_SERVER = environment.API_URL;
   private ADMIN_URL = environment.ADMIN_URL;
+  private LOAN_URL = environment.LOAN_URL;
+  
   user:any;
 
   constructor(private  httpClient:  HttpClient, private router: Router) {}
 
   login(data: any){
-    if(data.username){
-      data.username = data.username.toString().replace(/\+/gi, '')
-    }
-    return this.httpClient.post<any>(`${this.REST_API_SERVER}/auth/signin/`, data);
+    return this.httpClient.post<any>(`${this.REST_API_SERVER}/v1/auth/signin/`, data);
   }
 
   public saveUser(user:any){
@@ -32,8 +31,21 @@ export class AuthService {
   }
 
   public changePassword(data:any){
-    return this.httpClient.post(`${this.REST_API_SERVER}/password/change/`, data);
+    return this.httpClient.post(`${this.REST_API_SERVER}/v1/password/change/`, data);
   }
+
+  public payment(data:any){
+    return this.httpClient.post(`${this.LOAN_URL}/loans/init-payment`, data);
+  }
+
+  public sendSms(data:any){
+    return this.httpClient.post(`${this.REST_API_SERVER}/v1/phone-verification`, data);
+  }
+
+  public sendSmsCode(data:any){
+    return this.httpClient.put(`${this.REST_API_SERVER}/v1/auth/pass-reset`, data);
+  }
+
 
   get isLoggedIn(): boolean {
     const token = localStorage.getItem('token');
@@ -47,6 +59,7 @@ export class AuthService {
   logout(){
       localStorage.removeItem('user');
       localStorage.removeItem('token');
+      localStorage.removeItem('pinfo');
       this.router.navigate(['/']);
   }
 

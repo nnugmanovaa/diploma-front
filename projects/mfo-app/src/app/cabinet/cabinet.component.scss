@@ -56,6 +56,21 @@ footer{
 
 :host{
   .container{
-    min-height: calc(100vh - 317px);
+    min-height: calc(100vh - 280px);
+  }
+}
+
+@media (max-width: 600px){
+  footer{
+    margin-top: 20px;
+  }
+  .sidebar{
+    display: none;
+  }
+  :host{
+    .container{
+      display: block;
+      min-height: calc(100vh - 139px);
+    }
   }
 }

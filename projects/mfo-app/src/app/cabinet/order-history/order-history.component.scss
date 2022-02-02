@@ -20,7 +20,59 @@ ul li {
       font-weight: 600;
     }
     .status{
-      color: #34BE82;
+      color: rgba(0, 0, 0, 0.2);
+      &.REJECTED{
+        color: #FB4B4B;
+      }
+      &.APPROVED{
+        color: #34BE82;
+      }
+    }
+  }
+}
+
+.empty{
+  font-size: 20px;
+  color: #000;
+  opacity: 0.3;
+  text-align: center;
+  border: 1px dashed;
+  padding: 40px;
+  margin-top: 40px;
+}
+
+.pagination ol {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  li {
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    &.active{
+      background: rgba(46,58,89,.12);
+    }
+  }
+}
+
+.top{
+  .dates{
+    display: flex;
+    justify-content: flex-end;
+    gap:24px;
+    input{
+      margin-left: 10px;
+      border: 1px solid #ccc;
+      padding: 3px 12px;
+      border-radius: 8px;
+    }
+  }
+}
+
+@media (max-width: 600px){
+  .top{
+    .dates{
+      flex-wrap: wrap;
     }
   }
 }

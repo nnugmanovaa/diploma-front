@@ -10,8 +10,8 @@ import { AuthService } from '../../core/services/auth.service'
 export class LoginComponent implements OnInit {
 
   loginForm:any = {
-    username:'+77051366182',
-    password:'nnn2020$'
+    username:'',
+    password:''
   }
   constructor(private route: ActivatedRoute,
               private router: Router,
