@@ -13,6 +13,8 @@ export class LoginComponent implements OnInit {
     username:'',
     password:''
   }
+  returnUrl: string = "";
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private auth:AuthService) { 
@@ -20,14 +22,14 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/cabinet';
   }
 
   loginUser(){
     this.auth.login(this.loginForm).subscribe(res => {
       if(res){
         this.auth.saveUser(res);
-        this.router.navigate(['/cabinet'])
+        this.router.navigateByUrl(this.returnUrl);
       }
     })
   }

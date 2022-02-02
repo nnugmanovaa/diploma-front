@@ -18,4 +18,12 @@ export class CabinetService {
     return this.httpClient.get<any>(`${this.REST_API_SERVER}/orders`, {params});
   }
 
+  getActiveOrders(data:any){
+    return this.httpClient.post<any>(`${this.REST_API_SERVER}/loans/account-loans`, data);
+  }
+
+  getSchedule(data:any){
+    return this.httpClient.get<any>(`${this.REST_API_SERVER}/orders/repayment-schedule`);
+  }
+
 }

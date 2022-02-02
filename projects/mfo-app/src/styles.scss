@@ -136,6 +136,10 @@ body{
 
   .label-checkbox{
     margin-bottom: 20px;
+    input{
+      margin: 4px 0;
+      margin-right: 12px;
+    }
     label{
       display: flex;
       span{
