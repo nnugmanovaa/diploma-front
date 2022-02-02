@@ -37,7 +37,7 @@
             "tsConfig": "projects/mfo-app/tsconfig.app.json",
             "aot": true,
             "assets": [
-              "projects/mfo-app/src/favicon.ico",
+              "projects/mfo-app/src/favicon.png",
               "projects/mfo-app/src/assets"
             ],
             "styles": [
