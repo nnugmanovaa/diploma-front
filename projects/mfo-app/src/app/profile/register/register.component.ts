@@ -57,12 +57,24 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadScript('../assets/js/verilive.js');
     this.route.queryParams.subscribe(queryParams => {
       this.qparams = queryParams;
     });
     fromEvent(window,'build').subscribe((event:any)=>{
        this.showSignUP()
     })
+  }
+
+  public loadScript(url: string) {
+    const body = <HTMLDivElement> document.body;
+    const script = document.createElement('script');
+    script.innerHTML = '';
+    script.src = url;
+    script.async = false;
+    script.defer = true;
+    body.appendChild(script);
+    console.log("load")
   }
 
   veriLive(){
