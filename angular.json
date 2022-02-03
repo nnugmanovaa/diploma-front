@@ -138,5 +138,8 @@
       }
     }
   },
-  "defaultProject": "mfo-app"
+  "defaultProject": "mfo-app",
+  "cli": {
+    "analytics": "96c801b0-bf00-41e0-80d8-2ef0d94acb08"
+  }
 }
