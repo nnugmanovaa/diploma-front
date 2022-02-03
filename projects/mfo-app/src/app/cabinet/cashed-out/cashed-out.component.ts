@@ -9,23 +9,26 @@ import { CabinetService } from '../../core/services/cabinet.service';
 })
 export class CashedOutComponent implements OnInit {
 
-  params:any = {
-    endDate:'2021-12-10',
-    page:0,
-    size:20,
-    startDate:'2021-08-10',
-    status:'CASHED_OUT_CARD'
-  }
-
+  loan:any = null;
+  // schedule:any = null;
+  // hasSchedule:boolean = false;
   constructor(private cabinet:CabinetService) { }
 
   ngOnInit(): void {
-    this.getOrders();
+    // this.getOrders();
+    this.getSchedule();
   }
 
-  getOrders(){
-    this.cabinet.getOrders(this.params).subscribe(res => {
+  // getOrders(){
+  //   this.cabinet.getActiveOrders({"iin": "910511300038"}).subscribe(res => {
+  //     this.loan = res?.loans[0];
+  //   })
+  // }
 
+  getSchedule(){
+    this.cabinet.getSchedule({}).subscribe(res => {
+      this.loan = res;
+      // this.schedule = res.orderDetailsSchedule
     })
   }
 

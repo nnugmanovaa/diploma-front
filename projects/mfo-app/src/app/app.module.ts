@@ -51,7 +51,7 @@ registerLocaleData(localeRu, 'ru');
       multi   : true,
     },
     { provide: LOCALE_ID, useValue: 'ru' },
-    {provide: LocationStrategy, useClass: HashLocationStrategy}
+    // {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]
 })

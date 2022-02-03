@@ -1,12 +1,12 @@
-<div class="content">
+<div class="content" *ngIf="loan">
   <h2 class="content-title">Открытый микрокредит</h2>
-  <p><b>Номер договора:</b> №1300792001700314</p>
-  <p><b>Ежемесячный платеж:</b> 20 832.92 ₸</p>
-  <p><b>Сумма кредита:</b> 499 990 ₸</p>
-  <p><b>Дата получения:</b> 13 июля 2021</p>
-  <p><b>Срок кредита:</b> 12 месяца</p>
-  <p><b>Остаток по займу:</b> 299 157.08 ₸</p>
-  <p><b>Переплата за весь период:</b> 0 ₸</p>
+  <p><b>Номер договора:</b> №{{ loan.orderDetailsSchedule?.contract }}</p>
+  <p><b>Ежемесячный платеж:</b> {{ loan.orderDetailsSchedule?.monthPayment| currency: '':'₸' }}</p>
+  <p><b>Сумма кредита:</b> {{ loan.orderDetailsSchedule?.totalAmount | currency: '':'₸' }}</p>
+  <p><b>Дата получения:</b> {{ loan.orderDetailsSchedule?.contractDate | date }}</p>
+  <p><b>Срок кредита:</b> {{ loan.orderDetailsSchedule?.period }} месяца</p>
+  <p><b>Остаток по займу:</b> {{ loan.orderDetailsSchedule?.amountRemain | currency: '':'₸' }}</p>
+  <p><b>Переплата за весь период:</b> {{ loan.orderDetailsSchedule?.amountOverPayment | currency: '':'₸' }}</p>
   <br>
   <h2 class="content-title">График погашения</h2>
   <div class="overflow-table">
@@ -21,12 +21,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>28.02.2022</td>
-          <td>95 833.33</td>
-          <td>12 500</td>
-          <td>500 000</td>
+        <tr *ngFor="let item of loan?.orderDetailsSchedule?.scheduleItems">
+          <td>{{ item.number }}</td>
+          <td>{{ item.paymentDate | date }}</td>
+          <td>{{ item.amountToBePaid | currency: '':'₸' }}</td>
+          <td>{{ item.reward }}</td>
+          <td>{{ item.totalAmountDebt  | currency: '':'₸'}}</td>
+        </tr>
+        <tr *ngIf="!this.loan.hasActiveLoan">
+          <td colspan="5">
+            <p class="info-text">Не найдено открытых микрокредитов</p>
+          </td>
         </tr>
       </tbody>
     </table>

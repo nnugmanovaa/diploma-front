@@ -248,8 +248,8 @@ export class StepsComponent implements OnInit {
         this.registerService.checkOTP(data).subscribe(res => {
           let order = {
             orderId: this.loanID,
-            "backSuccessLink": "http://google.com",
-            "backFailureLink": "http://google.com"
+            "backSuccessLink": "https://zaimem.kz/cabinet/cashed-out",
+            "backFailureLink": "https://zaimem.kz/cabinet/cashed-out"
           }
           this.stepService.payoutCard(order).subscribe(res => {
             window.open(res.url)

@@ -32,6 +32,7 @@ export class RegisterComponent implements OnInit {
   showSMSModal:boolean = false;
 
   veriface:boolean = false;
+  
   signUpShow:boolean = false;
   singUpForm:any = {
     "code": null,

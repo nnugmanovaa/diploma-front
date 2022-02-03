@@ -9,20 +9,39 @@
 
 .veriface{
   .top-info{
-    max-width: 600px;
+    max-width: 400px;
     margin: 0 auto;
+    h2{
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 600;
+      font-size: 36px;
+      line-height: 43px;
+    }
+    p{
+      margin-bottom: 12px;
+    }
+    b{
+      font-weight: 600;
+    }
+    ul {
+      list-style: disc;
+      padding-left: 20px;
+      li{
+        margin-bottom: 8px;
+      }
+    }
   }
   button{
     background: #42A8FA;
     width: 100%;
-    max-width: 300px;
     border: none;
     font-size: 24px;
     color: #FFFFFF;
     cursor: pointer;
     display: block;
     border-radius: 6px;
-    margin: 30px auto;
+    margin: 30px auto 24px;
     span{
       align-items: center;
       justify-content: center;

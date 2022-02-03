@@ -34,7 +34,8 @@ export class ChangePasswordComponent implements OnInit {
     this.auth.resetPassword(this.passwordForm).subscribe(res => {
       if(res){
         this.auth.saveUser(res);
-        this.router.navigate(['/cabinet'])
+        // this.router.navigate(['/cabinet'])
+        this.toastr.success('Пароль изменён', 'Персональные данные');
       }
     })
   }
