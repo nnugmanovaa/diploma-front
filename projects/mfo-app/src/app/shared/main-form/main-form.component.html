@@ -19,7 +19,7 @@
     </div>
     <ngx-slider (userChange)="calculateForm()" [(value)]="form.amount" [options]="priceOptions"></ngx-slider>
     <div class="month-bottom">
-      <p (click)="form.amount = 50000;calculateForm()" style="min-width: 80px;">0 ₸</p>
+      <p (click)="form.amount = 50000;calculateForm()" style="min-width: 80px;">50 000 ₸</p>
       <p (click)="form.amount = 250000;calculateForm()">250 000 ₸</p>
       <p (click)="form.amount = 500000;calculateForm()">до 500 000 ₸</p>
     </div>
@@ -36,4 +36,5 @@
     <b>{{ paymentPerMonth | currency: 'CLP':'₸' }}</b>
   </div>
   <button type="submit">Получить</button>
+  <p class="small-text">*ГЭСВ не превышает 56%</p>
 </form>

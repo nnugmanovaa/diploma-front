@@ -1,7 +1,7 @@
 .form-calculate{
   background: #FFFFFF;
   border-radius: 20px;
-  padding: 50px 30px;
+  padding: 50px 30px 26px;
   h2{
     font-weight: bold;
     font-size: 28px;
@@ -46,9 +46,15 @@
     width: 100%;
     padding: 14px;
   }
+
+  .small-text {
+    font-size: 10px;
+    margin-top: 12px;
+    text-align: right;
+  }
 }
 
-::ng-deep { 
+::ng-deep {
   .custom-slider {
     .month-bottom {
       display: flex;
@@ -128,9 +134,9 @@
       height: 9px;
     }
 
-    .ngx-slider .ngx-slider-pointer { 
-      &:focus { 
-        outline:0 !important; 
+    .ngx-slider .ngx-slider-pointer {
+      &:focus {
+        outline:0 !important;
       }
     }
   }
