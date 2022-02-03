@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { fromEvent } from 'rxjs';
 
 declare function loadVideo():any;
+declare function iinCheck(iin:any):any;
 
 @Component({
   selector: 'mfo-register',
@@ -58,6 +59,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadScript('../assets/js/verilive.js');
+    this.loadScript('../assets/js/checkiin.js');
     this.route.queryParams.subscribe(queryParams => {
       this.qparams = queryParams;
     });
@@ -95,7 +97,6 @@ export class RegisterComponent implements OnInit {
   getPersData(){
     this.registerService.getInfoByIIN(this.requestId).subscribe(res => {
       localStorage.setItem('pinfo', JSON.stringify(res));
-      // this.qparams['requestId'] = this.requestId;
       this.router.navigate(['/profile/steps'], { queryParams: {...this.qparams, requestId:this.requestId}})
     });
   }
@@ -123,6 +124,13 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser(){
+    if(this.pdfForm.iin){
+      console.log(iinCheck(this.pdfForm.iin))
+      if(!iinCheck(this.pdfForm.iin)){
+        this.toastr.error('Вы ввели неверный ИИН!', 'Ошибка!');
+        return;
+      }
+    }
     this.registerService.sendOTP(this.registerForm).subscribe(res => {
       this.getConsent();
     })

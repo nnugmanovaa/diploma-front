@@ -23,7 +23,7 @@
       </div>
       <div class="label-input">
         <label for="">ИИН</label>
-        <input type="tel" name="iin" [(ngModel)]="pdfForm.iin" required [imask]="{mask: '000000000000',placeholderChar: '_',lazy: false}">
+        <input type="tel" name="iin" [(ngModel)]="pdfForm.iin" required [imask]="{mask: '000000000000',placeholderChar: '_',lazy: true}" minlength="12">
       </div>
       <div class="label-checkbox">
         <label>
