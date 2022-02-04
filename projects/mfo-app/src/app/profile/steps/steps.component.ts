@@ -4,6 +4,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { interval, Subscription } from 'rxjs';
 import { RegisterService } from '../../core/services/register.service';
 import { AuthService } from '../../core/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'mfo-steps',
@@ -103,7 +104,7 @@ export class StepsComponent implements OnInit {
         "nationalIdValidDate":"",
         "isIpdl": true,
     }
-}
+  }
 
   priceMask = {
     mask: [
@@ -147,6 +148,7 @@ export class StepsComponent implements OnInit {
   showSMSModal:boolean = false;
   code:any = null;
   userId:any = null;
+  hasdata:boolean = false;
   constructor(public stepService:StepService,
               private route: ActivatedRoute,
               private router: Router,
@@ -167,6 +169,9 @@ export class StepsComponent implements OnInit {
         this.data.preScoreRequestId = queryParams.requestId;        
       }
     });
+    if(!this.data.preScoreRequestId){
+      this.getPersonalData();
+    }
   }
 
   getAnketa(){
@@ -176,9 +181,18 @@ export class StepsComponent implements OnInit {
     });
   }
 
+  getPersonalData(){
+    this.authService.getUserDataById(this.userId).subscribe(res =>{
+      this.userInfo = res;
+      if(res.addressInfoDto || res.jobDetailsDto || res.passportInfoDto){
+        this.hasdata = true;
+      }
+    })
+  }
+
   getUserByPhone(){
     this.authService.getUserId(this.authService?.getUser?.username).subscribe(res => {
-      this.userId = res.id;
+      this.userId = res.clientsId;
     })
   }
 
@@ -342,18 +356,45 @@ export class StepsComponent implements OnInit {
   }
 
   updateUser(){
-    this.userInfo.passportInfoDto.firstName = this.data.personalInfo.firstName;
-    this.userInfo.passportInfoDto.lastName = this.data.personalInfo.lastName;
-    this.userInfo.passportInfoDto.patronymic = this.data.personalInfo.middleName;
-    this.userInfo.passportInfoDto.birthDate = this.data.personalInfo.birthDate;
-    this.userInfo.passportInfoDto.nationalIdNumber = this.data.personalInfo.nationalIdDocument.idNumber;
-    this.userInfo.passportInfoDto.nationality = this.data.personalInfo.nationalIdDocument.nationality;
-    this.userInfo.passportInfoDto.nationalIdIssuer = this.data.personalInfo.nationalIdDocument.issuedBy;
-    this.userInfo.passportInfoDto.nationalIdIssueDate = this.data.personalInfo.nationalIdDocument.issuedDate;
-    this.userInfo.passportInfoDto.nationalIdValidDate = this.data.personalInfo.nationalIdDocument.expireDate;    
-    this.authService.CreateUserPasport(this.userInfo.passportInfoDto, this.userId).subscribe(res => {
+    this.userInfo.passportInfoDto.firstName = this.data.personalInfo?.firstName;
+    this.userInfo.passportInfoDto.lastName = this.data.personalInfo?.lastName;
+    this.userInfo.passportInfoDto.patronymic = this.data.personalInfo?.middleName;
+    this.userInfo.passportInfoDto.birthDate = this.data.personalInfo?.birthDate;
+    this.userInfo.passportInfoDto.nationalIdNumber = this.data.personalInfo?.nationalIdDocument.idNumber;
+    this.userInfo.passportInfoDto.nationality = this.data.personalInfo?.nationalIdDocument.nationality;
+    this.userInfo.passportInfoDto.nationalIdIssuer = this.data.personalInfo?.nationalIdDocument.issuedBy;
+    this.userInfo.passportInfoDto.nationalIdIssueDate = this.data.personalInfo?.nationalIdDocument.issuedDate;
+    this.userInfo.passportInfoDto.nationalIdValidDate = this.data.personalInfo?.nationalIdDocument.expireDate;
 
-    })
+    this.userInfo.jobDetailsDto.education = this.data.personalInfo?.education;
+    this.userInfo.jobDetailsDto.employment = this.data.personalInfo?.employment;
+    this.userInfo.jobDetailsDto.typeOfWork = this.data.personalInfo?.typeOfWork;
+    this.userInfo.jobDetailsDto.workPosition = this.data.personalInfo?.workPosition;
+    this.userInfo.jobDetailsDto.employer = this.data.personalInfo?.employer;
+    this.userInfo.jobDetailsDto.monthlyIncome = this.data.personalInfo?.monthlyIncome;
+    this.userInfo.jobDetailsDto.additionalMonthlyIncome = this.data.personalInfo?.additionalMonthlyIncome;
+    this.userInfo.jobDetailsDto.maritalStatus = this.data.personalInfo?.maritalStatus;
+    this.userInfo.jobDetailsDto.numberOfKids = this.data.personalInfo?.numberOfKids;
+
+    this.userInfo.addressInfoDto.region = this.data.personalInfo?.registrationAddress?.region
+    this.userInfo.addressInfoDto.city = this.data.personalInfo?.registrationAddress?.city
+    this.userInfo.addressInfoDto.postalCode = this.data.personalInfo?.registrationAddress?.postalCode
+    this.userInfo.addressInfoDto.street = this.data.personalInfo?.registrationAddress?.street
+    this.userInfo.addressInfoDto.house = this.data.personalInfo?.registrationAddress?.house
+    this.userInfo.addressInfoDto.apartment = this.data.personalInfo?.registrationAddress?.apartment
+    // this.userInfo.addressInfoDto.periodOfResidence = this.data.personalInfo?.registrationAddress?.periodOfResidence
+    this.userInfo.addressInfoDto.addressIsValid = true;
+
+    if(this.hasdata){
+      this.authService.updateUser(this.userInfo, this.userId).subscribe(res => {
+
+      });
+    }else{
+      this.authService.CreateUserPasport(this.userInfo.jobDetailsDto, this.userId).subscribe(res => {
+        this.authService.updateUser(this.userInfo, this.userId).subscribe(res => {
+        });
+      });
+    }
   }
 
 }

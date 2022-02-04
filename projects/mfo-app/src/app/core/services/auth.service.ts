@@ -51,7 +51,15 @@ export class AuthService {
   }
 
   public CreateUserPasport(data:any, id:any){
-    return this.httpClient.post<any>(`${this.REST_API_SERVER}/clients/passport-info/{id}`, data);
+    return this.httpClient.post<any>(`${this.REST_API_SERVER}/v1/clients/job-details/${id}`, data);
+  }
+
+  public getUserDataById(id:any){
+    return this.httpClient.get<any>(`${this.REST_API_SERVER}/v1/clients/full-personal-info/${id}`);
+  }
+
+  public updateUser(data:any, id:any){
+    return this.httpClient.put<any>(`${this.REST_API_SERVER}/v1/clients/update-personal-info/${id}`,data);
   }
 
   get isLoggedIn(): boolean {

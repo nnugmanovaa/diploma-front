@@ -15,10 +15,13 @@ import { DeferredPaymentComponent } from './deferred-payment/deferred-payment.co
 import { SettingsComponent } from './settings/settings.component';
 import { MainFormModule } from '../shared/main-form/main-form.module';
 
+import { IMaskModule } from 'angular-imask';
+
 @NgModule({
   declarations: [CabinetComponent, CashedOutComponent, OrderHistoryComponent, ChangePasswordComponent, ContactsComponent, PaymenttypesComponent, DeferredPaymentComponent, SettingsComponent],
   imports: [
     CommonModule,
+    IMaskModule,
     CabinetRoutingModule,
     HttpClientModule,
     ReactiveFormsModule, 
