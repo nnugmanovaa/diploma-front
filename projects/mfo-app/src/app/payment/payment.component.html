@@ -11,22 +11,30 @@
       </div>
       <div class="label-input">
         <label for="">ИИН</label>
-        <input [unmask]="true" type="text" required [imask]="{mask: '000000000000',placeholderChar: '_',lazy: false}">
+        <input [unmask]="true" type="text" name="clientRef" required [imask]="{mask: '000000000000',placeholderChar: '_',lazy: false}" [(ngModel)]="payForm.clientRef">
       </div>
 
       <div class="label-input">
         <label for="">Номер договора</label>
-        <input type="text" required [imask]="{mask: '0-000000000',lazy: false, autoclear: true}">
+        <input type="text" required [imask]="{mask: '0-000000000',lazy: false, autoclear: true}" [(ngModel)]="payForm.contractNumber" name="contractNumber">
       </div>
 
       <div class="label-input">
-        <label for="">Сумма к оплате </label>
-        <input [imask]="priceMask" [unmask]="true" name="amount" [(ngModel)]="payForm.amount" type="text" required>
+        <label>Выберите тип погашения</label>
+        <select name="loanRepayType" [(ngModel)]="payForm.loanRepayType" (ngModelChange)="setAmout()">
+          <option value="PLANNED_REPAYMENT">Досрочное погашение</option>
+          <option value="FULL_REPAYMENT">Полное погашение</option>
+        </select>
       </div>
+
+      <h3>Сумма к оплате: 
+        <b *ngIf="payForm.loanRepayType == 'PLANNED_REPAYMENT'">{{ payForm.monthPayment | currency: '':'₸' }}</b>
+        <b *ngIf="payForm.loanRepayType != 'PLANNED_REPAYMENT'">{{ payForm.amountRemain | currency: '':'₸' }}</b>
+      </h3>
 
       <div class="label-input">
         <label for="">Сумма платежа</label>
-        <input [imask]="priceMask"  type="text" required>
+        <input [imask]="priceMask" [unmask]="true" name="amount" [(ngModel)]="payForm.amount" type="text" required>
       </div>
     
       <button class="btn" type="submit">Оплатить</button>

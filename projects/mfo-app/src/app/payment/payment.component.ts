@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/services/auth.service'
+import { CabinetService } from '../core/services/cabinet.service';
 
 @Component({
   selector: 'mfo-payment',
@@ -27,22 +28,53 @@ export class PaymentComponent implements OnInit {
     ]
   };
   payForm:any = {
-    username:null,
-    amount:null,
-    message: "Hello"
+    "username": "",
+    "amountRemain": "",
+    "monthPayment": "",
+    "amount": "",
+    "clientRef": "",
+    "contractDate": "",
+    "contractNumber": "",
+    "loanRepayType": "PLANNED_REPAYMENT"
   }
-  constructor(private auth:AuthService) { }
+  constructor(private auth:AuthService,
+              private cabinet:CabinetService) { }
 
   ngOnInit(): void {
     if(this.auth.isLoggedIn){
-      this.payForm.username = this.auth.getUser.username
+      this.payForm.username = this.auth.getUser.username;
+      this.getUserByPhone();
+      this.getActiveLoan();
     }
   }
 
-  payCredit(){
-    console.log(this.payForm)
-    this.auth.payment(this.payForm).subscribe(res => {
-      
+  getUserByPhone(){
+    this.auth.getUserId(this.payForm.username).subscribe(res => {
+      this.payForm.clientRef = res.iin;
     })
+  }
+
+  getActiveLoan(){
+    this.cabinet.getSchedule().subscribe(res => {
+      this.payForm.contractNumber = res.orderDetailsSchedule?.contract;
+      this.payForm.contractDate = res.orderDetailsSchedule?.contractDate;
+      this.payForm.monthPayment = res.orderDetailsSchedule?.monthPayment;
+      this.payForm.amountRemain = res.orderDetailsSchedule?.amountRemain;
+      this.payForm.amount = String(res.orderDetailsSchedule?.monthPayment);
+    })
+  }
+
+  payCredit(){
+    this.auth.payment(this.payForm).subscribe(res => {
+      window.open(res.url)
+    })
+  }
+
+  setAmout(){
+    if(this.payForm.loanRepayType == 'PLANNED_REPAYMENT'){
+      this.payForm.amount = String(this.payForm.monthPayment);
+    }else{
+      this.payForm.amount = String(this.payForm.amountRemain);
+    }
   }
 }

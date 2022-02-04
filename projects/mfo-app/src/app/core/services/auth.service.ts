@@ -35,7 +35,7 @@ export class AuthService {
   }
 
   public payment(data:any){
-    return this.httpClient.post(`${this.LOAN_URL}/loans/init-payment`, data);
+    return this.httpClient.post<any>(`${this.LOAN_URL}/loans/init-payment`, data);
   }
 
   public sendSms(data:any){
@@ -46,6 +46,13 @@ export class AuthService {
     return this.httpClient.put(`${this.REST_API_SERVER}/v1/auth/pass-reset`, data);
   }
 
+  public getUserId(phone:any){
+    return this.httpClient.get<any>(`${this.LOAN_URL}/clients/${phone}`);
+  }
+
+  public CreateUserPasport(data:any, id:any){
+    return this.httpClient.post<any>(`${this.REST_API_SERVER}/clients/passport-info/{id}`, data);
+  }
 
   get isLoggedIn(): boolean {
     const token = localStorage.getItem('token');

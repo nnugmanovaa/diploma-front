@@ -10,6 +10,7 @@ import { AuthService } from '../../core/services/auth.service';
   templateUrl: './steps.component.html',
   styleUrls: ['./steps.component.scss']
 })
+
 export class StepsComponent implements OnInit {
   step:any = 1;
   data = {
@@ -68,6 +69,42 @@ export class StepsComponent implements OnInit {
     "preScoreRequestId": null,
   }
 
+  userInfo:any = {
+    "addressInfoDto": {
+        "region": "",
+        "city": "",
+        "postalCode": "",
+        "street": "",
+        "house": "",
+        "apartment": "",
+        "periodOfResidence": "",
+        "addressIsValid": true
+    },
+    "jobDetailsDto": {
+        "education": "",
+        "employment": "",
+        "typeOfWork": "",
+        "workPosition": "",
+        "employer": "",
+        "monthlyIncome": "",
+        "additionalMonthlyIncome": "",
+        "maritalStatus": "",
+        "numberOfKids": ""
+    },
+    "passportInfoDto": {
+        "firstName":"",
+        "lastName":"",
+        "patronymic":"",
+        "birthDate":"",
+        "nationalIdNumber":"",
+        "nationality":"",
+        "nationalIdIssuer":"",
+        "nationalIdIssueDate":"",
+        "nationalIdValidDate":"",
+        "isIpdl": true,
+    }
+}
+
   priceMask = {
     mask: [
         { mask: '' },
@@ -109,6 +146,7 @@ export class StepsComponent implements OnInit {
 
   showSMSModal:boolean = false;
   code:any = null;
+  userId:any = null;
   constructor(public stepService:StepService,
               private route: ActivatedRoute,
               private router: Router,
@@ -120,6 +158,7 @@ export class StepsComponent implements OnInit {
   ngOnInit(): void {
     this.getLocations();
     this.fillData();
+    this.getUserByPhone();
     this.route.queryParams.subscribe(queryParams => {
       if(queryParams){
         this.data.loanAmount = queryParams.amount;
@@ -135,6 +174,12 @@ export class StepsComponent implements OnInit {
       let file = URL.createObjectURL(res);
       window.open(file);
     });
+  }
+
+  getUserByPhone(){
+    this.authService.getUserId(this.authService?.getUser?.username).subscribe(res => {
+      this.userId = res.id;
+    })
   }
 
   getContract(){
@@ -288,10 +333,26 @@ export class StepsComponent implements OnInit {
        this.successResult = true;
        this.loanID = res.orderId;
        this.loading = false;
+       this.updateUser();
     }, error => {
       this.resultShow = true;
       this.errorResult = true;
       this.loading = false;
+    })
+  }
+
+  updateUser(){
+    this.userInfo.passportInfoDto.firstName = this.data.personalInfo.firstName;
+    this.userInfo.passportInfoDto.lastName = this.data.personalInfo.lastName;
+    this.userInfo.passportInfoDto.patronymic = this.data.personalInfo.middleName;
+    this.userInfo.passportInfoDto.birthDate = this.data.personalInfo.birthDate;
+    this.userInfo.passportInfoDto.nationalIdNumber = this.data.personalInfo.nationalIdDocument.idNumber;
+    this.userInfo.passportInfoDto.nationality = this.data.personalInfo.nationalIdDocument.nationality;
+    this.userInfo.passportInfoDto.nationalIdIssuer = this.data.personalInfo.nationalIdDocument.issuedBy;
+    this.userInfo.passportInfoDto.nationalIdIssueDate = this.data.personalInfo.nationalIdDocument.issuedDate;
+    this.userInfo.passportInfoDto.nationalIdValidDate = this.data.personalInfo.nationalIdDocument.expireDate;    
+    this.authService.CreateUserPasport(this.userInfo.passportInfoDto, this.userId).subscribe(res => {
+
     })
   }
 
