@@ -11,6 +11,50 @@
       <input type="text" name="lastName" disabled [ngModel]="data.passportInfoDto.lastName">
     </div>
 
+    <div class="label-input">
+      <label for="">Имя</label>
+      <input type="text" name="firstName" disabled [ngModel]="data.passportInfoDto.firstName">
+    </div>
+
+    <div class="label-input">
+      <label for="">Отчество</label>
+      <input type="text" name="patronymic" disabled [ngModel]="data.passportInfoDto.patronymic">
+    </div>
+
+    <div class="label-input">
+      <label for="">Дата рождения</label>
+      <input type="text" name="birthDate" disabled [ngModel]="data.passportInfoDto.birthDate">
+    </div>
+
+    <div class="label-input">
+      <label for="">Номер удостоверения</label>
+      <input type="text" name="nationalIdNumber" [(ngModel)]="data.passportInfoDto.nationalIdNumber">
+    </div>
+
+    <div class="label-input">
+      <label for="">Национальность</label>
+      <input type="text" name="nationality" [(ngModel)]="data.passportInfoDto.nationality">
+    </div>
+
+     <div class="label-input">
+      <label>Кем выдан</label>
+      <select name="nationalIdIssuer" required [(ngModel)]="data.passportInfoDto.nationalIdIssuer">
+        <option value="МИНИСТЕРСТВО ВНУТРЕННИХ ДЕЛ РК">МВД РК</option>
+        <option value="Министерства юстиции Республики Казахстан">МЮ РК</option>
+      </select>
+    </div>
+
+    <div class="label-input">
+      <label>Дата выдачи</label>
+      <input type="date" name="nationalIdIssueDate" [(ngModel)]="data.passportInfoDto.nationalIdIssueDate">
+    </div>
+
+    <div class="label-input">
+      <label for="">Дата окончания</label>
+      <input type="date" name="nationalIdValidDate" [(ngModel)]="data.passportInfoDto.nationalIdValidDate">
+    </div>
+
+
     <div class="form-top">
       <h2>Сведения о работе</h2>
     </div>
