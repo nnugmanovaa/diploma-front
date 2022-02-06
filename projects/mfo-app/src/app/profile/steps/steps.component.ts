@@ -55,8 +55,8 @@ export class StepsComponent implements OnInit {
         "typeOfWork": null,
         "workPosition": null,
         "employer": null,
-        "monthlyIncome": 0,
-        "additionalMonthlyIncome": 0,
+        "monthlyIncome": "",
+        "additionalMonthlyIncome": "",
         "workExperience": 0,
         "workPhoneNum": null,
         "maritalStatus": null,
@@ -214,8 +214,8 @@ export class StepsComponent implements OnInit {
         this.data.personalInfo.typeOfWork = this.userInfo.jobDetailsDto.typeOfWork;
         this.data.personalInfo.workPosition = this.userInfo.jobDetailsDto.workPosition;
         this.data.personalInfo.employer = this.userInfo.jobDetailsDto.employer;
-        this.data.personalInfo.monthlyIncome = this.userInfo.jobDetailsDto.monthlyIncome;
-        this.data.personalInfo.additionalMonthlyIncome = this.userInfo.jobDetailsDto.additionalMonthlyIncome;
+        this.data.personalInfo.monthlyIncome = String(this.userInfo.jobDetailsDto.monthlyIncome);
+        this.data.personalInfo.additionalMonthlyIncome = String(this.userInfo.jobDetailsDto.additionalMonthlyIncome);
         this.data.personalInfo.maritalStatus = this.userInfo.jobDetailsDto.maritalStatus;
         this.data.personalInfo.numberOfKids = this.userInfo.jobDetailsDto.numberOfKids;
       }
@@ -368,12 +368,12 @@ export class StepsComponent implements OnInit {
     if(this.data.loanAmount){
       this.data.loanAmount = Number(this.data.loanAmount);
     }
-    if(this.data.personalInfo.monthlyIncome){
-      this.data.personalInfo.monthlyIncome = Number(this.data.personalInfo.monthlyIncome);
-    }
-    if(this.data.personalInfo.additionalMonthlyIncome){
-      this.data.personalInfo.additionalMonthlyIncome = Number(this.data.personalInfo.additionalMonthlyIncome);
-    }
+    // if(this.data.personalInfo.monthlyIncome){
+    //   this.data.personalInfo.monthlyIncome = Number(this.data.personalInfo.monthlyIncome);
+    // }
+    // if(this.data.personalInfo.additionalMonthlyIncome){
+    //   this.data.personalInfo.additionalMonthlyIncome = Number(this.data.personalInfo.additionalMonthlyIncome);
+    // }
     if(this.data.personalInfo.workExperience){
       this.data.personalInfo.workExperience = Number(this.data.personalInfo.workExperience);
     }
