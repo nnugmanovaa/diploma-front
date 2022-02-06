@@ -168,7 +168,7 @@
 
       <div class="label-input">
         <label>Период проживания по этому адресу</label>
-        <select name="" id="">
+        <select required [(ngModel)]="userInfo.addressInfoDto.periodOfResidence" name="periodOfResidence">
           <option value="">Выберите</option>
           <option value="1">1</option>
           <option value="2">2</option>
