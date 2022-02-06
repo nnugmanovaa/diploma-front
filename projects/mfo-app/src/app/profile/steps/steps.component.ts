@@ -181,6 +181,20 @@ export class StepsComponent implements OnInit {
     });
   }
 
+  createRequest(){
+    let data = {
+      firstName: this.data.personalInfo.firstName,
+      iin: this.data.iin,
+      lastName: this.data.personalInfo.lastName,
+      patronymic: this.data.personalInfo.middleName,
+      phone: this.authService.getUser.username,
+    }
+    this.registerService.getLoanRequestId(data).subscribe(res => {
+      this.data.preScoreRequestId = res.requestId
+      this.submitAll();
+    })
+  }
+
   getPersonalData(){
     this.authService.getUserDataById(this.clientId).subscribe(res =>{
       if(res.addressInfoDto){
@@ -367,6 +381,13 @@ export class StepsComponent implements OnInit {
       this.data.personalInfo.numberOfKids = Number(this.data.personalInfo.numberOfKids);
     }
     this.strokeLoading();
+
+    if(!this.data.preScoreRequestId){
+      this.createRequest();
+    }
+  }
+
+  submitAll(){
     this.stepService.submitStep(this.data).subscribe(res => {
        this.resultShow = true;
        this.successResult = true;

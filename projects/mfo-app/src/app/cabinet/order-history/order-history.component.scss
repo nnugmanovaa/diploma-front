@@ -21,11 +21,20 @@ ul li {
     }
     .status{
       color: rgba(0, 0, 0, 0.2);
-      &.REJECTED{
+      &.REJECTED,
+      &.EXPIRED{
         color: #FB4B4B;
       }
-      &.APPROVED{
+      &.CASHED_OUT_WALLET,
+      &.CASHED_OUT_CARD,
+      &.CLOSED,
+      &.PAID{
         color: #34BE82;
+      }
+      &.APPROVED,
+      &.PENDING,
+      &.NEW{
+        color: blue;
       }
     }
   }

@@ -3,10 +3,16 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { CabinetService } from '../../core/services/cabinet.service';
 
 export enum Status {
+  CASH_OUT_CARD_INITIALIZED = 'Обналичивание',
+  NEW = "Новый",
   APPROVED = 'Одобрен',
-  REJECTED = 'Отклонен',
-  CLOSED = 'Закрыт',
-  CASH_OUT_CARD_INITIALIZED = 'Обналичивание'
+  REJECTED = 'Отказано ',
+  CASHED_OUT_WALLET = 'Выдано',
+  CASHED_OUT_CARD = 'Выдано на карту',
+  CLOSED = 'Закрыто',
+  PENDING = 'Погасить',
+  PAID = 'Оплачен',
+  EXPIRED = 'Просрочено'
 }
 
 @Component({
