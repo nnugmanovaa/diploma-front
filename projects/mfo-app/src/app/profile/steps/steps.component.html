@@ -6,7 +6,7 @@
           <path d="M11.67 1.8701L9.9 0.100098L0 10.0001L9.9 19.9001L11.67 18.1301L3.54 10.0001L11.67 1.8701Z" fill="black"/>
         </svg>
         Назад
-      </div>  
+      </div>
       <p>Шаг {{ step }}/3</p>
       <div class="progress"><span style="width: calc(33% * {{ step }});"></span></div>
     </div>
@@ -73,7 +73,7 @@
       </div>
       <div class="label-input">
         <label>Область</label>
-        <select required name="district" [(ngModel)]="selectedDistrict" 
+        <select required name="district" [(ngModel)]="selectedDistrict"
         (ngModelChange)="getCities()">
           <option [value]="">Выберите</option>
           <option *ngFor="let item of districts" [ngValue]="item">{{ item.name_ru }}</option>
@@ -81,7 +81,7 @@
       </div>
       <div class="label-input">
         <label [class.disabled]="!cities">Регион/село/город</label>
-        <select required name="city" [(ngModel)]="selectedCity" [disabled]="!cities" 
+        <select required name="city" [(ngModel)]="selectedCity" [disabled]="!cities"
         (ngModelChange)="setPostalCode()">
           <option [value]="">Выберите</option>
           <option *ngFor="let item of cities" [ngValue]="item">{{ item.name_ru }}</option>
@@ -113,7 +113,7 @@
       <div class="label-toggle">
         <p>
           <img src="assets/img/point.svg" alt="">
-          Адрес проживания совпадает с адресом прописки  
+          Адрес проживания совпадает с адресом прописки
         </p>
         <label>
           <input type="checkbox" name="sameAdress" [(ngModel)]="data.personalInfo.sameAdress">
@@ -128,7 +128,7 @@
 
         <div class="label-input">
           <label>Область</label>
-          <select required name="selectedDistrictResidence" [(ngModel)]="selectedDistrictResidence" 
+          <select required name="selectedDistrictResidence" [(ngModel)]="selectedDistrictResidence"
           (ngModelChange)="getResCities()">
             <option [value]="">Выберите</option>
             <option *ngFor="let item of districts" [ngValue]="item">{{ item.name_ru }}</option>
@@ -136,7 +136,7 @@
         </div>
         <div class="label-input">
           <label [class.disabled]="!cities">Регион/село/город</label>
-          <select required name="selectedCityResidence" [(ngModel)]="selectedCityResidence" [disabled]="!cities" 
+          <select required name="selectedCityResidence" [(ngModel)]="selectedCityResidence" [disabled]="!cities"
           (ngModelChange)="setPostalCode(true)">
             <option [value]="">Выберите</option>
             <option *ngFor="let item of citiesres" [ngValue]="item">{{ item.name_ru }}</option>
@@ -188,7 +188,7 @@
         <h2>Сведения о работе</h2>
         <p class="info-text">Получите <span>+30% к вероятности одобрения микрокредита</span>, заполнив все поля.</p>
       </div>
-      
+
       <div class="label-input">
         <label>Образование</label>
         <select name="education" [(ngModel)]="data.personalInfo.education" >

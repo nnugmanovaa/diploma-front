@@ -11,27 +11,27 @@ import { AuthService } from '../../core/services/auth.service';
 export class MainFormComponent implements OnInit {
 
   form:any = {
-    period: 6,
-    amount:250000,
+    period: 7,
+    amount:275000,
     type: 'ANNUITY_PAYMENTS'
   }
   value: number = 6;
   monthOptions: Options = {
-    floor: 0,
+    floor: 2,
     ceil: 12,
     showSelectionBar: true,
-    minLimit: 2
+    minLimit: 0
   };
 
   priceOptions:Options = {
-    floor: 0,
+    floor: 50000,
     minLimit: 50000,
     ceil: 500000,
     step: 5000,
     showSelectionBar: true,
     showTicks: true,
   }
-  
+
   paymentPerMonth:any = null;
 
   constructor(private route: ActivatedRoute,
@@ -43,7 +43,7 @@ export class MainFormComponent implements OnInit {
   }
 
   calculateForm(){
-    this.paymentPerMonth = this.getPayment(this.form.amount, this.form.period, 0.38) 
+    this.paymentPerMonth = this.getPayment(this.form.amount, this.form.period, 0.38)
   }
 
   getPayment(sum:any, period:any, rate:any) {
@@ -61,13 +61,13 @@ export class MainFormComponent implements OnInit {
   createRequest(){
     if(this.authService.isLoggedIn){
       this.router.navigate(
-        ['/profile/steps'], 
+        ['/profile/steps'],
         {
           queryParams: this.form
         });
     }else{
       this.router.navigate(
-        ['/profile/register'], 
+        ['/profile/register'],
         {
           queryParams: this.form
         });
