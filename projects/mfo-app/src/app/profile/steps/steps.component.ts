@@ -32,7 +32,7 @@ export class StepsComponent implements OnInit {
         },
         "registrationAddress": {
             "district": null,
-            "region": null,
+            "region": 0,
             "city": null,
             "postalCode": null,
             "street": null,
@@ -42,7 +42,7 @@ export class StepsComponent implements OnInit {
         },
         "residenceAddress": {
             "district": null,
-            "region": null,
+            "region": 0,
             "city": null,
             "postalCode": null,
             "street": null,
@@ -129,12 +129,6 @@ export class StepsComponent implements OnInit {
   cities:any = null;
   citiesres:any = null;
 
-  selectedDistrict:any = null;
-  selectedCity:any = null;
-
-  selectedDistrictResidence:any = null;
-  selectedCityResidence:any = null;
-
   stroke:any = "stroke-dasharray: 753.9822368615503, 753.9822368615503; stroke-dashoffset: 753.9822368615503;";
   intervalId:any = null;
   loading:boolean = false;
@@ -205,6 +199,7 @@ export class StepsComponent implements OnInit {
         this.data.personalInfo.registrationAddress.street = this.userInfo.addressInfoDto.street;
         this.data.personalInfo.registrationAddress.house = this.userInfo.addressInfoDto.house;
         this.data.personalInfo.registrationAddress.apartment = this.userInfo.addressInfoDto.apartment;
+        this.getDistrictById()
       }
       if(res.jobDetailsDto){
         this.userInfo.jobDetailsDto = res.jobDetailsDto;
@@ -268,7 +263,7 @@ export class StepsComponent implements OnInit {
 
   fillData(){
     let info = localStorage.getItem('pinfo');
-    if(info){
+    if(info && !this.data.preScoreRequestId){
       let dinfo = JSON.parse(info);
       this.data.iin = dinfo.iin;
       this.data.personalInfo.firstName = dinfo.firstName;
@@ -294,28 +289,41 @@ export class StepsComponent implements OnInit {
     })
   }
 
-  setPostalCode(res:boolean = false){
-    if(res){
-      this.data.personalInfo.residenceAddress.city = this.selectedDistrictResidence.name_ru;
-      this.data.personalInfo.residenceAddress.region = this.selectedDistrictResidence.id;
-    }else{
-      this.data.personalInfo.registrationAddress.city = this.selectedCity.name_ru;
-      this.data.personalInfo.registrationAddress.region = this.selectedCity.id;
+  getDistrictById(){
+    let code = this.data.personalInfo.registrationAddress.region;
+    if(code){
+      code = code * 1;
+    }
+    let d = this.districts.filter((x:any)=> x.code == code)[0];
+    if(d){
+      this.getCities(d.id);
+      this.data.personalInfo.registrationAddress.district = d.name_ru;
     }
   }
 
-  getCities(){
+  getResDistrictByID(){
+    let code = this.data.personalInfo.residenceAddress.region;
+    if(code){
+      code = code * 1;
+    }
+    let d = this.districts.filter((x:any)=> x.code == code)[0];
+    if(d){
+      this.getResCities(d.id)
+      this.data.personalInfo.residenceAddress.district = d.name_ru;
+    }
+  }
+
+
+  getCities(id:any){
     this.cities = null;
-    this.data.personalInfo.registrationAddress.district = this.selectedDistrict?.name_ru
-    this.stepService.getCities(this.selectedDistrict?.id).subscribe(res => {
+    this.stepService.getCities(id).subscribe(res => {
       this.cities = res;
     })
   }
 
-  getResCities(){
+  getResCities(id:any){
     this.citiesres = null;
-    this.data.personalInfo.residenceAddress.district = this.selectedDistrictResidence?.name_ru
-    this.stepService.getCities(this.selectedDistrictResidence?.id).subscribe(res => {
+    this.stepService.getCities(id).subscribe(res => {
       this.citiesres = res;
     })
   }
@@ -359,9 +367,6 @@ export class StepsComponent implements OnInit {
   }
 
   finishStep(){
-    if(this.data.personalInfo.sameAdress){
-      this.data.personalInfo.residenceAddress = this.data.personalInfo.registrationAddress
-    }
     if(this.data.loanPeriod){
       this.data.loanPeriod = Number(this.data.loanPeriod);
     }
@@ -385,6 +390,8 @@ export class StepsComponent implements OnInit {
     if(!this.data.preScoreRequestId){
       this.createRequest();
     }
+
+    this.createJobInfo()
   }
 
   submitAll(){
@@ -393,7 +400,6 @@ export class StepsComponent implements OnInit {
        this.successResult = true;
        this.loanID = res.orderId;
        this.loading = false;
-       this.createJobInfo();
     }, error => {
       this.resultShow = true;
       this.errorResult = true;

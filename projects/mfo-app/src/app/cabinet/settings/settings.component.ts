@@ -3,6 +3,7 @@ import { RegisterService } from '../../core/services/register.service';
 import { AuthService } from '../../core/services/auth.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { StepService } from '../../core/services/step.service';
 
 @Component({
   selector: 'mfo-settings',
@@ -46,6 +47,11 @@ export class SettingsComponent implements OnInit {
         "isIpdl": true,
     }
   }
+
+  cities:any = null;
+  districts:any = null;
+  selectedCity:any = null;
+  selectedDisctirct:any = null;
   userId:any = null;
   priceMask = {
     mask: [
@@ -71,14 +77,41 @@ export class SettingsComponent implements OnInit {
               private router: Router,
               private registerService:RegisterService,
               public authService:AuthService,
-              private toastr: ToastrService,) {
+              private toastr: ToastrService,
+              public stepService:StepService,) {
 
               }
 
   ngOnInit(): void {
-    this.authService.getUserId(this.authService?.getUser?.username).subscribe(res => {
-      this.userId = res.clientsId;
+    this.userId = this.authService.getUser.clientId;
+    this.getLocations();
+    if(this.userId){
       this.getPersonalData();
+    }
+  }
+
+  getLocations(){
+    this.stepService.getLocations().subscribe(res => {
+      this.districts = res;
+    })
+  }
+
+  getDistrictById(){
+    let code = this.data.addressInfoDto.region;
+    if(code){
+      code = code * 1;
+    }
+    this.selectedDisctirct = this.districts.filter((x:any)=> x.code == code)[0];
+    if(this.selectedDisctirct){
+      this.getCities(this.selectedDisctirct.id)
+    }
+  }
+
+
+  getCities(id:any){
+    this.cities = null;
+    this.stepService.getCities(id).subscribe(res => {
+      this.cities = res;
     })
   }
 
@@ -87,9 +120,14 @@ export class SettingsComponent implements OnInit {
       if(res.addressInfoDto){
         this.data.addressInfoDto = res.addressInfoDto;
         this.hastData = true;
+        if(this.data.addressInfoDto.region){
+          this.getDistrictById()
+        }
       }
       if(res.jobDetailsDto){
         this.data.jobDetailsDto = res.jobDetailsDto;
+        this.data.jobDetailsDto.monthlyIncome = String(res.jobDetailsDto.monthlyIncome);
+        this.data.jobDetailsDto.additionalMonthlyIncome = String(res.jobDetailsDto.additionalMonthlyIncome);
         this.hastData = true;
       }
       if(res.passportInfoDto){

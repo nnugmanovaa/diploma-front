@@ -125,14 +125,14 @@ const url = "https://services.verigram.ai:8443/verilive/verilive"
     // Failure VeriLive json results
     function failCallback(data) {
       // E.g. Show to user, say to retry again
-      verilive.dispose();
-      document.getElementById("results").value = JSON.stringify(data, undefined, 2).replace(/</g, "&lt;");
+      // verilive.dispose();
+      // document.getElementById("results").value = JSON.stringify(data, undefined, 2).replace(/</g, "&lt;");
     }
 
     function errorCallback(data) {
       // E.g. Show to user, say to retry again
-      verilive.dispose();
-      document.getElementById("results").value = JSON.stringify(data, undefined, 2).replace(/</g, "&lt;");
+      // verilive.dispose();
+      // document.getElementById("results").value = JSON.stringify(data, undefined, 2).replace(/</g, "&lt;");
     }
 
     function updateCallback(data) {

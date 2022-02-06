@@ -73,18 +73,17 @@
       </div>
       <div class="label-input">
         <label>Область</label>
-        <select required name="district" [(ngModel)]="selectedDistrict"
-        (ngModelChange)="getCities()">
+        <select required name="region" [(ngModel)]="data.personalInfo.registrationAddress.region"
+        (ngModelChange)="getDistrictById()">
           <option [value]="">Выберите</option>
-          <option *ngFor="let item of districts" [ngValue]="item">{{ item.name_ru }}</option>
+          <option *ngFor="let item of districts" value="{{item.code}}">{{ item.name_ru }}</option>
         </select>
       </div>
       <div class="label-input">
         <label [class.disabled]="!cities">Регион/село/город</label>
-        <select required name="city" [(ngModel)]="selectedCity" [disabled]="!cities"
-        (ngModelChange)="setPostalCode()">
+        <select required name="city" [(ngModel)]="data.personalInfo.registrationAddress.city" [disabled]="!cities">
           <option [value]="">Выберите</option>
-          <option *ngFor="let item of cities" [ngValue]="item">{{ item.name_ru }}</option>
+          <option *ngFor="let item of cities" [ngValue]="item.name_ru">{{ item.name_ru }}</option>
         </select>
       </div>
 
@@ -128,18 +127,17 @@
 
         <div class="label-input">
           <label>Область</label>
-          <select required name="selectedDistrictResidence" [(ngModel)]="selectedDistrictResidence"
-          (ngModelChange)="getResCities()">
+          <select required name="residenceAddressRegion" [(ngModel)]="data.personalInfo.residenceAddress.region"
+          (ngModelChange)="getResDistrictByID()">
             <option [value]="">Выберите</option>
-            <option *ngFor="let item of districts" [ngValue]="item">{{ item.name_ru }}</option>
+            <option *ngFor="let item of districts" value="item.code">{{ item.name_ru }}</option>
           </select>
         </div>
         <div class="label-input">
           <label [class.disabled]="!cities">Регион/село/город</label>
-          <select required name="selectedCityResidence" [(ngModel)]="selectedCityResidence" [disabled]="!cities"
-          (ngModelChange)="setPostalCode(true)">
+          <select required name="residenceAddresscity" [(ngModel)]="data.personalInfo.residenceAddress.city" [disabled]="!cities">
             <option [value]="">Выберите</option>
-            <option *ngFor="let item of citiesres" [ngValue]="item">{{ item.name_ru }}</option>
+            <option *ngFor="let item of citiesres" [ngValue]="item.name_ru">{{ item.name_ru }}</option>
           </select>
         </div>
 
