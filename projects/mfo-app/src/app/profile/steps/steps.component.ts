@@ -285,10 +285,12 @@ export class StepsComponent implements OnInit {
 
   setPasportData(){
     this.step = 2;
+    this.createPasportInfo();
   }
 
   setAdressData(){
     this.step = 3
+    this.createAdressInfo();
   }
 
   sendOTP(){
@@ -347,7 +349,7 @@ export class StepsComponent implements OnInit {
        this.successResult = true;
        this.loanID = res.orderId;
        this.loading = false;
-       this.updateUser();
+       this.createJobInfo();
     }, error => {
       this.resultShow = true;
       this.errorResult = true;
@@ -355,7 +357,7 @@ export class StepsComponent implements OnInit {
     })
   }
 
-  updateUser(){
+  createPasportInfo(){
     this.userInfo.passportInfoDto.firstName = this.data.personalInfo?.firstName;
     this.userInfo.passportInfoDto.lastName = this.data.personalInfo?.lastName;
     this.userInfo.passportInfoDto.patronymic = this.data.personalInfo?.middleName;
@@ -366,6 +368,12 @@ export class StepsComponent implements OnInit {
     this.userInfo.passportInfoDto.nationalIdIssueDate = this.data.personalInfo?.nationalIdDocument.issuedDate;
     this.userInfo.passportInfoDto.nationalIdValidDate = this.data.personalInfo?.nationalIdDocument.expireDate;
 
+    this.authService.CreateUserPasport(this.userInfo.passportInfoDto, this.userId).subscribe(res => {
+        
+    });
+  }
+
+  createJobInfo(){
     this.userInfo.jobDetailsDto.education = this.data.personalInfo?.education;
     this.userInfo.jobDetailsDto.employment = this.data.personalInfo?.employment;
     this.userInfo.jobDetailsDto.typeOfWork = this.data.personalInfo?.typeOfWork;
@@ -376,6 +384,12 @@ export class StepsComponent implements OnInit {
     this.userInfo.jobDetailsDto.maritalStatus = this.data.personalInfo?.maritalStatus;
     this.userInfo.jobDetailsDto.numberOfKids = this.data.personalInfo?.numberOfKids;
 
+    this.authService.CreateUserJobDetails(this.userInfo.jobDetailsDto, this.userId).subscribe(res => {
+        
+    });
+  }
+
+  createAdressInfo(){
     this.userInfo.addressInfoDto.region = this.data.personalInfo?.registrationAddress?.region
     this.userInfo.addressInfoDto.city = this.data.personalInfo?.registrationAddress?.city
     this.userInfo.addressInfoDto.postalCode = this.data.personalInfo?.registrationAddress?.postalCode
@@ -384,15 +398,15 @@ export class StepsComponent implements OnInit {
     this.userInfo.addressInfoDto.apartment = this.data.personalInfo?.registrationAddress?.apartment
     // this.userInfo.addressInfoDto.periodOfResidence = this.data.personalInfo?.registrationAddress?.periodOfResidence
     this.userInfo.addressInfoDto.addressIsValid = true;
+    this.authService.CreateUserAdress(this.userInfo.addressInfoDto, this.userId).subscribe(res => {
+        
+    });
+  }
 
+  updateUser(){
     if(this.hasdata){
       this.authService.updateUser(this.userInfo, this.userId).subscribe(res => {
 
-      });
-    }else{
-      this.authService.CreateUserPasport(this.userInfo.jobDetailsDto, this.userId).subscribe(res => {
-        this.authService.updateUser(this.userInfo, this.userId).subscribe(res => {
-        });
       });
     }
   }

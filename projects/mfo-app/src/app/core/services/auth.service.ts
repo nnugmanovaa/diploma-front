@@ -51,7 +51,15 @@ export class AuthService {
   }
 
   public CreateUserPasport(data:any, id:any){
+    return this.httpClient.post<any>(`${this.REST_API_SERVER}/v1/clients/passport-info/${id}`, data);
+  }
+
+  public CreateUserJobDetails(data:any, id:any){
     return this.httpClient.post<any>(`${this.REST_API_SERVER}/v1/clients/job-details/${id}`, data);
+  }
+
+  public CreateUserAdress(data:any, id:any){
+    return this.httpClient.post<any>(`${this.REST_API_SERVER}/v1/clients/address-info/${id}`, data);
   }
 
   public getUserDataById(id:any){
