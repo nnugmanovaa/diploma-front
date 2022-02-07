@@ -23,8 +23,8 @@ export class HeaderComponent implements OnInit {
         if(event['url'] === '/cabinet/settings'){
           // this.settingsPage = true; otklyuchili settings
           this.settingsPage = false;
-        }else{
-          this.settingsPage = false;
+        // }else{
+        //   this.settingsPage = false;
         }
         if(event['url'] !== '/'){
           this.hideLogin = true;

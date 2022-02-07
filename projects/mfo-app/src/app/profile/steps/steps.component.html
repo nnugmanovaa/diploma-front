@@ -57,8 +57,14 @@
         <label>Дата окончания</label>
         <input type="date" required name="expireDate" [(ngModel)]="data.personalInfo.nationalIdDocument.expireDate">
       </div>
-      <div class="label-input">
-        <label>Вы ИПДЛ или родственник?</label>
+      <div class="label-input ipdl-text">
+        <div class="question">
+          <label>Вы ИПДЛ или родственник?</label>
+          <div class="tooltip">
+            <img class="question-img" src="assets/img/help_outline.svg" alt="">
+            <span class="tooltiptext">Являетесь ли Вы иностранным публичным должностным лицом, либо его членом семьи и близким родственником?</span>
+          </div>
+        </div>
         <select  required [(ngModel)]="data.personalInfo.IPDL" name="IPDL">
           <option value="yes">Да</option>
           <option value="no">Нет</option>
