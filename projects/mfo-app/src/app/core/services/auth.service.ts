@@ -50,26 +50,26 @@ export class AuthService {
     return this.httpClient.get<any>(`${this.LOAN_URL}/clients/${phone}`);
   }
 
-  public CreateUserPasport(data:any, id:any){
+  public CreateUserPasport(data:any){
     var lastN = JSON.stringify(data.lastName);
     localStorage.setItem('name', lastN.substr(1, lastN.length-2)+" "+JSON.stringify(data.firstName)[1]+".");
-    return this.httpClient.post<any>(`${this.REST_API_SERVER}/v1/clients/passport-info/${id}`, data);
+    return this.httpClient.post<any>(`${this.REST_API_SERVER}/v1/clients/passport-info`, data);
   }
 
-  public CreateUserJobDetails(data:any, id:any){
-    return this.httpClient.post<any>(`${this.REST_API_SERVER}/v1/clients/job-details/${id}`, data);
+  public CreateUserJobDetails(data:any){
+    return this.httpClient.post<any>(`${this.REST_API_SERVER}/v1/clients/job-details`, data);
   }
 
-  public CreateUserAdress(data:any, id:any){
-    return this.httpClient.post<any>(`${this.REST_API_SERVER}/v1/clients/address-info/${id}`, data);
+  public CreateUserAdress(data:any){
+    return this.httpClient.post<any>(`${this.REST_API_SERVER}/v1/clients/address-info`, data);
   }
 
-  public getUserDataById(id:any){
-    return this.httpClient.get<any>(`${this.REST_API_SERVER}/v1/clients/full-personal-info/${id}`);
+  public getUserDataById(){
+    return this.httpClient.get<any>(`${this.REST_API_SERVER}/v1/clients/full-personal-info`);
   }
 
-  public updateUser(data:any, id:any){
-    return this.httpClient.put<any>(`${this.REST_API_SERVER}/v1/clients/update-personal-info/${id}`,data);
+  public updateUser(data:any){
+    return this.httpClient.put<any>(`${this.REST_API_SERVER}/v1/clients/update-personal-info`,data);
   }
 
   get isLoggedIn(): boolean {

@@ -158,7 +158,7 @@ export class StepsComponent implements OnInit {
   ngOnInit(): void {
     this.getLocations();
     this.fillData();
-    this.clientId = this.authService.getUser.clientId;
+    // this.clientId = this.authService.getUser.clientId;
     this.route.queryParams.subscribe(queryParams => {
       if(queryParams){
         this.data.loanAmount = queryParams.amount;
@@ -194,7 +194,7 @@ export class StepsComponent implements OnInit {
   }
 
   getPersonalData(){
-    this.authService.getUserDataById(this.clientId).subscribe(res =>{
+    this.authService.getUserDataById().subscribe(res =>{
       if(res.addressInfoDto){
         this.userInfo.addressInfoDto = res.addressInfoDto;
         this.data.personalInfo.registrationAddress.region = this.userInfo.addressInfoDto.region;
@@ -448,7 +448,7 @@ export class StepsComponent implements OnInit {
     this.userInfo.passportInfoDto.nationalIdIssueDate = this.data.personalInfo?.nationalIdDocument.issuedDate;
     this.userInfo.passportInfoDto.nationalIdValidDate = this.data.personalInfo?.nationalIdDocument.expireDate;
 
-    this.authService.CreateUserPasport(this.userInfo.passportInfoDto, this.clientId).subscribe(res => {
+    this.authService.CreateUserPasport(this.userInfo.passportInfoDto).subscribe(res => {
 
     });
   }
@@ -464,7 +464,7 @@ export class StepsComponent implements OnInit {
     this.userInfo.jobDetailsDto.maritalStatus = this.data.personalInfo?.maritalStatus;
     this.userInfo.jobDetailsDto.numberOfKids = this.data.personalInfo?.numberOfKids;
 
-    this.authService.CreateUserJobDetails(this.userInfo.jobDetailsDto, this.clientId).subscribe(res => {
+    this.authService.CreateUserJobDetails(this.userInfo.jobDetailsDto).subscribe(res => {
 
     });
   }
@@ -477,14 +477,14 @@ export class StepsComponent implements OnInit {
     this.userInfo.addressInfoDto.house = this.data.personalInfo?.registrationAddress?.house
     this.userInfo.addressInfoDto.apartment = this.data.personalInfo?.registrationAddress?.apartment
     this.userInfo.addressInfoDto.addressIsValid = true;
-    this.authService.CreateUserAdress(this.userInfo.addressInfoDto, this.clientId).subscribe(res => {
+    this.authService.CreateUserAdress(this.userInfo.addressInfoDto).subscribe(res => {
 
     });
   }
 
   updateUser(){
     if(this.hasdata){
-      this.authService.updateUser(this.userInfo, this.clientId).subscribe(res => {
+      this.authService.updateUser(this.userInfo).subscribe(res => {
 
       });
     }

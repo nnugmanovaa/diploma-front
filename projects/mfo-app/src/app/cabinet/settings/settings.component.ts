@@ -83,11 +83,11 @@ export class SettingsComponent implements OnInit {
               }
 
   ngOnInit(): void {
-    this.userId = this.authService.getUser.clientId;
+    // this.userId = this.authService.getUser.clientId;
     this.getLocations();
-    if(this.userId){
+    // if(this.userId){
       this.getPersonalData();
-    }
+    // }
   }
 
   getLocations(){
@@ -116,7 +116,7 @@ export class SettingsComponent implements OnInit {
   }
 
   getPersonalData(){
-    this.authService.getUserDataById(this.userId).subscribe(res =>{
+    this.authService.getUserDataById().subscribe(res =>{
       if(res.addressInfoDto){
         this.data.addressInfoDto = res.addressInfoDto;
         this.hastData = true;
@@ -139,12 +139,12 @@ export class SettingsComponent implements OnInit {
 
   updateData(){
     if(this.hastData){
-      this.authService.updateUser(this.data, this.userId).subscribe(res => {
+      this.authService.updateUser(this.data).subscribe(res => {
         this.toastr.success('Настройки профиля', 'Данные сохранены');
       });
     }else{
-      this.authService.CreateUserPasport(this.data.jobDetailsDto, this.userId).subscribe(res => {
-        this.authService.updateUser(this.data, this.userId).subscribe(res => {
+      this.authService.CreateUserPasport(this.data.jobDetailsDto).subscribe(res => {
+        this.authService.updateUser(this.data).subscribe(res => {
           this.toastr.success('Настройки профиля', 'Данные сохранены');
         });
       });
