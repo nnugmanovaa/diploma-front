@@ -11,7 +11,7 @@ export class AuthService {
   private REST_API_SERVER = environment.API_URL;
   private ADMIN_URL = environment.ADMIN_URL;
   private LOAN_URL = environment.LOAN_URL;
-  
+
   user:any;
 
   constructor(private  httpClient:  HttpClient, private router: Router) {}
@@ -51,6 +51,8 @@ export class AuthService {
   }
 
   public CreateUserPasport(data:any, id:any){
+    var lastN = JSON.stringify(data.lastName);
+    localStorage.setItem('name', lastN.substr(1, lastN.length-2)+" "+JSON.stringify(data.firstName)[1]+".");
     return this.httpClient.post<any>(`${this.REST_API_SERVER}/v1/clients/passport-info/${id}`, data);
   }
 
@@ -78,7 +80,13 @@ export class AuthService {
   get getUser(){
     return JSON.parse(localStorage.getItem('user') || '{}');
   }
-
+  get getUserName(){
+    if (localStorage.getItem('name') == null) {
+      return false;
+    } else {
+      return localStorage.getItem('name');
+    }
+  }
   logout(){
       localStorage.removeItem('user');
       localStorage.removeItem('token');

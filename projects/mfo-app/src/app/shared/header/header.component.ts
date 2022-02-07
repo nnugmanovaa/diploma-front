@@ -23,8 +23,8 @@ export class HeaderComponent implements OnInit {
         if(event['url'] === '/cabinet/settings'){
           // this.settingsPage = true; otklyuchili settings
           this.settingsPage = false;
-        }else{
-          this.settingsPage = false;
+        // }else{
+        //   this.settingsPage = false;
         }
         if(event['url'] !== '/'){
           this.hideLogin = true;
@@ -42,7 +42,14 @@ export class HeaderComponent implements OnInit {
   }
 
   checkLogin(){
-     this.user = this.authService.getUser;
+    // console.log("1:" + this.authService.getUserName);
+    if (this.authService.getUserName == false) {
+      // console.log("2:" + this.authService.getUser);
+      // console.log("3:" + this.authService.getUser.username);
+      this.user = this.authService.getUser.username;
+    } else {
+      this.user = this.authService.getUserName;
+    }
      if(this.authService.isLoggedIn){
        this.hideLogin = true;
      }
