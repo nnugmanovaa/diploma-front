@@ -246,10 +246,10 @@ export class StepsComponent implements OnInit {
     this.loanID = this.selectedChoice.orderId;
     this.data.loanAmount = this.selectedChoice.loanAmount;
     this.data.loanPeriod = this.selectedChoice.loanMonthPeriod;
-    this.showSMSModal = true;
     this.code = null;
     this.resultShow = false;
     this.alternativeResult = false;
+    this.sendOTP();
   }
 
   strokeLoading(){
