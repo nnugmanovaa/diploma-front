@@ -366,7 +366,7 @@ export class StepsComponent implements OnInit {
             "backFailureLink": "https://zaimem.kz/cabinet/cashed-out"
           }
           this.stepService.payoutCard(order).subscribe(res => {
-            window.open(res.url)
+            window.open(res.url, "_self")
             this.router.navigate(['/cabinet/cashed-out'])
           })
         })
