@@ -389,6 +389,10 @@ export class StepsComponent implements OnInit {
     }
     this.strokeLoading();
 
+    if(this.data.personalInfo.sameAdress){
+      this.data.personalInfo.residenceAddress = this.data.personalInfo.registrationAddress
+    }
+
     if(!this.data.preScoreRequestId){
       this.createRequest();
     }else{
