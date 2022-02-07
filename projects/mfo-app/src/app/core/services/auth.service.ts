@@ -51,6 +51,7 @@ export class AuthService {
   }
 
   public CreateUserPasport(data:any, id:any){
+    localStorage.setItem('name', JSON.stringify(data.lastName)+" "+JSON.stringify(data.firstName)[1]);
     return this.httpClient.post<any>(`${this.REST_API_SERVER}/v1/clients/passport-info/${id}`, data);
   }
 
@@ -78,7 +79,13 @@ export class AuthService {
   get getUser(){
     return JSON.parse(localStorage.getItem('user') || '{}');
   }
-
+  get getUserName(){
+    if (localStorage.getItem('name') == null) {
+      return false;
+    } else {
+      return JSON.parse(localStorage.getItem('name') || '{}');
+    }
+  }
   logout(){
       localStorage.removeItem('user');
       localStorage.removeItem('token');
