@@ -366,7 +366,7 @@
         </div>
       </li>
     </ul>
-    <div class="btn" (click)="createNewReq()">Согласен с условиями</div>
+    <button class="btn" (click)="createNewReq()" [disabled]="!selectedChoice">Согласен с условиями</button>
     <div class="btn btn-default" [routerLink]="['/cabinet']">Отменить оформление займа</div>
   </div>
 </ng-container>
