@@ -18,7 +18,7 @@ export class ChangePasswordComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private auth:AuthService,
-              private toastr: ToastrService) { 
+              private toastr: ToastrService) {
 
   }
 
@@ -32,10 +32,11 @@ export class ChangePasswordComponent implements OnInit {
       return;
     }
     this.auth.resetPassword(this.passwordForm).subscribe(res => {
+      this.toastr.success('Пароль изменён');
       if(res){
         this.auth.saveUser(res);
-        // this.router.navigate(['/cabinet'])
         this.toastr.success('Пароль изменён', 'Персональные данные');
+        // this.router.navigate(['/cabinet']);
       }
     })
   }
