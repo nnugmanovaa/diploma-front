@@ -100,10 +100,56 @@ p.info-text{
   z-index:10;
 }
 
-.error-result, .success-result {
+.error-result, .success-result, .alternative-result {
   text-align: center;
   max-width: 400px;
   margin: 0 auto;
+  p{
+    b{
+      font-size: 18px;
+      line-height: 28px;
+      text-align: center;
+      letter-spacing: -0.4px;
+      margin-bottom: 30px;
+      font-weight: 600;
+      color: rgba(4, 4, 21, 0.6);
+      display: block;
+    }
+  }
+
+  ul li {
+    display: flex;
+    text-align: left;
+    gap: 16px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    padding: 15px;
+    cursor: pointer;
+    span {
+      font-size: 14px;
+      line-height: 24px;
+      letter-spacing: -0.3px;
+      color: #0404158f;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-weight: 600;
+      font-size: 24px;
+    }
+
+    &:hover {
+      box-shadow: 0 0 3px #cccccc4f;
+    }
+
+    &.active {
+      background: rgba(66, 168, 250, 0.1);
+      border-color: rgba(66, 168, 250, 0.1);
+    }
+  }
+
+
   .info-text{
     font-size: 15px;
     line-height: 26px;

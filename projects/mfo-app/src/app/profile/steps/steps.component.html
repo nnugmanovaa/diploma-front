@@ -344,6 +344,25 @@
     <div class="btn" (click)="sendOTP()">Подписать</div>
     <div class="btn btn-default" [routerLink]="['/cabinet/history']">Отменить оформление займа</div>
   </div>
+  <div class="alternative-result" *ngIf="alternativeResult">
+    <img src="assets/img/error.svg" alt="">
+    <h2>К сожалению, Вам отказано в <br> запрашиваемой сумме</h2>
+    <p><b>Но вы можете рассмотреть варианты ниже:</b></p>
+    <ul>
+      <li *ngFor="let item of alternativeChoices" (click)="selectedChoice = item">
+        <div class="left">
+          <span>Сумма займа</span>
+          <p>{{ item.loanAmount | currency: 'CLP':'₸' }}</p>
+        </div>
+        <div class="center">
+          <span>Срок</span>
+          <p>{{ item.loanMonthPeriod }} мес.</p>
+        </div>
+      </li>
+    </ul>
+    <div class="btn" (click)="createNewReq()">Согласен с условиями</div>
+    <div class="btn btn-default" [routerLink]="['/cabinet']">Отменить оформление займа</div>
+  </div>
 </ng-container>
 
 <div class="profile-page">

@@ -135,8 +135,12 @@ export class StepsComponent implements OnInit {
   percent:any = 0;
 
   resultShow:boolean = false;
+
   errorResult:boolean = false;
   successResult:boolean = false;
+  alternativeResult:boolean = false;
+  alternativeChoices:any = null;
+  selectedChoice:any = null;
   loanID:any = null;
 
   showSMSModal:boolean = false;
@@ -237,20 +241,24 @@ export class StepsComponent implements OnInit {
     });
   }
 
+  createNewReq(){
+    console.log(this.selectedChoice)
+  }
+
   strokeLoading(){
     this.loading = true;
     let perc = 0;
     this.fillSvg();
     this.intervalId = setInterval(() => {
       this.fillSvg();
-    }, 1000);
+    }, 1500);
   }
 
   fillSvg(){
     if(this.percent > 77){
       this.percent += Math.floor(Math.random() * 2) + 1;
     }else{
-      this.percent += Math.floor(Math.random() * 10) + 1;
+      this.percent += Math.floor(Math.random() * 6) + 1;
     }
     if(this.percent > 97){
       clearInterval(this.intervalId);
@@ -373,12 +381,6 @@ export class StepsComponent implements OnInit {
     if(this.data.loanAmount){
       this.data.loanAmount = Number(this.data.loanAmount);
     }
-    // if(this.data.personalInfo.monthlyIncome){
-    //   this.data.personalInfo.monthlyIncome = Number(this.data.personalInfo.monthlyIncome);
-    // }
-    // if(this.data.personalInfo.additionalMonthlyIncome){
-    //   this.data.personalInfo.additionalMonthlyIncome = Number(this.data.personalInfo.additionalMonthlyIncome);
-    // }
     if(this.data.personalInfo.workExperience){
       this.data.personalInfo.workExperience = Number(this.data.personalInfo.workExperience);
     }
@@ -389,6 +391,8 @@ export class StepsComponent implements OnInit {
 
     if(!this.data.preScoreRequestId){
       this.createRequest();
+    }else{
+      this.submitAll();
     }
 
     this.createJobInfo()
@@ -396,14 +400,29 @@ export class StepsComponent implements OnInit {
 
   submitAll(){
     this.stepService.submitStep(this.data).subscribe(res => {
-       this.resultShow = true;
-       this.successResult = true;
-       this.loanID = res.orderId;
-       this.loading = false;
+      clearInterval(this.intervalId);
+      if(res?.result == 'APPROVED'){
+        this.resultShow = true;
+        this.successResult = true;
+        this.loanID = res.orderId;
+        this.loading = false;
+      }else if(res?.result == 'ALTERNATIVE'){
+        this.resultShow = true;
+        this.alternativeResult = true;
+        this.loanID = res.orderId;
+        this.loading = false;
+        this.alternativeChoices = res.alternativeChoices;
+      }else{
+        this.resultShow = true;
+        this.errorResult = true;
+        this.loading = false;  
+      }
+
     }, error => {
       this.resultShow = true;
       this.errorResult = true;
       this.loading = false;
+      clearInterval(this.intervalId);
     })
   }
 
