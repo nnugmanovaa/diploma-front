@@ -58,7 +58,7 @@ export class StepsComponent implements OnInit {
         "monthlyIncome": "",
         "additionalMonthlyIncome": "",
         "workExperience": 0,
-        // "workPhoneNum": null,
+        "workPhoneNum": null,
         "maritalStatus": null,
         "gender": null,
         "numberOfKids": 0
