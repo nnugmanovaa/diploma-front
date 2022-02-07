@@ -21,9 +21,10 @@ export class HeaderComponent implements OnInit {
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         if(event['url'] === '/cabinet/settings'){
-          this.settingsPage = true;
-        }else{
+          // this.settingsPage = true; otklyuchili settings
           this.settingsPage = false;
+        // }else{
+        //   this.settingsPage = false;
         }
         if(event['url'] !== '/'){
           this.hideLogin = true;
@@ -36,7 +37,7 @@ export class HeaderComponent implements OnInit {
   }
 
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.checkLogin();
   }
 

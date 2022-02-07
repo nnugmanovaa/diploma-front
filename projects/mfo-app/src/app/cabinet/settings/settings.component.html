@@ -54,6 +54,62 @@
       <input type="date" name="nationalIdValidDate" [(ngModel)]="data.passportInfoDto.nationalIdValidDate">
     </div>
 
+    <div class="form-top">
+      <h2>Адресные данные</h2>
+    </div>
+
+    <div class="label-input">
+        <label>Область</label>
+        <select required name="region" [(ngModel)]="data.addressInfoDto.region"
+        (ngModelChange)="getDistrictById()">
+          <option [value]="">Выберите</option>
+          <option *ngFor="let item of districts" value="{{item.code}}">{{ item.name_ru }}</option>
+        </select>
+      </div>
+      <div class="label-input">
+        <label [class.disabled]="!cities">Регион/село/город</label>
+        <select required name="city" [(ngModel)]="data.addressInfoDto.city" [disabled]="!cities">
+          <option [value]="">Выберите</option>
+          <option *ngFor="let item of cities" [ngValue]="item.name_ru">{{ item.name_ru }}</option>
+        </select>
+      </div>
+
+      <div class="label-input">
+        <label>Индекс</label>
+        <input type="text" required name="postalCode" [(ngModel)]="data.addressInfoDto.postalCode">
+      </div>
+
+      <div class="label-input">
+        <label>Улица/мкрн</label>
+        <input type="text" required name="street" [(ngModel)]="data.addressInfoDto.street">
+      </div>
+
+      <div class="half-form">
+        <div class="label-input">
+          <label>№ дома</label>
+          <input type="text" required name="house" [(ngModel)]="data.addressInfoDto.house">
+        </div>
+
+        <div class="label-input">
+          <label>Кв/офис</label>
+          <input type="text" required name="apartment" [(ngModel)]="data.addressInfoDto.apartment">
+        </div>
+      </div>
+
+
+    <div class="label-input">
+      <label>Период проживания по этому адресу</label>
+      <select required [(ngModel)]="data.addressInfoDto.periodOfResidence" name="periodOfResidence">
+        <option value="">Выберите</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+      </select>
+    </div>
 
     <div class="form-top">
       <h2>Сведения о работе</h2>
