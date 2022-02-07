@@ -58,7 +58,7 @@ export class StepsComponent implements OnInit {
         "monthlyIncome": "",
         "additionalMonthlyIncome": "",
         "workExperience": 0,
-        "workPhoneNum": null,
+        // "workPhoneNum": null,
         "maritalStatus": null,
         "gender": null,
         "numberOfKids": 0
@@ -160,7 +160,7 @@ export class StepsComponent implements OnInit {
         this.data.loanAmount = queryParams.amount;
         this.data.loanPeriod = queryParams.period;
         this.data.loanMethod = queryParams.type;
-        this.data.preScoreRequestId = queryParams.requestId;        
+        this.data.preScoreRequestId = queryParams.requestId;
       }
     });
     if(!this.data.preScoreRequestId){
@@ -419,7 +419,7 @@ export class StepsComponent implements OnInit {
     this.userInfo.passportInfoDto.nationalIdValidDate = this.data.personalInfo?.nationalIdDocument.expireDate;
 
     this.authService.CreateUserPasport(this.userInfo.passportInfoDto, this.clientId).subscribe(res => {
-        
+
     });
   }
 
@@ -435,7 +435,7 @@ export class StepsComponent implements OnInit {
     this.userInfo.jobDetailsDto.numberOfKids = this.data.personalInfo?.numberOfKids;
 
     this.authService.CreateUserJobDetails(this.userInfo.jobDetailsDto, this.clientId).subscribe(res => {
-        
+
     });
   }
 
@@ -448,7 +448,7 @@ export class StepsComponent implements OnInit {
     this.userInfo.addressInfoDto.apartment = this.data.personalInfo?.registrationAddress?.apartment
     this.userInfo.addressInfoDto.addressIsValid = true;
     this.authService.CreateUserAdress(this.userInfo.addressInfoDto, this.clientId).subscribe(res => {
-        
+
     });
   }
 
