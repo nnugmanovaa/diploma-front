@@ -355,7 +355,7 @@
     <h2>К сожалению, Вам отказано в <br> запрашиваемой сумме</h2>
     <p><b>Но вы можете рассмотреть варианты ниже:</b></p>
     <ul>
-      <li *ngFor="let item of alternativeChoices" (click)="selectedChoice = item">
+      <li *ngFor="let item of alternativeChoices" (click)="selectedChoice = item" [class.active]="selectedChoice == item">
         <div class="left">
           <span>Сумма займа</span>
           <p>{{ item.loanAmount | currency: 'CLP':'₸' }}</p>
