@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/services/auth.service'
 import { CabinetService } from '../core/services/cabinet.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'mfo-payment',
@@ -38,6 +39,7 @@ export class PaymentComponent implements OnInit {
     "loanRepayType": "PLANNED_REPAYMENT"
   }
   constructor(private auth:AuthService,
+              private router: Router,
               private cabinet:CabinetService) { }
 
   ngOnInit(): void {
@@ -66,7 +68,7 @@ export class PaymentComponent implements OnInit {
 
   payCredit(){
     this.auth.payment(this.payForm).subscribe(res => {
-      window.open(res.url)
+      this.router.navigate(['/cabinet']);
     })
   }
 
