@@ -85,6 +85,9 @@ export class RegisterComponent implements OnInit {
 
   showSignUP(){
     let image = (<HTMLInputElement>document.getElementById("results")).value;
+    if(!this.requestId){
+      return;
+    }
     this.registerService.sendImage(this.requestId, image).subscribe(res => {
       this.getPersData();
     }, error => {
