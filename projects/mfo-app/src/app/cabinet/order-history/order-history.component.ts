@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { CabinetService } from '../../core/services/cabinet.service';
+import { StepService } from '../../core/services/step.service';
 
 export enum Status {
   CASH_OUT_CARD_INITIALIZED = 'Обналичивание',
@@ -30,12 +31,16 @@ export class OrderHistoryComponent implements OnInit {
     status:'CASHED_OUT_CARD'
   }
 
+  infoModal:boolean = false;
+  selectedItem:any = null;
+
   Status:any = Status;
 
   date:any = null
 
   list:any = null;
-  constructor(private cabinet:CabinetService) { }
+  constructor(private cabinet:CabinetService,
+              public stepService:StepService) { }
 
   ngOnInit(): void {
     let currentDate = new Date()
@@ -44,6 +49,13 @@ export class OrderHistoryComponent implements OnInit {
     this.params.startDate = start.toISOString().split('T')[0]
     this.params.endDate = currentDate.toISOString().split('T')[0]
     this.getOrders();
+  }
+
+  getContract(){
+    this.stepService.getContract(this.selectedItem.orderId).subscribe(res => {
+      let file = URL.createObjectURL(res);
+      window.open(file);
+    });
   }
 
   counter(i: number) {
