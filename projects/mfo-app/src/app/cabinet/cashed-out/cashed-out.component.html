@@ -1,39 +1,44 @@
 <div class="content" *ngIf="loan">
   <h2 class="content-title">Открытый микрокредит</h2>
-  <p><b>Номер договора:</b> №{{ loan.orderDetailsSchedule?.contract }}</p>
-  <p><b>Ежемесячный платеж:</b> {{ loan.orderDetailsSchedule?.monthPayment| currency: '':'₸' }}</p>
-  <p><b>Сумма кредита:</b> {{ loan.orderDetailsSchedule?.totalAmount | currency: '':'₸' }}</p>
-  <p><b>Дата получения:</b> {{ loan.orderDetailsSchedule?.contractDate | date }}</p>
-  <p><b>Срок кредита:</b> {{ loan.orderDetailsSchedule?.period }} месяца</p>
-  <p><b>Остаток по займу:</b> {{ loan.orderDetailsSchedule?.amountRemain | currency: '':'₸' }}</p>
-  <p><b>Переплата за весь период:</b> {{ loan.orderDetailsSchedule?.amountOverPayment | currency: '':'₸' }}</p>
-  <br>
-  <h2 class="content-title">График погашения</h2>
-  <div class="overflow-table">
-    <table>
-      <thead>
-        <tr>
-          <th>№</th>
-          <th>Дата</th>
-          <th>Платеж</th>
-          <th>Проценты</th>
-          <th>Остаток</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of loan?.orderDetailsSchedule?.scheduleItems">
-          <td>{{ item.number }}</td>
-          <td>{{ item.paymentDate | date }}</td>
-          <td>{{ item.amountToBePaid | currency: '':'₸' }}</td>
-          <td>{{ item.reward }}</td>
-          <td>{{ item.totalAmountDebt  | currency: '':'₸'}}</td>
-        </tr>
-        <tr *ngIf="!this.loan.hasActiveLoan">
-          <td colspan="5">
-            <p class="info-text">Не найдено открытых микрокредитов</p>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <ng-container *ngIf="loan.hasActiveLoan">
+    <p><b>Номер договора:</b> №{{ loan.orderDetailsSchedule?.contract }}</p>
+    <p><b>Ежемесячный платеж:</b> {{ loan.orderDetailsSchedule?.monthPayment| currency: '':'₸' }}</p>
+    <p><b>Сумма кредита:</b> {{ loan.orderDetailsSchedule?.totalAmount | currency: '':'₸' }}</p>
+    <p><b>Дата получения:</b> {{ loan.orderDetailsSchedule?.contractDate | date }}</p>
+    <p><b>Срок кредита:</b> {{ loan.orderDetailsSchedule?.period }} месяца</p>
+    <p><b>Остаток по займу:</b> {{ loan.orderDetailsSchedule?.amountRemain | currency: '':'₸' }}</p>
+    <p><b>Переплата за весь период:</b> {{ loan.orderDetailsSchedule?.amountOverPayment | currency: '':'₸' }}</p>
+    <br>
+    <h2 class="content-title">График погашения</h2>
+    <div class="overflow-table">
+      <table>
+        <thead>
+          <tr>
+            <th>№</th>
+            <th>Дата</th>
+            <th>Платеж</th>
+            <th>Проценты</th>
+            <th>Остаток</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of loan?.orderDetailsSchedule?.scheduleItems">
+            <td>{{ item.number }}</td>
+            <td>{{ item.paymentDate | date }}</td>
+            <td>{{ item.amountToBePaid | currency: '':'₸' }}</td>
+            <td>{{ item.reward }}</td>
+            <td>{{ item.totalAmountDebt  | currency: '':'₸'}}</td>
+          </tr>
+          <tr *ngIf="!this.loan.hasActiveLoan">
+            <td colspan="5">
+              <p class="info-text">Не найдено открытых микрокредитов</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!loan.hasActiveLoan">
+    {{ loan.message }}
+  </ng-container>
 </div>
