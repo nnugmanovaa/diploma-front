@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
     iin: null,
     lastName: null,
     patronymic: null,
-    phone: 77012556991,
+    phone: null,
   }
 
   file:any = null;
@@ -124,7 +124,7 @@ export class RegisterComponent implements OnInit {
   }
 
   checkUser(){
-    this.registerService.checkUser(this.pdfForm.phone).subscribe(res => {
+    this.registerService.checkUser(this.registerForm.msisdn).subscribe(res => {
       if(!res.exist){
         this.registerUser()
       }else{
