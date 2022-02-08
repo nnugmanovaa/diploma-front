@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
     iin: null,
     lastName: null,
     patronymic: null,
-    phone: null,
+    phone: 77012556991,
   }
 
   file:any = null;
@@ -119,6 +119,16 @@ export class RegisterComponent implements OnInit {
       if(res){
         this.auth.saveUser(res);
         this.createRequest();
+      }
+    })
+  }
+
+  checkUser(){
+    this.registerService.checkUser(this.pdfForm.phone).subscribe(res => {
+      if(!res.exist){
+        this.registerUser()
+      }else{
+        this.toastr.error('Пользователь с таким номером уже зарегистрирован', 'Ошибка!');
       }
     })
   }

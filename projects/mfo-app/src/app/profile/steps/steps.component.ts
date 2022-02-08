@@ -423,6 +423,9 @@ export class StepsComponent implements OnInit {
         this.loanID = res.orderId;
         this.loading = false;
         this.alternativeChoices = res.alternativeChoices;
+        if(this.alternativeChoices.length == 1){
+          this.selectedChoice = this.alternativeChoices[0];
+        }
       }else{
         this.resultShow = true;
         this.errorResult = true;

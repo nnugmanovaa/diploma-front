@@ -58,6 +58,13 @@ export class OrderHistoryComponent implements OnInit {
     });
   }
 
+  openOrder(item:any){
+    if(item.contractExtRefId){
+      this.selectedItem = item;
+      this.infoModal = true
+    }
+  }
+
   counter(i: number) {
     return new Array(i);
   }

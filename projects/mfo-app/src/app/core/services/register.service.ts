@@ -46,4 +46,8 @@ export class RegisterService {
   resendImage(reqid:any, image:any){
     return this.httpClient.put<any>(`${this.REST_API_SERVER}/v1/loan/${reqid}/identity/result`, image);
   }
+
+  checkUser(number:any){
+    return this.httpClient.get<any>(`${this.LOAN_URL}/public/client/${number}`);
+  }
 }

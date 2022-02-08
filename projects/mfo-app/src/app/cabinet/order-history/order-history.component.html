@@ -13,11 +13,11 @@
     </div>
   </div>
   <ul>
-    <li *ngFor="let item of list.content" (click)="selectedItem = item;infoModal = true;">
+    <li *ngFor="let item of list.content" (click)="openOrder(item);">
       <img src="assets/img/doc.svg" alt="">
       <div class="center">
         <span>Займ №{{ item.orderId }}</span>
-        <p>{{ item.insertedTime | date }} - {{ item.orderExtRefTime | date }}</p>
+        <p>{{ item.contractExtRefTime | date }} </p>
       </div>
       <div class="right">
         <p>{{ item.loanAmount | currency: 'CLP':'₸' }}</p>
