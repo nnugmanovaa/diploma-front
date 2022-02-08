@@ -76,7 +76,6 @@ export class RegisterComponent implements OnInit {
     script.async = false;
     script.defer = true;
     body.appendChild(script);
-    console.log("load")
   }
 
   veriLive(){
@@ -89,10 +88,18 @@ export class RegisterComponent implements OnInit {
       return;
     }
     this.registerService.sendImage(this.requestId, image).subscribe(res => {
-      this.getPersData();
+      if(res.identified){
+        this.getPersData();
+      }else{
+        this.toastr.warning('Пожалуйста попробуйте еще раз пройти идентификацию лица', '');
+      }
     }, error => {
       this.registerService.resendImage(this.requestId, image).subscribe(res => {
-        this.getPersData();
+        if(res.identified){
+          this.getPersData();
+        }else{
+          this.toastr.warning('Пожалуйста попробуйте еще раз пройти идентификацию лица', '');
+        }
       })
     })
   }
