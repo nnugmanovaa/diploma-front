@@ -28,6 +28,24 @@ form button:active{
   opacity: .7;
 }
 
+.ngx-pagination .current {
+  background: rgba(46,58,89,.12)!important;
+  border-radius: 8px;
+  color: #42A8FA!important;
+  padding: 10px 16px!important;
+}
+
+.ngx-pagination a,.ngx-pagination button {
+  padding: 10px 16px!important;
+  border-radius: 8px!important
+}
+
+
+ul.ngx-pagination {
+  text-align: center;
+  margin-top: 24px;
+}
+
 body{
   .toast {
     display: flex;

@@ -15,6 +15,8 @@ import { DeferredPaymentComponent } from './deferred-payment/deferred-payment.co
 import { SettingsComponent } from './settings/settings.component';
 import { MainFormModule } from '../shared/main-form/main-form.module';
 
+import {NgxPaginationModule} from 'ngx-pagination';
+
 import { IMaskModule } from 'angular-imask';
 
 @NgModule({
@@ -26,6 +28,7 @@ import { IMaskModule } from 'angular-imask';
     HttpClientModule,
     ReactiveFormsModule, 
     FormsModule,
+    NgxPaginationModule,
     MainFormModule
   ]
 })

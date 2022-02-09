@@ -13,7 +13,7 @@
     </div>
   </div>
   <ul>
-    <li *ngFor="let item of list.content" (click)="openOrder(item);">
+    <li *ngFor="let item of list.content | paginate : { itemsPerPage: params.size , currentPage: params.page, totalItems: list.totalPages }" (click)="openOrder(item);">
       <img src="assets/img/doc.svg" alt="">
       <div class="center">
         <span>Займ №{{ item.orderId }}</span>
@@ -28,7 +28,11 @@
 
   <p class="empty" *ngIf="list?.empty">нет данных</p>
 
-  <div class="pagination" *ngIf="list.totalPages > 1">
+  <pagination-controls *ngIf="list.totalPages > 1" (pageChange)="changePage($event)" 
+                      previousLabel=""
+                      nextLabel=""></pagination-controls>
+
+  <!-- <div class="pagination" *ngIf="list.totalPages > 1">
     <ol>
       <li (click)="changePage(params.page - 1, !list.first)">
         <svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -44,7 +48,7 @@
         </svg>
       </li>
     </ol>
-  </div>
+  </div> -->
 </div>
 
 
