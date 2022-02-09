@@ -13,9 +13,10 @@ import { LoginComponent } from './login/login.component';
 import { MainFormModule } from '../shared/main-form/main-form.module';
 import { ForgotPassComponent } from './forgot-pass/forgot-pass.component';
 import { StepsComponent } from './steps/steps.component';
+import { VeriliveComponent } from './verilive/verilive.component';
 
 @NgModule({
-  declarations: [ProfileComponent, RegisterComponent, LoginComponent, ForgotPassComponent, StepsComponent],
+  declarations: [ProfileComponent, RegisterComponent, LoginComponent, ForgotPassComponent, StepsComponent, VeriliveComponent],
   imports: [
     IMaskModule,
     ProfileRoutingModule,

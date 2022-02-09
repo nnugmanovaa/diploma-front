@@ -5,7 +5,6 @@ import { AuthService } from '../../core/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { fromEvent } from 'rxjs';
 
-declare function loadVideo():any;
 declare function iinCheck(iin:any):any;
 
 @Component({
@@ -31,8 +30,6 @@ export class RegisterComponent implements OnInit {
 
   code:any = null;
   showSMSModal:boolean = false;
-
-  veriface:boolean = false;
   
   signUpShow:boolean = false;
   singUpForm:any = {
@@ -42,12 +39,7 @@ export class RegisterComponent implements OnInit {
     "confirmPassword": null
   }
 
-  verifaceLoad:boolean = true;
-
-  vfImage:boolean = true;
   qparams:any = null;
-
-  requestId:any = null;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -58,14 +50,10 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadScript('../assets/js/verilive.js');
     this.loadScript('../assets/js/checkiin.js');
     this.route.queryParams.subscribe(queryParams => {
       this.qparams = queryParams;
     });
-    fromEvent(window,'build').subscribe((event:any)=>{
-       this.showSignUP()
-    })
   }
 
   public loadScript(url: string) {
@@ -78,46 +66,6 @@ export class RegisterComponent implements OnInit {
     body.appendChild(script);
   }
 
-  veriLive(){
-    this.verifaceLoad = false;
-  }
-
-  showSignUP(){
-    let image = (<HTMLInputElement>document.getElementById("results")).value;
-    if(!this.requestId){
-      return;
-    }
-    this.registerService.sendImage(this.requestId, image).subscribe(res => {
-      if(res.identified){
-        this.getPersData();
-      }else{
-        this.toastr.warning('Пожалуйста попробуйте еще раз пройти идентификацию лица', '');
-      }
-    }, error => {
-      this.registerService.resendImage(this.requestId, image).subscribe(res => {
-        if(res.identified){
-          this.getPersData();
-        }else{
-          this.toastr.warning('Пожалуйста попробуйте еще раз пройти идентификацию лица', '');
-        }
-      })
-    })
-  }
-
-  getPersData(){
-    this.registerService.getInfoByIIN(this.requestId).subscribe(res => {
-      localStorage.setItem('pinfo', JSON.stringify(res));
-      this.router.navigate(['/profile/steps'], { queryParams: {...this.qparams, requestId:this.requestId}})
-    });
-  }
-
-  createRequest(){
-    this.registerService.getLoanRequestId(this.pdfForm).subscribe(res => {
-      this.requestId = res.requestId
-      this.veriface = true;
-    })
-  }
-
   signUp(){
     if(this.singUpForm.password !== this.singUpForm.confirmPassword){
       this.toastr.error('Пароль не изменён, так как новый пароль повторен неправильно.', 'Ошибка!');
@@ -128,7 +76,7 @@ export class RegisterComponent implements OnInit {
     this.registerService.signUp(this.singUpForm).subscribe(res => {
       if(res){
         this.auth.saveUser(res);
-        this.createRequest();
+        this.router.navigate(['/profile/verilive'], { queryParams: {...this.qparams}})
       }
     })
   }

@@ -50,8 +50,11 @@ export class HeaderComponent implements OnInit {
     } else {
       this.user = this.authService.getUserName;
     }
+
      if(this.authService.isLoggedIn){
        this.hideLogin = true;
+       let lastName = this.authService.getUser.lastName ? this.authService.getUser.lastName[0] + '.' : "";
+       this.user = this.authService.getUser.firstName + ' ' + lastName;
      }
   }
 

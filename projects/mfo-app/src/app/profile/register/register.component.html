@@ -1,4 +1,4 @@
-<section class="profile-page" *ngIf="!veriface">
+<section class="profile-page">
   <div class="container">
     <form ngNativeValidate (ngSubmit)="checkUser()" *ngIf="!signUpShow">
       <div class="form-top">
@@ -83,37 +83,4 @@
   </div>
 </section>
 
-<section class="veriface" *ngIf="veriface">
-  <div class="container">
-    <div class="top-info" id="vfInfo">
-      <ng-container *ngIf="verifaceLoad">
-        <h2>Идентификация лица</h2>
-        <p><b>Рекоммендации:</b></p>
-          <ul>
-            <li>
-              Не закрывайте лицо (снимите головной убор, солнцезащитные очки, маску)
-            </li>
-            <li>
-              Встаньте лицом к источнику света
-            </li>
-            <li>
-              Держите телефон перед собой
-            </li>
-            <li>
-              Разрешите доступ к камере
-            </li>
-          </ul>
-      </ng-container>
-      <div class="btns">
-        <button onclick="onInitButtonClick()"><span id="ChangeText" (click)="veriLive()">Далее</span></button>
-      </div>
-    </div>
-    <div class="top-info" [hidden]="true" id="NextShow">
-      <div class="btns">
-        <button><span (click)="showSignUP()">Далее</span></button>
-      </div>
-    </div>
-    <div id="id_verilive" style="margin: auto;"></div>
-    <textarea id="results" [hidden]="true" [(ngModel)]="vfImage"></textarea>
-  </div>
-</section>
+

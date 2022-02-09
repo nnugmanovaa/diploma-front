@@ -60,11 +60,19 @@ export class MainFormComponent implements OnInit {
 
   createRequest(){
     if(this.authService.isLoggedIn){
-      this.router.navigate(
-        ['/profile/steps'],
-        {
-          queryParams: this.form
-        });
+      if(this.authService.getUser.identificationStatus !== 'FULL_IDENTIFIED'){
+        this.router.navigate(
+          ['/profile/verilive'],
+          {
+            queryParams: this.form
+          });
+      }else{
+        this.router.navigate(
+          ['/profile/steps'],
+          {
+            queryParams: this.form
+          });
+      }
     }else{
       this.router.navigate(
         ['/profile/register'],
