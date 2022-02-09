@@ -36,7 +36,11 @@ export class RegisterComponent implements OnInit {
     "code": null,
     "msisdn": null,
     "password": null,
-    "confirmPassword": null
+    "confirmPassword": null,
+    "firstName": null,
+    "iin": null,
+    "lastName": null,
+    "patronymic": null,
   }
 
   qparams:any = null;
@@ -73,6 +77,12 @@ export class RegisterComponent implements OnInit {
     }
     this.singUpForm.code = this.code;
     this.singUpForm.msisdn = this.registerForm.msisdn;
+
+    this.singUpForm.firstName = this.pdfForm.firstName;
+    this.singUpForm.lastName = this.pdfForm.lastName;
+    this.singUpForm.patronymic = this.pdfForm.patronymic;
+    this.singUpForm.iin = this.pdfForm.iin;
+
     this.registerService.signUp(this.singUpForm).subscribe(res => {
       if(res){
         this.auth.saveUser(res);
