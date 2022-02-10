@@ -91,7 +91,7 @@ export class RegisterComponent implements OnInit {
       }
       this.disabled = false;
     },error => {
-      this.disabled = true;
+      this.disabled = false;
     })
   }
 
