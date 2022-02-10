@@ -60,7 +60,7 @@ export class StepsComponent implements OnInit {
         "workExperience": 0,
         "workPhoneNum": null,
         "maritalStatus": null,
-        "gender": null,
+        "gender": "",
         "numberOfKids": 0
     },
     "loanAmount": 0,
@@ -102,7 +102,7 @@ export class StepsComponent implements OnInit {
         "nationalIdIssuer":"",
         "nationalIdIssueDate":"",
         "nationalIdValidDate":"",
-        "isIpdl": true,
+        "isIpdl": true
     }
   }
 
@@ -290,8 +290,12 @@ export class StepsComponent implements OnInit {
       this.data.personalInfo.nationalIdDocument.issuedBy = dinfo.nationalIdIssuer;
       this.data.personalInfo.nationalIdDocument.issuedDate = dinfo.nationalIdIssueDate;
       this.data.personalInfo.nationalIdDocument.expireDate = dinfo.nationalIdValidDate;
-      this.data.personalInfo.gender = dinfo.gender;
-
+      if (dinfo.iin.charAt(6) == '1' || '3' || '5') {
+        this.data.personalInfo.gender = 'male';
+      } else {
+        this.data.personalInfo.gender = 'female';
+      }
+      // this.data.personalInfo.gender = dinfo.gender;
       this.data.personalInfo.registrationAddress.street = dinfo?.registrationAddress?.street;
       this.data.personalInfo.registrationAddress.house = dinfo?.registrationAddress?.building;
       this.data.personalInfo.registrationAddress.apartment = dinfo?.registrationAddress?.flat;
@@ -429,7 +433,7 @@ export class StepsComponent implements OnInit {
       }else{
         this.resultShow = true;
         this.errorResult = true;
-        this.loading = false;  
+        this.loading = false;
       }
 
     }, error => {
