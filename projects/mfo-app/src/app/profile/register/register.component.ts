@@ -40,11 +40,11 @@ export class RegisterComponent implements OnInit {
     "firstName": null,
     "iin": null,
     "lastName": null,
-    "patronymic": null,
+    "middleName": null,
   }
 
   qparams:any = null;
-
+  disabled:any = false;
   constructor(private route: ActivatedRoute,
               private router: Router,
               private registerService:RegisterService,
@@ -80,14 +80,18 @@ export class RegisterComponent implements OnInit {
 
     this.singUpForm.firstName = this.pdfForm.firstName;
     this.singUpForm.lastName = this.pdfForm.lastName;
-    this.singUpForm.patronymic = this.pdfForm.patronymic;
+    this.singUpForm.middleName = this.pdfForm.patronymic;
     this.singUpForm.iin = this.pdfForm.iin;
 
+    this.disabled = true;
     this.registerService.signUp(this.singUpForm).subscribe(res => {
       if(res){
         this.auth.saveUser(res);
         this.router.navigate(['/profile/verilive'], { queryParams: {...this.qparams}})
       }
+      this.disabled = false;
+    },error => {
+      this.disabled = true;
     })
   }
 

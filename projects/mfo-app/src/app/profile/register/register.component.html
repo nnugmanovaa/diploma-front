@@ -53,7 +53,14 @@
         <label>Подтвердите пароль</label>
         <input type="password" required [(ngModel)]="singUpForm.confirmPassword" name="confirmPassword">
       </div>
-      <button class="btn" type="submit">Зарегистрироваться</button>
+      <button class="btn" type="submit" [disabled]="disabled">
+        Зарегистрироваться
+        <ng-container *ngIf="disabled">
+          <div class="loader">
+            <div class="lds-facebook"><div></div><div></div><div></div></div>
+          </div>
+        </ng-container>
+      </button>
     </form>
   </div>
 
