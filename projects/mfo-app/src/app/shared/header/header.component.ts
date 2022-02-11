@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   settingsPage:boolean = false;
 
   showNav:boolean = false;
+  headerModal:boolean = false;
 
   constructor(private router: Router,
               public authService:AuthService) {
