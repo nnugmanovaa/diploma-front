@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit {
               public authService:AuthService) {
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
+        this.headerModal = false;
         if(event['url'] === '/cabinet/settings'){
           // this.settingsPage = true; otklyuchili settings
           this.settingsPage = false;

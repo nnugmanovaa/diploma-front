@@ -25,7 +25,14 @@
     </div>
     <div class="top-info" [hidden]="true" id="NextShow">
       <div class="btns">
-        <button><span (click)="showSignUP()">Далее</span></button>
+        <button class="btn" [disabled]="disabled">
+          <span (click)="showSignUP()">Далее</span>
+          <ng-container *ngIf="disabled">
+            <div class="loader">
+              <div class="lds-facebook"><div></div><div></div><div></div></div>
+            </div>
+          </ng-container>
+        </button>
       </div>
     </div>
     <div id="id_verilive" style="margin: auto;"></div>

@@ -29,6 +29,8 @@ export class VeriliveComponent implements OnInit {
 
   qparams:any = null;
 
+  disabled:boolean = false;
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private registerService:RegisterService,
@@ -73,11 +75,14 @@ export class VeriliveComponent implements OnInit {
     if(!this.requestId){
       return;
     }
+    this.disabled = true;
     this.registerService.sendImage(this.requestId, image).subscribe(res => {
       if(res.identified){
         this.changeStatus();
         this.getPersData();
+        this.disabled = false;
       }else{
+        this.disabled = false;
         this.toastr.warning('Пожалуйста попробуйте еще раз пройти идентификацию лица', '');
       }
     }, error => {
@@ -85,9 +90,13 @@ export class VeriliveComponent implements OnInit {
         if(res.identified){
           this.changeStatus();
           this.getPersData();
+          this.disabled = false;
         }else{
+          this.disabled = false;
           this.toastr.warning('Пожалуйста попробуйте еще раз пройти идентификацию лица', '');
         }
+      }, error => {
+        this.disabled = false;
       })
     })
   }

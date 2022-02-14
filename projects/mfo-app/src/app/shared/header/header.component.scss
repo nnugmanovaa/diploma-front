@@ -81,6 +81,7 @@ header{
       display: flex;
       gap:23px;
       .hb-btn{
+        cursor: pointer;
         border: 2px solid #34BE82;
         border-radius: 10px;
         display: inline-flex;
