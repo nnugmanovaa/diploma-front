@@ -20,7 +20,7 @@ export enum Status {
   selector: 'mfo-order-history',
   templateUrl: './order-history.component.html',
   styleUrls: ['./order-history.component.scss']
-})  
+})
 
 export class OrderHistoryComponent implements OnInit {
   params:any = {
@@ -28,7 +28,7 @@ export class OrderHistoryComponent implements OnInit {
     endDate:'',
     page:1,
     size:6,
-    status:'CASHED_OUT_CARD'
+    states:'CASHED_OUT_CARD'
   }
 
   infoModal:boolean = false;
