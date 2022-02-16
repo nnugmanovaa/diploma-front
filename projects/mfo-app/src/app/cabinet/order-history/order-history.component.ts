@@ -26,9 +26,11 @@ export class OrderHistoryComponent implements OnInit {
   params:any = {
     startDate:'',
     endDate:'',
-    page:1,
+    page:0,
     size:6,
-    states:'CASHED_OUT_CARD'
+    states:'CASHED_OUT_CARD,APPROVED,REJECTED',
+    sort: 'orderId,desc'
+    // states=CASHED_OUT_CARD,APPROVED,REJECTED&sort=orderId,desc
   }
 
   infoModal:boolean = false;
