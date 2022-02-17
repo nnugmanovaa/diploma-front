@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
     firstName: null,
     iin: null,
     lastName: null,
-    patronymic: null,
+    patronymic: "",
     phone: null,
   }
 
@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
 
   code:any = null;
   showSMSModal:boolean = false;
-  
+
   signUpShow:boolean = false;
   singUpForm:any = {
     "code": null,
@@ -49,7 +49,7 @@ export class RegisterComponent implements OnInit {
               private router: Router,
               private registerService:RegisterService,
               private toastr: ToastrService,
-              private auth:AuthService) { 
+              private auth:AuthService) {
 
   }
 
