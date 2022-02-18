@@ -215,7 +215,7 @@ export class StepsComponent implements OnInit {
       }
       if(res.passportInfoDto){
         this.userInfo.passportInfoDto = res.passportInfoDto;
-
+        this.data.iin = this.userInfo.passportInfoDto.iin;
         this.data.personalInfo.firstName = this.userInfo.passportInfoDto.firstName;
         this.data.personalInfo.lastName = this.userInfo.passportInfoDto.lastName;
         this.data.personalInfo.middleName = this.userInfo.passportInfoDto.patronymic;
@@ -460,6 +460,7 @@ export class StepsComponent implements OnInit {
   }
 
   createPasportInfo(){
+    this.userInfo.passportInfoDto.iin = this.data.iin;
     this.userInfo.passportInfoDto.firstName = this.data.personalInfo?.firstName;
     this.userInfo.passportInfoDto.lastName = this.data.personalInfo?.lastName;
     this.userInfo.passportInfoDto.patronymic = this.data.personalInfo?.middleName;
