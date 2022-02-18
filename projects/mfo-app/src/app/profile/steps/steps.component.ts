@@ -157,8 +157,6 @@ export class StepsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLocations();
-    this.fillData();
-    // this.clientId = this.authService.getUser.clientId;
     this.route.queryParams.subscribe(queryParams => {
       if(queryParams){
         this.data.loanAmount = queryParams.amount;
@@ -167,9 +165,6 @@ export class StepsComponent implements OnInit {
         this.data.preScoreRequestId = queryParams.requestId;
       }
     });
-    if(!this.data.preScoreRequestId){
-      this.getPersonalData();
-    }
   }
 
   getAnketa(){
@@ -278,7 +273,7 @@ export class StepsComponent implements OnInit {
 
   fillData(){
     let info = localStorage.getItem('pinfo');
-    if(info && !this.data.preScoreRequestId){
+    if(info){
       let dinfo = JSON.parse(info);
       this.data.iin = dinfo.iin;
       this.data.personalInfo.firstName = dinfo.firstName;
@@ -299,12 +294,32 @@ export class StepsComponent implements OnInit {
       this.data.personalInfo.registrationAddress.street = dinfo?.registrationAddress?.street;
       this.data.personalInfo.registrationAddress.house = dinfo?.registrationAddress?.building;
       this.data.personalInfo.registrationAddress.apartment = dinfo?.registrationAddress?.flat;
+      this.fillAddress(dinfo.registrationAddress)
+    }
+  }
+
+  fillAddress(address:any){
+    // console.log(address)
+    if(!address){
+      return
+    }
+    let selected = this.districts.filter((x:any)=> x.name_ru?.toLowerCase().includes(address?.district?.toLowerCase()))[0];
+    if(selected){
+      this.data.personalInfo.registrationAddress.region = selected.code;
+      this.data.personalInfo.registrationAddress.city = (address.region?.charAt(0) + address.region?.slice(1).toLowerCase()).replace('р-н','район');
+      console.log(this.data.personalInfo.registrationAddress.city)
+      this.getDistrictById();
     }
   }
 
   getLocations(){
     this.stepService.getLocations().subscribe(res => {
       this.districts = res;
+      if(!this.data.preScoreRequestId){
+        this.getPersonalData();
+      }else{
+        this.fillData();
+      }
     })
   }
 
