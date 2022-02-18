@@ -28,7 +28,7 @@ export class OrderHistoryComponent implements OnInit {
     endDate:'',
     page:0,
     size:6,
-    states:'CASHED_OUT_CARD,APPROVED,REJECTED',
+    states:'CASHED_OUT_CARD,REJECTED',
     sort: 'orderId,desc'
     // states=CASHED_OUT_CARD,APPROVED,REJECTED&sort=orderId,desc
   }
