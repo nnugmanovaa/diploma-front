@@ -16,7 +16,7 @@ export class SettingsComponent implements OnInit {
     "addressInfoDto": {
         "region": "",
         "city": "",
-        "postalCode": "",
+        // "postalCode": "",
         "street": "",
         "house": "",
         "apartment": "",
