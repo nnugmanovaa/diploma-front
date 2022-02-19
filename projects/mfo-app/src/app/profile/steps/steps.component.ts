@@ -34,7 +34,7 @@ export class StepsComponent implements OnInit {
             "district": null,
             "region": 0,
             "city": null,
-            "postalCode": null,
+            // "postalCode": null,
             "street": null,
             "house": null,
             "apartment": null,
@@ -44,7 +44,7 @@ export class StepsComponent implements OnInit {
             "district": null,
             "region": 0,
             "city": null,
-            "postalCode": null,
+            // "postalCode": null,
             "street": null,
             "house": null,
             "apartment": null,
@@ -74,7 +74,7 @@ export class StepsComponent implements OnInit {
     "addressInfoDto": {
         "region": "",
         "city": "",
-        "postalCode": "",
+        // "postalCode": "",
         "street": "",
         "house": "",
         "apartment": "",
@@ -194,7 +194,7 @@ export class StepsComponent implements OnInit {
         this.userInfo.addressInfoDto = res.addressInfoDto;
         this.data.personalInfo.registrationAddress.region = this.userInfo.addressInfoDto.region;
         this.data.personalInfo.registrationAddress.city = this.userInfo.addressInfoDto.city;
-        this.data.personalInfo.registrationAddress.postalCode = this.userInfo.addressInfoDto.postalCode;
+        // this.data.personalInfo.registrationAddress.postalCode = this.userInfo.addressInfoDto.postalCode;
         this.data.personalInfo.registrationAddress.street = this.userInfo.addressInfoDto.street;
         this.data.personalInfo.registrationAddress.house = this.userInfo.addressInfoDto.house;
         this.data.personalInfo.registrationAddress.apartment = this.userInfo.addressInfoDto.apartment;
@@ -495,7 +495,7 @@ export class StepsComponent implements OnInit {
   createAdressInfo(){
     this.userInfo.addressInfoDto.region = this.data.personalInfo?.registrationAddress?.region
     this.userInfo.addressInfoDto.city = this.data.personalInfo?.registrationAddress?.city
-    this.userInfo.addressInfoDto.postalCode = this.data.personalInfo?.registrationAddress?.postalCode
+    // this.userInfo.addressInfoDto.postalCode = this.data.personalInfo?.registrationAddress?.postalCode
     this.userInfo.addressInfoDto.street = this.data.personalInfo?.registrationAddress?.street
     this.userInfo.addressInfoDto.house = this.data.personalInfo?.registrationAddress?.house
     this.userInfo.addressInfoDto.apartment = this.data.personalInfo?.registrationAddress?.apartment
