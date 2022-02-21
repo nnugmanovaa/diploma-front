@@ -33,7 +33,7 @@
 .tooltip {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black;
+  border-bottom: 1px black;
 }
 
 .tooltip .tooltiptext {
@@ -50,7 +50,7 @@
   z-index: 1;
   bottom: 100%;
   left: 50%;
-  margin-left: -60px;
+  margin-left: -220px;
 }
 
 .tooltip:hover .tooltiptext {
