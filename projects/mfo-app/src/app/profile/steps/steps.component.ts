@@ -167,6 +167,14 @@ export class StepsComponent implements OnInit {
     });
   }
 
+  scrollToTop() {
+    let top = document.getElementById('top');
+    if (top !== null) {
+      top.scrollIntoView();
+      top = null;
+    }
+  }
+
   getAnketa(){
     this.stepService.getAnketa(this.loanID).subscribe(res => {
       let file = URL.createObjectURL(res);

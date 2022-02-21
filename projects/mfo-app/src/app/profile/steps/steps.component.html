@@ -1,6 +1,7 @@
 <section class="profile-page" *ngIf="!loading && !resultShow">
   <div class="container">
     <div class="step-progress">
+      <div id="top"></div>
       <div class="back-btn" *ngIf="step > 1" (click)="step = step - 1">
         <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M11.67 1.8701L9.9 0.100098L0 10.0001L9.9 19.9001L11.67 18.1301L3.54 10.0001L11.67 1.8701Z" fill="black"/>
@@ -10,7 +11,7 @@
       <p>Шаг {{ step }}/3</p>
       <div class="progress"><span style="width: calc(33% * {{ step }});"></span></div>
     </div>
-    <form ngNativeValidate (ngSubmit)="setPasportData()" *ngIf="step == 1">
+    <form ngNativeValidate (ngSubmit)="setPasportData()" *ngIf="step == 1" (ngSubmit)="scrollToTop()">
       <div class="form-top">
         <h2>Паспортные данные</h2>
       </div>
@@ -73,7 +74,7 @@
       <button type="submit" class="btn">Подтвердить</button>
     </form>
 
-    <form ngNativeValidate (ngSubmit)="setAdressData()" *ngIf="step == 2">
+    <form ngNativeValidate (ngSubmit)="setAdressData()" *ngIf="step == 2" (ngSubmit)="scrollToTop()">
       <div class="form-top">
         <h2>Адресные данные</h2>
       </div>
