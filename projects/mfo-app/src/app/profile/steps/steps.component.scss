@@ -286,3 +286,12 @@ p.info-text{
     }
   }
 }
+
+@media screen and (max-width: 480px) {
+  .error-result, .success-result, .alternative-result {
+    .btn {
+      max-width: 328px;
+      width: 100%;
+    }
+  }
+}
