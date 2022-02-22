@@ -1,105 +1,38 @@
 @import url(normalize.scss);
 
-.lds-facebook {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
-}
-.lds-facebook div {
-  display: inline-block;
-  position: absolute;
-  left: 8px;
-  width: 16px;
-  background: #42A8FA;
-  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
-}
-.lds-facebook div:nth-child(1) {
-  left: 8px;
-  animation-delay: -0.24s;
-}
-.lds-facebook div:nth-child(2) {
-  left: 32px;
-  animation-delay: -0.12s;
-}
-.lds-facebook div:nth-child(3) {
-  left: 56px;
-  animation-delay: 0;
-}
-@keyframes lds-facebook {
-  0% {
-    top: 8px;
-    height: 64px;
-  }
-  50%, 100% {
-    top: 24px;
-    height: 32px;
-  }
-}
-
-.btn{
-  position: relative;
-  .loader{
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-      background: rgb(255 255 255 / 67%);
-  }
-}
-
-
-body, button, input, textarea, select{
+body,
+button,
+input,
+select,
+textarea {
   font-family: 'Inter', sans-serif;
 }
 
-body{
+body {
   color: #000000;
   font-size: 18px;
   line-height: 1.4;
   font-weight: normal;
 }
 
-h1{
+h1 {
   font-size: 48px;
   font-weight: bold;
   line-height: 1.2;
 }
 
-.content-title{
+.content-title {
   font-weight: 600;
   font-size: 32px;
   margin-bottom: 20px;
   line-height: 43px;
 }
 
-form button:active{
-  opacity: .7;
+form button:active {
+  opacity: 0.7;
 }
 
-.ngx-pagination .current {
-  background: rgba(46,58,89,.12)!important;
-  border-radius: 8px;
-  color: #42A8FA!important;
-  padding: 10px 16px!important;
-}
-
-.ngx-pagination a,.ngx-pagination button {
-  padding: 10px 16px!important;
-  border-radius: 8px!important
-}
-
-
-ul.ngx-pagination {
-  text-align: center;
-  margin-top: 24px;
-}
-
-body{
+body {
   .toast {
     display: flex;
     flex-direction: row;
@@ -130,7 +63,7 @@ body{
   }
 }
 
-.container{
+.container {
   max-width: 1000px;
   margin: 0 auto;
   padding: 0 20px;
@@ -146,26 +79,24 @@ body{
   background: rgba(0, 0, 0, 0.62);
   display: flex;
   align-items: center;
+  overflow: hidden;
   justify-content: center;
-  display: flex;
-  overflow: auto;
-  justify-content: center;
-  align-items: center;
+
   .modal-content {
     width: 100%;
     max-width: 500px;
     position: relative;
-    .modal-close{
+
+    .modal-close {
       position: absolute;
       right: 15px;
-      top:15px;
+      top: 15px;
       cursor: pointer;
     }
   }
 }
 
-
-.profile-page{
+.profile-page {
   form {
     max-width: 400px;
     margin: 0 auto;
@@ -173,66 +104,109 @@ body{
 
   .label-input {
     margin-bottom: 20px;
+
     label {
       color: rgba(0, 0, 0, 0.6);
       font-size: 16px;
       line-height: 22px;
       display: block;
       margin-bottom: 5px;
+
       kbd {
         color: #A0A5AB;
         font-size: 15px;
         line-height: 169%;
       }
-      &.disabled{
+
+      &.disabled {
         opacity: 0.4;
       }
+
       i {
         color: red;
       }
     }
-    input, textarea, select {
+
+    input,
+    select,
+    textarea {
       width: 100%;
       border: 1px solid rgba(0, 0, 0, 0.2);
       box-sizing: border-box;
       border-radius: 6px;
       padding: 15px;
       font-size: 18px;
-      background: #fff;
       letter-spacing: 1px;
-      &:disabled{
-        background: #ececec;
-        border: none;
+
+      &:disabled {
+        opacity: 0.4;
       }
     }
   }
 
-  .label-checkbox{
+  .label-checkbox {
     margin-bottom: 20px;
-    input{
-      margin: 4px 0;
-      margin-right: 12px;
+
+    label {
+      color: rgba(0, 0, 0, 0.6);
+      font-size: 16px;
+      line-height: 22px;
+      display: block;
+      margin-bottom: 5px;
+
+      kbd {
+        color: #A0A5AB;
+        font-size: 15px;
+        line-height: 169%;
+      }
+
+      &.disabled {
+        opacity: 0.4;
+      }
+
+      i {
+        color: red;
+      }
     }
-    label{
+
+    .input-check-box {
       display: flex;
-      span{
-        font-size: 14px;
-        // line-height: 24px;
-        letter-spacing: -0.3px;
-        color: rgba(4, 4, 21, 0.6);
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      box-sizing: border-box;
+      border-radius: 6px;
+      padding-right: 5px;
+
+      input {
+        border: none;
+        flex-grow: 1;
+        padding: 15px;
+        font-size: 18px;
+        letter-spacing: 1px;
+
+        &:disabled {
+          opacity: 0.4;
+        }
+      }
+
+      .btn-eye {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
       }
     }
   }
 
-  .form-top{
+  .form-top {
     text-align: center;
-    h2{
+
+    h2 {
       font-weight: bold;
       font-size: 30px;
       line-height: 43px;
       margin-bottom: 20px;
     }
-    .link{
+
+    .link {
       font-size: 24px;
       color: #42A8FA;
       margin-bottom: 30px;
@@ -240,10 +214,10 @@ body{
     }
   }
 
-  .btn{
+  .btn {
     background: #42A8FA;
     width: 100%;
-    border:none;
+    border: none;
     font-size: 24px;
     color: #FFFFFF;
     cursor: pointer;
@@ -256,7 +230,7 @@ body{
   }
 }
 
-.mobile{
+.mobile {
   display: none;
 }
 
@@ -264,8 +238,8 @@ body{
   display: flex;
   gap: 10px;
   align-items: center;
-  label {
-  }
+
+  label {}
 }
 
 .label-toggle label {
@@ -289,8 +263,8 @@ body{
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
   border-radius: 12px;
 }
 
@@ -302,8 +276,8 @@ body{
   left: 4px;
   bottom: 4px;
   background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
   border-radius: 50%;
 }
 
@@ -320,7 +294,7 @@ body{
   align-items: center;
   gap: 10px;
   font-size: 16px;
-  flex:1;
+  flex: 1;
   line-height: 26px;
   letter-spacing: -0.355556px;
   font-weight: 600;
@@ -329,34 +303,70 @@ body{
 .label-toggle {
   margin-bottom: 20px;
 }
-
-@media (max-width: 600px){
-  .overflow-table{
+@media (max-width: 600px) {
+  .overflow-table {
     overflow: auto;
     margin-right: -20px;
   }
-  .content-title{
+
+  .content-title {
     font-size: 20px;
   }
-  .mobile{
+
+  .mobile {
     display: block;
   }
-  .desctop{
+
+  .desctop {
     display: none !important;
   }
-  h1{
+
+  h1 {
     font-size: 26px;
     font-weight: 600;
   }
-  body{
+
+  body {
     font-size: 16px;
   }
+
   .profile-page {
     .form-top {
-      h2{
+      h2 {
         font-size: 24px !important;
         font-weight: 600;
       }
     }
+  }
+}
+
+.float {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  bottom: 1rem;
+  right: 1rem;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    a {
+      margin-bottom: 16px;
+    }
+
+    a:hover {
+      opacity: 0.5;
+    }
+  }
+
+  button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
   }
 }
