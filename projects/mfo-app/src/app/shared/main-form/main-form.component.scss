@@ -50,14 +50,14 @@
     display: block;
     width: 100%;
     padding: 14px;
-    animation: pulse 1s ease-in infinite alternate;
+    animation: pulse 1.3s ease-out infinite;
   }
   @keyframes pulse {
     0% {
       box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
     }
 
-    40% {
+    50% {
       box-shadow: 0 0 0 10px rgba(242,240,19, 0.3);
     }
 
