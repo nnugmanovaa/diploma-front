@@ -24,7 +24,7 @@
           <input type="tel" name="code" [imask]="{mask: '000000',lazy: false, placeholderChar: '-'}" [(ngModel)]="code">
         </div>
       </div>
-      <div class="resend-pass">Отправить повторно</div><br>
+      <div class="resend-pass" (click)="sendSms()">Отправить повторно</div><br>
       <div class="label-input" *ngIf="code.length == 6 && !code.includes('-')">
         <label for="">Введите новый пароль</label>
         <input type="password" [(ngModel)]="newPassword" name="password" required>
