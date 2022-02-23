@@ -31,6 +31,9 @@ export class RegisterComponent implements OnInit {
   code:any = null;
   showSMSModal:boolean = false;
 
+  showSmsCode:boolean = false;
+  // msisdn:any = null;
+
   signUpShow:boolean = false;
   singUpForm:any = {
     "code": null,
@@ -141,6 +144,12 @@ export class RegisterComponent implements OnInit {
 
   openFile(){
     window.open(this.file);
+  }
+
+  sendSms(){
+    this.auth.sendSms({msisdn:this.registerForm.msisdn}).subscribe(res => {
+      this.showSmsCode = true;
+    })
   }
 
 }

@@ -83,7 +83,7 @@
               <input type="tel" name="code" [imask]="{mask: '000000',lazy: false, placeholderChar: '-'}" [(ngModel)]="code" (ngModelChange)="sendCode()">
             </div>
           </div>
-          <div class="resend-pass">Отправить повторно</div>
+          <div class="resend-pass" (click)="sendSms()">Отправить повторно</div>
         </div>
       </form>
     </div>
