@@ -5,6 +5,7 @@ import { interval, Subscription } from 'rxjs';
 import { RegisterService } from '../../core/services/register.service';
 import { AuthService } from '../../core/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import amplitude from 'amplitude-js';
 
 @Component({
   selector: 'mfo-steps',
@@ -382,6 +383,7 @@ export class StepsComponent implements OnInit {
 
   sendOTP(){
     this.registerService.sendOTP({msisdn:this.authService?.getUser?.username}).subscribe(res => {
+      amplitude.getInstance().logEvent("sms resent");
       this.showSMSModal = true;
     })
   }
@@ -394,6 +396,7 @@ export class StepsComponent implements OnInit {
       }
       this.stepService.changeCardStatus(this.loanID).subscribe(res => {
         this.registerService.checkOTP(data).subscribe(res => {
+          amplitude.getInstance().logEvent("sms entered", {"success": true})
           let order = {
             orderId: this.loanID,
             "backSuccessLink": "https://zaimem.kz/cabinet/cashed-out",
@@ -403,7 +406,11 @@ export class StepsComponent implements OnInit {
             window.open(res.url, "_self")
             this.router.navigate(['/cabinet/cashed-out'])
           })
-        })
+        },
+        error => {
+          amplitude.getInstance().logEvent("sms entered", {"success": false})
+        }
+        )
       })
     }
   }
@@ -437,13 +444,30 @@ export class StepsComponent implements OnInit {
   }
 
   submitAll(){
+    var scoringStatus = "REJECTED"
+    var altAmount = null
+    var altPeriod = null
+    var decil: null = null
+    var kdn: null = null
+    var newKdn: null = null
+    var effectiveRate = 54.9
+    var ownScore: null = null
+    var rejectText: null = null
     this.stepService.submitStep(this.data).subscribe(res => {
+      scoringStatus = res?.result
+      decil = res.scoringInfo.decil
+      kdn = res.scoringInfo.kdn
+      newKdn = res.scoringInfo.newKdn
+      ownScore = res.scoringInfo.ownScore
+      rejectText = res.rejectText
       clearInterval(this.intervalId);
       if(res?.result == 'APPROVED'){
         this.resultShow = true;
         this.successResult = true;
         this.loanID = res.orderId;
         this.loading = false;
+        console.log("asd", rejectText)
+        amplitude.getInstance().logEvent("finished scoring", {"status": scoringStatus, "rejectText": rejectText, "decil": decil, "kdn": kdn, "newKdn": newKdn, "effective rate": effectiveRate, "ownScore": ownScore})    
       }else if(res?.result == 'ALTERNATIVE'){
         this.resultShow = true;
         this.alternativeResult = true;
@@ -453,17 +477,20 @@ export class StepsComponent implements OnInit {
         if(this.alternativeChoices.length == 1){
           this.selectedChoice = this.alternativeChoices[0];
         }
+        amplitude.getInstance().logEvent("finished scoring", {"status": scoringStatus, "rejectText": rejectText, "decil": decil, "kdn": kdn, "newKdn": newKdn, "effective rate": effectiveRate, "ownScore": ownScore})    
       }else{
         this.resultShow = true;
         this.errorResult = true;
         this.loading = false;
+        amplitude.getInstance().logEvent("finished scoring", {"status": scoringStatus, "rejectText": rejectText, "decil": decil, "kdn": kdn, "newKdn": newKdn, "effective rate": effectiveRate, "ownScore": ownScore})
       }
 
     }, error => {
       this.resultShow = true;
       this.errorResult = true;
       this.loading = false;
-      clearInterval(this.intervalId);
+      amplitude.getInstance().logEvent("finished scoring", {"status": scoringStatus, "rejectText": rejectText, "decil": decil, "kdn": kdn, "newKdn": newKdn, "effective rate": effectiveRate, "ownScore": ownScore})
+        clearInterval(this.intervalId);
     })
   }
 

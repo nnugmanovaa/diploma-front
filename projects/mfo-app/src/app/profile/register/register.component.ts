@@ -166,6 +166,7 @@ export class RegisterComponent implements OnInit {
   }
   sendSms() {
     this.auth.sendSms({msisdn:this.registerForm.msisdn}).subscribe(res => {
+      amplitude.getInstance().logEvent("sms resent");
       this.showSmsCode = true;
     })
   }
