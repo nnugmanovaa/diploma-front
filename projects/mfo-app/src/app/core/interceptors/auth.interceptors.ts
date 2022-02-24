@@ -31,6 +31,7 @@ export class AuthInterceptor implements HttpInterceptor {
       (err: any) => {
       if (err instanceof HttpErrorResponse) {
         if (err.status === 401) {
+          this.toastr.error(err.error?.message, 'Ошибка!');
           localStorage.removeItem('token');
           localStorage.removeItem('user');
           this.router.navigate(['/profile/login']);

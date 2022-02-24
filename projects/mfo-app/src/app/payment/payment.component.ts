@@ -46,15 +46,9 @@ export class PaymentComponent implements OnInit {
   ngOnInit(): void {
     if(this.auth.isLoggedIn){
       this.payForm.username = this.auth.getUser.username;
-      this.getUserByPhone();
+      this.payForm.clientRef = this.auth.getUser.iin;
       this.getActiveLoan();
     }
-  }
-
-  getUserByPhone(){
-    this.auth.getUserId(this.payForm.username).subscribe(res => {
-      this.payForm.clientRef = res.iin;
-    })
   }
 
   getActiveLoan(){
@@ -64,6 +58,10 @@ export class PaymentComponent implements OnInit {
       this.payForm.monthPayment = res.orderDetailsSchedule?.monthPayment;
       this.payForm.amountRemain = res.orderDetailsSchedule?.amountRemain;
       this.payForm.amount = String(res.orderDetailsSchedule?.monthPayment);
+    })
+
+    this.auth.accountLoans({iin: this.payForm.clientRef}).subscribe(res => {
+
     })
   }
 

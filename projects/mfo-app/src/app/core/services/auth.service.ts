@@ -38,6 +38,10 @@ export class AuthService {
     return this.httpClient.post<any>(`${this.LOAN_URL}/loans/init-payment`, data);
   }
 
+  public accountLoans(data:any){
+    return this.httpClient.post<any>(`${this.LOAN_URL}/loans/account-loans`, data);
+  }
+
   public sendSms(data:any){
     return this.httpClient.post(`${this.REST_API_SERVER}/v1/phone-verification`, data);
   }

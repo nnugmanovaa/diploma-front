@@ -32,6 +32,9 @@ export class RegisterComponent implements OnInit {
   code:any = null;
   showSMSModal:boolean = false;
 
+  showSmsCode:boolean = false;
+  // msisdn:any = null;
+
   signUpShow:boolean = false;
   singUpForm:any = {
     "code": null,
@@ -156,11 +159,15 @@ export class RegisterComponent implements OnInit {
   }
 
   signIn() {
-    console.log("was");
     let eventProperties = {
       "position": 2
     };
     amplitude.getInstance().logEvent("clicked sign in", eventProperties);
+  }
+  sendSms() {
+    this.auth.sendSms({msisdn:this.registerForm.msisdn}).subscribe(res => {
+      this.showSmsCode = true;
+    })
   }
 
 }
