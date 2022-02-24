@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import amplitude from "amplitude-js";
 
 @Component({
   selector: 'mfo-landing',
@@ -13,6 +14,7 @@ export class LandingComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMainTime();
+    amplitude.getInstance().logEvent("viewed landing");
   }
 
   getMainTime(){
@@ -22,4 +24,18 @@ export class LandingComponent implements OnInit {
     this.time = ("0" + newDateObj.getHours()).slice(-2) + ':' + ("0" + newDateObj.getMinutes()).slice(-2);
   }
   
+  takeLoan() {
+    this.modal = true
+    let eventProperties = {
+      "position": 2
+    };
+    amplitude.getInstance().logEvent("clicked get loan", eventProperties)
+  }
+
+  payLoan() {
+    let eventProperties = {
+      "position": 1
+    };
+    amplitude.getInstance().logEvent("clicked pay loan", eventProperties)
+  }
 }

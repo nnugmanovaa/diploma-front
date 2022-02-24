@@ -37,7 +37,7 @@
         <input [imask]="priceMask" [unmask]="true" name="amount" [(ngModel)]="payForm.amount" type="text" required>
       </div>
 
-      <button class="btn" type="submit">Оплатить</button>
+      <button click=(tryPayLoan()) class="btn" type="submit">Оплатить</button>
     </form>
   </div>
 </section>

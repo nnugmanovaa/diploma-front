@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import amplitude from "amplitude-js";
+import { environment } from '../environments/environment';
 
 declare let gtag: Function;
 
@@ -9,7 +11,7 @@ declare let gtag: Function;
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'mfo-app';
 
   constructor(public router: Router) {
@@ -23,5 +25,8 @@ export class AppComponent {
       }
     }
     )
+  }
+  ngOnInit(): void {
+    amplitude.getInstance().init(environment.amplitude_api_key);
   }
 }
