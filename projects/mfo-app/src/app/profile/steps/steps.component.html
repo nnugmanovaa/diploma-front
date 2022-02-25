@@ -197,7 +197,7 @@
       <div class="label-input">
         <label>Образование</label>
         <select name="education" [(ngModel)]="data.personalInfo.education" >
-          <option value="">Выберите</option>
+          <option value="" disabled selected>Выберите</option>
           <option value="Среднее">Среднее</option>
           <option value="Среднее специальное">Среднее специальное</option>
           <option value="Незаконченное высшее">Незаконченное высшее</option>
@@ -209,7 +209,7 @@
       <div class="label-input">
         <label>Занятость</label>
         <select name="typeOfWork" [(ngModel)]="data.personalInfo.typeOfWork">
-          <option value="">Выберите</option>
+          <option value="" disabled selected>Выберите</option>
           <option value="Сотрудник компании">Сотрудник компании</option>
           <option value="Индивидуальный предприниматель">Индивидуальный предприниматель</option>
           <option value="Безработный">Безработный</option>
@@ -225,7 +225,7 @@
       <div class="label-input">
         <label>Вид деятельности</label>
         <select name="employment" [(ngModel)]="data.personalInfo.employment">
-          <option value="">Выберите</option>
+          <option value="" disabled selected>Выберите</option>
           <option value="Информационные технологии/телекоммуникации">Информационные технологии/телекоммуникации</option>
           <option value="Финансы, банки, страхование, консалтинг">Финансы, банки, страхование, консалтинг</option>
           <option value="ТЭК">ТЭК</option>
@@ -263,7 +263,7 @@
 
 
       <div class="label-input">
-        <label>Опыт работы</label>
+        <label>Опыт работы (в годах)</label>
         <input type="number" name="workExperience" [(ngModel)]="data.personalInfo.workExperience">
       </div>
 
@@ -280,7 +280,7 @@
       <div class="label-input">
         <label>Семейное положение</label>
         <select name="maritalStatus" [(ngModel)]="data.personalInfo.maritalStatus">
-          <option value="">Выберите</option>
+          <option value="" disabled selected>Выберите</option>
           <option value="Не женат / Не замужем">Не женат / Не замужем</option>
           <option value="Женат / Замужем">Женат / Замужем</option>
           <option value="Вдовец / Вдова">Вдовец / Вдова</option>
@@ -292,7 +292,7 @@
       <div class="label-input">
         <label>Количество детей</label>
         <select name="numberOfKids" [(ngModel)]="data.personalInfo.numberOfKids">
-          <option value="">Выберите</option>
+          <option value="" disabled selected>Выберите</option>
           <option [value]="0">0</option>
           <option [value]="1">1</option>
           <option [value]="2">2</option>

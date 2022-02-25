@@ -51,18 +51,18 @@ export class StepsComponent implements OnInit {
             "apartment": null,
             "country": "Казахстан",
         },
-        "education": null,
-        "employment": null,
-        "typeOfWork": null,
+        "education": "",
+        "employment": "",
+        "typeOfWork": "",
         "workPosition": null,
         "employer": null,
         "monthlyIncome": "",
         "additionalMonthlyIncome": "",
-        "workExperience": 0,
+        "workExperience": null,
         "workPhoneNum": null,
-        "maritalStatus": null,
+        "maritalStatus": "",
         "gender": "",
-        "numberOfKids": 0
+        "numberOfKids": ""
     },
     "loanAmount": 0,
     "loanPeriod": 0,
@@ -467,7 +467,7 @@ export class StepsComponent implements OnInit {
         this.loanID = res.orderId;
         this.loading = false;
         console.log("asd", rejectText)
-        amplitude.getInstance().logEvent("finished scoring", {"status": scoringStatus, "rejectText": rejectText, "decil": decil, "kdn": kdn, "newKdn": newKdn, "effective rate": effectiveRate, "ownScore": ownScore})    
+        amplitude.getInstance().logEvent("finished scoring", {"status": scoringStatus, "rejectText": rejectText, "decil": decil, "kdn": kdn, "newKdn": newKdn, "effective rate": effectiveRate, "ownScore": ownScore})
       }else if(res?.result == 'ALTERNATIVE'){
         this.resultShow = true;
         this.alternativeResult = true;
@@ -477,7 +477,7 @@ export class StepsComponent implements OnInit {
         if(this.alternativeChoices.length == 1){
           this.selectedChoice = this.alternativeChoices[0];
         }
-        amplitude.getInstance().logEvent("finished scoring", {"status": scoringStatus, "rejectText": rejectText, "decil": decil, "kdn": kdn, "newKdn": newKdn, "effective rate": effectiveRate, "ownScore": ownScore})    
+        amplitude.getInstance().logEvent("finished scoring", {"status": scoringStatus, "rejectText": rejectText, "decil": decil, "kdn": kdn, "newKdn": newKdn, "effective rate": effectiveRate, "ownScore": ownScore})
       }else{
         this.resultShow = true;
         this.errorResult = true;
