@@ -30,7 +30,7 @@ export class VeriliveComponent implements OnInit {
 
   qparams:any = null;
 
-  disabled:boolean = false;
+  disabled:boolean = true;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -81,7 +81,7 @@ export class VeriliveComponent implements OnInit {
     if(!this.requestId){
       return;
     }
-    this.disabled = true;
+    // this.disabled = true;
     this.registerService.sendImage(this.requestId, image).subscribe(res => {
       if(res.identified){
         amplitude.getInstance().logEvent("finished identification", {"success": true})
