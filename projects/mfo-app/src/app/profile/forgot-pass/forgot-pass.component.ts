@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import amplitude from 'amplitude-js';
 import { AuthService } from '../../core/services/auth.service'
 
 @Component({
@@ -24,8 +25,11 @@ export class ForgotPassComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  sendSms(){
+  sendSms(i: number){
     this.auth.sendSms({msisdn:this.msisdn}).subscribe(res => {
+      if (i == 1) {
+        amplitude.getInstance().logEvent("sms resent");
+      }
       this.showSmsCode = true;
     })
   }
@@ -38,10 +42,15 @@ export class ForgotPassComponent implements OnInit {
     }
     this.auth.sendSmsCode(data).subscribe(res => {
       if(res){
+        amplitude.getInstance().logEvent("sms entered", {"success": true})
         this.auth.saveUser(res);
         this.router.navigate(['/cabinet'])
       }
-    })
+    },
+    error => {
+      amplitude.getInstance().logEvent("sms entered", {"success": false})
+    }
+    )
   }
 
 }

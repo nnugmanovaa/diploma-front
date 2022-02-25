@@ -4,6 +4,7 @@ import { RegisterService } from '../../core/services/register.service';
 import { AuthService } from '../../core/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { fromEvent } from 'rxjs';
+import amplitude from 'amplitude-js';
 
 declare function iinCheck(iin:any):any;
 
@@ -30,6 +31,9 @@ export class RegisterComponent implements OnInit {
 
   code:any = null;
   showSMSModal:boolean = false;
+
+  showSmsCode:boolean = false;
+  // msisdn:any = null;
 
   signUpShow:boolean = false;
   singUpForm:any = {
@@ -58,6 +62,7 @@ export class RegisterComponent implements OnInit {
     this.route.queryParams.subscribe(queryParams => {
       this.qparams = queryParams;
     });
+    amplitude.getInstance().logEvent("started registration");
   }
 
   public loadScript(url: string) {
@@ -86,6 +91,7 @@ export class RegisterComponent implements OnInit {
     this.disabled = true;
     this.registerService.signUp(this.singUpForm).subscribe(res => {
       if(res){
+        amplitude.getInstance().logEvent("registered");
         this.auth.saveUser(res);
         this.router.navigate(['/profile/verilive'], { queryParams: {...this.qparams}})
       }
@@ -96,6 +102,7 @@ export class RegisterComponent implements OnInit {
   }
 
   checkUser(){
+    amplitude.getInstance().logEvent("clicked register");
     this.registerService.checkUser(this.registerForm.msisdn).subscribe(res => {
       if(!res.exist){
         this.registerUser()
@@ -114,6 +121,7 @@ export class RegisterComponent implements OnInit {
       }
     }
     this.registerService.sendOTP(this.registerForm).subscribe(res => {
+      amplitude.getInstance().logEvent("sms sent");
       this.getConsent();
     })
   }
@@ -132,15 +140,35 @@ export class RegisterComponent implements OnInit {
         code: this.code,
         msisdn: this.registerForm.msisdn
       }
-      this.registerService.checkOTP(data).subscribe(res => {
-        this.showSMSModal = false;
-        this.signUpShow = true;
-      })
+
+      this.registerService.checkOTP(data).subscribe(
+        res => {
+          this.showSMSModal = false;
+          this.signUpShow = true;
+          amplitude.getInstance().logEvent("sms entered", {"success": true})
+        },
+        error => {
+          amplitude.getInstance().logEvent("sms entered", {"success": false})
+        }
+      )
     }
   }
 
   openFile(){
     window.open(this.file);
+  }
+
+  signIn() {
+    let eventProperties = {
+      "position": 2
+    };
+    amplitude.getInstance().logEvent("clicked sign in", eventProperties);
+  }
+  sendSms() {
+    this.auth.sendSms({msisdn:this.registerForm.msisdn}).subscribe(res => {
+      amplitude.getInstance().logEvent("sms resent");
+      this.showSmsCode = true;
+    })
   }
 
 }

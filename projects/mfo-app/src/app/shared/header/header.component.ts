@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import amplitude from 'amplitude-js';
 import { AuthService } from '../../core/services/auth.service';
 
 @Component({
@@ -38,7 +39,6 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-
   ngOnInit(): void {
     this.checkLogin();
   }
@@ -66,4 +66,34 @@ export class HeaderComponent implements OnInit {
     this.showNav = false;
   }
 
+  takeLoan() {
+    this.headerModal = true
+    let eventProperties = {
+      "position": 1
+    };
+    amplitude.getInstance().logEvent("clicked get loan", eventProperties)
+  }
+
+  howToGet() {
+    amplitude.getInstance().logEvent("clicked how to get")
+  }
+
+  howToPay() {
+    amplitude.getInstance().logEvent("clicked how to repay")
+  }
+
+  conditions() {
+    amplitude.getInstance().logEvent("clicked show conditions")
+  }
+
+  signIn() {
+    let eventProperties = {
+      "position": 2
+    }
+    amplitude.getInstance().logEvent("clicked sign in", eventProperties);
+  }
+
+  cabinet() {
+    amplitude.getInstance().logEvent("clicked cabinet")
+  }
 }

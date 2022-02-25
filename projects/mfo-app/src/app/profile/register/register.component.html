@@ -35,7 +35,11 @@
 
       <div class="text-center">
         <p>Уже проходили регистрацию?</p>
-        <a [routerLink]="['/profile/login']">Авторизоваться</a>
+          <a [routerLink]="['/profile/login']">
+            <div (click)="signIn()">
+              Авторизоваться
+            </div>
+          </a>
       </div>
     </form>
   </div>
@@ -75,15 +79,13 @@
         <div class="form-content">
           <p>Ознакомлен и даю свое согласие на</p>
           <div class="file" (click)="openFile()"><img src="assets/img/dot.svg" alt="">сбор и обработку персональных данных, <br>предоставление информации о них в кредитные бюро, <br>выдачу кредитного отчета из кредитного бюро</div>
-          <!-- <div class="file" (click)="openFile()"><img src="assets/img/dot.svg" alt="">предоставление информации о них в кредитные бюро</div>
-          <div class="file" (click)="openFile()"><img src="assets/img/dot.svg" alt="">выдачу кредитного отчета из кредитного бюро</div> -->
           <div class="text-center">
             <h3>SMS-код</h3>
             <div class="label-input">
               <input type="tel" name="code" [imask]="{mask: '000000',lazy: false, placeholderChar: '-'}" [(ngModel)]="code" (ngModelChange)="sendCode()">
             </div>
           </div>
-          <div class="resend-pass">Отправить повторно</div>
+          <div class="resend-pass" (click)="sendSms()">Отправить повторно</div>
         </div>
       </form>
     </div>

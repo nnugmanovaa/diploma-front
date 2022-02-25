@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import amplitude from "amplitude-js";
+import { environment } from '../environments/environment';
+
+declare let gtag: Function;
 import {
   trigger,
   state,
@@ -25,20 +30,34 @@ import {
     ])
   ]
 })
-export class AppComponent {
+
+export class AppComponent implements OnInit {
   media: boolean = false;
   img: string = "call-ico.svg";
-
   title = 'mfo-app';
-
-  constructor() { }
 
   get stateName() {
     return this.media ? 'show' : 'hide'
   }
-
   toggle() {
     this.media = !this.media;
     this.img = this.media ? 'close-button.png' : 'call-ico.svg';
+
+  }
+
+  constructor(public router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        gtag('config', 'UA-174917766-1',
+          {
+            'page_path': event.urlAfterRedirects
+          }
+        );
+      }
+    }
+    )
+  }
+  ngOnInit(): void {
+    amplitude.getInstance().init(environment.amplitude_api_key);
   }
 }

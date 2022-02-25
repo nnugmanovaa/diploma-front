@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import amplitude from 'amplitude-js';
 
 @Component({
   selector: 'mfo-cabinet',
@@ -12,4 +13,10 @@ export class CabinetComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  payLoan() {
+    let eventProperties = {
+      "position": 2
+    };
+    amplitude.getInstance().logEvent("clicked pay loan", eventProperties)
+  }
 }

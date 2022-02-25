@@ -3,13 +3,25 @@
     <div class="ht">
       <ul class="ht-nav" *ngIf="!this.authService.isLoggedIn">
         <li>
-          <a [routerLink]="['/']" fragment="Checkout">Как получить</a>
+            <a [routerLink]="['/']" fragment="Checkout">
+              <div (click)="howToGet()">
+                Как получить
+              </div>
+            </a>
         </li>
         <li>
-          <a [routerLink]="['/']" fragment="Repay">Как погасить</a>
+            <a [routerLink]="['/']" fragment="Repay">
+              <div (click)="howToPay()">
+                Как погасить
+              </div>
+            </a>
         </li>
         <li>
-          <a [routerLink]="['/']" fragment="Conditions">Условия</a>
+            <a [routerLink]="['/']" fragment="Conditions">
+              <div (click)="conditions()">
+                Условия
+              </div>
+            </a>
         </li>
       </ul>
       <ul class="ht-nav ht-cabinet-nav" *ngIf="this.authService.isLoggedIn">
@@ -101,9 +113,11 @@
       </a>
       <div class="hb-btns">
         <!-- <a [routerLink]="['/payment']" class="hb-btn hb-pay desctop">Оплатить</a> -->
-        <div class="hb-btn hb-pay" (click)="headerModal = true">Получить</div>
+        <div class="hb-btn hb-pay" (click)="takeLoan()">Получить</div>
         <a [routerLink]="['/cabinet']" class="hb-btn hb-login" *ngIf="this.authService.isLoggedIn">Кабинет</a>
-        <a [routerLink]="['/profile/login']" class="hb-btn hb-login" *ngIf="!this.authService.isLoggedIn">Войти</a>
+        <div (click)="signIn()">
+          <a [routerLink]="['/profile/login']" class="hb-btn hb-login" *ngIf="!this.authService.isLoggedIn">Войти</a>
+        </div>
       </div>
     </div>
   </div>

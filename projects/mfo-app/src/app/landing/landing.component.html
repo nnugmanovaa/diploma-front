@@ -103,7 +103,7 @@
         <span>1 минута</span>
       </li>
     </ul>
-    <div class="btn" (click)="modal = true;">Оформить займ</div>
+    <div class="btn" (click)="takeLoan();">Оформить займ</div>
   </div>
 </section>
 
@@ -188,7 +188,8 @@
       <img src="assets/img/rep1.png" alt="получить займ">
     </picture>
   </div>
-  <a [routerLink]="['/payment']" class="btn">Оплатить</a>
+  <button (click)="payLoan()" class="btn" [routerLink]="['/payment']">Оплатить</button>
+  <!-- <a [routerLink]="['/payment']" class="btn">Оплатить</a> -->
 </section>
 
 <section class="conditions" id="Conditions">

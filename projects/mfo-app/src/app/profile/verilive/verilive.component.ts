@@ -4,6 +4,7 @@ import { RegisterService } from '../../core/services/register.service';
 import { AuthService } from '../../core/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { fromEvent } from 'rxjs';
+import amplitude from 'amplitude-js';
 
 declare function loadVideo():any;
 
@@ -47,7 +48,10 @@ export class VeriliveComponent implements OnInit {
     this.loadScript('https://s3.eu-central-1.amazonaws.com/verilive-statics.verigram.ai/verilive.js');
     this.loadScript('../assets/js/verilive.js');
     fromEvent(window,'build').subscribe((event:any)=>{
-       this.showSignUP()
+       this.showSignUP(),
+        (error: any) => {
+          console.log("error");
+        } 
     })
   }
 
@@ -72,6 +76,7 @@ export class VeriliveComponent implements OnInit {
 
 
   showSignUP(){
+    // console.log("123");
     let image = (<HTMLInputElement>document.getElementById("results")).value;
     if(!this.requestId){
       return;
@@ -79,6 +84,7 @@ export class VeriliveComponent implements OnInit {
     this.disabled = true;
     this.registerService.sendImage(this.requestId, image).subscribe(res => {
       if(res.identified){
+        amplitude.getInstance().logEvent("finished identification", {"success": true})
         this.changeStatus();
         this.getPersData();
         this.disabled = false;
@@ -89,6 +95,7 @@ export class VeriliveComponent implements OnInit {
     }, error => {
       this.registerService.resendImage(this.requestId, image).subscribe(res => {
         if(res.identified){
+          amplitude.getInstance().logEvent("finished identification", {"success": true})
           this.changeStatus();
           this.getPersData();
           this.disabled = false;
@@ -97,6 +104,7 @@ export class VeriliveComponent implements OnInit {
           this.toastr.warning('Пожалуйста попробуйте еще раз пройти идентификацию лица', '');
         }
       }, error => {
+        amplitude.getInstance().logEvent("finished identification", {"success": false})
         this.disabled = false;
       })
     })
@@ -110,6 +118,7 @@ export class VeriliveComponent implements OnInit {
   }
 
   veriLive(){
+    amplitude.getInstance().logEvent("started identification");
     this.verifaceLoad = false;
   }
 

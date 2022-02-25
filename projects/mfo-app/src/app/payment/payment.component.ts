@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/services/auth.service'
 import { CabinetService } from '../core/services/cabinet.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import amplitude from 'amplitude-js';
 
 @Component({
   selector: 'mfo-payment',
@@ -82,5 +83,13 @@ export class PaymentComponent implements OnInit {
     }else{
       this.payForm.amount = String(this.payForm.amountRemain);
     }
+  }
+  tryPayLoan() {
+    let eventProperties = {
+      "amount": this.payForm.amount,
+      "contract number": this.payForm.contractNumber,
+      "method": this.payForm.loanRepayType
+    }
+    amplitude.getInstance().logEvent("tried pay loan", eventProperties);    
   }
 }
