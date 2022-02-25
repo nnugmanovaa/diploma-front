@@ -51,16 +51,22 @@ export class PaymentComponent implements OnInit {
   }
 
   getActiveLoan(){
-    this.cabinet.getSchedule().subscribe(res => {
-      this.payForm.contractNumber = res.orderDetailsSchedule?.contract;
-      this.payForm.contractDate = res.orderDetailsSchedule?.contractDate;
-      this.payForm.monthPayment = res.orderDetailsSchedule?.monthPayment;
-      this.payForm.amountRemain = res.orderDetailsSchedule?.amountRemain;
-      this.payForm.amount = String(res.orderDetailsSchedule?.monthPayment);
-    })
+    // this.cabinet.getSchedule().subscribe(res => {
+    //   this.payForm.contractNumber = res.orderDetailsSchedule?.contract;
+    //   this.payForm.contractDate = res.orderDetailsSchedule?.contractDate;
+    //   this.payForm.monthPayment = res.orderDetailsSchedule?.monthPayment;
+    //   this.payForm.amountRemain = res.orderDetailsSchedule?.amountRemain;
+    //   this.payForm.amount = String(res.orderDetailsSchedule?.monthPayment);
+    // })
 
     this.auth.accountLoans({iin: this.payForm.clientRef}).subscribe(res => {
-
+      if(res.loans.length){
+        this.payForm.contractNumber = res.loans[0].contractNumber;
+        this.payForm.contractDate = res.loans[0].contractDate;
+        this.payForm.monthPayment = res.loans[0].plannedPaymentAmount;
+        this.payForm.amountRemain = res.loans[0].amountOfDebt;
+        this.payForm.amount = String(res.loans[0].plannedPaymentAmount);
+      }
     })
   }
 
