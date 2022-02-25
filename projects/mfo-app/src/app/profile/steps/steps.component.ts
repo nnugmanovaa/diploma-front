@@ -58,7 +58,7 @@ export class StepsComponent implements OnInit {
         "employer": null,
         "monthlyIncome": "",
         "additionalMonthlyIncome": "",
-        "workExperience": "",
+        "workExperience": null,
         "workPhoneNum": null,
         "maritalStatus": "",
         "gender": "",
@@ -423,10 +423,10 @@ export class StepsComponent implements OnInit {
       this.data.loanAmount = Number(this.data.loanAmount);
     }
     if(this.data.personalInfo.workExperience){
-      this.data.personalInfo.workExperience = String(this.data.personalInfo.workExperience);
+      this.data.personalInfo.workExperience = Number(this.data.personalInfo.workExperience);
     }
     if(this.data.personalInfo.numberOfKids){
-      this.data.personalInfo.numberOfKids = String(this.data.personalInfo.numberOfKids);
+      this.data.personalInfo.numberOfKids = Number(this.data.personalInfo.numberOfKids);
     }
     this.strokeLoading();
 
