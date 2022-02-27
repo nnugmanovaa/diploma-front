@@ -35,6 +35,6 @@
     <p>Ежемесячный платеж</p>
     <b>{{ paymentPerMonth | currency: 'CLP':'₸' }}</b>
   </div>
-  <button class="submit-button" type="submit">Получить</button>
+  <button id="theButton" class="submit-button" type="submit" (click)="validateTime()">Получить</button>
   <p class="small-text">*ГЭСВ не превышает 56%</p>
 </form>

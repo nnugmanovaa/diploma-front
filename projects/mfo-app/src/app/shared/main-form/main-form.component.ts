@@ -10,9 +10,9 @@ import { AuthService } from '../../core/services/auth.service';
 })
 export class MainFormComponent implements OnInit {
 
-  form:any = {
+  form: any = {
     period: 7,
-    amount:325000,
+    amount: 325000,
     type: 'ANNUITY_PAYMENTS'
   }
   value: number = 6;
@@ -23,7 +23,7 @@ export class MainFormComponent implements OnInit {
     minLimit: 0
   };
 
-  priceOptions:Options = {
+  priceOptions: Options = {
     floor: 150000,
     minLimit: 150000,
     ceil: 500000,
@@ -32,25 +32,45 @@ export class MainFormComponent implements OnInit {
     showTicks: true,
   }
 
-  paymentPerMonth:any = null;
+  paymentPerMonth: any = null;
+
+  today = new Date();
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              public authService:AuthService) { }
+    private router: Router,
+    public authService: AuthService) { }
 
   ngOnInit(): void {
     this.calculateForm();
   }
 
-  calculateForm(){
+  // currentTime() {
+  //   var time = this.today.getHours() + ":" + this.today.getMinutes() + ":" + this.today.getSeconds();
+  //   console.log(this.today.getHours());
+  // }
+
+  validateTime() {
+    if (this.today.getHours() > 22 || this.today.getHours() <= 7) {
+      alert("Сервис недоступен в данный момент, попробуйте ещё раз в 08:00 утра. Спасибо, что используете наш сервис.");
+      this.disableButton();
+    } else {
+      this.createRequest();
+    }
+  }
+
+  disableButton() {
+    (document.getElementById("theButton") as HTMLButtonElement).disabled = true;
+  }
+
+  calculateForm() {
     this.paymentPerMonth = this.getPayment(this.form.amount, this.form.period, 0.38)
   }
 
-  getPayment(sum:any, period:any, rate:any) {
-    console.log(sum, period)
+  getPayment(sum: any, period: any, rate: any) {
+    // console.log(sum, period)
     var i,
-        koef,
-        result;
+      koef,
+      result;
     i = (rate / 12);
 
     koef = (i * (Math.pow(1 + i, period))) / (Math.pow(1 + i, period) - 1);
@@ -58,22 +78,22 @@ export class MainFormComponent implements OnInit {
     return result.toFixed();
   };
 
-  createRequest(){
-    if(this.authService.isLoggedIn){
-      if(this.authService.getUser.identificationStatus !== 'FULL_IDENTIFIED'){
+  createRequest() {
+    if (this.authService.isLoggedIn) {
+      if (this.authService.getUser.identificationStatus !== 'FULL_IDENTIFIED') {
         this.router.navigate(
           ['/profile/verilive'],
           {
             queryParams: this.form
           });
-      }else{
+      } else {
         this.router.navigate(
           ['/profile/steps'],
           {
             queryParams: this.form
           });
       }
-    }else{
+    } else {
       this.router.navigate(
         ['/profile/register'],
         {
@@ -81,6 +101,5 @@ export class MainFormComponent implements OnInit {
         });
     }
   }
-
 
 }

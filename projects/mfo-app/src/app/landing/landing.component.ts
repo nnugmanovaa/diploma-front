@@ -7,9 +7,10 @@ import amplitude from "amplitude-js";
   styleUrls: ['./landing.component.scss']
 })
 export class LandingComponent implements OnInit {
-  time:any = null;
-  show:any = {};
-  modal:boolean = false;
+  time: any = null;
+  show: any = {};
+  modal: boolean = false;
+  today = new Date();
   constructor() { }
 
   ngOnInit(): void {
@@ -17,20 +18,39 @@ export class LandingComponent implements OnInit {
     amplitude.getInstance().logEvent("viewed landing");
   }
 
-  getMainTime(){
+  getMainTime() {
     let oldDateObj = new Date();
     let newDateObj = new Date();
     newDateObj.setTime(oldDateObj.getTime() + (10 * 60 * 1000));
     this.time = ("0" + newDateObj.getHours()).slice(-2) + ':' + ("0" + newDateObj.getMinutes()).slice(-2);
   }
-  
-  takeLoan() {
-    this.modal = true
-    let eventProperties = {
-      "position": 2
-    };
-    amplitude.getInstance().logEvent("clicked get loan", eventProperties)
+
+  currentTime() {
+    var time = this.today.getHours() + ":" + this.today.getMinutes() + ":" + this.today.getSeconds();
+    console.log(this.today.getHours());
   }
+
+  validateTime() {
+    if (this.today.getHours() > 22 || this.today.getHours() <= 7) {
+      alert("Сервис недоступен в данный момент, попробуйте ещё раз в 08:00 утра. Спасибо, что используете наш сервис.");
+      this.modal = false;
+    } else {
+      this.takeLoan();
+    }
+  }
+
+  takeLoan() {
+    if (this.today.getHours() > 22 || this.today.getHours() <= 7) {
+      this.modal = false;
+    } else {
+      this.modal = true
+      let eventProperties = {
+        "position": 2
+      };
+      amplitude.getInstance().logEvent("clicked get loan", eventProperties)
+    }
+  }
+
 
   payLoan() {
     let eventProperties = {
