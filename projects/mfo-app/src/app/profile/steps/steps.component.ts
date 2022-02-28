@@ -295,9 +295,9 @@ export class StepsComponent implements OnInit {
       this.data.personalInfo.nationalIdDocument.issuedDate = dinfo.nationalIdIssueDate;
       this.data.personalInfo.nationalIdDocument.expireDate = dinfo.nationalIdValidDate;
       if (dinfo.iin.charAt(6) == '1' || '3' || '5') {
-        this.data.personalInfo.gender = 'male';
+        this.data.personalInfo.gender = 'Мужской';
       } else {
-        this.data.personalInfo.gender = 'female';
+        this.data.personalInfo.gender = 'Женский';
       }
       // this.data.personalInfo.gender = dinfo.gender;
       this.data.personalInfo.registrationAddress.street = dinfo?.registrationAddress?.street;
@@ -505,6 +505,7 @@ export class StepsComponent implements OnInit {
     this.userInfo.passportInfoDto.nationalIdIssuer = this.data.personalInfo?.nationalIdDocument.issuedBy;
     this.userInfo.passportInfoDto.nationalIdIssueDate = this.data.personalInfo?.nationalIdDocument.issuedDate;
     this.userInfo.passportInfoDto.nationalIdValidDate = this.data.personalInfo?.nationalIdDocument.expireDate;
+    this.userInfo.passportInfoDto.gender = this.data.personalInfo?.gender;
 
     this.authService.CreateUserPasport(this.userInfo.passportInfoDto).subscribe(res => {
 
