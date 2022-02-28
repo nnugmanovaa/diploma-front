@@ -294,7 +294,7 @@ export class StepsComponent implements OnInit {
       this.data.personalInfo.nationalIdDocument.issuedBy = dinfo.nationalIdIssuer;
       this.data.personalInfo.nationalIdDocument.issuedDate = dinfo.nationalIdIssueDate;
       this.data.personalInfo.nationalIdDocument.expireDate = dinfo.nationalIdValidDate;
-      if (dinfo.iin.charAt(6) == '1' || '3' || '5') {
+      if ((dinfo.iin.charAt(6) == '1') || (dinfo.iin.charAt(6) == '3') || (dinfo.iin.charAt(6) == '5')) {
         this.data.personalInfo.gender = 'Мужской';
       } else {
         this.data.personalInfo.gender = 'Женский';
@@ -308,7 +308,6 @@ export class StepsComponent implements OnInit {
   }
 
   fillAddress(address:any){
-    // console.log(address)
     if(!address){
       return
     }
