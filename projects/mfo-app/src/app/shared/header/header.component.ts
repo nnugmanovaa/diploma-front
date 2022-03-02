@@ -61,6 +61,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout(){
+    amplitude.getInstance().logEvent("signed out");
     this.authService.logout();
     this.user = null;
     this.showNav = false;
@@ -88,12 +89,12 @@ export class HeaderComponent implements OnInit {
 
   signIn() {
     let eventProperties = {
-      "position": 2
+      "position": 1
     }
     amplitude.getInstance().logEvent("clicked sign in", eventProperties);
   }
 
   cabinet() {
-    amplitude.getInstance().logEvent("clicked cabinet")
+    amplitude.getInstance().logEvent("clicked cabinet");
   }
 }

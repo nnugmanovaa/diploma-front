@@ -12,7 +12,11 @@
         <label for="">Пароль:</label>
         <input type="password" name="password" required [(ngModel)]="loginForm.password">
       </div>
-      <a class="reset-pass-btn" [routerLink]="['/profile/forgot-pass']">Забыли пароль?</a>
+      <a class="reset-pass-btn" [routerLink]="['/profile/forgot-pass']">
+        <div (click)="forgetPass()">
+          Забыли пароль?
+        </div>
+      </a>
 
       <button class="btn" type="submit">Войти</button>
     </form>

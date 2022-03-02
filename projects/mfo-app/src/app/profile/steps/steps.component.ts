@@ -234,6 +234,7 @@ export class StepsComponent implements OnInit {
         this.data.personalInfo.nationalIdDocument.issuedBy = this.userInfo.passportInfoDto.nationalIdIssuer;
         this.data.personalInfo.nationalIdDocument.issuedDate = this.userInfo.passportInfoDto.nationalIdIssueDate;
         this.data.personalInfo.nationalIdDocument.expireDate = this.userInfo.passportInfoDto.nationalIdValidDate;
+        this.data.personalInfo.gender = this.userInfo.passportInfoDto.gender;
       }
     })
   }
@@ -315,7 +316,7 @@ export class StepsComponent implements OnInit {
     if(selected){
       this.data.personalInfo.registrationAddress.region = selected.code;
       this.data.personalInfo.registrationAddress.city = (address.region?.charAt(0) + address.region?.slice(1).toLowerCase()).replace('р-н','район');
-      console.log(this.data.personalInfo.registrationAddress.city)
+      // console.log(this.data.personalInfo.registrationAddress.city)
       this.getDistrictById();
     }
   }
@@ -324,6 +325,7 @@ export class StepsComponent implements OnInit {
     this.stepService.getLocations().subscribe(res => {
       this.districts = res;
       if(!this.data.preScoreRequestId){
+        // console.log("hhhhhhhhh")
         this.getPersonalData();
       }else{
         this.fillData();
@@ -433,6 +435,7 @@ export class StepsComponent implements OnInit {
       this.data.personalInfo.residenceAddress = this.data.personalInfo.registrationAddress
     }
 
+    // console.log("this data 1:", this.data);
     if(!this.data.preScoreRequestId){
       this.createRequest();
     }else{
@@ -452,6 +455,7 @@ export class StepsComponent implements OnInit {
     var effectiveRate = 54.9
     var ownScore: null = null
     var rejectText: null = null
+    // console.log("this.data", this.data);
     this.stepService.submitStep(this.data).subscribe(res => {
       scoringStatus = res?.result
       decil = res.scoringInfo.decil
@@ -465,7 +469,7 @@ export class StepsComponent implements OnInit {
         this.successResult = true;
         this.loanID = res.orderId;
         this.loading = false;
-        console.log("asd", rejectText)
+        // console.log("asd", rejectText)
         amplitude.getInstance().logEvent("finished scoring", {"status": scoringStatus, "rejectText": rejectText, "decil": decil, "kdn": kdn, "newKdn": newKdn, "effective rate": effectiveRate, "ownScore": ownScore})
       }else if(res?.result == 'ALTERNATIVE'){
         this.resultShow = true;
@@ -504,6 +508,7 @@ export class StepsComponent implements OnInit {
     this.userInfo.passportInfoDto.nationalIdIssuer = this.data.personalInfo?.nationalIdDocument.issuedBy;
     this.userInfo.passportInfoDto.nationalIdIssueDate = this.data.personalInfo?.nationalIdDocument.issuedDate;
     this.userInfo.passportInfoDto.nationalIdValidDate = this.data.personalInfo?.nationalIdDocument.expireDate;
+    // console.log(this.data.personalInfo?.gender)
     this.userInfo.passportInfoDto.gender = this.data.personalInfo?.gender;
 
     this.authService.CreateUserPasport(this.userInfo.passportInfoDto).subscribe(res => {
