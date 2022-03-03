@@ -18,6 +18,8 @@ export class HeaderComponent implements OnInit {
   showNav:boolean = false;
   headerModal:boolean = false;
 
+  today = new Date();
+
   constructor(private router: Router,
               public authService:AuthService) {
     router.events.forEach((event) => {
@@ -41,6 +43,15 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkLogin();
+  }
+
+  validateTime() {
+    if (this.today.getHours() > 22 || this.today.getHours() <= 7) {
+      alert("Сервис недоступен в данный момент, попробуйте ещё раз в 08:00 утра. Спасибо, что используете наш сервис.");
+      this.headerModal = false;
+    } else {
+      this.takeLoan();
+    }
   }
 
   checkLogin(){
