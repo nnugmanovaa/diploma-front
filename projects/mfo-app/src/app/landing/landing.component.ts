@@ -32,7 +32,7 @@ export class LandingComponent implements OnInit {
 
   validateTime() {
     if (this.today.getHours() >= 24 || this.today.getHours() <= 6) {
-      alert("Сервис недоступен в данный момент, попробуйте ещё раз в 08:00 утра. Спасибо, что используете наш сервис.");
+      alert("Сервис недоступен в данный момент, попробуйте ещё раз в 06:00 утра. Спасибо, что используете наш сервис.");
       this.modal = false;
     } else {
       this.takeLoan();
