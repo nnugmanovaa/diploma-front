@@ -12,7 +12,7 @@ export class MainFormComponent implements OnInit {
 
   form: any = {
     period: 7,
-    amount: 325000,
+    amount: 275000,
     type: 'ANNUITY_PAYMENTS'
   }
   value: number = 6;
@@ -26,7 +26,7 @@ export class MainFormComponent implements OnInit {
   priceOptions: Options = {
     floor: 150000,
     minLimit: 150000,
-    ceil: 500000,
+    ceil: 400000,
     step: 5000,
     showSelectionBar: true,
     showTicks: true,
@@ -50,7 +50,7 @@ export class MainFormComponent implements OnInit {
   // }
 
   validateTime() {
-    if (this.today.getHours() > 22 || this.today.getHours() <= 7) {
+    if (this.today.getHours() >= 24 || this.today.getHours() <= 6) {
       alert("Сервис недоступен в данный момент, попробуйте ещё раз в 08:00 утра. Спасибо, что используете наш сервис.");
       this.disableButton();
     } else {
