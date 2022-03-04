@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
   loginUser(){
     this.auth.login(this.loginForm).subscribe(res => {
       if(res){
+        amplitude.getInstance().logEvent("signed in");
         this.auth.saveUser(res);
         this.router.navigateByUrl(this.returnUrl);
       }

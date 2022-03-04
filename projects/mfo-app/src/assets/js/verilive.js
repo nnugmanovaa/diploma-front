@@ -113,7 +113,7 @@ const url = "https://services.verigram.ai:8443/verilive/verilive"
     }
 
     function onInitButtonClick() {
-        console.log(verilive.started)
+        // console.log(verilive.started)
         // if(verilive.started){
           verilive.dispose();
         // }

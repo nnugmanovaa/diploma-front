@@ -76,7 +76,6 @@ export class VeriliveComponent implements OnInit {
 
 
   showSignUP(){
-    // console.log("123");
     let image = (<HTMLInputElement>document.getElementById("results")).value;
     if(!this.requestId){
       return;

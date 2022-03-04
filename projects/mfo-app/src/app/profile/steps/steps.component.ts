@@ -373,11 +373,13 @@ export class StepsComponent implements OnInit {
   }
 
   setPasportData(){
+    amplitude.getInstance().logEvent("confirmed passport details");
     this.step = 2;
     this.createPasportInfo();
   }
 
   setAdressData(){
+    amplitude.getInstance().logEvent("entered address details");
     this.step = 3
     this.createAdressInfo();
   }
@@ -417,6 +419,7 @@ export class StepsComponent implements OnInit {
   }
 
   finishStep(){
+    amplitude.getInstance().logEvent("entered job details")
     if(this.data.loanPeriod){
       this.data.loanPeriod = Number(this.data.loanPeriod);
     }
@@ -437,8 +440,10 @@ export class StepsComponent implements OnInit {
 
     // console.log("this data 1:", this.data);
     if(!this.data.preScoreRequestId){
+      amplitude.getInstance().logEvent("started scoring process", {"first time": false})
       this.createRequest();
     }else{
+      amplitude.getInstance().logEvent("started scoring process", {"first time": true})
       this.submitAll();
     }
 
@@ -463,6 +468,7 @@ export class StepsComponent implements OnInit {
       newKdn = res.scoringInfo.newKdn
       ownScore = res.scoringInfo.ownScore
       rejectText = res.rejectText
+      console.log(newKdn)
       clearInterval(this.intervalId);
       if(res?.result == 'APPROVED'){
         this.resultShow = true;

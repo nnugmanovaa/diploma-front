@@ -43,6 +43,7 @@ export class ForgotPassComponent implements OnInit {
     this.auth.sendSmsCode(data).subscribe(res => {
       if(res){
         amplitude.getInstance().logEvent("sms entered", {"success": true})
+        amplitude.getInstance().logEvent("restored password")
         this.auth.saveUser(res);
         this.router.navigate(['/cabinet'])
       }
