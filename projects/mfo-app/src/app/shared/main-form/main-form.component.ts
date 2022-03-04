@@ -11,14 +11,14 @@ import { AuthService } from '../../core/services/auth.service';
 export class MainFormComponent implements OnInit {
 
   form: any = {
-    period: 7,
-    amount: 275000,
+    period: 4,
+    amount: 175000,
     type: 'ANNUITY_PAYMENTS'
   }
   value: number = 6;
   monthOptions: Options = {
     floor: 2,
-    ceil: 12,
+    ceil: 6,
     showSelectionBar: true,
     minLimit: 0
   };
@@ -26,7 +26,7 @@ export class MainFormComponent implements OnInit {
   priceOptions: Options = {
     floor: 150000,
     minLimit: 150000,
-    ceil: 400000,
+    ceil: 200000,
     step: 5000,
     showSelectionBar: true,
     showTicks: true,
@@ -51,7 +51,7 @@ export class MainFormComponent implements OnInit {
 
   validateTime() {
     if (this.today.getHours() >= 24 || this.today.getHours() <= 6) {
-      alert("Сервис недоступен в данный момент, попробуйте ещё раз в 06:00 утра. Спасибо, что используете наш сервис.");
+      alert("Сервис недоступен в данный момент, попробуйте ещё раз в 06:00. Спасибо, что используете наш сервис.");
       this.disableButton();
     } else {
       this.createRequest();
