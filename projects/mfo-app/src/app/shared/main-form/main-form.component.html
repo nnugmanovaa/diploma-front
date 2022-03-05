@@ -8,8 +8,8 @@
     <ngx-slider (userChange)="calculateForm()" [(value)]="form.period" [options]="monthOptions"></ngx-slider>
     <div class="month-bottom">
       <p (click)="form.period = 2;calculateForm()">от 2 месяцев</p>
-      <p (click)="form.period = 4;calculateForm()">4 месяца</p>
-      <p (click)="form.period = 6;calculateForm()">6 месяцев</p>
+      <p (click)="form.period = 4;calculateForm()">7 месяца</p>
+      <p (click)="form.period = 6;calculateForm()">12 месяцев</p>
     </div>
   </div>
   <div class="custom-slider">
@@ -20,8 +20,8 @@
     <ngx-slider (userChange)="calculateForm()" [(value)]="form.amount" [options]="priceOptions"></ngx-slider>
     <div class="month-bottom">
       <p (click)="form.amount = 150000;calculateForm()" style="min-width: 80px;">150 000 ₸</p>
-      <p (click)="form.amount = 175000;calculateForm()">175 000 ₸</p>
-      <p (click)="form.amount = 200000;calculateForm()">до 200 000 ₸</p>
+      <p (click)="form.amount = 175000;calculateForm()">325 000 ₸</p>
+      <p (click)="form.amount = 200000;calculateForm()">до 500 000 ₸</p>
     </div>
   </div>
   <div class="form-label">
