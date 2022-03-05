@@ -115,13 +115,6 @@
       </a>
       <div class="hb-btns">
         <!-- <a [routerLink]="['/payment']" class="hb-btn hb-pay desctop">Оплатить</a> -->
-<<<<<<< Updated upstream
-        <div class="hb-btn hb-pay" (click)="takeLoan()" (click)="validateTime()">Получить</div>
-        <a [routerLink]="['/cabinet']" class="hb-btn hb-login" *ngIf="this.authService.isLoggedIn">Кабинет</a>
-        <div (click)="signIn()">
-          <a [routerLink]="['/profile/login']" class="hb-btn hb-login" *ngIf="!this.authService.isLoggedIn">Войти</a>
-        </div>
-=======
         <div class="hb-btn hb-pay" (click)="takeLoan()">Получить</div>
         <a [routerLink]="['/cabinet']" class="hb-btn hb-login" *ngIf="this.authService.isLoggedIn">Кабинет</a>    
           <a [routerLink]="['/profile/login']" class="hb-btn hb-login" *ngIf="!this.authService.isLoggedIn">
@@ -129,7 +122,6 @@
               Войти
             </div>
           </a>
->>>>>>> Stashed changes
       </div>
     </div>
   </div>
