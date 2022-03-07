@@ -325,9 +325,8 @@ export class StepsComponent implements OnInit {
     this.stepService.getLocations().subscribe(res => {
       this.districts = res;
       if(!this.data.preScoreRequestId){
-        // console.log("hhhhhhhhh")
         this.getPersonalData();
-      }else{
+      } else {
         this.fillData();
       }
     })
@@ -440,10 +439,10 @@ export class StepsComponent implements OnInit {
 
     // console.log("this data 1:", this.data);
     if(!this.data.preScoreRequestId){
-      amplitude.getInstance().logEvent("started scoring process", {"first time": false})
+      amplitude.getInstance().logEvent("started scoring process", {"first time": true})
       this.createRequest();
     }else{
-      amplitude.getInstance().logEvent("started scoring process", {"first time": true})
+      amplitude.getInstance().logEvent("started scoring process", {"first time": false})
       this.submitAll();
     }
 
@@ -514,7 +513,14 @@ export class StepsComponent implements OnInit {
     this.userInfo.passportInfoDto.nationalIdIssuer = this.data.personalInfo?.nationalIdDocument.issuedBy;
     this.userInfo.passportInfoDto.nationalIdIssueDate = this.data.personalInfo?.nationalIdDocument.issuedDate;
     this.userInfo.passportInfoDto.nationalIdValidDate = this.data.personalInfo?.nationalIdDocument.expireDate;
-    // console.log(this.data.personalInfo?.gender)
+    if (this.data.personalInfo?.gender == null) {
+      if ((this.userInfo.passportInfoDto.iin.charAt(6) == '1') || (this.userInfo.passportInfoDto.iin.charAt(6) == '3') || (this.userInfo.passportInfoDto.iin.charAt(6) == '5')) {
+        this.data.personalInfo.gender = 'Мужской';
+      } else {
+        this.data.personalInfo.gender = 'Женский';
+      }
+
+    }
     this.userInfo.passportInfoDto.gender = this.data.personalInfo?.gender;
 
     this.authService.CreateUserPasport(this.userInfo.passportInfoDto).subscribe(res => {
