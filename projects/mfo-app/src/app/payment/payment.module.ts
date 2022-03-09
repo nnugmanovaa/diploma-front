@@ -9,9 +9,12 @@ import { IMaskModule } from 'angular-imask';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { TRANSLOCO_SCOPE, TranslocoModule } from '@ngneat/transloco';
+
 @NgModule({
   declarations: [PaymentComponent],
   imports: [
+    TranslocoModule,
     CommonModule,
     PaymentRoutingModule,
     IMaskModule,

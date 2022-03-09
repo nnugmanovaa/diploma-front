@@ -1,34 +1,36 @@
-<div class="container">
-  <div class="sidebar">
-    <ul>
-      <li>
-        <a [routerLink]="['/cabinet/cashed-out']" routerLinkActive="active">Открытый микрокредит</a>
-      </li>
-      <li>
-        <a [routerLink]="['/cabinet/history']" routerLinkActive="active">История микрокредитов</a>
-      </li>
-      <li>
-        <a [routerLink]="['/cabinet/change-password']" routerLinkActive="active">Смена пароля</a>
-      </li>
-      <li>
-        <a [routerLink]="['/cabinet/contacts']" routerLinkActive="active">Связаться с нами</a>
-      </li>
-      <li>
-        <a [routerLink]="['/cabinet/payment-types']" routerLinkActive="active">Способы погашения</a>
-      </li>
-      <li>
-        <a [routerLink]="['/cabinet/deferred-payment']" routerLinkActive="active">Продление микрокредита</a>
-      </li><li>
-        <!-- <a [routerLink]="['/cabinet/settings']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Настройки профиля </a> -->
-        <a [routerLink]="['/cabinet/settings']" routerLinkActive="active">Настройки профиля </a>
-      </li>
-    </ul>
-    <div class="text-center">
-      <button (click)="payLoan()" class="btn-custom" [routerLink]="['/payment']">Оплатить<br>микрокредит</button>
+<ng-container *transloco="let text; read: 'cabinet'">
+  <div class="container">
+    <div class="sidebar">
+      <ul>
+        <li>
+          <a [routerLink]="['/cabinet/cashed-out']" routerLinkActive="active">{{text('open')}}</a>
+        </li>
+        <li>
+          <a [routerLink]="['/cabinet/history']" routerLinkActive="active">{{text('history')}}</a>
+        </li>
+        <li>
+          <a [routerLink]="['/cabinet/change-password']" routerLinkActive="active">{{text('password')}}</a>
+        </li>
+        <li>
+          <a [routerLink]="['/cabinet/contacts']" routerLinkActive="active">{{text('contact')}}</a>
+        </li>
+        <li>
+          <a [routerLink]="['/cabinet/payment-types']" routerLinkActive="active">{{text('repay')}}</a>
+        </li>
+        <li>
+          <a [routerLink]="['/cabinet/deferred-payment']" routerLinkActive="active">{{text('microcredit')}}</a>
+        </li>
+        <li>
+          <a [routerLink]="['/cabinet/settings']" routerLinkActive="active">{{text('setprof')}} </a>
+        </li>
+      </ul>
+      <div class="text-center">
+        <button (click)="payLoan()" class="btn-custom" [routerLink]="['/payment']">{{text('get')}}<br>{{text('micro')}}</button>
+      </div>
+    </div>
+    <div class="right">
+      <router-outlet></router-outlet>
     </div>
   </div>
-  <div class="right">
-    <router-outlet></router-outlet>
-  </div>
-</div>
-<footer>Copyright © 2022 ТОО "МФО Payintech”</footer>
+  <footer>Copyright © 2022 ТОО "МФО Payintech”</footer>
+</ng-container>

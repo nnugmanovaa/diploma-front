@@ -1,43 +1,45 @@
-<section class="profile-page">
-  <div class="container">
-    <form ngNativeValidate (ngSubmit)="payCredit()">
-      <div class="form-top">
-        <p>Погашение микрокредита</p>
-        <h2>Банковской картой</h2>
-      </div>
-      <div class="label-input">
-        <label for="">Мобильный телефон заемщика</label>
-        <input [unmask]="true" [imask]="{mask: '+{7}0000000000',placeholderChar: '_',lazy: false}" [(ngModel)]="payForm.username" name="username" required>
-      </div>
-      <div class="label-input">
-        <label for="">ИИН</label>
-        <input [unmask]="true" type="text" name="clientRef" required [imask]="{mask: '000000000000',placeholderChar: '_',lazy: false}" [(ngModel)]="payForm.clientRef">
-      </div>
+<ng-container *transloco="let text; read:'payment'">
+  <section class="profile-page">
+    <div class="container">
+      <form ngNativeValidate (ngSubmit)="payCredit()">
+        <div class="form-top">
+          <p>{{text('pogcredit')}}</p>
+          <h2>{{text('bankcredit')}}</h2>
+        </div>
+        <div class="label-input">
+          <label for="">{{text('mobloaner')}}</label>
+          <input [unmask]="true" [imask]="{mask: '+{7}0000000000',placeholderChar: '_',lazy: false}" [(ngModel)]="payForm.username" name="username" required>
+        </div>
+        <div class="label-input">
+          <label for="">{{text('iin')}}</label>
+          <input [unmask]="true" type="text" name="clientRef" required [imask]="{mask: '000000000000',placeholderChar: '_',lazy: false}" [(ngModel)]="payForm.clientRef">
+        </div>
 
-      <div class="label-input">
-        <label for="">Номер договора</label>
-        <input type="text" required [imask]="{mask: '0-000000000',lazy: false, autoclear: true}" [(ngModel)]="payForm.contractNumber" name="contractNumber">
-      </div>
+        <div class="label-input">
+          <label for="">{{text('numdog')}}</label>
+          <input type="text" required [imask]="{mask: '0-000000000',lazy: false, autoclear: true}" [(ngModel)]="payForm.contractNumber" name="contractNumber">
+        </div>
 
-      <div class="label-input">
-        <label>Выберите тип погашения</label>
-        <select name="loanRepayType" [(ngModel)]="payForm.loanRepayType" (ngModelChange)="setAmout()">
-          <option value="PLANNED_REPAYMENT">Плановое погашение</option>
-          <option value="FULL_REPAYMENT">Полное погашение</option>
-        </select>
-      </div>
+        <div class="label-input">
+          <label>{{text('chooce')}}</label>
+          <select name="loanRepayType" [(ngModel)]="payForm.loanRepayType" (ngModelChange)="setAmout()">
+            <option value="PLANNED_REPAYMENT">{{text('pla')}}</option>
+            <option value="FULL_REPAYMENT">{{text('pol')}}</option>
+          </select>
+        </div>
 
-      <h3>Сумма к оплате:
-        <b *ngIf="payForm.loanRepayType == 'PLANNED_REPAYMENT'">{{ payForm.monthPayment | currency: '':'₸' }}</b>
-        <b *ngIf="payForm.loanRepayType != 'PLANNED_REPAYMENT'">{{ payForm.amountRemain | currency: '':'₸' }}</b>
-      </h3>
+        <h3>{{text('sumopt')}}
+          <b *ngIf="payForm.loanRepayType == 'PLANNED_REPAYMENT'">{{ payForm.monthPayment | currency: '':'₸' }}</b>
+          <b *ngIf="payForm.loanRepayType != 'PLANNED_REPAYMENT'">{{ payForm.amountRemain | currency: '':'₸' }}</b>
+        </h3>
 
-      <div class="label-input">
-        <label for="">Сумма платежа</label>
-        <input [imask]="priceMask" [unmask]="true" name="amount" [(ngModel)]="payForm.amount" type="text" required>
-      </div>
+        <div class="label-input">
+          <label for="">{{text('sumpla')}}</label>
+          <input [imask]="priceMask" [unmask]="true" name="amount" [(ngModel)]="payForm.amount" type="text" required>
+        </div>
 
-      <button click=(tryPayLoan()) class="btn" type="submit">Оплатить</button>
-    </form>
-  </div>
-</section>
+        <button click=(tryPayLoan()) class="btn" type="submit">{{text('opl')}}</button>
+      </form>
+    </div>
+  </section>
+</ng-container>

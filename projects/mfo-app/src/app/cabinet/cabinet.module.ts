@@ -15,18 +15,20 @@ import { DeferredPaymentComponent } from './deferred-payment/deferred-payment.co
 import { SettingsComponent } from './settings/settings.component';
 import { MainFormModule } from '../shared/main-form/main-form.module';
 
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { IMaskModule } from 'angular-imask';
+import { TRANSLOCO_SCOPE, TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({
   declarations: [CabinetComponent, CashedOutComponent, OrderHistoryComponent, ChangePasswordComponent, ContactsComponent, PaymenttypesComponent, DeferredPaymentComponent, SettingsComponent],
   imports: [
+    TranslocoModule,
     CommonModule,
     IMaskModule,
     CabinetRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
     FormsModule,
     NgxPaginationModule,
     MainFormModule

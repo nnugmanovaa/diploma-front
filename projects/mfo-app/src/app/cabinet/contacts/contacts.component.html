@@ -1,31 +1,32 @@
-<div class="content">
-  <h2 class="content-title">Связаться с нами</h2>
+<ng-container *transloco="let text; read:'contacts'">
+  <div class="content">
+    <h2 class="content-title">{{text('contact')}}</h2>
+    <ul>
+      <li>
+        <img src="assets/img/contact-ico-1.svg" alt="">
+        <div class="right">
+          <p>{{text('tel')}}</p>
+          <a href="tel:+7 777 010 58 00">+7 (777) 010-58-00</a>
+        </div>
+      </li>
+      <li>
+        <img src="assets/img/contact-ico-2.svg" alt="">
+        <div class="right">
+          <p>{{text('email')}}</p>
+          <a href="mailto:info@zaimem.kz">info@zaimem.kz</a>
+        </div>
+      </li>
+      <li>
+        <img src="assets/img/contact-ico-3.svg" alt="">
+        <div class="right">
+          <p>Адрес</p>
+          <span>г. Алматы, ул. Байзакова 280</span>
+        </div>
+      </li>
+    </ul>
 
-  <ul>
-    <li>
-      <img src="assets/img/contact-ico-1.svg" alt="">
-      <div class="right">
-        <p>Телефон</p>
-        <a href="tel:+7 777 010 58 00">+7 (777) 010-58-00</a>
-      </div>
-    </li>
-    <li>
-      <img src="assets/img/contact-ico-2.svg" alt="">
-      <div class="right">
-        <p>Электронный адрес</p>
-        <a href="mailto:info@zaimem.kz">info@zaimem.kz</a>
-      </div>
-    </li>
-    <li>
-      <img src="assets/img/contact-ico-3.svg" alt="">
-      <div class="right">
-        <p>Адрес</p>
-        <span>г. Алматы, ул. Байзакова 280</span>
-      </div>
-    </li>
-  </ul>
-
-  <div class="bottom-info">
-    ТОО «МФО Payintech», Лицензия на осуществление микрофинансовой деятельности № 02.21.0059.М от 31.03.2021 года, выдана Управлением региональных представителей в городе Алматы Агентства Республики Казахстан по регулированию и развитию финансового рынка. <br><br>Источник: Займ онлайн в Казахстане под минимальный процент © zaimem.kz
+    <div class="bottom-info">
+      {{text('fir')}}<br><br>{{text('sec')}}
+    </div>
   </div>
-</div>
+</ng-container>

@@ -1,52 +1,54 @@
-<div class="content">
-  <h2 class="content-title">
-    Способы погашения микрокредита
-  </h2>
+<ng-container *transloco="let text; read:'paymenttypes'">
+  <div class="content">
+    <h2 class="content-title">
+      {{text('was')}}
+    </h2>
 
-  <h3><img src="assets/img/p1.svg" alt=""> Возврат микрокредита платежной картой </h3>
-  <p>
-    В настоящее время ТОО «МФО «Payintech» принимает платежи по картам платежных систем VISA и MasterCard. <br>
-    Для оплаты с помощью платежной карты, необходимо выполнить следующие шаги: <br> <br>
+    <h3><img src="assets/img/p1.svg" alt=""> {{text('returncredit')}} </h3>
+    <p>
+      {{text('currentlypay')}} <br>
+      {{text('attention')}} <br> <br>
 
-    1. Нажмите на кнопку «Оплатить» в правом верхнем углу <br>
-    2. Введите номер телефона, фамилию заемщика, сумму для оплаты  <br>
-    3. Нажмите на кнопку «Далее» <br>
-    4. Введите данные карты и нажмите на кнопку «Оплатить» <br> <br>
+      {{text('clickpay')}} <br>
+      {{text('enternumberlast')}} <br>
+      {{text('nextbutton')}} <br>
+      {{text('paybutton')}} <br> <br>
 
-    По умолчанию, в данном поле ввода будет указана сумма ежемесячного платежа.
-  </p>
+      {{text('defpayment')}}
+    </p>
 
-  <h3><img src="assets/img/p1.svg" alt=""> Электронный кошелек (Без комиссий)</h3>
-  <p>
-    Для погашения микрокредита через электронный кошелек PITECH: <br><br>
-    1) Зайдите на сайт https://money.pitech.kz/. <br>
-    2) Выберите «МФО Payintech - плановый платеж». <br>
-    3) Введите ИИН и выберите микрокредит, который хотите погасить. <br>
-    4) Введите сумму и нажмите «Оплатить»* <br>
-    <br>
-    *Погашение займа через электронный кошелек PITECH – бесплатно.
-  </p>
+    <h3><img src="assets/img/p1.svg" alt=""> {{text('ewallet')}} </h3>
+    <p>
+      {{text('repayloan')}} <br><br>
+      {{text('insite')}} <br>
+      {{text('choocemfo')}} <br>
+      {{text('enteriin')}}<br> <br>
+      {{text('enterrepay')}} <br><br>
 
-  <h3><img src="assets/img/p2.svg" alt=""> Электронный кошелек</h3>
-  <p>
-    Для погашения микрокредита через электронный кошелек: <br><br>
-    1) Зайдите на сайт сервиса. <br>
-    2) Выберите «Payintech – плановый платеж». <br>
-    3) Введите ИИН и выберите микрокредит, который хотите погасить. <br>
-    4) Введите сумму и нажите «Оплатить»* <br><br>
-    *Комиссии за погашение взимаются сервисом отдельно.
-  </p>
+      {{text('loanacross')}}
+    </p>
 
-  <h3><img src="assets/img/p2.svg" alt=""> Терминалы</h3>
-  <p>
-    Pitech.kz предлагает возможность погашать займы через терминалы Касса 24. <br><br>
-    Касса 24 имеет широкую терминальную сеть по всему Казахстану в 17 000 терминалов. <br><br>
-    Для погашения микрокредита через терминал: <br><br>
-    1) В меню терминала перейдите в раздел «Финансовые организации» <br>
-    2) Выберите «Payintech – плановый платеж». <br>
-    3) Заполните форму оплаты. <br>
-    4) Внесите наличные в купюроприемник*. <br>
-    5) Заберите чек <br><br>
-    *Комиссии за погашение взимаются сервисом отдельно.
-  </p>
-</div>
+    <h3><img src="assets/img/p2.svg" alt=""> {{text('ewall')}} </h3>
+    <p>
+      {{text('forrepaycredit')}} <br><br>
+      {{text('comesite')}} <br>
+      {{text('choocepayin')}} <br>
+      {{text('enterin')}} <br>
+      {{text('entersum')}} <br><br>
+      {{text('kom')}}
+    </p>
+
+    <h3><img src="assets/img/p2.svg" alt=""> {{text('terminals')}} </h3>
+    <p>
+      {{text('laonrepay')}} <br><br>
+      {{text('kassa24')}} <br><br>
+      {{text('repayterminal')}} <br><br>
+      {{text('menu')}} <br>
+      {{text('enterpay')}} <br>
+      {{text('form')}} <br>
+      {{text('nal')}} <br>
+      {{text('check')}} <br><br>
+      {{text('komservice')}}
+    </p>
+  </div>
+</ng-container>

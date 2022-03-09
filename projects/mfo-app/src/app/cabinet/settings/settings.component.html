@@ -1,75 +1,75 @@
-<div class="content profile-page">
-  <h2 class="content-title">Настройки профиля</h2>
+<ng-container *transloco="let text; read:'settings'">
+  <div class="content profile-page">
+    <h2 class="content-title">{{text('setprof')}}</h2>
 
-  <form ngNativeValidate (ngSubmit)="updateData()">
-    <div class="form-top">
-      <h2>Паспортные данные</h2>
-    </div>
+    <form ngNativeValidate (ngSubmit)="updateData()">
+      <div class="form-top">
+        <h2>{{text('data')}}</h2>
+      </div>
 
-    <div class="label-input">
-      <label for="">Фамилия</label>
-      <input type="text" name="lastName" disabled [ngModel]="data.passportInfoDto.lastName">
-    </div>
+      <div class="label-input">
+        <label for="">{{text('last')}}</label>
+        <input type="text" name="lastName" disabled [ngModel]="data.passportInfoDto.lastName">
+      </div>
 
-    <div class="label-input">
-      <label for="">Имя</label>
-      <input type="text" name="firstName" disabled [ngModel]="data.passportInfoDto.firstName">
-    </div>
+      <div class="label-input">
+        <label for="">{{text('name')}}</label>
+        <input type="text" name="firstName" disabled [ngModel]="data.passportInfoDto.firstName">
+      </div>
 
-    <div class="label-input">
-      <label for="">Отчество</label>
-      <input type="text" name="patronymic" disabled [ngModel]="data.passportInfoDto.patronymic">
-    </div>
+      <div class="label-input">
+        <label for="">{{text('dad')}}</label>
+        <input type="text" name="patronymic" disabled [ngModel]="data.passportInfoDto.patronymic">
+      </div>
 
-    <div class="label-input">
-      <label for="">Дата рождения</label>
-      <input type="text" name="birthDate" disabled [ngModel]="data.passportInfoDto.birthDate">
-    </div>
+      <div class="label-input">
+        <label for="">{{text('date')}}</label>
+        <input type="text" name="birthDate" disabled [ngModel]="data.passportInfoDto.birthDate">
+      </div>
 
-    <div class="label-input">
-      <label for="">Номер удостоверения</label>
-      <input type="text" name="nationalIdNumber" [(ngModel)]="data.passportInfoDto.nationalIdNumber">
-    </div>
+      <div class="label-input">
+        <label for="">{{text('number')}}</label>
+        <input type="text" name="nationalIdNumber" [(ngModel)]="data.passportInfoDto.nationalIdNumber">
+      </div>
 
-    <div class="label-input">
-      <label for="">Национальность</label>
-      <input type="text" name="nationality" [(ngModel)]="data.passportInfoDto.nationality">
-    </div>
+      <div class="label-input">
+        <label for="">{{text('national')}}</label>
+        <input type="text" name="nationality" [(ngModel)]="data.passportInfoDto.nationality">
+      </div>
 
-     <div class="label-input">
-      <label>Кем выдан</label>
-      <select name="nationalIdIssuer" required [(ngModel)]="data.passportInfoDto.nationalIdIssuer">
-        <option value="МИНИСТЕРСТВО ВНУТРЕННИХ ДЕЛ РК">МВД РК</option>
-        <option value="Министерства юстиции Республики Казахстан">МЮ РК</option>
-      </select>
-    </div>
+      <div class="label-input">
+        <label>{{text('whom')}}</label>
+        <select name="nationalIdIssuer" required [(ngModel)]="data.passportInfoDto.nationalIdIssuer">
+          <option value="МИНИСТЕРСТВО ВНУТРЕННИХ ДЕЛ РК">{{text('mvd')}}</option>
+          <option value="Министерства юстиции Республики Казахстан">{{text('mu')}}</option>
+        </select>
+      </div>
 
-    <div class="label-input">
-      <label>Дата выдачи</label>
-      <input type="date" name="nationalIdIssueDate" [(ngModel)]="data.passportInfoDto.nationalIdIssueDate">
-    </div>
+      <div class="label-input">
+        <label>{{text('datea')}}</label>
+        <input type="date" name="nationalIdIssueDate" [(ngModel)]="data.passportInfoDto.nationalIdIssueDate">
+      </div>
 
-    <div class="label-input">
-      <label for="">Дата окончания</label>
-      <input type="date" name="nationalIdValidDate" [(ngModel)]="data.passportInfoDto.nationalIdValidDate">
-    </div>
+      <div class="label-input">
+        <label for="">{{text('dateb')}}</label>
+        <input type="date" name="nationalIdValidDate" [(ngModel)]="data.passportInfoDto.nationalIdValidDate">
+      </div>
 
-    <div class="form-top">
-      <h2>Адресные данные</h2>
-    </div>
+      <div class="form-top">
+        <h2>{{text('addresData')}}</h2>
+      </div>
 
-    <div class="label-input">
-        <label>Область</label>
-        <select required name="region" [(ngModel)]="data.addressInfoDto.region"
-        (ngModelChange)="getDistrictById()">
-          <option [value]="">Выберите</option>
+      <div class="label-input">
+        <label>{{text('state')}}</label>
+        <select required name="region" [(ngModel)]="data.addressInfoDto.region" (ngModelChange)="getDistrictById()">
+          <option [value]="">{{text('select')}}</option>
           <option *ngFor="let item of districts" value="{{item.code}}">{{ item.name_ru }}</option>
         </select>
       </div>
       <div class="label-input">
-        <label [class.disabled]="!cities">Регион/село/город</label>
+        <label [class.disabled]="!cities">{{text('city')}}</label>
         <select required name="city" [(ngModel)]="data.addressInfoDto.city" [disabled]="!cities">
-          <option [value]="">Выберите</option>
+          <option [value]="">{{text('select')}}</option>
           <option *ngFor="let item of cities" [ngValue]="item.name_ru">{{ item.name_ru }}</option>
         </select>
       </div>
@@ -80,102 +80,102 @@
       </div> -->
 
       <div class="label-input">
-        <label>Улица/мкрн</label>
+        <label>{{text('street')}}</label>
         <input type="text" required name="street" [(ngModel)]="data.addressInfoDto.street">
       </div>
 
       <div class="half-form">
         <div class="label-input">
-          <label>№ дома</label>
+          <label>{{text('home-num')}}</label>
           <input type="text" required name="house" [(ngModel)]="data.addressInfoDto.house">
         </div>
 
         <div class="label-input">
-          <label>Кв/офис</label>
+          <label>{{text('kv')}}</label>
           <input type="text" required name="apartment" [(ngModel)]="data.addressInfoDto.apartment">
         </div>
       </div>
 
 
-    <div class="label-input">
-      <label>Период проживания по этому адресу</label>
-      <select required [(ngModel)]="data.addressInfoDto.periodOfResidence" name="periodOfResidence">
-        <option value="">Выберите</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-      </select>
-    </div>
+      <div class="label-input">
+        <label>{{text('adrprocheck')}}</label>
+        <select required [(ngModel)]="data.addressInfoDto.periodOfResidence" name="periodOfResidence">
+          <option value="">{{text('select')}}</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7+</option>
+        </select>
+      </div>
 
-    <div class="form-top">
-      <h2>Сведения о работе</h2>
-    </div>
+      <div class="form-top">
+        <h2>{{text('infojob')}}</h2>
+      </div>
 
       <div class="label-input">
-        <label>Образование</label>
-        <select name="education" [(ngModel)]="data.jobDetailsDto.education" >
-          <option value="">Выберите</option>
-          <option value="Среднее">Среднее</option>
-          <option value="Среднее специальное">Среднее специальное</option>
-          <option value="Незаконченное высшее">Незаконченное высшее</option>
-          <option value="Высшее">Высшее</option>
-          <option value="Магистратура, 2-ое высшее, Ученая степень и пр">Магистратура, 2-ое высшее, Ученая степень и пр.</option>
+        <label>{{text('edu')}}</label>
+        <select name="education" [(ngModel)]="data.jobDetailsDto.education">
+          <option value="">{{text('choose')}}</option>
+          <option value="Среднее">{{text('mid')}}</option>
+          <option value="Среднее специальное">{{text('midss')}}</option>
+          <option value="Незаконченное высшее">{{text('nohigh')}}</option>
+          <option value="Высшее">{{text('high')}}</option>
+          <option value="Магистратура, 2-ое высшее, Ученая степень и пр">{{text('magistr')}}</option>
         </select>
       </div>
 
       <div class="label-input">
-        <label>Занятость</label>
+        <label>{{text('zanyat')}}</label>
         <select name="typeOfWork" [(ngModel)]="data.jobDetailsDto.typeOfWork">
-          <option value="">Выберите</option>
-          <option value="Сотрудник компании">Сотрудник компании</option>
-          <option value="Индивидуальный предприниматель">Индивидуальный предприниматель</option>
-          <option value="Безработный">Безработный</option>
-          <option value="Студент">Студент</option>
-          <option value="Пенсионер">Пенсионер</option>
-          <option value="Владелец компании">Владелец компании</option>
-          <option value="Пенсионер (сотрудник компании)">Пенсионер (сотрудник компании)</option>
-          <option value="Пенсионер (индивидуальный предприниматель)">Пенсионер (индивидуальный предприниматель)</option>
-          <option value="В декретном отпуске">В декретном отпуске</option>
+          <option value="">{{text('choose')}}</option>
+          <option value="Сотрудник компании">{{text('empoylee')}}</option>
+          <option value="Индивидуальный предприниматель">{{text('indemp')}}</option>
+          <option value="Безработный">{{text('jobless')}}</option>
+          <option value="Студент">{{text('student')}}</option>
+          <option value="Пенсионер">{{text('pensioner')}}</option>
+          <option value="Владелец компании">{{text('boss')}}</option>
+          <option value="Пенсионер (сотрудник компании)">{{text('penemp')}}</option>
+          <option value="Пенсионер (индивидуальный предприниматель)">{{text('penindemp')}}</option>
+          <option value="В декретном отпуске">{{text('mate')}}</option>
         </select>
       </div>
 
       <div class="label-input">
-        <label>Вид деятельности</label>
+        <label>{{text('vid')}}</label>
         <select name="employment" [(ngModel)]="data.jobDetailsDto.employment">
-          <option value="">Выберите</option>
-          <option value="Информационные технологии/телекоммуникации">Информационные технологии/телекоммуникации</option>
-          <option value="Финансы, банки, страхование, консалтинг">Финансы, банки, страхование, консалтинг</option>
-          <option value="ТЭК">ТЭК</option>
-          <option value="Сервис и Услуги">Сервис и Услуги</option>
-          <option value="Армия">Армия</option>
-          <option value="Охранная деятельность">Охранная деятельность</option>
-          <option value="Добывающий сектор">Добывающий сектор</option>
-          <option value="Культура и искусство">Культура и искусство</option>
-          <option value="Медицина">Медицина</option>
-          <option value="Наука и Образование">Наука и Образование</option>
-          <option value="Государственная служба">Государственная служба</option>
-          <option value="Торговля">Торговля</option>
-          <option value="Промышленность">Промышленность</option>
-          <option value="Строительство и недвижимость">Строительство и недвижимость</option>
-          <option value="Транспорт">Транспорт</option>
-          <!-- <option value="Другое">Другое</option> -->
+          <option value="">{{text('choose')}}</option>
+          <option value="Информационные технологии/телекоммуникации">{{text('info')}}</option>
+          <option value="Финансы, банки, страхование, консалтинг">{{text('finance')}}</option>
+          <option value="ТЭК">{{text('tek')}}</option>
+          <option value="Сервис и Услуги">{{text('service')}}</option>
+          <option value="Армия">{{text('army')}}</option>
+          <option value="Охранная деятельность">{{text('security')}}</option>
+          <option value="Добывающий сектор">{{text('sector')}}</option>
+          <option value="Культура и искусство">{{text('culture')}}</option>
+          <option value="Медицина">{{text('medicine')}}</option>
+          <option value="Наука и Образование">{{text('science')}}</option>
+          <option value="Государственная служба">{{text('gos-service')}}</option>
+          <option value="Торговля">{{text('trade')}}</option>
+          <option value="Промышленность">{{text('industry')}}</option>
+          <option value="Строительство и недвижимость">{{text('building')}}</option>
+          <option value="Транспорт">{{text('transport')}}</option>
+          <option value="Другое">{{text('other')}}</option>
         </select>
       </div>
 
       <div class="label-input">
-        <label>Должность</label>
+        <label>{{text('post')}}</label>
         <input type="text" name="workPosition" [(ngModel)]="data.jobDetailsDto.workPosition">
       </div>
 
       <div class="label-input">
-        <label>Название организации</label>
+        <label>{{text('name-organization')}}</label>
         <input type="text" name="employer" [(ngModel)]="data.jobDetailsDto.employer">
       </div>
-<!--
+      <!--
       <div class="label-input">
         <label>Рабочий телефон</label>
         <input type="tel" required name="workPhoneNum" [(ngModel)]="data.jobDetailsDto.workPhoneNum">
@@ -188,31 +188,31 @@
       </div> -->
 
       <div class="label-input">
-        <label>Ваш ежемесячный доход</label>
-        <input type="tel" name="monthlyIncome" [unmask]="true" [(ngModel)]="data.jobDetailsDto.monthlyIncome" [imask]="priceMask" >
+        <label>{{text('month-income')}}</label>
+        <input type="tel" name="monthlyIncome" [unmask]="true" [(ngModel)]="data.jobDetailsDto.monthlyIncome" [imask]="priceMask">
       </div>
 
       <div class="label-input">
-        <label>Ваш ежемесячный дополнительный доход</label>
-        <input type="tel" name="additionalMonthlyIncome" [unmask]="true" [(ngModel)]="data.jobDetailsDto.additionalMonthlyIncome" [imask]="priceMask" >
+        <label>{{text('month-extra-income')}}</label>
+        <input type="tel" name="additionalMonthlyIncome" [unmask]="true" [(ngModel)]="data.jobDetailsDto.additionalMonthlyIncome" [imask]="priceMask">
       </div>
 
       <div class="label-input">
-        <label>Семейное положение</label>
+        <label>{{text('marital-status')}}</label>
         <select name="maritalStatus" [(ngModel)]="data.jobDetailsDto.maritalStatus">
-          <option value="">Выберите</option>
-          <option value="Не женат / Не замужем">Не женат / Не замужем</option>
-          <option value="Женат / Замужем">Женат / Замужем</option>
-          <option value="Вдовец / Вдова">Вдовец / Вдова</option>
-          <option value="Разведен / Разведена">Разведен / Разведена</option>
-          <option value="Гражданский брак">Гражданский брак</option>
+          <option value="">{{text('choose')}}</option>
+          <option value="Не женат / Не замужем">{{text('notmarry')}}</option>
+          <option value="Женат / Замужем">{{text('married')}}</option>
+          <option value="Вдовец / Вдова">{{text('widow')}}</option>
+          <option value="Разведен / Разведена">{{text('dismarry')}}</option>
+          <option value="Гражданский брак">{{text('grazh')}}</option>
         </select>
       </div>
 
       <div class="label-input">
-        <label>Количество детей</label>
+        <label>{{text('amoutchild')}}</label>
         <select name="numberOfKids" [(ngModel)]="data.jobDetailsDto.numberOfKids">
-          <option value="">Выберите</option>
+          <option value="">{{text('choose')}}</option>
           <option [value]="0">0</option>
           <option [value]="1">1</option>
           <option [value]="2">2</option>
@@ -223,6 +223,7 @@
 
 
 
-    <button class="btn" type="submit">Сохранить</button>
-  </form>
-</div>
+      <button class="btn" type="submit">{{text('save')}}</button>
+    </form>
+  </div>
+</ng-container>

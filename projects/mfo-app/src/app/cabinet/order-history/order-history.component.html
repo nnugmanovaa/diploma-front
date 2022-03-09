@@ -1,14 +1,14 @@
-<!-- <ng-container *transloco="let text; read:'order-history'"> -->
+<ng-container *transloco="let text; read:'order-history'">
   <div class="content" *ngIf="list">
     <div class="top">
-      <h2 class="content-title">История микрокредитов</h2>
+      <h2 class="content-title">{{text('hist')}}</h2>
       <div class="dates">
         <div class="left">
-          <span>c:</span>
+          <span>{{text('s')}}</span>
           <input type="date" [(ngModel)]="params.startDate" (ngModelChange)="getOrders()">
         </div>
         <div class="right">
-          <span>по:</span>
+          <span>{{text('po')}}</span>
           <input type="date" [(ngModel)]="params.endDate" (ngModelChange)="getOrders()">
         </div>
       </div>
@@ -17,7 +17,7 @@
       <li *ngFor="let item of list.content | paginate : { itemsPerPage: params.size , currentPage: params.page, totalItems: list.totalPages }" (click)="openOrder(item);">
         <img src="assets/img/doc.svg" alt="">
         <div class="center">
-          <span>Займ №{{ item.orderId }}</span>
+          <span>{{text('loan')}} №{{ item.orderId }}</span>
           <p>{{ item.contractExtRefTime | date }} </p>
         </div>
         <div class="right">
@@ -27,7 +27,7 @@
       </li>
     </ul>
 
-    <p class="empty" *ngIf="list?.empty">нет данных</p>
+    <p class="empty" *ngIf="list?.empty">{{text('nodata')}}</p>
 
     <pagination-controls *ngIf="list.totalPages > 1" (pageChange)="changePage($event)" previousLabel="" nextLabel=""></pagination-controls>
 
@@ -55,7 +55,7 @@
     <div class="modal-content">
       <div class="modal-v">
         <div class="modal-top">
-          <h2>Информация о займе</h2>
+          <h2>{{text('info')}}</h2>
           <div class="modal-close" (click)="infoModal = false;">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -66,7 +66,7 @@
         </div>
         <ul>
           <li>
-            <h3>Номер договора</h3>
+            <h3>{{text('num')}}</h3>
             <p>№{{ selectedItem.contractExtRefId }}</p>
           </li>
           <!-- <li>
@@ -74,15 +74,15 @@
           <p>{{ selectedItem.contractExtRefId | currency: 'CLP':'₸' }}</p>
         </li> -->
           <li>
-            <h3>Сумма кредита</h3>
+            <h3>{{text('sum')}}</h3>
             <p>{{ selectedItem.loanAmount | currency: 'CLP':'₸' }}</p>
           </li>
           <li>
-            <h3>Дата получения</h3>
+            <h3>{{text('date')}}</h3>
             <p>{{ selectedItem.contractExtRefTime | date }}</p>
           </li>
           <li>
-            <h3>Срок кредита</h3>
+            <h3>{{text('ada')}}</h3>
             <p>{{ selectedItem.loanPeriodMonths }} мес.</p>
           </li>
           <!-- <li>
@@ -95,10 +95,10 @@
         </li> -->
         </ul>
         <div class="text-center">
-          <div class="link" (click)="getContract()">Скачать оферту</div>
+          <div class="link" (click)="getContract()">{{text('download')}}</div>
         </div>
-        <button class="btn" (click)="infoModal = false;">Закрыть</button>
+        <button class="btn" (click)="infoModal = false;">{{text('close')}}</button>
       </div>
     </div>
   </div>
-<!-- </ng-container> -->
+</ng-container>
