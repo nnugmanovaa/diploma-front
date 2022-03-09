@@ -113,6 +113,25 @@ header{
   }
 }
 
+.ru {
+  margin-right: 10px;
+  margin-left: 8px;
+  border-radius: 10px;
+  border-style: none;
+  padding: 10px;
+}
+
+.kz {
+  margin-left: auto;
+  border-radius: 10px;
+  border-style: none;
+  padding: 10px;
+}
+
+.ru:active,
+.kz:active {
+  background-color: #42A8FA;
+}
 
 .mobile-nav{
   display: none;
@@ -192,5 +211,5 @@ header{
 @media (max-width: 600px) {
    .desctop{
     display: none;
-   } 
+   }
 }

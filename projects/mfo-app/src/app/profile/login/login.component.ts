@@ -9,16 +9,17 @@ import { AuthService } from '../../core/services/auth.service'
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  show: boolean = false;
 
-  loginForm:any = {
-    username:'',
-    password:''
+  loginForm: any = {
+    username: '',
+    password: ''
   }
   returnUrl: string = "";
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              private auth:AuthService) { 
+    private router: Router,
+    private auth: AuthService) {
 
   }
 
@@ -26,14 +27,18 @@ export class LoginComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/cabinet';
   }
 
-  loginUser(){
+  loginUser() {
     this.auth.login(this.loginForm).subscribe(res => {
-      if(res){
+      if (res) {
         amplitude.getInstance().logEvent("signed in");
         this.auth.saveUser(res);
         this.router.navigateByUrl(this.returnUrl);
       }
     })
+  }
+
+  togglePassword() {
+    this.show = !this.show;
   }
 
   forgetPass() {

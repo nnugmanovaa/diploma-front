@@ -1,37 +1,38 @@
-<section class="profile-page">
-  <div class="container">
-    <form ngNativeValidate (ngSubmit)="sendSms(1)" *ngIf="!showSmsCode">
-      <div class="form-top">
-        <h2>Введите свой номер телефона</h2>
-        <p>Для восстановления пароля введите ваш номер мобильного телефона (например, 87001234567), который вы указывали при регистрации и нажмите на "Восстановить пароль".</p>
-      </div>
-      <div class="label-input">
-        <label for="">Телефон</label>
-        <input type="tel" [unmask]="true" [imask]="{mask: '+{7}0000000000',lazy: false}" required [(ngModel)]="msisdn" name="msisdn">
-      </div>
-      <button class="btn" type="submit">Восстановить пароль</button>
-    </form>
-
-    <form ngNativeValidate (ngSubmit)="sendSmsCode()" *ngIf="showSmsCode">
-      <div class="form-top">
-        <h2>Восстановить доступ</h2>
-      </div>
-      <h3>Подтверждение сброса пароля</h3>
-      <p>На номер {{ msisdn }} придёт код подтверждения, введите его в поле ниже</p>
-      <div class="text-center">
-        <h3>SMS-код</h3>
-        <div class="label-input">
-          <input type="tel" name="code" [imask]="{mask: '000000',lazy: false, placeholderChar: '-'}" [(ngModel)]="code">
+<ng-container *transloco="let text; read:'forgot-pass'">
+  <section class="profile-page">
+    <div class="container">
+      <form ngNativeValidate (ngSubmit)="sendSms(1)" *ngIf="!showSmsCode">
+        <div class="form-top">
+          <h2>{{text('urnum')}}</h2>
+          <p>{{text('example')}}</p>
         </div>
-      </div>
-      <div class="resend-pass" (click)="sendSms(2)">Отправить повторно</div><br>
-      <div class="label-input" *ngIf="code.length == 6 && !code.includes('-')">
-        <label for="">Введите новый пароль</label>
-        <input type="password" [(ngModel)]="newPassword" name="password" required>
-      </div>
-      <button class="btn" type="submit">Восстановить пароль</button>
-      <!-- <div class="login-pass-btn" (click)="this.showSmsCode = false">Ввести другой номер</div> -->
-    </form>
+        <div class="label-input">
+          <label for="">Телефон</label>
+          <input type="tel" [unmask]="true" [imask]="{mask: '+{7}0000000000',lazy: false}" required [(ngModel)]="msisdn" name="msisdn">
+        </div>
+        <button class="btn" type="submit">{{text('recoverpas')}}</button>
+      </form>
 
-  </div>
-</section>
+      <form ngNativeValidate (ngSubmit)="sendSmsCode()" *ngIf="showSmsCode">
+        <div class="form-top">
+          <h2>{{text('recoverdos')}}</h2>
+        </div>
+        <h3>{{text('confirm')}}</h3>
+        <p> {{ msisdn }} {{text('istrue')}} </p>
+        <div class="text-center">
+          <h3>SMS-код</h3>
+          <div class="label-input">
+            <input type="tel" name="code" [imask]="{mask: '000000',lazy: false, placeholderChar: '-'}" [(ngModel)]="code">
+          </div>
+        </div>
+        <div class="resend-pass" (click)="sendSms(2)">{{text('resend')}}</div><br>
+        <div class="label-input" *ngIf="code.length == 6 && !code.includes('-')">
+          <label for="">{{text('newpas')}}</label>
+          <input type="password" [(ngModel)]="newPassword" name="password" required>
+        </div>
+        <button class="btn" type="submit">{{text('vos')}}</button>
+        <!-- <div class="login-pass-btn" (click)="this.showSmsCode = false">Ввести другой номер</div> -->
+      </form>
+    </div>
+  </section>
+</ng-container>

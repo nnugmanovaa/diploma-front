@@ -50,13 +50,27 @@
         <div class="form-top">
           <h2>{{text('setpass')}}</h2>
         </div>
-        <div class="label-input">
+        <!-- <div class="label-input">
           <label>{{text('set-pass')}}</label>
           <input type="password" required [(ngModel)]="singUpForm.password" name="password">
+        </div> -->
+        <div class="label-checkbox">
+          <label for="">{{text('set-pass')}}</label>
+          <div class="input-check-box">
+            <input [type]="show ? 'text' : 'password'" name="password" required [(ngModel)]="singUpForm.password" placeholder="********">
+            <button type="button" (click)="togglePassword()" class="btn-eye"><span class="material-icons-outlined">{{show ? 'visibility' : 'visibility_off' }}</span></button>
+          </div>
         </div>
-        <div class="label-input">
+        <!-- <div class="label-input">
           <label>{{text('confirm-pass')}}</label>
           <input type="password" required [(ngModel)]="singUpForm.confirmPassword" name="confirmPassword">
+        </div> -->
+        <div class="label-checkbox">
+          <label for="">{{text('confirm-pass')}}</label>
+          <div class="input-check-box">
+            <input [type]="show ? 'text' : 'password'" name="confirmPassword" required [(ngModel)]="singUpForm.confirmPassword" placeholder="********">
+            <button type="button" (click)="togglePassword()" class="btn-eye"><span class="material-icons-outlined">{{show ? 'visibility' : 'visibility_off' }}</span></button>
+          </div>
         </div>
         <button class="btn" type="submit" [disabled]="disabled">
           {{text('register')}}

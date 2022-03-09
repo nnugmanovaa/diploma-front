@@ -45,6 +45,13 @@
             </a>
           </li>
         </ul>
+        <!-- <div class="custom-control custom-switch">
+          <input  [type]="checkbox ? (click)="langKZ()" : '(click)="langRU()"' type="checkbox" class="custom-control-input">
+          <label class="custom-control-label">RU</label>
+        </div> -->
+        <button class="kz" (click)="langKZ()">Каз</button>
+        <button class="ru" (click)="langRU()">Рус</button>
+
         <a href="tel:+7 (777) 010-58-00" class="ht-phone">
           <img src="assets/img/call-ico.svg" width="52" height="52" alt="">
           <span class="ht-phone-right">
@@ -61,6 +68,10 @@
           <div class="close" (click)="showNav = false"><img src="assets/img/close.svg" alt=""></div>
           <ng-container *ngIf="!this.authService.isLoggedIn">
             <ul>
+              <li (click)="showNav = false">
+                <a class="kz" (click)="langKZ()">Каз</a>
+                <a class="kz" (click)="langRU()">Рус</a>
+              </li>
               <li (click)="showNav = false">
                 <a [routerLink]="['/']" fragment="Checkout">{{text('header.HowToGet')}}</a>
               </li>

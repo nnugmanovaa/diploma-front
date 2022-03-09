@@ -1,24 +1,28 @@
-<section class="profile-page">
-  <div class="container">
-    <form ngNativeValidate (ngSubmit)="loginUser()">
-      <div class="form-top">
-        <h2>Вход</h2>
-      </div>
-      <div class="label-input">
-        <label for="">Мобильный телефон <i>*</i></label>
-        <input type="tel" [unmask]="true" [imask]="{mask: '+{7}0000000000',lazy: false}" required [(ngModel)]="loginForm.username" name="username">
-      </div>
-      <div class="label-input">
-        <label for="">Пароль:</label>
-        <input type="password" name="password" required [(ngModel)]="loginForm.password">
-      </div>
-      <a class="reset-pass-btn" [routerLink]="['/profile/forgot-pass']">
-        <div (click)="forgetPass()">
-          Забыли пароль?
+<ng-container *transloco="let text; read:'login'">
+  <section class="profile-page">
+    <div class="container">
+      <form ngNativeValidate (ngSubmit)="loginUser()">
+        <div class="form-top">
+          <h2>{{text('in')}}</h2>
         </div>
-      </a>
-
-      <button class="btn" type="submit">Войти</button>
-    </form>
-  </div>
-</section>
+        <div class="label-input">
+          <label for="">{{text('mobile')}} <i>*</i></label>
+          <input type="tel" [unmask]="true" [imask]="{mask: '+{7}0000000000',lazy: false}" required [(ngModel)]="loginForm.username" name="username">
+        </div>
+        <div class="label-checkbox">
+          <label for="">{{text('password')}}</label>
+          <div class="input-check-box">
+            <input [type]="show ? 'text' : 'password'" name="password" required [(ngModel)]="loginForm.password" placeholder="********">
+            <button type="button" (click)="togglePassword()" class="btn-eye"><span class="material-icons-outlined">{{show ? 'visibility' : 'visibility_off' }}</span></button>
+          </div>
+        </div>
+        <a class="reset-pass-btn" [routerLink]="['/profile/forgot-pass']">
+          <div (click)="forgetPass()">
+            {{text('less')}}
+          </div>
+        </a>
+        <button class="btn" type="submit">{{text('comein')}}</button>
+      </form>
+    </div>
+  </section>
+</ng-container>

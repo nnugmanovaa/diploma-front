@@ -74,22 +74,22 @@ export class AppComponent implements OnInit {
           let currentRoute = this.router.url;
           this.contact = this.setContact(currentRoute);
           gtag('config', 'UA-174917766-1',
-          {
-            'page_path': event.urlAfterRedirects
-          }
-        );
+            {
+              'page_path': event.urlAfterRedirects
+            }
+          );
         }
       }
     );
   }
 
-  public update() {
-    this.translateService.setActiveLang('kz');
-  }
-
-  public date() {
-    this.translateService.setActiveLang('ru');
-  }
+  // public langKZ() {
+  //   this.translateService.setActiveLang('kz');
+  // }
+  //
+  // public langRU() {
+  //   this.translateService.setActiveLang('ru');
+  // }
 
   ngOnInit(): void {
     amplitude.getInstance().init(environment.amplitude_api_key);

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import amplitude from 'amplitude-js';
 import { AuthService } from '../../core/services/auth.service';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'mfo-header',
@@ -10,30 +11,31 @@ import { AuthService } from '../../core/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  hideLogin:boolean = false;
-  showCabinet:boolean = false;
-  user:any = null;
-  settingsPage:boolean = false;
+  hideLogin: boolean = false;
+  showCabinet: boolean = false;
+  user: any = null;
+  settingsPage: boolean = false;
 
-  showNav:boolean = false;
-  headerModal:boolean = false;
+  showNav: boolean = false;
+  headerModal: boolean = false;
 
   today = new Date();
 
   constructor(private router: Router,
-              public authService:AuthService) {
+    public authService: AuthService,
+    public translateService: TranslocoService) {
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         this.headerModal = false;
-        if(event['url'] === '/cabinet/settings'){
+        if (event['url'] === '/cabinet/settings') {
           // this.settingsPage = true; otklyuchili settings
           this.settingsPage = false;
-        // }else{
-        //   this.settingsPage = false;
+          // }else{
+          //   this.settingsPage = false;
         }
-        if(event['url'] !== '/'){
+        if (event['url'] !== '/') {
           this.hideLogin = true;
-        }else{
+        } else {
           this.hideLogin = false;
         }
         this.checkLogin();
@@ -54,7 +56,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  checkLogin(){
+  checkLogin() {
     // console.log("1:" + this.authService.getUserName);
     if (this.authService.getUserName == false) {
       // console.log("2:" + this.authService.getUser);
@@ -64,14 +66,14 @@ export class HeaderComponent implements OnInit {
       this.user = this.authService.getUserName;
     }
 
-     if(this.authService.isLoggedIn){
-       this.hideLogin = true;
-       let lastName = this.authService.getUser.lastName ? this.authService.getUser.lastName[0] + '.' : "";
-       this.user = this.authService.getUser.firstName + ' ' + lastName;
-     }
+    if (this.authService.isLoggedIn) {
+      this.hideLogin = true;
+      let lastName = this.authService.getUser.lastName ? this.authService.getUser.lastName[0] + '.' : "";
+      this.user = this.authService.getUser.firstName + ' ' + lastName;
+    }
   }
 
-  logout(){
+  logout() {
     amplitude.getInstance().logEvent("signed out");
     this.authService.logout();
     this.user = null;
@@ -107,5 +109,13 @@ export class HeaderComponent implements OnInit {
 
   cabinet() {
     amplitude.getInstance().logEvent("clicked cabinet");
+  }
+
+  public langKZ() {
+    this.translateService.setActiveLang('kz');
+  }
+
+  public langRU() {
+    this.translateService.setActiveLang('ru');
   }
 }

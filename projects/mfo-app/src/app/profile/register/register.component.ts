@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { fromEvent } from 'rxjs';
 import amplitude from 'amplitude-js';
 
-declare function iinCheck(iin:any):any;
+declare function iinCheck(iin: any): any;
 
 @Component({
   selector: 'mfo-register',
@@ -14,12 +14,13 @@ declare function iinCheck(iin:any):any;
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  show: boolean = false;
 
-  registerForm:any = {
-    msisdn:null
+  registerForm: any = {
+    msisdn: null
   }
 
-  pdfForm:any = {
+  pdfForm: any = {
     firstName: null,
     iin: null,
     lastName: null,
@@ -27,16 +28,16 @@ export class RegisterComponent implements OnInit {
     phone: null,
   }
 
-  file:any = null;
+  file: any = null;
 
-  code:any = null;
-  showSMSModal:boolean = false;
+  code: any = null;
+  showSMSModal: boolean = false;
 
-  showSmsCode:boolean = false;
+  showSmsCode: boolean = false;
   // msisdn:any = null;
 
-  signUpShow:boolean = false;
-  singUpForm:any = {
+  signUpShow: boolean = false;
+  singUpForm: any = {
     "code": null,
     "msisdn": null,
     "password": null,
@@ -47,13 +48,13 @@ export class RegisterComponent implements OnInit {
     "middleName": null,
   }
 
-  qparams:any = null;
-  disabled:any = false;
+  qparams: any = null;
+  disabled: any = false;
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              private registerService:RegisterService,
-              private toastr: ToastrService,
-              private auth:AuthService) {
+    private router: Router,
+    private registerService: RegisterService,
+    private toastr: ToastrService,
+    private auth: AuthService) {
 
   }
 
@@ -66,7 +67,7 @@ export class RegisterComponent implements OnInit {
   }
 
   public loadScript(url: string) {
-    const body = <HTMLDivElement> document.body;
+    const body = <HTMLDivElement>document.body;
     const script = document.createElement('script');
     script.innerHTML = '';
     script.src = url;
@@ -75,8 +76,8 @@ export class RegisterComponent implements OnInit {
     body.appendChild(script);
   }
 
-  signUp(){
-    if(this.singUpForm.password !== this.singUpForm.confirmPassword){
+  signUp() {
+    if (this.singUpForm.password !== this.singUpForm.confirmPassword) {
       this.toastr.error('Пароль не изменён, так как новый пароль повторен неправильно.', 'Ошибка!');
       return;
     }
@@ -90,32 +91,32 @@ export class RegisterComponent implements OnInit {
 
     this.disabled = true;
     this.registerService.signUp(this.singUpForm).subscribe(res => {
-      if(res){
+      if (res) {
         amplitude.getInstance().logEvent("registered");
         this.auth.saveUser(res);
-        this.router.navigate(['/profile/verilive'], { queryParams: {...this.qparams}})
+        this.router.navigate(['/profile/verilive'], { queryParams: { ...this.qparams } })
       }
       this.disabled = false;
-    },error => {
+    }, error => {
       this.disabled = false;
     })
   }
 
-  checkUser(){
+  checkUser() {
     amplitude.getInstance().logEvent("clicked register");
     this.registerService.checkUser(this.registerForm.msisdn).subscribe(res => {
-      if(!res.exist){
+      if (!res.exist) {
         this.registerUser()
-      }else{
+      } else {
         this.toastr.error('Пользователь с таким номером уже зарегистрирован', 'Ошибка!');
       }
     })
   }
 
-  registerUser(){
-    if(this.pdfForm.iin){
+  registerUser() {
+    if (this.pdfForm.iin) {
       console.log(iinCheck(this.pdfForm.iin))
-      if(!iinCheck(this.pdfForm.iin)){
+      if (!iinCheck(this.pdfForm.iin)) {
         this.toastr.error('Вы ввели неверный ИИН!', 'Ошибка!');
         return;
       }
@@ -126,7 +127,7 @@ export class RegisterComponent implements OnInit {
     })
   }
 
-  getConsent(){
+  getConsent() {
     this.pdfForm.phone = this.registerForm.msisdn;
     this.registerService.getConsent(this.pdfForm).subscribe(res => {
       this.file = URL.createObjectURL(res);
@@ -134,8 +135,8 @@ export class RegisterComponent implements OnInit {
     })
   }
 
-  sendCode(){
-    if(this.code.length == 6 && !this.code.includes('-')){
+  sendCode() {
+    if (this.code.length == 6 && !this.code.includes('-')) {
       let data = {
         code: this.code,
         msisdn: this.registerForm.msisdn
@@ -145,16 +146,16 @@ export class RegisterComponent implements OnInit {
         res => {
           this.showSMSModal = false;
           this.signUpShow = true;
-          amplitude.getInstance().logEvent("sms entered", {"success": true})
+          amplitude.getInstance().logEvent("sms entered", { "success": true })
         },
         error => {
-          amplitude.getInstance().logEvent("sms entered", {"success": false})
+          amplitude.getInstance().logEvent("sms entered", { "success": false })
         }
       )
     }
   }
 
-  openFile(){
+  openFile() {
     window.open(this.file);
   }
 
@@ -165,10 +166,14 @@ export class RegisterComponent implements OnInit {
     amplitude.getInstance().logEvent("clicked sign in", eventProperties);
   }
   sendSms() {
-    this.auth.sendSms({msisdn:this.registerForm.msisdn}).subscribe(res => {
+    this.auth.sendSms({ msisdn: this.registerForm.msisdn }).subscribe(res => {
       amplitude.getInstance().logEvent("sms resent");
       this.showSmsCode = true;
     })
+  }
+
+  togglePassword() {
+    this.show = !this.show;
   }
 
 }
