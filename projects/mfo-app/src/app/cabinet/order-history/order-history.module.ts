@@ -4,16 +4,14 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MainFormComponent } from './main-form.component';
+import { OrderHistoryComponent } from './order-history.component';
 import { CommonModule } from '@angular/common';
-import {TRANSLOCO_SCOPE, TranslocoModule} from '@ngneat/transloco';
+import { TRANSLOCO_SCOPE, TranslocoModule } from '@ngneat/transloco';
 
 
 @NgModule({
-  declarations: [
-    MainFormComponent
-  ],
-  exports:[MainFormComponent],
+  declarations: [OrderHistoryComponent],
+  exports: [OrderHistoryComponent],
   imports: [
     TranslocoModule,
     ReactiveFormsModule,
@@ -22,12 +20,12 @@ import {TRANSLOCO_SCOPE, TranslocoModule} from '@ngneat/transloco';
     NgxSliderModule,
     CommonModule
   ],
-  providers: [{
-    provide: TRANSLOCO_SCOPE,
-    useValue: 'main-form'
-  }],
+  // providers: [{
+  //   provide: TRANSLOCO_SCOPE,
+  //   useValue: 'order-history'
+  // }],
   bootstrap: []
 })
 
 
-export class MainFormModule { }
+export class OrderHistoryModule { }

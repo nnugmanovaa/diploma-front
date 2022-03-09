@@ -18,7 +18,7 @@ export class MainFormComponent implements OnInit {
   value: number = 6;
   monthOptions: Options = {
     floor: 2,
-    ceil: 6,
+    ceil: 12,
     showSelectionBar: true,
     minLimit: 0
   };

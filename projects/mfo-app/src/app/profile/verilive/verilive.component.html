@@ -1,41 +1,47 @@
-<section class="veriface">
-  <div class="container">
-    <div class="top-info" id="vfInfo">
-      <ng-container *ngIf="verifaceLoad">
-        <h2>Идентификация лица</h2>
-        <p><b>Рекоммендации:</b></p>
+<ng-container *transloco="let text; read: 'var'">
+  <section class="veriface">
+    <div class="container">
+      <div class="top-info" id="vfInfo">
+        <ng-container *ngIf="verifaceLoad">
+          <h2>{{text('identification')}}</h2>
+          <p><b>{{text('recommend')}}</b></p>
           <ul>
             <li>
-              Не закрывайте лицо (снимите головной убор, солнцезащитные очки, маску)
+              {{text('nomask')}}
             </li>
             <li>
-              Встаньте лицом к источнику света
+              {{text('facelight')}}
             </li>
             <li>
-              Держите телефон перед собой
+              {{text('holdphone')}}
             </li>
             <li>
-              Разрешите доступ к камере
+              {{text('camera')}}
             </li>
           </ul>
-      </ng-container>
-      <div class="btns">
-        <button onclick="onInitButtonClick()"><span id="ChangeText" (click)="veriLive()">Далее</span></button>
+        </ng-container>
+        <div class="btns">
+          <button onclick="onInitButtonClick()"><span id="ChangeText" (click)="veriLive()">{{text('next')}}</span></button>
+        </div>
       </div>
-    </div>
-    <div class="top-info" [hidden]="true" id="NextShow">
-      <div class="btns">
-        <button class="btn" [disabled]="disabled" (click)="showSignUP()">
-          <span>Далее</span>
-          <ng-container *ngIf="disabled">
-            <div class="loader">
-              <div class="lds-facebook"><div></div><div></div><div></div></div>
-            </div>
-          </ng-container>
-        </button>
+      <div class="top-info" [hidden]="true" id="NextShow">
+        <div class="btns">
+          <button class="btn" [disabled]="disabled" (click)="showSignUP()">
+            <span>{{text('next')}}</span>
+            <ng-container *ngIf="disabled">
+              <div class="loader">
+                <div class="lds-facebook">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              </div>
+            </ng-container>
+          </button>
+        </div>
       </div>
+      <div id="id_verilive" style="margin: auto;"></div>
+      <textarea id="results" [hidden]="true" [(ngModel)]="vfImage"></textarea>
     </div>
-    <div id="id_verilive" style="margin: auto;"></div>
-    <textarea id="results" [hidden]="true" [(ngModel)]="vfImage"></textarea>
-  </div>
-</section>
+  </section>
+</ng-container>

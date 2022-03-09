@@ -3,6 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import amplitude from "amplitude-js";
 import { environment } from '../environments/environment';
 import { AuthService } from './core/services/auth.service';
+import { TranslocoService } from '@ngneat/transloco';
 
 declare let gtag: Function;
 import {
@@ -66,7 +67,7 @@ export class AppComponent implements OnInit {
   //   )
   // }
 
-  constructor(private router: Router, private auth: AuthService) {
+  constructor(private router: Router, private auth: AuthService, public translateService: TranslocoService) {
     this.router.events.subscribe(
       (event: any) => {
         if (event instanceof NavigationEnd) {
@@ -80,6 +81,14 @@ export class AppComponent implements OnInit {
         }
       }
     );
+  }
+
+  public update() {
+    this.translateService.setActiveLang('kz');
+  }
+
+  public date() {
+    this.translateService.setActiveLang('ru');
   }
 
   ngOnInit(): void {

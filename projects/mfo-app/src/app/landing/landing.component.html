@@ -1,277 +1,287 @@
-<main class="main">
-  <div class="container">
-    <div class="main-left">
-      <h1>Микрокредит онлайн<br>до 500 000 ₸</h1>
-      <ul>
-        <li>Деньги у вас уже в <a class="timer">{{ time }}</a></li>
-        <li>1 минута решение по выдаче</li>
-        <li>от 4.8% годовых*</li>
-      </ul>
-      <div class="main-left-img">
-        <picture class="desctop">
-          <source type="image/webp" srcset="assets/img/main-img.webp">
-          <source type="image/jpeg" srcset="assets/img/main-img.png">
-          <img src="assets/img/main-img.png" alt="займы онлайн">
-        </picture>
+<ng-container *transloco="let text; read:'landing'">
+  <main class="main">
+    <div class="container">
+      <div class="main-left">
+        <h1>{{text('creditonline')}}<br>{{text('before')}}</h1>
+        <ul>
+          <li>{{text('money')}} <a class="timer">{{ time }}</a></li>
+          <li>{{text('mindecision')}}</li>
+          <li>{{text('per')}}</li>
+        </ul>
+        <div class="main-left-img">
+          <picture class="desctop">
+            <source type="image/webp" srcset="assets/img/main-img.webp">
+            <source type="image/jpeg" srcset="assets/img/main-img.png">
+            <img src="assets/img/main-img.png" alt="займы онлайн">
+          </picture>
+        </div>
+      </div>
+      <div class="main-right">
+        <mfo-main-form></mfo-main-form>
       </div>
     </div>
-    <div class="main-right">
+  </main>
+
+  <section class="why-we">
+    <div class="container">
+      <h1>{{text('whyus')}}</h1>
+      <ul>
+        <li>
+          <div class="left"><img src="assets/img/why1.svg" alt="займ онлайн казахстан" width="71" height="71"></div>
+          <div class="right">
+            <h2>{{text('everonline')}}</h2>
+            <p>{{text('applicationuneed')}} <br>{{text('onlyinternet')}}</p>
+          </div>
+        </li>
+        <li>
+          <div class="left"><img src="assets/img/why2.svg" alt="микрокредит без процентов" width="68" height="68"></div>
+          <div class="right">
+            <h2>{{text('simpledesign')}}</h2>
+            <p>{{text('fillin7')}}</p>
+          </div>
+        </li>
+        <li>
+          <div class="left"><img src="assets/img/why3.svg" alt="займ онлайн кз" width="71" height="71"></div>
+          <div class="right">
+            <h2>{{text('flexibleterm')}}</h2>
+            <p>{{text('2to12')}}</p>
+          </div>
+        </li>
+        <li>
+          <div class="left"><img src="assets/img/why4.svg" alt="кредит без подтверждения дохода" width="71" height="71"></div>
+          <div class="right">
+            <h2>{{text('convenientrepay')}}</h2>
+            <p>{{text('payonline')}} <br>{{text('useterminal')}}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="how-to-checkout" id="Checkout">
+    <div class="container">
+      <h1>{{text('getloan5')}}</h1>
+      <p>{{text('applyloancard')}} <br>{{text('need')}}</p>
+      <ul>
+        <li>
+          <picture>
+            <source type="image/webp" srcset="assets/img/how1.webp">
+            <source type="image/jpeg" srcset="assets/img/how1.png">
+            <img src="assets/img/how1.png" alt="выгодный займ">
+          </picture>
+          <h4>{{text('submitapplication')}}</h4>
+          <p>{{text('onwebphone')}}</p>
+          <span>{{text('min1')}}</span>
+        </li>
+        <li>
+          <picture>
+            <source type="image/webp" srcset="assets/img/how2.webp">
+            <source type="image/jpeg" srcset="assets/img/how2.png">
+            <img src="assets/img/how2.png" alt="микрокредиты в казахстане">
+          </picture>
+          <h4>{{text('fillques')}}</h4>
+          <p>{{text('quicklysimple')}}</p>
+          <span>{{text('min5')}}</span>
+        </li>
+        <li>
+          <picture>
+            <source type="image/webp" srcset="assets/img/how3.webp">
+            <source type="image/jpeg" srcset="assets/img/how3.png">
+            <img src="assets/img/how3.png" alt="онлайн кредит на карту без отказа">
+          </picture>
+          <h4>{{text('getsolution')}}</h4>
+          <p>{{text('notesms')}}</p>
+          <span>{{text('min1')}}</span>
+        </li>
+        <li>
+          <picture>
+            <source type="image/webp" srcset="assets/img/how4.webp">
+            <source type="image/jpeg" srcset="assets/img/how4.png">
+            <img src="assets/img/how4.png" alt="онлайн микрокредит">
+          </picture>
+          <h4>{{text('collectmoney')}}</h4>
+          <p>{{text('receiptcardonline')}}</p>
+          <span>{{text('min1')}}</span>
+        </li>
+      </ul>
+      <div class="btn" (click)="validateTime()" (click)="takeLoan()">{{text('loan')}}</div>
+    </div>
+  </section>
+
+  <section class="how-to-repay" id="Repay">
+    <div class="container">
+      <div class="left">
+        <h1>{{text('howrepayloan')}}</h1>
+        <p>{{text('planned')}}</p>
+        <ul>
+          <li>
+            <div class="top" (click)="show[4] = !show[4]">
+              <p>{{text('returncredit')}} </p> <img src="assets/img/chev.svg" width="30" height="30" alt="" [class.open]="show[4]">
+            </div>
+            <div class="bottom" *ngIf="show[4]">
+              <p>
+                {{text('currentlypay')}}<br>
+                {{text('attention')}} <br> <br>
+
+                {{text('clickpay')}} <br>
+                {{text('enternumberlast')}} <br>
+                {{text('nextbutton')}} <br>
+                {{text('paybutton')}} <br> <br>
+
+                {{text('defpayment')}}
+              </p>
+            </div>
+          </li>
+          <li>
+            <div class="top" (click)="show[0] = !show[0]">
+              <p>{{text('ewallet')}}</p> <img src="assets/img/chev.svg" width="30" height="30" alt="займ без процентов" [class.open]="show[0]">
+            </div>
+            <div class="bottom" *ngIf="show[0]">
+              <p>
+                {{text('repayloan')}}<br><br>
+                {{text('insite')}} <br>
+                {{text('choocemfo')}} <br>
+                {{text('enteriin')}} <br>
+                {{text('enterrepay')}} <br>
+                <br>
+                {{text('loanacross')}}
+              </p>
+            </div>
+          </li>
+          <li>
+            <div class="top" (click)="show[1] = !show[1]">
+              <p>{{text('ewall')}} <img src="assets/img/kassa.svg" alt=""></p> <img src="assets/img/chev.svg" width="30" height="30" alt="быстрые займы" [class.open]="show[1]">
+            </div>
+            <div class="bottom" *ngIf="show[1]">
+              <p>
+                {{text('forrepaycredit')}} <br><br>
+                {{text('comesite')}}<br>
+                {{text('choocepayin')}}<br>
+                {{text('enterin')}} <br>
+                {{text('entersum')}}<br><br>
+                {{text('kom')}}
+              </p>
+            </div>
+          </li>
+          <li>
+            <div class="top" (click)="show[2] = !show[2]">
+              <p>{{text('terminals')}} <img src="assets/img/kassa.svg" alt=""></p> <img src="assets/img/chev.svg" width="30" height="30" alt="мфо доступный кредит" [class.open]="show[2]">
+            </div>
+            <div class="bottom" *ngIf="show[2]">
+              <p>
+                {{text('laonrepay')}}<br><br>
+                {{text('kassa24')}}<br><br>
+                {{text('repayterminal')}} <br><br>
+                {{text('menu')}} <br>
+                {{text('enterpay')}}<br>
+                {{text('form')}} <br>
+                {{text('nal')}} <br>
+                {{text('check')}} <br><br>
+                {{text('komservice')}}
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <picture class="desctop">
+        <source type="image/webp" srcset="assets/img/rep1.webp">
+        <source type="image/jpeg" srcset="assets/img/rep1.png">
+        <img src="assets/img/rep1.png" alt="получить займ">
+      </picture>
+    </div>
+    <button (click)="payLoan()" class="btn" [routerLink]="['/payment']">{{text('repay')}}</button>
+    <!-- <a [routerLink]="['/payment']" class="btn">Оплатить</a> -->
+  </section>
+
+  <section class="conditions" id="Conditions">
+    <div class="container">
+      <h1>{{text('uslovie')}}</h1>
+      <ul>
+        <li>
+          <img src="assets/img/lc1.svg" width="60" height="60" alt="онлайн заявка на кредит">
+          <p>{{text('maxsum')}} <br> 500 000 тенге</p>
+        </li>
+        <li>
+          <img src="assets/img/lc2.svg" width="60" height="60" alt="деньги онлайн займ">
+          <p>{{text('maxterm')}}<br>{{text('year')}}</p>
+        </li>
+        <li>
+          <img src="assets/img/lc3.svg" width="60" height="60" alt="деньги до зарплаты без процентов">
+          <p>{{text('kz')}}</p>
+        </li>
+        <li>
+          <img src="assets/img/lc4.svg" width="60" height="60" alt="займ под 0 процентов">
+          <p>{{text('21year')}}</p>
+        </li>
+        <li>
+          <img src="assets/img/lc5.svg" width="60" height="60" alt="микро займ">
+          <p>{{text('bankcard')}}</p>
+        </li>
+        <li>
+          <img src="assets/img/lc6.svg" width="60" height="60" alt="взять кредит">
+          <p>{{text('smartphone')}}</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="landing-bottom">
+    <div class="container">
+      <ul>
+        <li>
+          <a class="hb-logo" [routerLink]="['/']" class="desctop">
+            <img src="assets/img/logo.svg" alt="">
+          </a>
+        </li>
+        <li>
+          <h2>{{text('navi')}}</h2>
+          <a [routerLink]="['/']" fragment="Checkout"><img src="assets/img/link.svg" width="16" height="16" alt=""> {{text('howget')}}</a>
+          <a [routerLink]="['/']" fragment="Repay"><img src="assets/img/link.svg" width="16" height="16" alt=""> {{text('howrepay')}}</a>
+          <a [routerLink]="['/']" fragment="Conditions"><img src="assets/img/link.svg" width="16" height="16" alt=""> {{text('uslovii')}}</a>
+        </li>
+        <li>
+          <h2>{{text('conditions')}}</h2>
+          <a href="https://mfo-ui-docs.storage-object.pscloud.io/%D0%BB%D0%B8%D1%86%D0%B5%D0%BD%D0%B7%D0%B8%D1%8F%20%D0%9C%D0%A4%D0%9E.pdf" target="_blank"><img src="assets/img/link2.svg" width="20" height="20" alt="">Лицензия МФО</a>
+          <a href="https://mfo-ui-docs.storage-object.pscloud.io/%D0%9F%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%B0%20%D0%BF%D1%80%D0%B5%D0%B4%D0%BE%D1%81%D1%82%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%BC%D0%B8%D0%BA%D1%80%D0%BE%D0%BA%D1%80%D0%B5%D0%B4%D0%B8%D1%82%D0%BE%D0%B2_2021.pdf"
+            target="_blank"><img src="assets/img/link2.svg" width="20" height="20" alt="">{{text('rule')}}</a>
+          <a href="https://web-ui-docs.storage-object.pscloud.io/%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8_%D0%9C%D0%A4%D0%9E.pdf"
+            target="_blank"><img src="assets/img/link2.svg" width="20" height="20" alt="">{{text('politic')}}</a>
+          <a href="https://mfo-ui-docs.object.pscloud.io/prikaz.8.otsrochka.PDF" target="_blank"><img src="assets/img/link2.svg" width="20" height="20" alt="">{{text('order')}}</a>
+          <a href="https://mfo-ui-docs.object.pscloud.io/uvedoml.ob.otsrochke.pdf" target="_blank"><img src="assets/img/link2.svg" width="20" height="20" alt="">{{text('granting')}}</a>
+          <a href="https://mfo-ui-docs.object.pscloud.io/%D0%98%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8F_%D0%BF%D0%BE_%D1%83%D1%80%D0%B5%D0%B3%D1%83%D0%BB%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8E_%D0%BF%D1%80%D0%BE%D0%B1%D0%BB%D0%B5%D0%BC%D0%BD%D0%BE%D0%B8%CC%86_%D0%B7%D0%B0%D0%B4%D0%BE%D0%BB%D0%B6%D0%B5%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D0%B8.pdf"
+            target="_blank"><img src="assets/img/link2.svg" width="20" height="20" alt="">Информация по урегулированию проблемной задолженности</a>
+          <a href="https://mfo-ui-docs.object.pscloud.io/%D0%A4%D0%B8%D0%BD%D0%B0%D0%BD%D1%81%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BE%D1%82%D1%87%D0%B5%D1%82%D0%BD%D0%BE%D1%81%D1%82%D1%8C%20%D0%B7%D0%B0%202020.pdf" target="_blank"><img
+              src="assets/img/link2.svg" width="20" height="20" alt="">Финансовая отчетность за 2020 г.</a>
+          <a href="https://mfo-ui-docs.object.pscloud.io/%D0%A4%D0%B8%D0%BD%D0%B0%D0%BD%D1%81%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BE%D1%82%D1%87%D0%B5%D1%82%D0%BD%D0%BE%D1%81%D1%82%D1%8C%20%D0%B7%D0%B0%202021.pdf" target="_blank"><img
+              src="assets/img/link2.svg" width="20" height="20" alt="">Финансовая отчетность за 2021 г.</a>
+
+        </li>
+        <li>
+          <h2>{{text('contacts')}}</h2>
+          <a href="https://go.2gis.com/ldlhhy" target="_blank"><img src="assets/img/link4.svg" width="17" height="17" alt=""> г.Алматы, ул Байзакова 280</a>
+          <a href="mailto:info@zaimem.kz"><img src="assets/img/link5.svg" width="16" height="16" alt="">info@zaimem.kz</a>
+          <a href="tel:+7 777 010-58-00"><img src="assets/img/link3.svg" width="17" height="17" alt="">+7 (777) 010-58-00</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <p class="cpr">Copyright © 2022 ТОО "МФО Payintech”</p>
+  </footer>
+
+
+  <div class="modal" *ngIf="modal">
+    <div class="modal-content">
+      <div class="modal-close" (click)="modal = false;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M14.59 8L12 10.59L9.41 8L8 9.41L10.59 12L8 14.59L9.41 16L12 13.41L14.59 16L16 14.59L13.41 12L16 9.41L14.59 8ZM12 2C6.47 2 2 6.47 2 12C2 17.53 6.47 22 12 22C17.53 22 22 17.53 22 12C22 6.47 17.53 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z"
+            fill="black" />
+        </svg>
+      </div>
       <mfo-main-form></mfo-main-form>
     </div>
   </div>
-</main>
 
-<section class="why-we">
-  <div class="container">
-    <h1>Почему мы?</h1>
-    <ul>
-      <li>
-       <div class="left"><img src="assets/img/why1.svg" alt="займ онлайн казахстан" width="71" height="71"></div>
-       <div class="right">
-         <h2>Всё онлайн</h2>
-         <p>Для заявки нужен <br>только интернет</p>
-       </div>
-      </li>
-      <li>
-       <div class="left"><img src="assets/img/why2.svg" alt="микрокредит без процентов" width="68" height="68"></div>
-       <div class="right">
-         <h2>Простое оформление</h2>
-         <p>Заполните за 7 минут</p>
-       </div>
-      </li>
-      <li>
-       <div class="left"><img src="assets/img/why3.svg" alt="займ онлайн кз" width="71" height="71"></div>
-       <div class="right">
-         <h2>Гибкий срок микрокредитования</h2>
-         <p>от 2 до 12 месяцев</p>
-       </div>
-      </li>
-      <li>
-       <div class="left"><img src="assets/img/why4.svg" alt="кредит без подтверждения дохода" width="71" height="71"></div>
-       <div class="right">
-         <h2>Удобное погашение</h2>
-         <p>Оплатите онлайн или <br>используйте сеть терминалов</p>
-       </div>
-      </li>
-    </ul>
-  </div>
-</section>
-
-<section class="how-to-checkout" id="Checkout">
-  <div class="container">
-    <h1>Как оформить займ за 5 минут</h1>
-    <p>Оформите займ не входя из дома онлайн на карту. <br>Нужен только паспорт РК. Оформление займет не более 10 минут, деньги поступят на счет - мгновенно.</p>
-    <ul>
-      <li>
-        <picture>
-          <source type="image/webp" srcset="assets/img/how1.webp">
-          <source type="image/jpeg" srcset="assets/img/how1.png">
-          <img src="assets/img/how1.png" alt="выгодный займ">
-        </picture>
-        <h4 class="checkout-title">Подать заявку</h4>
-        <p class="checkout-text">онлайн на сайте круглосуточно</p>
-        <span>1 минута</span>
-      </li>
-      <li>
-        <picture>
-          <source type="image/webp" srcset="assets/img/how2.webp">
-          <source type="image/jpeg" srcset="assets/img/how2.png">
-          <img src="assets/img/how2.png" alt="микрокредиты в казахстане">
-        </picture>
-        <h4 class="checkout-title">Заполнить анкету</h4>
-        <p class="checkout-text">быстро и максимально просто</p>
-        <span>5 минут</span>
-      </li>
-      <li>
-        <picture>
-          <source type="image/webp" srcset="assets/img/how3.webp">
-          <source type="image/jpeg" srcset="assets/img/how3.png">
-          <img src="assets/img/how3.png" alt="онлайн кредит на карту без отказа">
-        </picture>
-        <h4 class="checkout-title">Получить решение</h4>
-        <p class="checkout-text">Мгновенное решение по одобрению займа</p>
-        <span>1 минута</span>
-      </li>
-      <li>
-        <picture>
-          <source type="image/webp" srcset="assets/img/how4.webp">
-          <source type="image/jpeg" srcset="assets/img/how4.png">
-          <img src="assets/img/how4.png" alt="онлайн микрокредит">
-        </picture>
-        <h4 class="checkout-title">Забрать деньги</h4>
-        <p class="checkout-text">Зачисление денег в кратчайшее время</p>
-        <span>1 минута</span>
-      </li>
-    </ul>
-    <div class="btn" (click)="validateTime()" (click)="takeLoan()">Оформить займ</div>
-  </div>
-</section>
-
-<section class="how-to-repay" id="Repay">
-  <div class="container">
-    <div class="left">
-      <h1>Как погасить микрокредит</h1>
-      <p>Нашим клиентам доступно плановое, частичное и полное досрочное погашение микрокредита:</p>
-      <ul>
-        <li>
-          <div class="top" (click)="show[4] = !show[4]">
-            <p>Возврат микрокредита платежной картой </p> <img src="assets/img/chev.svg" width="30" height="30" alt="" [class.open]="show[4]">
-          </div>
-          <div class="bottom" *ngIf="show[4]">
-            <p>
-              В настоящее время ТОО «МФО «Payintech» принимает платежи по картам платежных систем VISA и MasterCard. <br>
-              Для оплаты с помощью платежной карты, необходимо выполнить следующие шаги: <br> <br>
-
-              1. Нажмите на кнопку «Оплатить» в правом верхнем углу <br>
-              2. Введите номер телефона, фамилию заемщика, сумму для оплаты  <br>
-              3. Нажмите на кнопку «Далее» <br>
-              4. Введите данные карты и нажмите на кнопку «Оплатить» <br> <br>
-
-              По умолчанию, в данном поле ввода будет указана сумма ежемесячного платежа.
-            </p>
-          </div>
-        </li>
-        <li>
-          <div class="top" (click)="show[0] = !show[0]">
-            <p>Электронный кошелёк (Без комиссий)</p> <img src="assets/img/chev.svg" width="30" height="30" alt="займ без процентов" [class.open]="show[0]">
-          </div>
-          <div class="bottom" *ngIf="show[0]">
-            <p>
-              Для погашения микрокредита через электронный кошелек PITECH: <br><br>
-              1) Зайдите на сайт https://money.pitech.kz/. <br>
-              2) Выберите «МФО Payintech - плановый платеж». <br>
-              3) Введите ИИН и выберите микрокредит, который хотите погасить. <br>
-              4) Введите сумму и нажмите «Оплатить»* <br>
-              <br>
-              *Погашение займа через электронный кошелек PITECH – бесплатно.
-            </p>
-          </div>
-        </li>
-        <li>
-          <div class="top" (click)="show[1] = !show[1]">
-            <p>Электронный кошелёк <img src="assets/img/kassa.svg" alt=""></p> <img src="assets/img/chev.svg" width="30" height="30" alt="быстрые займы" [class.open]="show[1]">
-          </div>
-          <div class="bottom" *ngIf="show[1]">
-            <p>
-              Для погашения микрокредита через электронный кошелек: <br><br>
-              1) Зайдите на сайт сервиса. <br>
-              2) Выберите «Payintech – плановый платеж». <br>
-              3) Введите ИИН и выберите микрокредит, который хотите погасить. <br>
-              4) Введите сумму и нажите «Оплатить»* <br><br>
-              *Комиссии за погашение взимаются сервисом отдельно.
-            </p>
-          </div>
-        </li>
-        <li>
-          <div class="top" (click)="show[2] = !show[2]">
-            <p>Терминалы <img src="assets/img/kassa.svg" alt=""></p> <img src="assets/img/chev.svg" width="30" height="30" alt="мфо доступный кредит" [class.open]="show[2]">
-          </div>
-          <div class="bottom" *ngIf="show[2]">
-            <p>
-              Pitech.kz предлагает возможность погашать займы через терминалы Касса 24. <br><br>
-              Касса 24 имеет широкую терминальную сеть по всему Казахстану в 17 000 терминалов. <br><br>
-              Для погашения микрокредита через терминал: <br><br>
-              1) В меню терминала перейдите в раздел «Финансовые организации» <br>
-              2) Выберите «Payintech – плановый платеж». <br>
-              3) Заполните форму оплаты. <br>
-              4) Внесите наличные в купюроприемник*. <br>
-              5) Заберите чек <br><br>
-              *Комиссии за погашение взимаются сервисом отдельно.
-            </p>
-          </div>
-        </li>
-      </ul>
-    </div>
-    <picture class="desctop">
-      <source type="image/webp" srcset="assets/img/rep1.webp">
-      <source type="image/jpeg" srcset="assets/img/rep1.png">
-      <img src="assets/img/rep1.png" alt="получить займ">
-    </picture>
-  </div>
-  <button (click)="payLoan()" class="btn" [routerLink]="['/payment']">Оплатить</button>
-  <!-- <a [routerLink]="['/payment']" class="btn">Оплатить</a> -->
-</section>
-
-<section class="conditions" id="Conditions">
-  <div class="container">
-    <h1>Условия</h1>
-    <ul>
-      <li>
-        <img src="assets/img/lc1.svg" width="60" height="60" alt="онлайн заявка на кредит">
-        <p>Максимальная сумма микрокредита: <br> 500 000 тенге</p>
-      </li>
-      <li>
-        <img src="assets/img/lc2.svg" width="60" height="60" alt="деньги онлайн займ">
-        <p>Максимальный срок микрокредита: <br>1 год</p>
-      </li>
-      <li>
-        <img src="assets/img/lc3.svg" width="60" height="60" alt="деньги до зарплаты без процентов">
-        <p>Гражданство Республики Казахстан</p>
-      </li>
-      <li>
-        <img src="assets/img/lc4.svg" width="60" height="60" alt="займ под 0 процентов">
-        <p>Достижение 21 года</p>
-      </li>
-      <li>
-        <img src="assets/img/lc5.svg" width="60" height="60" alt="микро займ">
-        <p>Наличие банковской карты</p>
-      </li>
-      <li>
-        <img src="assets/img/lc6.svg" width="60" height="60" alt="взять кредит">
-        <p>Наличие смартфона</p>
-      </li>
-    </ul>
-  </div>
-</section>
-
-<section class="landing-bottom">
-  <div class="container">
-    <ul>
-      <li>
-        <a class="hb-logo" [routerLink]="['/']" class="desctop">
-          <img src="assets/img/logo.svg" alt="">
-        </a>
-      </li>
-      <li>
-        <h2>Навигация</h2>
-        <a [routerLink]="['/']" fragment="Checkout"><img src="assets/img/link.svg" width="16" height="16" alt=""> Как получить</a>
-        <a [routerLink]="['/']" fragment="Repay"><img src="assets/img/link.svg" width="16" height="16" alt=""> Как погасить</a>
-        <a [routerLink]="['/']" fragment="Conditions"><img src="assets/img/link.svg" width="16" height="16" alt=""> Условия</a>
-      </li>
-      <li>
-        <h2>Общие положения</h2>
-        <a href="https://mfo-ui-docs.storage-object.pscloud.io/%D0%BB%D0%B8%D1%86%D0%B5%D0%BD%D0%B7%D0%B8%D1%8F%20%D0%9C%D0%A4%D0%9E.pdf" target="_blank"><img src="assets/img/link2.svg" width="20" height="20" alt="">Лицензия МФО</a>
-        <a href="https://mfo-ui-docs.storage-object.pscloud.io/%D0%9F%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%B0%20%D0%BF%D1%80%D0%B5%D0%B4%D0%BE%D1%81%D1%82%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%BC%D0%B8%D0%BA%D1%80%D0%BE%D0%BA%D1%80%D0%B5%D0%B4%D0%B8%D1%82%D0%BE%D0%B2_2021.pdf" target="_blank"><img src="assets/img/link2.svg" width="20" height="20" alt="">Правила предоставления микрокредитов</a>
-        <a href="https://web-ui-docs.storage-object.pscloud.io/%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B8%D0%BA%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%84%D0%B8%D0%B4%D0%B5%D0%BD%D1%86%D0%B8%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8_%D0%9C%D0%A4%D0%9E.pdf" target="_blank"><img src="assets/img/link2.svg" width="20" height="20" alt="">Политика конфиденциальности и обработки персональных данных</a>
-        <a href="https://mfo-ui-docs.object.pscloud.io/prikaz.8.otsrochka.PDF" target="_blank"><img src="assets/img/link2.svg" width="20" height="20" alt="">Приказ №8 от 10.01.2022 о предоставлении отсрочки</a>
-        <a href="https://mfo-ui-docs.object.pscloud.io/uvedoml.ob.otsrochke.pdf" target="_blank"><img src="assets/img/link2.svg" width="20" height="20" alt="">Уведомление о предоставлении отсрочки</a>
-        <a href="https://mfo-ui-docs.object.pscloud.io/%D0%98%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8F_%D0%BF%D0%BE_%D1%83%D1%80%D0%B5%D0%B3%D1%83%D0%BB%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8E_%D0%BF%D1%80%D0%BE%D0%B1%D0%BB%D0%B5%D0%BC%D0%BD%D0%BE%D0%B8%CC%86_%D0%B7%D0%B0%D0%B4%D0%BE%D0%BB%D0%B6%D0%B5%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D0%B8.pdf" target="_blank"><img src="assets/img/link2.svg" width="20" height="20" alt="">Информация по урегулированию проблемной задолженности</a>
-        <a href="https://mfo-ui-docs.object.pscloud.io/%D0%A4%D0%B8%D0%BD%D0%B0%D0%BD%D1%81%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BE%D1%82%D1%87%D0%B5%D1%82%D0%BD%D0%BE%D1%81%D1%82%D1%8C%20%D0%B7%D0%B0%202020.pdf" target="_blank"><img src="assets/img/link2.svg" width="20" height="20" alt="">Финансовая отчетность за 2020 г.</a>
-        <a href="https://mfo-ui-docs.object.pscloud.io/%D0%A4%D0%B8%D0%BD%D0%B0%D0%BD%D1%81%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%BE%D1%82%D1%87%D0%B5%D1%82%D0%BD%D0%BE%D1%81%D1%82%D1%8C%20%D0%B7%D0%B0%202021.pdf" target="_blank"><img src="assets/img/link2.svg" width="20" height="20" alt="">Финансовая отчетность за 2021 г.</a>
-
-      </li>
-      <li>
-        <h2>Контакты</h2>
-        <a href="https://go.2gis.com/ldlhhy" target="_blank"><img src="assets/img/link4.svg" width="17" height="17" alt=""> г.Алматы, ул Байзакова 280</a>
-        <a href="mailto:info@zaimem.kz"><img src="assets/img/link5.svg" width="16" height="16" alt="">info@zaimem.kz</a>
-        <a href="tel:+7 777 010-58-00"><img src="assets/img/link3.svg" width="17" height="17" alt="">+7 (777) 010-58-00</a>
-      </li>
-    </ul>
-  </div>
-</section>
-
-<footer>
-  <p class="cpr">Copyright © 2022 ТОО "МФО Payintech”</p>
-</footer>
-
-
-<div class="modal" *ngIf="modal">
-  <div class="modal-content">
-    <div class="modal-close" (click)="modal = false;">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M14.59 8L12 10.59L9.41 8L8 9.41L10.59 12L8 14.59L9.41 16L12 13.41L14.59 16L16 14.59L13.41 12L16 9.41L14.59 8ZM12 2C6.47 2 2 6.47 2 12C2 17.53 6.47 22 12 22C17.53 22 22 17.53 22 12C22 6.47 17.53 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="black"/>
-      </svg>
-    </div>
-    <mfo-main-form></mfo-main-form>
-  </div>
-</div>
+</ng-container>

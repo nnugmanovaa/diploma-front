@@ -1,93 +1,99 @@
-<section class="profile-page">
-  <div class="container">
-    <form ngNativeValidate (ngSubmit)="checkUser()" *ngIf="!signUpShow">
-      <div class="form-top">
-        <h2>Заявка на микрокредит</h2>
-        <p class="link">Контактная информация</p>
-      </div>
-      <div class="label-input">
-        <label for="">Мобильный телефон <i>*</i></label>
-        <input type="tel" [unmask]="true" [imask]="{mask: '+{7}0000000000',lazy: false}" [(ngModel)]="registerForm.msisdn" name="msisdn">
-      </div>
-      <div class="label-input">
-        <label for="">Фамилия</label>
-        <input type="text" required name="lastName" [(ngModel)]="pdfForm.lastName">
-      </div>
-      <div class="label-input">
-        <label for="">Имя</label>
-        <input type="text" required name="firstName" [(ngModel)]="pdfForm.firstName">
-      </div>
-      <div class="label-input">
-        <label for="">Отчество <kbd>(необязательно)</kbd></label>
-        <input type="text" name="patronymic" [(ngModel)]="pdfForm.patronymic">
-      </div>
-      <div class="label-input">
-        <label for="">ИИН</label>
-        <input type="tel" name="iin" [(ngModel)]="pdfForm.iin" required [imask]="{mask: '000000000000',placeholderChar: '_',lazy: true}" minlength="12">
-      </div>
-      <div class="label-checkbox">
-        <label>
-          <input type="checkbox" required>
-          <span>Я даю свое согласие на сбор, обработку и использование моих персональных данных</span>
-        </label>
-      </div>
-      <button class="btn" type="submit">Далее</button>
+<ng-container *transloco="let text; read: 'register'">
+  <section class="profile-page">
+    <div class="container">
+      <form ngNativeValidate (ngSubmit)="checkUser()" *ngIf="!signUpShow">
+        <div class="form-top">
+          <h2>{{text('application-loan')}}</h2>
+          <p class="link">{{text('contact-info')}}</p>
+        </div>
+        <div class="label-input">
+          <label for="">{{text('mobile-phone')}} <i>*</i></label>
+          <input type="tel" [unmask]="true" [imask]="{mask: '+{7}0000000000',lazy: false}" [(ngModel)]="registerForm.msisdn" name="msisdn">
+        </div>
+        <div class="label-input">
+          <label for="">{{text('lastname')}}</label>
+          <input type="text" required name="lastName" [(ngModel)]="pdfForm.lastName">
+        </div>
+        <div class="label-input">
+          <label for="">{{text('name')}}</label>
+          <input type="text" required name="firstName" [(ngModel)]="pdfForm.firstName">
+        </div>
+        <div class="label-input">
+          <label for="">{{text('patronymic')}} <kbd>{{text('optional')}}</kbd></label>
+          <input type="text" name="patronymic" [(ngModel)]="pdfForm.patronymic">
+        </div>
+        <div class="label-input">
+          <label for="">{{text('iin')}}</label>
+          <input type="tel" name="iin" [(ngModel)]="pdfForm.iin" required [imask]="{mask: '000000000000',placeholderChar: '_',lazy: true}" minlength="12">
+        </div>
+        <div class="label-checkbox">
+          <label>
+            <input type="checkbox" required>
+            <span> {{text('personal-data')}}</span>
+          </label>
+        </div>
+        <button class="btn" type="submit">{{text('next')}}</button>
 
-      <div class="text-center">
-        <p>Уже проходили регистрацию?</p>
+        <div class="text-center">
+          <p>{{text('already-check')}}</p>
           <a [routerLink]="['/profile/login']">
             <div (click)="signIn()">
-              Авторизоваться
+              {{text('login')}}
             </div>
           </a>
-      </div>
-    </form>
-  </div>
-
-  <div class="container" *ngIf="signUpShow">
-    <form ngNativeValidate (ngSubmit)="signUp()">
-      <div class="form-top">
-        <h2>Установка пароля</h2>
-      </div>
-      <div class="label-input">
-        <label>Установите пароль</label>
-        <input type="password" required [(ngModel)]="singUpForm.password" name="password">
-      </div>
-      <div class="label-input">
-        <label>Подтвердите пароль</label>
-        <input type="password" required [(ngModel)]="singUpForm.confirmPassword" name="confirmPassword">
-      </div>
-      <button class="btn" type="submit" [disabled]="disabled">
-        Зарегистрироваться
-        <ng-container *ngIf="disabled">
-          <div class="loader">
-            <div class="lds-facebook"><div></div><div></div><div></div></div>
-          </div>
-        </ng-container>
-      </button>
-    </form>
-  </div>
-
-
-  <div class="modal" *ngIf="showSMSModal">
-    <div class="modal-content">
-      <form ngNativeValidate (ngSubmit)="sendCode()">
-        <div class="form-top">
-          <h2>Подтверждение номера телефона</h2>
-          <p>На номер {{ registerForm.msisdn }} было отправлено SMS с кодом подтверждения. Введите полученный код, чтобы продолжить оформление заявки. <br><br>Если в течении 60 секунд SMS не пришло, проверьте номер телефона и получите код повторно. </p>
-        </div>
-        <div class="form-content">
-          <p>Ознакомлен и даю свое согласие на</p>
-          <div class="file" (click)="openFile()"><img src="assets/img/dot.svg" alt="">сбор и обработку персональных данных, <br>предоставление информации о них в кредитные бюро, <br>выдачу кредитного отчета из кредитного бюро</div>
-          <div class="text-center">
-            <h3>SMS-код</h3>
-            <div class="label-input">
-              <input type="tel" name="code" [imask]="{mask: '000000',lazy: false, placeholderChar: '-'}" [(ngModel)]="code" (ngModelChange)="sendCode()">
-            </div>
-          </div>
-          <div class="resend-pass" (click)="sendSms()">Отправить повторно</div>
         </div>
       </form>
     </div>
-  </div>
-</section>
+
+    <div class="container" *ngIf="signUpShow">
+      <form ngNativeValidate (ngSubmit)="signUp()">
+        <div class="form-top">
+          <h2>{{text('setpass')}}</h2>
+        </div>
+        <div class="label-input">
+          <label>{{text('set-pass')}}</label>
+          <input type="password" required [(ngModel)]="singUpForm.password" name="password">
+        </div>
+        <div class="label-input">
+          <label>{{text('confirm-pass')}}</label>
+          <input type="password" required [(ngModel)]="singUpForm.confirmPassword" name="confirmPassword">
+        </div>
+        <button class="btn" type="submit" [disabled]="disabled">
+          {{text('register')}}
+          <ng-container *ngIf="disabled">
+            <div class="loader">
+              <div class="lds-facebook">
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+          </ng-container>
+        </button>
+      </form>
+    </div>
+
+
+    <div class="modal" *ngIf="showSMSModal">
+      <div class="modal-content">
+        <form ngNativeValidate (ngSubmit)="sendCode()">
+          <div class="form-top">
+            <h2>{{text('verification')}}</h2>
+            <p> {{ registerForm.msisdn }} {{text('sms-number')}} </p>
+          </div>
+          <div class="form-content">
+            <p>{{text('consent')}}</p>
+            <div class="file" (click)="openFile()"><img src="assets/img/dot.svg" alt="">сбор и обработку персональных данных, <br>предоставление информации о них в кредитные бюро, <br>выдачу кредитного отчета из кредитного бюро</div>
+            <div class="text-center">
+              <h3>SMS-код</h3>
+              <div class="label-input">
+                <input type="tel" name="code" [imask]="{mask: '000000',lazy: false, placeholderChar: '-'}" [(ngModel)]="code" (ngModelChange)="sendCode()">
+              </div>
+            </div>
+            <div class="resend-pass" (click)="sendSms()">{{text('resend')}}</div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</ng-container>

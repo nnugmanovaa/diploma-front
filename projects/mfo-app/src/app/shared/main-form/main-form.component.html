@@ -1,21 +1,36 @@
-<form ngNativeValidate (ngSubmit)="createRequest()" class="form-calculate">
-  <h2>Получить микрокредит</h2>
-  <div class="custom-slider">
-    <div class="slider-info">
-      <p>Срок микрокредитования</p>
-      <span>{{ form.period }} мес.</span>
+<ng-container *transloco="let t; read:'main-form'">
+  <form ngNativeValidate (ngSubmit)="createRequest()" class="form-calculate">
+    <h2>{{t('GetCredit')}}</h2>
+    <div class="custom-slider">
+      <div class="slider-info">
+        <p>{{t('TermCredit')}}</p>
+        <span>{{ form.period }} {{t('month')}}</span>
+      </div>
+      <ngx-slider (userChange)="calculateForm()" [(value)]="form.period" [options]="monthOptions"></ngx-slider>
+      <div class="month-bottom">
+        <p (click)="form.period = 2;calculateForm()">{{t('2month')}}</p>
+        <p (click)="form.period = 7;calculateForm()">{{t('7month')}}</p>
+        <p (click)="form.period = 12;calculateForm()">{{t('12month')}}</p>
+      </div>
     </div>
-    <ngx-slider (userChange)="calculateForm()" [(value)]="form.period" [options]="monthOptions"></ngx-slider>
-    <div class="month-bottom">
-      <p (click)="form.period = 2;calculateForm()">от 2 месяцев</p>
-      <p (click)="form.period = 4;calculateForm()">4 месяца</p>
-      <p (click)="form.period = 6;calculateForm()">6 месяцев</p>
+    <div class="custom-slider">
+      <div class="slider-info">
+        <p>{{t('AmountCredit')}}</p>
+        <span>{{ form.amount | currency: 'CLP':'₸' }} </span>
+      </div>
+      <ngx-slider (userChange)="calculateForm()" [(value)]="form.amount" [options]="priceOptions"></ngx-slider>
+      <div class="month-bottom">
+        <p (click)="form.amount = 150000;calculateForm()" style="min-width: 80px;">150 000 ₸</p>
+        <p (click)="form.amount = 325000;calculateForm()">325 000 ₸</p>
+        <p (click)="form.amount = 500000;calculateForm()">{{t('Do500000')}}</p>
+      </div>
     </div>
-  </div>
-  <div class="custom-slider">
-    <div class="slider-info">
-      <p>Сумма микрокредита</p>
-      <span>{{ form.amount | currency: 'CLP':'₸' }} </span>
+    <div class="form-label">
+      <label>{{t('RepaymentProcedure')}}</label>
+      <select [(ngModel)]="form.type" (ngModelChange)="calculateForm()" name="type">
+        <option value="ANNUITY_PAYMENTS">{{t('Annuity')}}</option>
+        <option value="MONTHLY_PRINCIPAL_DEBT_REPAYMENT_EQUAL_SHARES">{{t('Graded')}}</option>
+      </select>
     </div>
     <ngx-slider (userChange)="calculateForm()" [(value)]="form.amount" [options]="priceOptions"></ngx-slider>
     <div class="month-bottom">
@@ -23,18 +38,7 @@
       <p (click)="form.amount = 225000;calculateForm()">225 000 ₸</p>
       <p (click)="form.amount = 300000;calculateForm()">до 300 000 ₸</p>
     </div>
-  </div>
-  <div class="form-label">
-    <label>Порядок погашения</label>
-    <select [(ngModel)]="form.type" (ngModelChange)="calculateForm()" name="type">
-      <option value="ANNUITY_PAYMENTS">Аннуитетный</option>
-      <option value="MONTHLY_PRINCIPAL_DEBT_REPAYMENT_EQUAL_SHARES">Дифференцированный</option>
-    </select>
-  </div>
-  <div class="form-monthly">
-    <p>Ежемесячный платеж</p>
-    <b>{{ paymentPerMonth | currency: 'CLP':'₸' }}</b>
-  </div>
-  <button id="theButton" class="submit-button" type="submit" (click)="validateTime()">Получить</button>
-  <p class="small-text">*ГЭСВ не превышает 56%</p>
-</form>
+    <button id="theButton" class="submit-button" type="submit" (click)="validateTime()">{{t('Receive')}}</button>
+    <p class="small-text">{{t('GESB')}}</p>
+  </form>
+</ng-container>

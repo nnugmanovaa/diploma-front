@@ -1,397 +1,386 @@
-<section class="profile-page" *ngIf="!loading && !resultShow">
-  <div class="container">
-    <div class="step-progress">
-      <div id="top"></div>
-      <div class="back-btn" *ngIf="step > 1" (click)="step = step - 1">
-        <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M11.67 1.8701L9.9 0.100098L0 10.0001L9.9 19.9001L11.67 18.1301L3.54 10.0001L11.67 1.8701Z" fill="black"/>
-        </svg>
-        Назад
-      </div>
-      <p>Шаг {{ step }}/3</p>
-      <div class="progress"><span style="width: calc(33% * {{ step }});"></span></div>
-    </div>
-    <form ngNativeValidate (ngSubmit)="setPasportData()" *ngIf="step == 1" (ngSubmit)="scrollToTop()">
-      <div class="form-top">
-        <h2>Паспортные данные</h2>
-      </div>
-      <div class="label-input">
-        <label>ИИН</label>
-        <input type="tel" required name="iin" [(ngModel)]="data.iin">
-      </div>
-      <div class="label-input">
-        <label>Фамилия</label>
-        <input type="text" required name="lastName" [(ngModel)]="data.personalInfo.lastName">
-      </div>
-      <div class="label-input">
-        <label>Имя</label>
-        <input type="text" required name="firstName" [(ngModel)]="data.personalInfo.firstName">
-      </div>
-      <div class="label-input">
-        <label>Отчество</label>
-        <input type="text" name="middleName" [(ngModel)]="data.personalInfo.middleName">
-      </div>
-      <div class="label-input">
-        <label>Дата рождения</label>
-        <input type="date" required name="birthDate" [(ngModel)]="data.personalInfo.birthDate">
-      </div>
-      <div class="label-input">
-        <label>Номер удостоверения</label>
-        <input type="text" required name="idNumber" [(ngModel)]="data.personalInfo.nationalIdDocument.idNumber">
-      </div>
-      <div class="label-input">
-        <label>Национальность</label>
-        <input type="text" required name="nationality" [(ngModel)]="data.personalInfo.nationalIdDocument.nationality">
-      </div>
-      <div class="label-input">
-        <label>Кем выдан</label>
-        <select name="issuedBy" required [(ngModel)]="data.personalInfo.nationalIdDocument.issuedBy">
-          <option value="МИНИСТЕРСТВО ВНУТРЕННИХ ДЕЛ РК">МВД РК</option>
-          <option value="Министерства юстиции Республики Казахстан">МЮ РК</option>
-        </select>
-      </div>
-      <div class="label-input">
-        <label>Дата выдачи</label>
-        <input type="date" required name="issuedDate" [(ngModel)]="data.personalInfo.nationalIdDocument.issuedDate">
-      </div>
-      <div class="label-input">
-        <label>Дата окончания</label>
-        <input type="date" required name="expireDate" [(ngModel)]="data.personalInfo.nationalIdDocument.expireDate">
-      </div>
-      <div class="label-input ipdl-text">
-        <div class="question">
-          <label>Вы ИПДЛ или родственник?</label>
-          <div class="tooltip">
-            <img class="question-img" src="assets/img/help_outline.svg" alt="">
-            <span class="tooltiptext">Являетесь ли Вы иностранным публичным должностным лицом, либо его членом семьи и близким родственником?</span>
-          </div>
+<ng-container *transloco="let text; read: 'steps'">
+  <section class="profile-page" *ngIf="!loading && !resultShow">
+    <div class="container">
+      <div class="step-progress">
+        <div id="top"></div>
+        <div class="back-btn" *ngIf="step > 1" (click)="step = step - 1">
+          <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11.67 1.8701L9.9 0.100098L0 10.0001L9.9 19.9001L11.67 18.1301L3.54 10.0001L11.67 1.8701Z" fill="black" />
+          </svg>
+          {{text('Back')}}
         </div>
-        <select  required [(ngModel)]="data.personalInfo.IPDL" name="IPDL">
-          <option value="yes">Да</option>
-          <option value="no">Нет</option>
-        </select>
+        <p>{{text('Step1')}} {{ step }}/3</p>
+        <div class="progress"><span style="width: calc(33% * {{ step }});"></span></div>
       </div>
-      <button type="submit" class="btn">Подтвердить</button>
-    </form>
-
-    <form ngNativeValidate (ngSubmit)="setAdressData()" *ngIf="step == 2" (ngSubmit)="scrollToTop()">
-      <div class="form-top">
-        <h2>Адресные данные</h2>
-      </div>
-      <div class="label-input">
-        <label>Область</label>
-        <select required name="region" [(ngModel)]="data.personalInfo.registrationAddress.region"
-        (ngModelChange)="getDistrictById()">
-          <option [value]="">Выберите</option>
-          <option *ngFor="let item of districts" value="{{item.code}}">{{ item.name_ru }}</option>
-        </select>
-      </div>
-      <div class="label-input">
-        <label [class.disabled]="!cities">Регион/село/город</label>
-        <select required name="city" [(ngModel)]="data.personalInfo.registrationAddress.city" [disabled]="!cities">
-          <option [value]="">Выберите</option>
-          <option *ngFor="let item of cities" [ngValue]="item.name_ru">{{ item.name_ru }}</option>
-        </select>
-      </div>
-
-      <!-- <div class="label-input">
-        <label>Индекс</label>
-        <input type="text" required name="postalCode" [(ngModel)]="data.personalInfo.registrationAddress.postalCode">
-      </div> -->
-
-      <div class="label-input">
-        <label>Улица/мкрн</label>
-        <input type="text" required name="street" [(ngModel)]="data.personalInfo.registrationAddress.street">
-      </div>
-
-      <div class="half-form">
-        <div class="label-input">
-          <label>№ дома</label>
-          <input type="text" required name="house" [(ngModel)]="data.personalInfo.registrationAddress.house">
-        </div>
-
-        <div class="label-input">
-          <label>Кв/офис</label>
-          <input type="text" required name="apartment" [(ngModel)]="data.personalInfo.registrationAddress.apartment">
-        </div>
-      </div>
-
-      <div class="label-toggle">
-        <p>
-          <img src="assets/img/point.svg" alt="">
-          Адрес проживания совпадает с адресом прописки
-        </p>
-        <label>
-          <input type="checkbox" name="sameAdress" [(ngModel)]="data.personalInfo.sameAdress">
-          <span></span>
-        </label>
-      </div>
-
-      <ng-container *ngIf="!data.personalInfo.sameAdress">
+      <form ngNativeValidate (ngSubmit)="setPasportData()" *ngIf="step == 1" (ngSubmit)="scrollToTop()">
         <div class="form-top">
-          <h2>Адрес проживания</h2>
+          <h2>{{text('pasfordData')}}</h2>
         </div>
-
         <div class="label-input">
-          <label>Область</label>
-          <select required name="residenceAddressRegion" [(ngModel)]="data.personalInfo.residenceAddress.region"
-          (ngModelChange)="getResDistrictByID()">
-            <option [value]="">Выберите</option>
-            <option *ngFor="let item of districts" value="item.code">{{ item.name_ru }}</option>
+          <label>{{text('iin')}}</label>
+          <input type="tel" required name="iin" [(ngModel)]="data.iin">
+        </div>
+        <div class="label-input">
+          <label>{{text('Surname')}}</label>
+          <input type="text" required name="lastName" [(ngModel)]="data.personalInfo.lastName">
+        </div>
+        <div class="label-input">
+          <label>{{text('name')}}</label>
+          <input type="text" required name="firstName" [(ngModel)]="data.personalInfo.firstName">
+        </div>
+        <div class="label-input">
+          <label>{{text('dadname')}}</label>
+          <input type="text" name="middleName" [(ngModel)]="data.personalInfo.middleName">
+        </div>
+        <div class="label-input">
+          <label>{{text('dateBirth')}}</label>
+          <input type="date" required name="birthDate" [(ngModel)]="data.personalInfo.birthDate">
+        </div>
+        <div class="label-input">
+          <label>{{text('numberPasford')}}</label>
+          <input type="text" required name="idNumber" [(ngModel)]="data.personalInfo.nationalIdDocument.idNumber">
+        </div>
+        <div class="label-input">
+          <label>{{text('nationalty')}}</label>
+          <input type="text" required name="nationality" [(ngModel)]="data.personalInfo.nationalIdDocument.nationality">
+        </div>
+        <div class="label-input">
+          <label>{{text('issueWhom')}}</label>
+          <select name="issuedBy" required [(ngModel)]="data.personalInfo.nationalIdDocument.issuedBy">
+            <option value="МИНИСТЕРСТВО ВНУТРЕННИХ ДЕЛ РК">{{text('MVD')}}</option>
+            <option value="Министерства юстиции Республики Казахстан">{{text('MU')}}</option>
           </select>
         </div>
         <div class="label-input">
-          <label [class.disabled]="!cities">Регион/село/город</label>
-          <select required name="residenceAddresscity" [(ngModel)]="data.personalInfo.residenceAddress.city" [disabled]="!cities">
-            <option [value]="">Выберите</option>
-            <option *ngFor="let item of citiesres" [ngValue]="item.name_ru">{{ item.name_ru }}</option>
+          <label>{{text('dateIssue')}}</label>
+          <input type="date" required name="issuedDate" [(ngModel)]="data.personalInfo.nationalIdDocument.issuedDate">
+        </div>
+        <div class="label-input">
+          <label>{{text('endDate')}}</label>
+          <input type="date" required name="expireDate" [(ngModel)]="data.personalInfo.nationalIdDocument.expireDate">
+        </div>
+        <div class="label-input ipdl-text">
+          <div class="question">
+            <label>{{text('IPDL')}}</label>
+            <div class="tooltip">
+              <img class="question-img" src="assets/img/help_outline.svg" alt="">
+              <span class="tooltiptext">{{text('ipdl-text')}}</span>
+            </div>
+          </div>
+          <select required [(ngModel)]="data.personalInfo.IPDL" name="IPDL">
+            <option value="yes">{{text('yes')}}</option>
+            <option value="no">{{text('no')}}</option>
+          </select>
+        </div>
+        <button type="submit" class="btn">{{text('Confirm')}}</button>
+      </form>
+
+      <form ngNativeValidate (ngSubmit)="setAdressData()" *ngIf="step == 2" (ngSubmit)="scrollToTop()">
+        <div class="form-top">
+          <h2>{{text('addresData')}}</h2>
+        </div>
+        <div class="label-input">
+          <label>{{text('state')}}</label>
+          <select required name="region" [(ngModel)]="data.personalInfo.registrationAddress.region" (ngModelChange)="getDistrictById()">
+            <option [value]="">{{text('select')}}</option>
+            <option *ngFor="let item of districts" value="{{item.code}}">{{ item.name_ru }}</option>
+          </select>
+        </div>
+        <div class="label-input">
+          <label [class.disabled]="!cities">{{text('city')}}</label>
+          <select required name="city" [(ngModel)]="data.personalInfo.registrationAddress.city" [disabled]="!cities">
+            <option [value]="">{{text('select')}}</option>
+            <option *ngFor="let item of cities" [ngValue]="item.name_ru">{{ item.name_ru }}</option>
           </select>
         </div>
 
         <!-- <div class="label-input">
-          <label>Индекс</label>
-          <input type="text" required name="residenceAddresspostalCode" [(ngModel)]="data.personalInfo.residenceAddress.postalCode">
-        </div> -->
+        <label>Индекс</label>
+        <input type="text" required name="postalCode" [(ngModel)]="data.personalInfo.registrationAddress.postalCode">
+      </div> -->
 
         <div class="label-input">
-          <label>Улица/мкрн</label>
-          <input type="text" required name="residenceAddressstreet" [(ngModel)]="data.personalInfo.residenceAddress.street">
+          <label>{{text('street')}}</label>
+          <input type="text" required name="street" [(ngModel)]="data.personalInfo.registrationAddress.street">
         </div>
 
         <div class="half-form">
           <div class="label-input">
-            <label>№ дома</label>
-            <input type="text" required name="residenceAddresshouse" [(ngModel)]="data.personalInfo.residenceAddress.house">
+            <label>{{text('home-num')}}</label>
+            <input type="text" required name="house" [(ngModel)]="data.personalInfo.registrationAddress.house">
           </div>
 
           <div class="label-input">
-            <label>Кв/офис</label>
-            <input type="text" name="residenceAddressapartment" [(ngModel)]="data.personalInfo.residenceAddress.apartment">
+            <label>{{text('kv')}}</label>
+            <input type="text" required name="apartment" [(ngModel)]="data.personalInfo.registrationAddress.apartment">
           </div>
         </div>
-      </ng-container>
 
-      <div class="label-input">
-        <label>Период проживания по этому адресу</label>
-        <select required [(ngModel)]="userInfo.addressInfoDto.periodOfResidence" name="periodOfResidence">
-          <option value="">Выберите</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7+</option>
-        </select>
-      </div>
-
-      <button type="submit" class="btn">Подтвердить</button>
-    </form>
-
-    <form ngNativeValidate (ngSubmit)="finishStep()" *ngIf="step == 3">
-      <div class="form-top">
-        <h2>Сведения о работе</h2>
-        <p class="info-text">Получите <span>+30% к вероятности одобрения микрокредита</span>, заполнив все поля.</p>
-      </div>
-
-      <div class="label-input">
-        <label>Образование</label>
-        <select name="education" [(ngModel)]="data.personalInfo.education" >
-          <option value="" disabled selected>Выберите</option>
-          <option value="Среднее">Среднее</option>
-          <option value="Среднее специальное">Среднее специальное</option>
-          <option value="Незаконченное высшее">Незаконченное высшее</option>
-          <option value="Высшее">Высшее</option>
-          <option value="Магистратура, 2-ое высшее, Ученая степень и пр">Магистратура, 2-ое высшее, Ученая степень и пр.</option>
-        </select>
-      </div>
-
-      <div class="label-input">
-        <label>Занятость</label>
-        <select name="employment" [(ngModel)]="data.personalInfo.employment">
-          <option value="" disabled selected>Выберите</option>
-          <option value="Сотрудник компании">Сотрудник компании</option>
-          <option value="Индивидуальный предприниматель">Индивидуальный предприниматель</option>
-          <option value="Безработный">Безработный</option>
-          <option value="Студент">Студент</option>
-          <option value="Пенсионер">Пенсионер</option>
-          <option value="Владелец компании">Владелец компании</option>
-          <option value="Пенсионер (сотрудник компании)">Пенсионер (сотрудник компании)</option>
-          <option value="Пенсионер (индивидуальный предприниматель)">Пенсионер (индивидуальный предприниматель)</option>
-          <option value="В декретном отпуске">В декретном отпуске</option>
-        </select>
-      </div>
-
-      <div class="label-input">
-        <label>Вид деятельности</label>
-        <select name="typeOfWork" [(ngModel)]="data.personalInfo.typeOfWork">
-          <option value="" disabled selected>Выберите</option>
-          <option value="Информационные технологии/телекоммуникации">Информационные технологии/телекоммуникации</option>
-          <option value="Финансы, банки, страхование, консалтинг">Финансы, банки, страхование, консалтинг</option>
-          <option value="ТЭК">ТЭК</option>
-          <option value="Сервис и Услуги">Сервис и Услуги</option>
-          <option value="Армия">Армия</option>
-          <option value="Охранная деятельность">Охранная деятельность</option>
-          <option value="Добывающий сектор">Добывающий сектор</option>
-          <option value="Культура и искусство">Культура и искусство</option>
-          <option value="Медицина">Медицина</option>
-          <option value="Наука и Образование">Наука и Образование</option>
-          <option value="Государственная служба">Государственная служба</option>
-          <option value="Торговля">Торговля</option>
-          <option value="Промышленность">Промышленность</option>
-          <option value="Строительство и недвижимость">Строительство и недвижимость</option>
-          <option value="Транспорт">Транспорт</option>
-          <!-- <option value="Другое">Другое</option> -->
-        </select>
-      </div>
-
-      <div class="label-input">
-        <label>Должность</label>
-        <input type="text" name="workPosition" [(ngModel)]="data.personalInfo.workPosition">
-      </div>
-
-      <div class="label-input">
-        <label>Название организации</label>
-        <input type="text" name="employer" [(ngModel)]="data.personalInfo.employer">
-      </div>
-
-      <div class="label-input">
-        <label>Рабочий телефон</label>
-        <!-- <input type="tel" required name="workPhoneNum" [(ngModel)]="data.personalInfo.workPhoneNum"> -->
-        <input type="tel" name="workPhoneNum" [(ngModel)]="data.personalInfo.workPhoneNum">
-      </div>
-
-
-      <div class="label-input">
-        <label>Опыт работы (в годах)</label>
-        <input type="number" name="workExperience" [(ngModel)]="data.personalInfo.workExperience">
-      </div>
-
-      <div class="label-input">
-        <label>Ваш ежемесячный доход</label>
-        <input type="tel" name="monthlyIncome" [unmask]="true" [(ngModel)]="data.personalInfo.monthlyIncome" [imask]="priceMask" >
-      </div>
-
-      <div class="label-input">
-        <label>Ваш ежемесячный дополнительный доход</label>
-        <input type="tel" name="additionalMonthlyIncome" [unmask]="true" [(ngModel)]="data.personalInfo.additionalMonthlyIncome" [imask]="priceMask" >
-      </div>
-
-      <div class="label-input">
-        <label>Семейное положение</label>
-        <select name="maritalStatus" [(ngModel)]="data.personalInfo.maritalStatus">
-          <option value="" disabled selected>Выберите</option>
-          <option value="Не женат / Не замужем">Не женат / Не замужем</option>
-          <option value="Женат / Замужем">Женат / Замужем</option>
-          <option value="Вдовец / Вдова">Вдовец / Вдова</option>
-          <option value="Разведен / Разведена">Разведен / Разведена</option>
-          <option value="Гражданский брак">Гражданский брак</option>
-        </select>
-      </div>
-
-      <div class="label-input">
-        <label>Количество детей</label>
-        <select name="numberOfKids" [(ngModel)]="data.personalInfo.numberOfKids">
-          <option value="" disabled selected>Выберите</option>
-          <option [value]="0">0</option>
-          <option [value]="1">1</option>
-          <option [value]="2">2</option>
-          <option [value]="3">3</option>
-          <option [value]="4">4</option>
-        </select>
-      </div>
-
-
-      <button type="submit" class="btn">Рассчитать</button>
-    </form>
-  </div>
-</section>
-
-<ng-container *ngIf="loading">
-  <div class="loader">
-    <div class="top">
-      <svg
-       class="progress-ring"
-       width="270"
-       height="270"
-       >
-        <circle
-          class="progress-ring__circle"
-          stroke="#34BE82"
-          stroke-width="15"
-          fill="transparent"
-          r="120"
-          cx="135"
-          cy="135" style="{{stroke}}"/>
-      </svg>
-      <div class="percent">{{ percent }}%</div>
-    </div>
-    <h2>Идет обработка заявки</h2>
-    <p>Пожалуйста, дождитесь результата</p>
-  </div>
-</ng-container>
-
-<ng-container *ngIf="resultShow">
-  <div class="error-result" *ngIf="errorResult">
-    <img src="assets/img/error.svg" alt="">
-    <h2>К сожалению, Вам отказано в <br> запрашиваемой сумме</h2>
-    <div class="btn" [routerLink]="['/cabinet/history']">Отменить оформление займа</div>
-  </div>
-  <div class="success-result" *ngIf="successResult">
-    <img src="assets/img/success.svg" alt="">
-    <h2>
-      Ваша заявка одобрена.<br>
-      Сумма займа:  {{ data.loanAmount | currency: 'CLP':'₸' }} <br>
-      Срок займа: {{ data.loanPeriod }} месяцев
-    </h2>
-    <p class="info-text">Вам необходимо ознакомиться и подписать документы ниже, путем ввода одноразового пароля (SMS-код)</p>
-
-    <div class="file" (click)="getAnketa()"><img src="assets/img/dot.svg" alt="">Заявление-анкета</div>
-    <div class="file" (click)="getContract()"><img src="assets/img/dot.svg" alt="">Договор о предоставлении микрокредита с графиком погашения</div>
-    <br>
-    <div class="btn" (click)="sendOTP()">Подписать</div>
-    <div class="btn btn-default" [routerLink]="['/cabinet/history']">Отменить оформление займа</div>
-  </div>
-  <div class="alternative-result" *ngIf="alternativeResult">
-    <img src="assets/img/error.svg" alt="">
-    <h2>К сожалению, Вам отказано в <br> запрашиваемой сумме</h2>
-    <p><b>Но вы можете рассмотреть варианты ниже:</b></p>
-    <ul>
-      <li *ngFor="let item of alternativeChoices" (click)="selectedChoice = item" [class.active]="selectedChoice == item">
-        <div class="left">
-          <span>Сумма займа</span>
-          <p>{{ item.loanAmount | currency: 'CLP':'₸' }}</p>
+        <div class="label-toggle">
+          <p>
+            <img src="assets/img/point.svg" alt="">
+            {{text('adrprocheck')}}
+          </p>
+          <label>
+            <input type="checkbox" name="sameAdress" [(ngModel)]="data.personalInfo.sameAdress">
+            <span></span>
+          </label>
         </div>
-        <div class="center">
-          <span>Срок</span>
-          <p>{{ item.loanMonthPeriod }} мес.</p>
-        </div>
-      </li>
-    </ul>
-    <button class="btn" (click)="createNewReq()" [disabled]="!selectedChoice">Согласен с условиями</button>
-    <div class="btn btn-default" [routerLink]="['/cabinet']">Отменить оформление займа</div>
-  </div>
-</ng-container>
 
-<div class="profile-page">
- <div class="modal" *ngIf="showSMSModal">
-    <div class="modal-content">
-      <form ngNativeValidate (ngSubmit)="sendCode()">
-        <div class="form-top">
-          <h2>Подтверждение SMS-кода</h2>
-          <p>Для окончания оформления займа просим ввести в SMS-код</p>
-        </div>
-        <div class="form-content">
-          <div class="text-center">
-            <h3>SMS-код</h3>
+        <ng-container *ngIf="!data.personalInfo.sameAdress">
+          <div class="form-top">
+            <h2>{{text('adrpro')}}</h2>
+          </div>
+
+          <div class="label-input">
+            <label>{{text('state')}}</label>
+            <select required name="residenceAddressRegion" [(ngModel)]="data.personalInfo.residenceAddress.region" (ngModelChange)="getResDistrictByID()">
+              <option [value]="">{{text('select')}}</option>
+              <option *ngFor="let item of districts" value="item.code">{{ item.name_ru }}</option>
+            </select>
+          </div>
+          <div class="label-input">
+            <label [class.disabled]="!cities">{{text('city')}}</label>
+            <select required name="residenceAddresscity" [(ngModel)]="data.personalInfo.residenceAddress.city" [disabled]="!cities">
+              <option [value]="">{{text('select')}}</option>
+              <option *ngFor="let item of citiesres" [ngValue]="item.name_ru">{{ item.name_ru }}</option>
+            </select>
+          </div>
+
+          <!-- <div class="label-input">
+          <label>Индекс</label>
+          <input type="text" required name="residenceAddresspostalCode" [(ngModel)]="data.personalInfo.residenceAddress.postalCode">
+        </div> -->
+
+          <div class="label-input">
+            <label>{{text('street')}}</label>
+            <input type="text" required name="residenceAddressstreet" [(ngModel)]="data.personalInfo.residenceAddress.street">
+          </div>
+
+          <div class="half-form">
             <div class="label-input">
-              <input type="tel" name="code" [imask]="{mask: '000000',lazy: false, placeholderChar: '-'}" [(ngModel)]="code">
+              <label>{{text('home-num')}}</label>
+              <input type="text" required name="residenceAddresshouse" [(ngModel)]="data.personalInfo.residenceAddress.house">
+            </div>
+
+            <div class="label-input">
+              <label>{{text('kv')}}</label>
+              <input type="text" name="residenceAddressapartment" [(ngModel)]="data.personalInfo.residenceAddress.apartment">
             </div>
           </div>
-          <button type="submit" class="btn">Подтвердить</button>
-          <div class="resend-pass" (click)="sendOTP()">Отправить повторно</div>
+        </ng-container>
+
+        <div class="label-input">
+          <label>{{text('per')}}</label>
+          <select required [(ngModel)]="userInfo.addressInfoDto.periodOfResidence" name="periodOfResidence">
+            <option value="">{{text('select')}}</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7+</option>
+          </select>
         </div>
+
+        <button type="submit" class="btn">{{text('Confirm')}}</button>
+      </form>
+
+      <form ngNativeValidate (ngSubmit)="finishStep()" *ngIf="step == 3">
+        <div class="form-top">
+          <h2>{{text('aboutwork')}}</h2>
+          <p class="info-text">{{text('take-loan')}} <span>{{text('30credit')}}</span>{{text('allpol')}}</p>
+        </div>
+
+        <div class="label-input">
+          <label>{{text('edu')}}</label>
+          <select name="education" [(ngModel)]="data.personalInfo.education">
+            <option value="" disabled selected>{{text('select')}}</option>
+            <option value="Среднее">{{text('mid')}}</option>
+            <option value="Среднее специальное">{{text('midspe')}}</option>
+            <option value="Незаконченное высшее">{{text('unfinishhigh')}}</option>
+            <option value="Высшее">{{text('hidh')}}</option>
+            <option value="Магистратура, 2-ое высшее, Ученая степень и пр">{{text('magistr')}}</option>
+          </select>
+        </div>
+
+        <div class="label-input">
+          <label>{{text('employment')}}</label>
+          <select name="employment" [(ngModel)]="data.personalInfo.employment">
+            <option value="" disabled selected>{{text('select')}}</option>
+            <option value="Сотрудник компании">{{text('employee')}}</option>
+            <option value="Индивидуальный предприниматель">{{text('indiemp')}}</option>
+            <option value="Безработный">{{text('jobless')}}</option>
+            <option value="Студент">{{text('student')}}</option>
+            <option value="Пенсионер">{{text('pensioner')}}</option>
+            <option value="Владелец компании">{{text('bosscompony')}}</option>
+            <option value="Пенсионер (сотрудник компании)">{{text('pensi-empoylee')}}</option>
+            <option value="Пенсионер (индивидуальный предприниматель)">{{text('pensi-indiemp')}}</option>
+            <option value="В декретном отпуске">{{text('maternity')}}</option>
+          </select>
+        </div>
+
+        <div class="label-input">
+          <label>{{text('kindof-act')}}</label>
+          <select name="typeOfWork" [(ngModel)]="data.personalInfo.typeOfWork">
+            <option value="" disabled selected>{{text('select')}}</option>
+            <option value="Информационные технологии/телекоммуникации">{{text('info-tech')}}</option>
+            <option value="Финансы, банки, страхование, консалтинг">{{text('info-bank')}}</option>
+            <option value="ТЭК">{{text('tek')}}</option>
+            <option value="Сервис и Услуги">{{text('service')}}</option>
+            <option value="Армия">{{text('army')}}</option>
+            <option value="Охранная деятельность">{{text('security')}}</option>
+            <option value="Добывающий сектор">{{text('ext-sector')}}</option>
+            <option value="Культура и искусство">{{text('culture')}}</option>
+            <option value="Медицина">{{text('medicine')}}</option>
+            <option value="Наука и Образование">{{text('science')}}</option>
+            <option value="Государственная служба">{{text('gos-service')}}</option>
+            <option value="Торговля">{{text('trade')}}</option>
+            <option value="Промышленность">{{text('industry')}}</option>
+            <option value="Строительство и недвижимость">{{text('building')}}</option>
+            <option value="Транспорт">{{text('transport')}}</option>
+            <!-- <option value="Другое">Другое</option> -->
+          </select>
+        </div>
+
+        <div class="label-input">
+          <label>{{text('post')}}</label>
+          <input type="text" name="workPosition" [(ngModel)]="data.personalInfo.workPosition">
+        </div>
+
+        <div class="label-input">
+          <label>{{text('name-organization')}}</label>
+          <input type="text" name="employer" [(ngModel)]="data.personalInfo.employer">
+        </div>
+
+        <div class="label-input">
+          <label>{{text('work-number')}}</label>
+          <!-- <input type="tel" required name="workPhoneNum" [(ngModel)]="data.personalInfo.workPhoneNum"> -->
+          <input type="tel" name="workPhoneNum" [(ngModel)]="data.personalInfo.workPhoneNum">
+        </div>
+
+
+        <div class="label-input">
+          <label>{{text('work-exp')}}</label>
+          <input type="number" name="workExperience" [(ngModel)]="data.personalInfo.workExperience">
+        </div>
+
+        <div class="label-input">
+          <label>{{text('month-income')}}</label>
+          <input type="tel" name="monthlyIncome" [unmask]="true" [(ngModel)]="data.personalInfo.monthlyIncome" [imask]="priceMask">
+        </div>
+
+        <div class="label-input">
+          <label>{{text('month-extra-income')}}</label>
+          <input type="tel" name="additionalMonthlyIncome" [unmask]="true" [(ngModel)]="data.personalInfo.additionalMonthlyIncome" [imask]="priceMask">
+        </div>
+
+        <div class="label-input">
+          <label>{{text('marital-status')}}</label>
+          <select name="maritalStatus" [(ngModel)]="data.personalInfo.maritalStatus">
+            <option value="" disabled selected>{{text('select')}}</option>
+            <option value="Не женат / Не замужем">{{text('notmarry')}}</option>
+            <option value="Женат / Замужем">{{text('marry')}}</option>
+            <option value="Вдовец / Вдова">{{text('widow')}}</option>
+            <option value="Разведен / Разведена">{{text('divorce')}}</option>
+            <option value="Гражданский брак">{{text('civil-marry')}}</option>
+          </select>
+        </div>
+
+        <div class="label-input">
+          <label>{{text('amount-child')}}</label>
+          <select name="numberOfKids" [(ngModel)]="data.personalInfo.numberOfKids">
+            <option value="" disabled selected>{{text('select')}}</option>
+            <option [value]="0">0</option>
+            <option [value]="1">1</option>
+            <option [value]="2">2</option>
+            <option [value]="3">3</option>
+            <option [value]="4">4</option>
+          </select>
+        </div>
+
+
+        <button type="submit" class="btn">{{text('calculate')}}</button>
       </form>
     </div>
+  </section>
+
+  <ng-container *ngIf="loading">
+    <div class="loader">
+      <div class="top">
+        <svg class="progress-ring" width="270" height="270">
+          <circle class="progress-ring__circle" stroke="#34BE82" stroke-width="15" fill="transparent" r="120" cx="135" cy="135" style="{{stroke}}" />
+        </svg>
+        <div class="percent">{{ percent }}%</div>
+      </div>
+      <h2>{{text('process-prog')}}</h2>
+      <p>{{text('pls-result')}}</p>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="resultShow">
+    <div class="error-result" *ngIf="errorResult">
+      <img src="assets/img/error.svg" alt="">
+      <h2>{{text('unfortun')}}</h2>
+      <div class="btn" [routerLink]="['/cabinet/history']">{{text('cancel-loan')}}</div>
+    </div>
+    <div class="success-result" *ngIf="successResult">
+      <img src="assets/img/success.svg" alt="">
+      <h2>
+        {{text('approved-loan')}}<br>
+        {{text('sum-loan')}} {{ data.loanAmount | currency: 'CLP':'₸' }} <br>
+        {{text('term-loan')}} {{ data.loanPeriod }} {{text('term-month')}}
+      </h2>
+      <p class="info-text">{{text('write-password')}}</p>
+
+      <div class="file" (click)="getAnketa()"><img src="assets/img/dot.svg" alt="">{{text('statement')}}</div>
+      <div class="file" (click)="getContract()"><img src="assets/img/dot.svg" alt="">{{text('pay-schedule')}}</div>
+      <br>
+      <div class="btn" (click)="sendOTP()">{{text('subscribe')}}</div>
+      <div class="btn btn-default" [routerLink]="['/cabinet/history']">{{text('cancel-loan')}}</div>
+    </div>
+    <div class="alternative-result" *ngIf="alternativeResult">
+      <img src="assets/img/error.svg" alt="">
+      <h2>{{text('unfortun')}}</h2>
+      <p><b>{{text('alternative')}}</b></p>
+      <ul>
+        <li *ngFor="let item of alternativeChoices" (click)="selectedChoice = item" [class.active]="selectedChoice == item">
+          <div class="left">
+            <span>{{text('sum-loan')}}</span>
+            <p>{{ item.loanAmount | currency: 'CLP':'₸' }}</p>
+          </div>
+          <div class="center">
+            <span>{{text('term-loan')}}</span>
+            <p>{{ item.loanMonthPeriod }} мес.</p>
+          </div>
+        </li>
+      </ul>
+      <button class="btn" (click)="createNewReq()" [disabled]="!selectedChoice">{{text('conditions')}}</button>
+      <div class="btn btn-default" [routerLink]="['/cabinet']">{{text('cancel-loan')}}</div>
+    </div>
+  </ng-container>
+
+  <div class="profile-page">
+    <div class="modal" *ngIf="showSMSModal">
+      <div class="modal-content">
+        <form ngNativeValidate (ngSubmit)="sendCode()">
+          <div class="form-top">
+            <h2>{{text('confirm-sms')}}</h2>
+            <p>{{text('write-sms')}}</p>
+          </div>
+          <div class="form-content">
+            <div class="text-center">
+              <h3>SMS-код</h3>
+              <div class="label-input">
+                <input type="tel" name="code" [imask]="{mask: '000000',lazy: false, placeholderChar: '-'}" [(ngModel)]="code">
+              </div>
+            </div>
+            <button type="submit" class="btn">{{text('Confirm')}}</button>
+            <div class="resend-pass" (click)="sendOTP()">{{text('resend')}}</div>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
-</div>
+</ng-container>

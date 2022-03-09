@@ -1,137 +1,141 @@
-<header>
-  <div class="container">
-    <div class="ht">
-      <ul class="ht-nav" *ngIf="!this.authService.isLoggedIn">
-        <li>
+<header-container *transloco="let text;">
+  <header>
+    <div class="container">
+      <div class="ht">
+        <ul class="ht-nav" *ngIf="!this.authService.isLoggedIn">
+          <li>
             <a [routerLink]="['/']" fragment="Checkout">
               <div (click)="howToGet()">
-                Как получить
+                {{text('header.HowToGet')}}
               </div>
             </a>
-        </li>
-        <li>
+          </li>
+          <li>
             <a [routerLink]="['/']" fragment="Repay">
               <div (click)="howToPay()">
-                Как погасить
+                {{text('header.HowToRepay')}}
               </div>
             </a>
-        </li>
-        <li>
+          </li>
+          <li>
             <a [routerLink]="['/']" fragment="Conditions">
               <div (click)="conditions()">
-                Условия
+                {{text('header.Conditions')}}
               </div>
             </a>
-        </li>
-      </ul>
-      <ul class="ht-nav ht-cabinet-nav" *ngIf="this.authService.isLoggedIn">
-        <li>
-          <a [routerLink]="['/cabinet']" routerLinkActive="active" [class.settings-page]="settingsPage">
-            <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 0C4.48 0 0 4.928 0 11C0 17.072 4.48 22 10 22C15.52 22 20 17.072 20 11C20 4.928 15.52 0 10 0ZM10 3.3C11.66 3.3 13 4.774 13 6.6C13 8.426 11.66 9.9 10 9.9C8.34 9.9 7 8.426 7 6.6C7 4.774 8.34 3.3 10 3.3ZM10 18.92C7.5 18.92 5.29 17.512 4 15.378C4.03 13.189 8 11.99 10 11.99C11.99 11.99 15.97 13.189 16 15.378C14.71 17.512 12.5 18.92 10 18.92Z" fill="currentColor"/>
-            </svg>
-            {{ this.user }}
-          </a>
-        </li>
-        <!-- <li>
+          </li>
+        </ul>
+        <ul class="ht-nav ht-cabinet-nav" *ngIf="this.authService.isLoggedIn">
+          <li>
+            <a [routerLink]="['/cabinet']" routerLinkActive="active" [class.settings-page]="settingsPage">
+              <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M10 0C4.48 0 0 4.928 0 11C0 17.072 4.48 22 10 22C15.52 22 20 17.072 20 11C20 4.928 15.52 0 10 0ZM10 3.3C11.66 3.3 13 4.774 13 6.6C13 8.426 11.66 9.9 10 9.9C8.34 9.9 7 8.426 7 6.6C7 4.774 8.34 3.3 10 3.3ZM10 18.92C7.5 18.92 5.29 17.512 4 15.378C4.03 13.189 8 11.99 10 11.99C11.99 11.99 15.97 13.189 16 15.378C14.71 17.512 12.5 18.92 10 18.92Z"
+                  fill="currentColor" />
+              </svg>
+              {{ this.user }}
+            </a>
+          </li>
+          <!-- <li>
           <a [routerLink]="['/cabinet/settings']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Настройки профиля </a>
         </li> -->
-        <li>
-          <a (click)="logout()" href="javascript:;">
-              Выйти
-          </a>
-        </li>
-      </ul>
-      <a href="tel:+7 (777) 010-58-00" class="ht-phone">
-        <img src="assets/img/call-ico.svg" width="52" height="52" alt="">
-        <span class="ht-phone-right">
-          <b>+7 (777) 010-58-00</b>
-          <span>Ежедневно с 8.00 до 22.00</span>
-        </span>
-      </a>
-    </div>
-    <div class="mobile-nav" [class.open]="showNav">
-      <div class="nav-wrapper" (click)="showNav = !showNav">
+          <li>
+            <a (click)="logout()" href="javascript:;">
+              {{text('header.Exit')}}
+            </a>
+          </li>
+        </ul>
+        <a href="tel:+7 (777) 010-58-00" class="ht-phone">
+          <img src="assets/img/call-ico.svg" width="52" height="52" alt="">
+          <span class="ht-phone-right">
+            <b>+7 (777) 010-58-00</b>
+            <span>{{text('header.Dailyfrom8.00to22.00')}}</span>
+          </span>
+        </a>
+      </div>
+      <div class="mobile-nav" [class.open]="showNav">
+        <div class="nav-wrapper" (click)="showNav = !showNav">
 
+        </div>
+        <div class="content">
+          <div class="close" (click)="showNav = false"><img src="assets/img/close.svg" alt=""></div>
+          <ng-container *ngIf="!this.authService.isLoggedIn">
+            <ul>
+              <li (click)="showNav = false">
+                <a [routerLink]="['/']" fragment="Checkout">{{text('header.HowToGet')}}</a>
+              </li>
+              <li (click)="showNav = false">
+                <a [routerLink]="['/']" fragment="Repay">{{text('header.HowToRepay')}}</a>
+              </li>
+              <li (click)="showNav = false">
+                <a [routerLink]="['/']" fragment="Conditions">{{text('header.Conditions')}}</a>
+              </li>
+              <li (click)="showNav = false">
+                <a [routerLink]="['/payment']" fragment="Conditions">{{text('header.ToPay')}}</a>
+              </li>
+            </ul>
+          </ng-container>
+          <ng-container *ngIf="this.authService.isLoggedIn">
+            <ul (click)="showNav = false">
+              <li>
+                <a [routerLink]="['/cabinet/cashed-out']" routerLinkActive="active">{{text('header.OpenCredit')}}</a>
+              </li>
+              <li>
+                <a [routerLink]="['/cabinet/settings']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">{{text('header.ProfileSettings')}}</a>
+              </li>
+              <li>
+                <a [routerLink]="['/cabinet/history']" routerLinkActive="active">{{text('header.HistoryOfCredit')}}</a>
+              </li>
+              <li>
+                <a [routerLink]="['/cabinet/change-password']" routerLinkActive="active">{{text('header.PasswordChange')}}</a>
+              </li>
+              <li>
+                <a [routerLink]="['/cabinet/contacts']" routerLinkActive="active">{{text('header.ContactUs')}}</a>
+              </li>
+              <li>
+                <a [routerLink]="['/cabinet/payment-types']" routerLinkActive="active">{{text('header.RepaymentMethods')}}</a>
+              </li>
+              <li>
+                <a [routerLink]="['/cabinet/deferred-payment']" routerLinkActive="active">{{text('header.ExtensionCredit')}}</a>
+              </li>
+              <li (click)="showNav = false">
+                <a [routerLink]="['/payment']" fragment="Conditions">{{text('header.ToPay')}}</a>
+              </li>
+              <li>
+                <a (click)="logout()" href="javascript:;" style="color: red;">{{text('header.Exit')}}</a>
+              </li>
+            </ul>
+          </ng-container>
+        </div>
       </div>
-      <div class="content">
-        <div class="close" (click)="showNav = false"><img src="assets/img/close.svg" alt=""></div>
-        <ng-container *ngIf="!this.authService.isLoggedIn">
-          <ul>
-            <li (click)="showNav = false">
-              <a [routerLink]="['/']" fragment="Checkout">Как получить</a>
-            </li>
-            <li (click)="showNav = false">
-              <a [routerLink]="['/']" fragment="Repay">Как погасить</a>
-            </li>
-            <li (click)="showNav = false">
-              <a [routerLink]="['/']" fragment="Conditions">Условия</a>
-            </li>
-            <li (click)="showNav = false">
-              <a [routerLink]="['/payment']" fragment="Conditions">Оплатить</a>
-            </li>
-          </ul>
-        </ng-container>
-        <ng-container *ngIf="this.authService.isLoggedIn">
-          <ul (click)="showNav = false">
-            <li>
-              <a [routerLink]="['/cabinet/cashed-out']" routerLinkActive="active">Открытый микрокредит</a>
-            </li>
-            <li>
-              <a [routerLink]="['/cabinet/settings']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Настройки профиля </a>
-            </li>
-            <li>
-              <a [routerLink]="['/cabinet/history']" routerLinkActive="active">История микрокредитов</a>
-            </li>
-            <li>
-              <a [routerLink]="['/cabinet/change-password']" routerLinkActive="active">Смена пароля</a>
-            </li>
-            <li>
-              <a [routerLink]="['/cabinet/contacts']" routerLinkActive="active">Связаться с нами</a>
-            </li>
-            <li>
-              <a [routerLink]="['/cabinet/payment-types']" routerLinkActive="active">Способы погашения</a>
-            </li>
-            <li>
-              <a [routerLink]="['/cabinet/deferred-payment']" routerLinkActive="active">Продление микрокредита</a>
-            </li>
-            <li (click)="showNav = false">
-              <a [routerLink]="['/payment']" fragment="Conditions">Оплатить</a>
-            </li>
-            <li>
-              <a (click)="logout()" href="javascript:;" style="color: red;">Выйти</a>
-            </li>
-          </ul>
-        </ng-container>
+      <div class="hb">
+        <div class="mobile" (click)="showNav = true">
+          <img src="assets/img/nav.svg" alt="" width="30" height="30">
+        </div>
+        <a class="hb-logo" [routerLink]="['/']">
+          <img src="assets/img/logo.svg" alt="" class="desctop">
+          <span class="mobile">ZAIMEM.KZ</span>
+        </a>
+        <div class="hb-btns">
+          <!-- <a [routerLink]="['/payment']" class="hb-btn hb-pay desctop">Оплатить</a> -->
+          <div class="hb-btn hb-pay" (click)="takeLoan()" (click)="validateTime()">{{text('header.Receive')}}</div>
+          <a [routerLink]="['/cabinet']" class="hb-btn hb-login" *ngIf="this.authService.isLoggedIn">Кабинет</a>
+          <div (click)="signIn()">
+            <a [routerLink]="['/profile/login']" class="hb-btn hb-login" *ngIf="!this.authService.isLoggedIn">{{text('header.Enter')}}</a>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="hb">
-      <div class="mobile" (click)="showNav = true">
-        <img src="assets/img/nav.svg" alt="" width="30" height="30">
-      </div>
-      <a class="hb-logo" [routerLink]="['/']">
-        <img src="assets/img/logo.svg" alt="" class="desctop">
-        <span class="mobile">ZAIMEM.KZ</span>
-      </a>
-      <div class="hb-btns">
-        <!-- <a [routerLink]="['/payment']" class="hb-btn hb-pay desctop">Оплатить</a> -->
-        <div class="hb-btn hb-pay" (click)="takeLoan()">Получить</div>
-        <a [routerLink]="['/cabinet']" class="hb-btn hb-login" *ngIf="this.authService.isLoggedIn">Кабинет</a>    
-          <a [routerLink]="['/profile/login']" class="hb-btn hb-login" *ngIf="!this.authService.isLoggedIn">
-            <div (click)="signIn()">
-              Войти
-            </div>
-          </a>
-      </div>
-    </div>
-  </div>
-</header>
+  </header>
+</header-container>
 
 <div class="modal" *ngIf="headerModal">
   <div class="modal-content">
     <div class="modal-close" (click)="headerModal = false;">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M14.59 8L12 10.59L9.41 8L8 9.41L10.59 12L8 14.59L9.41 16L12 13.41L14.59 16L16 14.59L13.41 12L16 9.41L14.59 8ZM12 2C6.47 2 2 6.47 2 12C2 17.53 6.47 22 12 22C17.53 22 22 17.53 22 12C22 6.47 17.53 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z" fill="black"/>
+        <path
+          d="M14.59 8L12 10.59L9.41 8L8 9.41L10.59 12L8 14.59L9.41 16L12 13.41L14.59 16L16 14.59L13.41 12L16 9.41L14.59 8ZM12 2C6.47 2 2 6.47 2 12C2 17.53 6.47 22 12 22C17.53 22 22 17.53 22 12C22 6.47 17.53 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z"
+          fill="black" />
       </svg>
     </div>
     <mfo-main-form></mfo-main-form>

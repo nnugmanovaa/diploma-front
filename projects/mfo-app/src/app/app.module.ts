@@ -23,6 +23,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MainFormModule } from './shared/main-form/main-form.module';
 
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { TranslocoRootModule } from './transloco-root.module';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -43,6 +44,7 @@ registerLocaleData(localeRu, 'ru');
     NgxSliderModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    TranslocoRootModule,
   ],
   providers: [
     {

@@ -4,16 +4,14 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MainFormComponent } from './main-form.component';
+import { StepsComponent } from './steps.component';
 import { CommonModule } from '@angular/common';
 import {TRANSLOCO_SCOPE, TranslocoModule} from '@ngneat/transloco';
 
 
 @NgModule({
-  declarations: [
-    MainFormComponent
-  ],
-  exports:[MainFormComponent],
+  declarations: [StepsComponent],
+  exports: [StepsComponent],
   imports: [
     TranslocoModule,
     ReactiveFormsModule,
@@ -24,10 +22,10 @@ import {TRANSLOCO_SCOPE, TranslocoModule} from '@ngneat/transloco';
   ],
   providers: [{
     provide: TRANSLOCO_SCOPE,
-    useValue: 'main-form'
+    useValue: 'steps'
   }],
   bootstrap: []
 })
 
 
-export class MainFormModule { }
+export class RegisterModule { }

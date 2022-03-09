@@ -14,16 +14,23 @@ import { MainFormModule } from '../shared/main-form/main-form.module';
 import { ForgotPassComponent } from './forgot-pass/forgot-pass.component';
 import { StepsComponent } from './steps/steps.component';
 import { VeriliveComponent } from './verilive/verilive.component';
+import { TRANSLOCO_SCOPE, TranslocoModule } from '@ngneat/transloco';
+
 
 @NgModule({
   declarations: [ProfileComponent, RegisterComponent, LoginComponent, ForgotPassComponent, StepsComponent, VeriliveComponent],
   imports: [
+    TranslocoModule,
     IMaskModule,
     ProfileRoutingModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
     FormsModule,
     CommonModule,
     MainFormModule
-  ]
+  ],
+  // providers: [{
+  //   provide: TRANSLOCO_SCOPE,
+  //   useValue: 'login'
+  // }],
 })
 export class ProfileModule { }
