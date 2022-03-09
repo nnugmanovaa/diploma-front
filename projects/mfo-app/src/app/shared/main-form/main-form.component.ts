@@ -11,14 +11,14 @@ import { AuthService } from '../../core/services/auth.service';
 export class MainFormComponent implements OnInit {
 
   form: any = {
-    period: 4,
-    amount: 225000,
+    period: 7,
+    amount: 325000,
     type: 'ANNUITY_PAYMENTS'
   }
-  value: number = 4;
+  value: number = 7;
   monthOptions: Options = {
     floor: 2,
-    ceil: 6,
+    ceil: 12,
     showSelectionBar: true,
     minLimit: 0
   };
@@ -26,7 +26,7 @@ export class MainFormComponent implements OnInit {
   priceOptions: Options = {
     floor: 150000,
     minLimit: 150000,
-    ceil: 300000,
+    ceil: 500000,
     step: 5000,
     showSelectionBar: true,
     showTicks: true,
