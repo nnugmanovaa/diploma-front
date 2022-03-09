@@ -32,11 +32,13 @@ export class VeriliveComponent implements OnInit {
 
   disabled:boolean = true;
 
+  declare gtag: Function;
+
   constructor(private route: ActivatedRoute,
               private router: Router,
               private registerService:RegisterService,
               private toastr: ToastrService,
-              private auth:AuthService) { 
+              private auth:AuthService) {
 
   }
 
@@ -51,7 +53,7 @@ export class VeriliveComponent implements OnInit {
        this.showSignUP(),
         (error: any) => {
           console.log("error");
-        } 
+        }
     })
   }
 
@@ -69,6 +71,11 @@ export class VeriliveComponent implements OnInit {
     this.user.iin = data.iin;
 
     this.registerService.getLoanRequestId(this.user).subscribe(res => {
+      this.gtag('event', 'conversion', {
+        'send_to': 'AW-10848684799/atvsCNS59JcDEP-Vh7Uo',
+        'value': 1.0,
+        'currency': 'USD'
+      });
       this.requestId = res.requestId
       // this.router.navigate(['/profile/verilive'], { queryParams: {...this.qparams, requestId:this.requestId}})
     })

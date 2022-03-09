@@ -20,6 +20,8 @@ export class RegisterComponent implements OnInit {
     msisdn: null
   }
 
+  declare gtag: Function;
+
   pdfForm: any = {
     firstName: null,
     iin: null,
@@ -110,6 +112,7 @@ export class RegisterComponent implements OnInit {
         this.toastr.error('Минимальный возраст для получения займа - 21 год.', 'Ошибка!');
         console.log(currentAge)
       } else if (!res.exist) {
+        this.gtag('event', 'conversion', {'send_to': 'AW-10848684799/3LsACL6H65cDEP-Vh7Uo'});
         this.registerUser()
       } else {
         this.toastr.error('Пользователь с таким номером уже зарегистрирован', 'Ошибка!');
