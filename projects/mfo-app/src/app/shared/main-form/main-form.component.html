@@ -9,8 +9,8 @@
       <ngx-slider (userChange)="calculateForm()" [(value)]="form.period" [options]="monthOptions"></ngx-slider>
       <div class="month-bottom">
         <p (click)="form.period = 2;calculateForm()">{{t('2month')}}</p>
-        <p (click)="form.period = 7;calculateForm()">{{t('7month')}}</p>
-        <p (click)="form.period = 12;calculateForm()">{{t('12month')}}</p>
+        <p (click)="form.period = 4;calculateForm()">{{t('4month')}}</p>
+        <p (click)="form.period = 6;calculateForm()">{{t('6month')}}</p>
       </div>
     </div>
     <div class="custom-slider">
@@ -21,8 +21,8 @@
       <ngx-slider (userChange)="calculateForm()" [(value)]="form.amount" [options]="priceOptions"></ngx-slider>
       <div class="month-bottom">
         <p (click)="form.amount = 150000;calculateForm()" style="min-width: 80px;">150 000 ₸</p>
-        <p (click)="form.amount = 325000;calculateForm()">325 000 ₸</p>
-        <p (click)="form.amount = 500000;calculateForm()">{{t('Do500000')}}</p>
+        <p (click)="form.amount = 325000;calculateForm()">225 000 ₸</p>
+        <p (click)="form.amount = 500000;calculateForm()">{{t('Do300000')}}</p>
       </div>
     </div>
     <div class="form-label">
@@ -32,12 +32,16 @@
         <option value="MONTHLY_PRINCIPAL_DEBT_REPAYMENT_EQUAL_SHARES">{{t('Graded')}}</option>
       </select>
     </div>
-    <ngx-slider (userChange)="calculateForm()" [(value)]="form.amount" [options]="priceOptions"></ngx-slider>
-    <div class="month-bottom">
+    <div class="form-monthly">
+      <p>Ежемесячный платеж</p>
+      <b>{{ paymentPerMonth | currency: 'CLP':'₸' }}</b>
+    </div>
+    <!-- <ngx-slider (userChange)="calculateForm()" [(value)]="form.amount" [options]="priceOptions"></ngx-slider> -->
+    <!-- <div class="month-bottom">
       <p (click)="form.amount = 150000;calculateForm()" style="min-width: 80px;">150 000 ₸</p>
       <p (click)="form.amount = 225000;calculateForm()">225 000 ₸</p>
       <p (click)="form.amount = 300000;calculateForm()">до 300 000 ₸</p>
-    </div>
+    </div> -->
     <button id="theButton" class="submit-button" type="submit" (click)="validateTime()">{{t('Receive')}}</button>
     <p class="small-text">{{t('GESB')}}</p>
   </form>

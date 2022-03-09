@@ -15,10 +15,10 @@ export class MainFormComponent implements OnInit {
     amount: 225000,
     type: 'ANNUITY_PAYMENTS'
   }
-  value: number = 6;
+  value: number = 4;
   monthOptions: Options = {
     floor: 2,
-    ceil: 12,
+    ceil: 6,
     showSelectionBar: true,
     minLimit: 0
   };
