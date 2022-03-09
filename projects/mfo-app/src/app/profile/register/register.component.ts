@@ -7,6 +7,7 @@ import { fromEvent } from 'rxjs';
 import amplitude from 'amplitude-js';
 
 declare function iinCheck(iin: any): any;
+declare const gtag: Function;
 
 @Component({
   selector: 'mfo-register',
@@ -19,8 +20,6 @@ export class RegisterComponent implements OnInit {
   registerForm: any = {
     msisdn: null
   }
-
-  declare gtag: Function;
 
   pdfForm: any = {
     firstName: null,
@@ -112,7 +111,7 @@ export class RegisterComponent implements OnInit {
         this.toastr.error('Минимальный возраст для получения займа - 21 год.', 'Ошибка!');
         console.log(currentAge)
       } else if (!res.exist) {
-        this.gtag('event', 'conversion', {'send_to': 'AW-10848684799/3LsACL6H65cDEP-Vh7Uo'});
+        gtag('event', 'conversion', {'send_to': 'AW-10848684799/3LsACL6H65cDEP-Vh7Uo'});
         this.registerUser()
       } else {
         this.toastr.error('Пользователь с таким номером уже зарегистрирован', 'Ошибка!');

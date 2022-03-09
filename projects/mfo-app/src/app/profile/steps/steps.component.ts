@@ -7,6 +7,8 @@ import { AuthService } from '../../core/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import amplitude from 'amplitude-js';
 
+declare const gtag: Function;
+
 @Component({
   selector: 'mfo-steps',
   templateUrl: './steps.component.html',
@@ -144,8 +146,6 @@ export class StepsComponent implements OnInit {
   selectedChoice: any = null;
   loanID: any = null;
 
-  declare gtag: Function;
-
   showSMSModal: boolean = false;
   code: any = null;
   clientId: any = null;
@@ -194,7 +194,7 @@ export class StepsComponent implements OnInit {
       phone: this.authService.getUser.username,
     }
     this.registerService.getLoanRequestId(data).subscribe(res => {
-      this.gtag('event', 'conversion', {
+      gtag('event', 'conversion', {
         'send_to': 'AW-10848684799/atvsCNS59JcDEP-Vh7Uo',
         'value': 1.0,
         'currency': 'USD'
@@ -457,7 +457,7 @@ export class StepsComponent implements OnInit {
   }
 
   submitAll() {
-    this.gtag('event', 'conversion', {
+    gtag('event', 'conversion', {
       'send_to': 'AW-10848684799/sOSaCLGu9JcDEP-Vh7Uo',
       'value': 1.0,
       'currency': 'USD'
@@ -482,7 +482,7 @@ export class StepsComponent implements OnInit {
       console.log(newKdn)
       clearInterval(this.intervalId);
       if (res ?.result == 'APPROVED') {
-        this.gtag('event', 'conversion', {
+        gtag('event', 'conversion', {
           'send_to': 'AW-10848684799/C1dACPmBvZcDEP-Vh7Uo',
           'value': 1.0,
           'currency': 'USD',
@@ -495,7 +495,7 @@ export class StepsComponent implements OnInit {
         // console.log("asd", rejectText)
         amplitude.getInstance().logEvent("finished scoring", { "status": scoringStatus, "rejectText": rejectText, "decil": decil, "kdn": kdn, "newKdn": newKdn, "effective rate": effectiveRate, "ownScore": ownScore })
       } else if (res ?.result == 'ALTERNATIVE') {
-        this.gtag('event', 'conversion', {
+        gtag('event', 'conversion', {
           'send_to': 'AW-10848684799/C1dACPmBvZcDEP-Vh7Uo',
           'value': 1.0,
           'currency': 'USD',

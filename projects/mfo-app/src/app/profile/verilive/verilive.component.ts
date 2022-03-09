@@ -6,7 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { fromEvent } from 'rxjs';
 import amplitude from 'amplitude-js';
 
-declare function loadVideo():any;
+declare function loadVideo(): any;
+declare const gtag: Function;
 
 @Component({
   selector: 'mfo-verilive',
@@ -15,7 +16,7 @@ declare function loadVideo():any;
 })
 export class VeriliveComponent implements OnInit {
 
-  user:any = {
+  user: any = {
     firstName: null,
     iin: null,
     lastName: null,
@@ -23,22 +24,20 @@ export class VeriliveComponent implements OnInit {
     phone: null,
   }
 
-  verifaceLoad:boolean = true;
-  vfImage:boolean = true;
+  verifaceLoad: boolean = true;
+  vfImage: boolean = true;
 
-  requestId:any = null;
+  requestId: any = null;
 
-  qparams:any = null;
+  qparams: any = null;
 
-  disabled:boolean = true;
-
-  declare gtag: Function;
+  disabled: boolean = true;
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              private registerService:RegisterService,
-              private toastr: ToastrService,
-              private auth:AuthService) {
+    private router: Router,
+    private registerService: RegisterService,
+    private toastr: ToastrService,
+    private auth: AuthService) {
 
   }
 
@@ -49,21 +48,21 @@ export class VeriliveComponent implements OnInit {
     this.createRequest();
     this.loadScript('https://s3.eu-central-1.amazonaws.com/verilive-statics.verigram.ai/verilive.js');
     this.loadScript('../assets/js/verilive.js');
-    fromEvent(window,'build').subscribe((event:any)=>{
-       this.showSignUP(),
+    fromEvent(window, 'build').subscribe((event: any) => {
+      this.showSignUP(),
         (error: any) => {
           console.log("error");
         }
     })
   }
 
-  changeStatus(){
+  changeStatus() {
     let data = this.auth.getUser;
     data.identificationStatus = "FULL_IDENTIFIED"
     this.auth.saveUser(data);
   }
 
-  createRequest(){
+  createRequest() {
     let data = this.auth.getUser;
     this.user.firstName = data.firstName;
     this.user.lastName = data.lastName;
@@ -71,7 +70,7 @@ export class VeriliveComponent implements OnInit {
     this.user.iin = data.iin;
 
     this.registerService.getLoanRequestId(this.user).subscribe(res => {
-      this.gtag('event', 'conversion', {
+      gtag('event', 'conversion', {
         'send_to': 'AW-10848684799/atvsCNS59JcDEP-Vh7Uo',
         'value': 1.0,
         'currency': 'USD'
@@ -82,54 +81,54 @@ export class VeriliveComponent implements OnInit {
   }
 
 
-  showSignUP(){
+  showSignUP() {
     let image = (<HTMLInputElement>document.getElementById("results")).value;
-    if(!this.requestId){
+    if (!this.requestId) {
       return;
     }
     // this.disabled = true;
     this.registerService.sendImage(this.requestId, image).subscribe(res => {
-      if(res.identified){
-        amplitude.getInstance().logEvent("finished identification", {"success": true})
+      if (res.identified) {
+        amplitude.getInstance().logEvent("finished identification", { "success": true })
         this.changeStatus();
         this.getPersData();
         this.disabled = false;
-      }else{
+      } else {
         this.disabled = false;
         this.toastr.warning('Пожалуйста попробуйте еще раз пройти идентификацию лица', '');
       }
     }, error => {
       this.registerService.resendImage(this.requestId, image).subscribe(res => {
-        if(res.identified){
-          amplitude.getInstance().logEvent("finished identification", {"success": true})
+        if (res.identified) {
+          amplitude.getInstance().logEvent("finished identification", { "success": true })
           this.changeStatus();
           this.getPersData();
           this.disabled = false;
-        }else{
+        } else {
           this.disabled = false;
           this.toastr.warning('Пожалуйста попробуйте еще раз пройти идентификацию лица', '');
         }
       }, error => {
-        amplitude.getInstance().logEvent("finished identification", {"success": false})
+        amplitude.getInstance().logEvent("finished identification", { "success": false })
         this.disabled = false;
       })
     })
   }
 
-  getPersData(){
+  getPersData() {
     this.registerService.getInfoByIIN(this.requestId).subscribe(res => {
       localStorage.setItem('pinfo', JSON.stringify(res));
-      this.router.navigate(['/profile/steps'], { queryParams: {...this.qparams, requestId:this.requestId}})
+      this.router.navigate(['/profile/steps'], { queryParams: { ...this.qparams, requestId: this.requestId } })
     });
   }
 
-  veriLive(){
+  veriLive() {
     amplitude.getInstance().logEvent("started identification");
     this.verifaceLoad = false;
   }
 
   public loadScript(url: string) {
-    const body = <HTMLDivElement> document.body;
+    const body = <HTMLDivElement>document.body;
     const script = document.createElement('script');
     script.innerHTML = '';
     script.src = url;
