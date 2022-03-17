@@ -42,10 +42,7 @@
             </a>
           </li>
         </ul>
-        <!-- <div class="custom-control custom-switch">
-          <input  [type]="checkbox ? (click)="langKZ()" : '(click)="langRU()"' type="checkbox" class="custom-control-input">
-          <label class="custom-control-label">RU</label>
-        </div> -->
+
         <button class="kz" (click)="langKZ()">KZ</button>
         <button class="ru" (click)="langRU()">RU</button>
 
@@ -124,9 +121,15 @@
           <img src="assets/img/logo.svg" alt="" class="desctop">
           <span class="mobile">ZAIMEM.KZ</span>
         </a>
-        <div class="hb-btns">
-          <div class="hb-btn hb-pay" (click)="takePDL()" (click)="validateTimePDL()">До 150 000 Т</div>
-          <div class="hb-btn hb-pay" (click)="takeLoan()" (click)="validateTime()">До 500 000 Т</div>
+        <div class="hb-btns" *ngIf="this.authService.isLoggedIn">
+          <div class="hb-btn hb-pay" (click)="takePDL()" (click)="validateTimePDL()">До 150 000 ₸</div>
+          <div class="hb-btn hb-pay" (click)="takeLoan()" (click)="validateTime()">До 500 000 ₸</div>
+          <a [routerLink]="['/cabinet']" class="hb-btn hb-login" *ngIf="this.authService.isLoggedIn">Кабинет</a>
+          <div (click)="signIn()">
+            <a [routerLink]="['/profile/login']" class="hb-btn hb-login" *ngIf="!this.authService.isLoggedIn">{{text('header.Enter')}}</a>
+          </div>
+        </div>
+        <div class="hb-btns" *ngIf="!this.authService.isLoggedIn">
           <a [routerLink]="['/cabinet']" class="hb-btn hb-login" *ngIf="this.authService.isLoggedIn">Кабинет</a>
           <div (click)="signIn()">
             <a [routerLink]="['/profile/login']" class="hb-btn hb-login" *ngIf="!this.authService.isLoggedIn">{{text('header.Enter')}}</a>
