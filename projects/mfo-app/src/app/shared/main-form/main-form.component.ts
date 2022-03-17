@@ -12,7 +12,7 @@ export class MainFormComponent implements OnInit {
 
   form: any = {
     period: 7,
-    amount: 325000,
+    amount: 350000,
     type: 'ANNUITY_PAYMENTS'
   }
   value: number = 7;
@@ -24,8 +24,8 @@ export class MainFormComponent implements OnInit {
   };
 
   priceOptions: Options = {
-    floor: 150000,
-    minLimit: 150000,
+    floor: 200000,
+    minLimit: 200000,
     ceil: 500000,
     step: 5000,
     showSelectionBar: true,

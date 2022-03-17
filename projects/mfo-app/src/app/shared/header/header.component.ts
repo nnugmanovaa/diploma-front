@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit {
 
   showNav: boolean = false;
   headerModal: boolean = false;
+  headerModalPDL: boolean = false;
 
   today = new Date();
 
@@ -27,6 +28,7 @@ export class HeaderComponent implements OnInit {
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         this.headerModal = false;
+        this.headerModalPDL = false;
         if (event['url'] === '/cabinet/settings') {
           // this.settingsPage = true; otklyuchili settings
           this.settingsPage = false;
@@ -56,6 +58,15 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  validateTimePDL() {
+    if (this.today.getHours() >= 24 || this.today.getHours() <= 6) {
+      alert("Сервис недоступен в данный момент, попробуйте ещё раз в 06:00. Спасибо, что используете наш сервис.");
+      this.headerModalPDL = false;
+    } else {
+      this.takePDL();
+    }
+  }
+
   checkLogin() {
     // console.log("1:" + this.authService.getUserName);
     if (this.authService.getUserName == false) {
@@ -80,10 +91,18 @@ export class HeaderComponent implements OnInit {
     this.showNav = false;
   }
 
+  takePDL() {
+    this.headerModalPDL = true
+    let eventProperties = {
+      "position": 1
+    };
+    amplitude.getInstance().logEvent("clicked get pdl loan", eventProperties)
+  }
+
   takeLoan() {
     this.headerModal = true
     let eventProperties = {
-      "position": 1
+      "position": 2
     };
     amplitude.getInstance().logEvent("clicked get loan", eventProperties)
   }

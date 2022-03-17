@@ -78,8 +78,9 @@ header{
     align-items: center;
     justify-content: space-between;
     &-btns{
-      display: flex;
+      // display: flex;
       gap:23px;
+      justify-content: flex-end;
       .hb-btn{
         cursor: pointer;
         border: 2px solid #34BE82;
@@ -112,6 +113,13 @@ header{
     }
   }
 }
+
+.hb{
+  .hb-btn {
+    margin-left: 23px;
+  }
+}
+
 
 .header-text {
   font-weight: 500;
@@ -219,6 +227,13 @@ header{
       }
     }
   }
+
+  .hb{
+    .hb-btn {
+      margin-bottom: 8px;
+    }
+  }
+
 }
 
 @media (max-width: 600px) {

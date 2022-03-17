@@ -20,8 +20,8 @@
       </div>
       <ngx-slider (userChange)="calculateForm()" [(value)]="form.amount" [options]="priceOptions"></ngx-slider>
       <div class="month-bottom">
-        <p (click)="form.amount = 150000;calculateForm()" style="min-width: 80px;">150 000 ₸</p>
-        <p (click)="form.amount = 325000;calculateForm()">325 000 ₸</p>
+        <p (click)="form.amount = 200000;calculateForm()" style="min-width: 80px;">200 000 ₸</p>
+        <p (click)="form.amount = 350000;calculateForm()">350 000 ₸</p>
         <p (click)="form.amount = 500000;calculateForm()">{{t('Do500000')}}</p>
       </div>
     </div>
@@ -36,12 +36,6 @@
       <p class="interest-sum">{{t('FormMonthly')}}</p>
       <b>{{ paymentPerMonth | currency: 'CLP':'₸' }}</b>
     </div>
-    <!-- <ngx-slider (userChange)="calculateForm()" [(value)]="form.amount" [options]="priceOptions"></ngx-slider> -->
-    <!-- <div class="month-bottom">
-      <p (click)="form.amount = 150000;calculateForm()" style="min-width: 80px;">150 000 ₸</p>
-      <p (click)="form.amount = 225000;calculateForm()">225 000 ₸</p>
-      <p (click)="form.amount = 300000;calculateForm()">до 300 000 ₸</p>
-    </div> -->
     <button id="theButton" class="submit-button" type="submit" (click)="validateTime()">{{t('Receive')}}</button>
     <p class="small-text">{{t('GESB')}}</p>
   </form>
