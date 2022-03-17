@@ -159,6 +159,9 @@ header{
 }
 
 @media (max-width: 600px){
+  .container {
+    padding: 0;
+  }
   .mobile-nav {
     display: flex;
     position: fixed;
@@ -215,10 +218,11 @@ header{
     }
     .hb{
       &-btns{
+        display: flex;
         .hb-btn{
           font-size: 16px;
           min-width: inherit;
-          padding: 5px;
+          padding: 2px;
           height: auto;
         }
         .hb-pay{
@@ -230,7 +234,8 @@ header{
 
   .hb{
     .hb-btn {
-      margin-bottom: 8px;
+      // margin-bottom: 8px;
+      margin-left: 4px;
     }
   }
 
@@ -247,6 +252,7 @@ header{
   header{
     .hb{
       &-btns{
+        display: flex;
         gap:16px;
         .hb-btn{
           font-size: 12px;
@@ -263,9 +269,11 @@ header{
 header{
   .hb{
     &-btns{
+      display: flex;
       gap:8px;
       .hb-btn{
         font-size: 12px;
+        text-align: center;
       }
     }
   }
