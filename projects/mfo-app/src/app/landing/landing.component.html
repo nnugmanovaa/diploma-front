@@ -1,26 +1,70 @@
 <ng-container *transloco="let text; read:'landing'">
-  <main class="main">
-    <div class="container">
-      <div class="main-left">
-        <h1>{{text('creditonline')}}<br>{{text('before')}}</h1>
-        <ul>
-          <li>{{text('money')}} <a class="timer">{{ time }}</a></li>
-          <li>{{text('mindecision')}}</li>
-          <li>{{text('per')}}</li>
-        </ul>
-        <div class="main-left-img">
-          <picture class="desctop">
-            <source type="image/webp" srcset="assets/img/main-img.webp">
-            <source type="image/jpeg" srcset="assets/img/main-img.png">
-            <img src="assets/img/main-img.png" alt="займы онлайн">
-          </picture>
-        </div>
+  <div class="block-one" id="block-one">
+  <div class="carousel" aria-label="carousel" Tabindex="0">
+    <div class="slides">
+      <div class="slides-item slide-1" id="slide-1">
+        <main class="main">
+          <div class="container">
+            <div class="main-left">
+              <h1>{{text('creditonline')}}<br>{{text('before')}}</h1>
+              <ul>
+                <li>{{text('money')}} <a class="timer">{{ time }}</a></li>
+                <li>{{text('mindecision')}}</li>
+                <li>{{text('per')}}</li>
+              </ul>
+              <div class="main-left-img">
+                <picture class="desctop">
+                  <!-- <source type="image/webp" srcset="assets/img/main-img.webp"> -->
+                  <source type="image/jpeg" srcset="assets/img/main-img.png">
+                  <img src="assets/img/main-img.png" alt="займы онлайн">
+                </picture>
+              </div>
+            </div>
+            <div class="main-right">
+              <mfo-pdl-form></mfo-pdl-form>
+            </div>
+          </div>
+        </main>
       </div>
-      <div class="main-right">
-        <mfo-main-form></mfo-main-form>
+      <div class="slides-item slide-2" id="slide-2">
+        <main class="main" style="background: #34BE82;">
+          <div class="container">
+            <div class="main-left">
+              <h1>{{text('creditonline')}}<br>{{text('before2')}}</h1>
+              <ul>
+                <li>{{text('money')}} <a class="timer">{{ time }}</a></li>
+                <li>{{text('zalog')}}</li>
+                <li>{{text('per')}}</li>
+              </ul>
+              <div class="main-left-img">
+                <picture class="desctop">
+                  <!-- <source type="image/webp" srcset="assets/img/main-img.webp"> -->
+                  <source type="image/jpeg" srcset="assets/img/main-img2.png">
+                  <img src="assets/img/main-img.png" alt="займы онлайн">
+                </picture>
+              </div>
+            </div>
+            <div class="main-right">
+              <mfo-main-form></mfo-main-form>
+            </div>
+          </div>
+        </main>
       </div>
     </div>
-  </main>
+    <div class="carousel__nav">
+      <div>
+        <a class="slider-nav-1" href="#slide-1" aria-label="Go to slide 1">{{text('pdl')}}</a>
+      </div>
+      <div>
+        <a class="slider-nav-2" href="#slide-2" aria-label="Go to slide 2">{{text('lt')}}</a>
+      </div>
+    </div>
+    <div class="carousel__nav_mob">
+      <a class="slider-nav" href="#slide-1" aria-label="Go to slide 1">1</a>
+      <a class="slider-nav" href="#slide-2" aria-label="Go to slide 2">2</a>
+    </div>
+  </div>
+</div>
 
   <section class="why-we">
     <div class="container">
@@ -104,7 +148,9 @@
           <span>{{text('min1')}}</span>
         </li>
       </ul>
-      <div class="btn" (click)="validateTime()" (click)="takeLoan()">{{text('loan')}}</div>
+      <!-- <div class="btn" (click)="validateTime()" (click)="takeLoan()">{{text('loan')}}</div> -->
+      <div class="btn" [routerLink]="['/']" fragment="block-one">{{text('loan')}}</div>
+
     </div>
   </section>
 

@@ -5,6 +5,7 @@ import { LandingRoutingModule } from './landing-routing.module';
 import { LandingComponent } from './landing.component';
 
 import { MainFormModule } from '../shared/main-form/main-form.module';
+import { PdlFormModule } from "../shared/pdl-form/pdl-form.module";
 import {TRANSLOCO_SCOPE, TranslocoModule} from '@ngneat/transloco';
 
 @NgModule({
@@ -13,7 +14,8 @@ import {TRANSLOCO_SCOPE, TranslocoModule} from '@ngneat/transloco';
     TranslocoModule,
     CommonModule,
     LandingRoutingModule,
-    MainFormModule
+    MainFormModule,
+    PdlFormModule
   ]
 })
 export class LandingModule { }

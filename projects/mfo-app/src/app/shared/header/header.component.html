@@ -27,7 +27,7 @@
         </ul>
         <ul class="ht-nav ht-cabinet-nav" *ngIf="this.authService.isLoggedIn">
           <li>
-            <a [routerLink]="['/cabinet']" routerLinkActive="active" [class.settings-page]="settingsPage">
+            <a class="header-text" [routerLink]="['/cabinet']" routerLinkActive="active" [class.settings-page]="settingsPage">
               <svg width="20" height="22" viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M10 0C4.48 0 0 4.928 0 11C0 17.072 4.48 22 10 22C15.52 22 20 17.072 20 11C20 4.928 15.52 0 10 0ZM10 3.3C11.66 3.3 13 4.774 13 6.6C13 8.426 11.66 9.9 10 9.9C8.34 9.9 7 8.426 7 6.6C7 4.774 8.34 3.3 10 3.3ZM10 18.92C7.5 18.92 5.29 17.512 4 15.378C4.03 13.189 8 11.99 10 11.99C11.99 11.99 15.97 13.189 16 15.378C14.71 17.512 12.5 18.92 10 18.92Z"
@@ -36,11 +36,8 @@
               {{ this.user }}
             </a>
           </li>
-          <!-- <li>
-          <a [routerLink]="['/cabinet/settings']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Настройки профиля </a>
-        </li> -->
           <li>
-            <a (click)="logout()" href="javascript:;">
+            <a class="header-text" (click)="logout()" href="javascript:;">
               {{text('header.Exit')}}
             </a>
           </li>
@@ -128,8 +125,7 @@
           <span class="mobile">ZAIMEM.KZ</span>
         </a>
         <div class="hb-btns">
-          <!-- <a [routerLink]="['/payment']" class="hb-btn hb-pay desctop">Оплатить</a> -->
-          <div class="hb-btn hb-pay" (click)="takeLoan()" (click)="validateTime()">{{text('header.Receive')}}</div>
+          <!-- <div class="hb-btn hb-pay" (click)="takeLoan()" (click)="validateTime()">{{text('header.Receive')}}</div> -->
           <a [routerLink]="['/cabinet']" class="hb-btn hb-login" *ngIf="this.authService.isLoggedIn">Кабинет</a>
           <div (click)="signIn()">
             <a [routerLink]="['/profile/login']" class="hb-btn hb-login" *ngIf="!this.authService.isLoggedIn">{{text('header.Enter')}}</a>

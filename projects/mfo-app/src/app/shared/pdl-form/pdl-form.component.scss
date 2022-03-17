@@ -4,15 +4,15 @@
   padding: 50px 30px 26px;
   width: 407px;
 
+  .interest-sum {
+    margin: auto auto auto 0;
+  }
+
   h2 {
     font-weight: bold;
     font-size: 28px;
     margin-bottom: 36px;
     text-align: center;
-  }
-
-  .interest-sum {
-    margin: auto auto auto 0;
   }
 
   .form-label {
@@ -177,8 +177,8 @@
 }
 @media (max-width: 600px) {
   .form-calculate {
-    padding: 20px;
     width: 100%;
+    padding: 20px;
 
     h2 {
       font-weight: 600;
@@ -211,59 +211,3 @@
     }
   }
 }
-// @media (max-width: 340px) {
-//   .form-label {
-//     display: flex;
-//     justify-content: space-between;
-//     align-items: center;
-//     margin-bottom: 18px;
-//
-//     select {
-//       font-size: 12px;
-//       padding: 7px 10px;
-//       width: 150px;
-//       border: 1px solid #8F8F8F;
-//       box-sizing: border-box;
-//       border-radius: 10px;
-//     }
-//   }
-//
-//   .form-calculate {
-//     padding: 20px;
-//
-//     h2 {
-//       font-weight: 600;
-//       margin-bottom: 23px;
-//       font-size: 20px;
-//     }
-//     font-size: 14px;
-//
-//     .form-monthly {
-//       b {
-//         font-size: 16px;
-//       }
-//     }
-//
-//     button {
-//       padding: 8px;
-//       font-weight: 600;
-//     }
-//
-//     .custom-slider {
-//       .slider-info {
-//         p {
-//           font-size: 14.2px;
-//         }
-//
-//         span {
-//           font-size: 15px;
-//           line-height: 31px;
-//         }
-//       }
-//     }
-//
-//     p {
-//       font-size: 13px;
-//     }
-//   }
-// }

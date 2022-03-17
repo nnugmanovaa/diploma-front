@@ -16,6 +16,10 @@ declare const gtag: Function;
 })
 
 export class StepsComponent implements OnInit {
+
+  incomeToggle: boolean = false;
+  additionalIncomeToggle: boolean = false;
+
   step: any = 1;
   data = {
     "iin": null,
@@ -37,7 +41,6 @@ export class StepsComponent implements OnInit {
         "district": null,
         "region": 0,
         "city": null,
-        // "postalCode": null,
         "street": null,
         "house": null,
         "apartment": null,
@@ -47,7 +50,6 @@ export class StepsComponent implements OnInit {
         "district": null,
         "region": 0,
         "city": null,
-        // "postalCode": null,
         "street": null,
         "house": null,
         "apartment": null,
@@ -59,7 +61,21 @@ export class StepsComponent implements OnInit {
       "workPosition": null,
       "employer": null,
       "monthlyIncome": "",
+      "monthlyIncomesInfo": {
+        "secondMonth": "",
+        "thirdMonth": "",
+        "fourthMonth": "",
+        "fifthMonth": "",
+        "sixthMonth": "",
+      },
       "additionalMonthlyIncome": "",
+      "additionalMonthlyIncomesInfo": {
+        "secondMonth": "",
+        "thirdMonth": "",
+        "fourthMonth": "",
+        "fifthMonth": "",
+        "sixthMonth": "",
+      },
       "workExperience": 0,
       "workPhoneNum": null,
       "maritalStatus": "",
@@ -77,7 +93,6 @@ export class StepsComponent implements OnInit {
     "addressInfoDto": {
       "region": "",
       "city": "",
-      // "postalCode": "",
       "street": "",
       "house": "",
       "apartment": "",
@@ -91,7 +106,21 @@ export class StepsComponent implements OnInit {
       "workPosition": "",
       "employer": "",
       "monthlyIncome": "",
+      "monthlyIncomesInfo": {
+        "secondMonth": "",
+        "thirdMonth": "",
+        "fourthMonth": "",
+        "fifthMonth": "",
+        "sixthMonth": "",
+      },
       "additionalMonthlyIncome": "",
+      "additionalMonthlyIncomesInfo": {
+        "secondMonth": "",
+        "thirdMonth": "",
+        "fourthMonth": "",
+        "fifthMonth": "",
+        "sixthMonth": "",
+      },
       "maritalStatus": "",
       "numberOfKids": ""
     },

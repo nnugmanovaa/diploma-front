@@ -113,6 +113,14 @@ header{
   }
 }
 
+.header-text {
+  font-weight: 500;
+}
+
+.header-text:hover {
+  color: #42A8FA;
+}
+
 .ru {
   margin-right: 10px;
   margin-left: 8px;
@@ -217,4 +225,34 @@ header{
    .desctop{
     display: none;
    }
+}
+
+
+@media (max-width:400px){
+  header{
+    .hb{
+      &-btns{
+        gap:16px;
+        .hb-btn{
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 340px){
+  body {
+    font-size: 14px;
+}
+header{
+  .hb{
+    &-btns{
+      gap:8px;
+      .hb-btn{
+        font-size: 12px;
+      }
+    }
+  }
+}
 }

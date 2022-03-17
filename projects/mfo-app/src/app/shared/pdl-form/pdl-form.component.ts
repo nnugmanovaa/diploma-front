@@ -4,29 +4,29 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 
 @Component({
-  selector: 'mfo-main-form',
-  templateUrl: './main-form.component.html',
-  styleUrls: ['./main-form.component.scss']
+  selector: 'mfo-pdl-form',
+  templateUrl: './pdl-form.component.html',
+  styleUrls: ['./pdl-form.component.scss']
 })
-export class MainFormComponent implements OnInit {
+export class PdlFormComponent implements OnInit {
 
   form: any = {
-    period: 7,
-    amount: 325000,
-    type: 'ANNUITY_PAYMENTS'
+    period: 20,
+    amount: 80000,
+    type: 'REPAYMENT_DEBT_INTEREST_END_PERIOD'
   }
-  value: number = 7;
+  value: number = 20;
   monthOptions: Options = {
-    floor: 2,
-    ceil: 12,
+    floor: 10,
+    ceil: 30,
     showSelectionBar: true,
     minLimit: 0
   };
 
   priceOptions: Options = {
-    floor: 150000,
-    minLimit: 150000,
-    ceil: 500000,
+    floor: 10000,
+    minLimit: 10000,
+    ceil: 150000,
     step: 5000,
     showSelectionBar: true,
     showTicks: true,
@@ -58,17 +58,29 @@ export class MainFormComponent implements OnInit {
   }
 
   calculateForm() {
-    this.paymentPerMonth = this.getPayment(this.form.amount, this.form.period, 0.38)
+    this.paymentPerMonth = this.getPayment(this.form.amount, this.form.period, 0.25)
   }
+
+  // getPayment(sum: any, period: any, rate: any) {
+  //   // console.log(sum, period)
+  //   var i,
+  //     koef,
+  //     result;
+  //   i = (rate);
+  //
+  //   koef = (i * (Math.pow(1 + i, period))) / (Math.pow(1 + i, period) - 1);
+  //   result = sum * koef;
+  //   return result.toFixed();
+  // };
 
   getPayment(sum: any, period: any, rate: any) {
     // console.log(sum, period)
     var i,
       koef,
       result;
-    i = (rate / 12);
+    i = (rate);
 
-    koef = (i * (Math.pow(1 + i, period))) / (Math.pow(1 + i, period) - 1);
+    koef = 0.0083 * period;
     result = sum * koef;
     return result.toFixed();
   };

@@ -374,3 +374,69 @@ body {
 *{
 scroll-behavior: smooth !important;
 }
+
+@media (max-width:340px){
+  .content-title {
+    line-height: 34px;
+  }
+
+  .profile-page {
+    .label-input {
+      label {
+        font-size: 14px;
+
+        kbd {
+          font-size: 15px;
+        }
+      }
+
+      input,
+      select,
+      textarea {
+        font-size: 18px;
+      }
+    }
+
+    .label-checkbox {
+      label {
+        font-size: 16px;
+
+        kbd {
+          font-size: 15px;
+        }
+      }
+
+      .input-check-box {
+        input {
+          font-size: 15px;
+        }
+      }
+    }
+
+    .form-top {
+      text-align: center;
+
+      h2 {
+        font-weight: bold;
+        font-size: 30px;
+        line-height: 33px;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .link {
+        font-size: 20px;
+      }
+    }
+
+
+  p{
+    font-size: 12px;
+    text-align: center;
+  }
+  div{
+    font-size: 14px;
+  }
+
+  }
+}

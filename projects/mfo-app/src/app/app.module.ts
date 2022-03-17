@@ -24,13 +24,14 @@ import { MainFormModule } from './shared/main-form/main-form.module';
 
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { TranslocoRootModule } from './transloco-root.module';
+import { PdlFormModule } from './shared/pdl-form/pdl-form.module';
 
 registerLocaleData(localeRu, 'ru');
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   exports:[],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
@@ -45,6 +46,7 @@ registerLocaleData(localeRu, 'ru');
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     TranslocoRootModule,
+    PdlFormModule,
   ],
   providers: [
     {
