@@ -22,7 +22,7 @@
 
         <div class="label-input">
           <label>{{text('chooce')}}</label>
-          <select name="loanRepayType" [(ngModel)]="payForm.loanRepayType" (ngModelChange)="setAmout()">
+          <select name="loanRepayType" [(ngModel)]="payForm.loanRepayType" (ngModelChange)="setAmount()">
             <option value="PLANNED_REPAYMENT">{{text('pla')}}</option>
             <option value="FULL_REPAYMENT">{{text('pol')}}</option>
           </select>

@@ -107,7 +107,7 @@ export class RegisterComponent implements OnInit {
     amplitude.getInstance().logEvent("clicked register");
     var currentAge = this.pdfForm.iin.slice(0, 2);
     this.registerService.checkUser(this.registerForm.msisdn).subscribe(res => {
-      if (currentAge < 21) {
+      if (currentAge < 22) {
         this.toastr.error('Минимальный возраст для получения займа - 21 год.', 'Ошибка!');
         console.log(currentAge)
       } else if (!res.exist) {

@@ -11,7 +11,7 @@ export class LandingComponent implements OnInit {
   show: any = {};
   modal: boolean = false;
   today = new Date();
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.getMainTime();

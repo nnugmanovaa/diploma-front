@@ -29,7 +29,7 @@ export class PaymentComponent implements OnInit {
         }
     ]
   };
-  payForm:any = {
+  payForm: any = {
     "username": "",
     "amountRemain": "",
     "monthPayment": "",
@@ -51,15 +51,7 @@ export class PaymentComponent implements OnInit {
     }
   }
 
-  getActiveLoan(){
-    // this.cabinet.getSchedule().subscribe(res => {
-    //   this.payForm.contractNumber = res.orderDetailsSchedule?.contract;
-    //   this.payForm.contractDate = res.orderDetailsSchedule?.contractDate;
-    //   this.payForm.monthPayment = res.orderDetailsSchedule?.monthPayment;
-    //   this.payForm.amountRemain = res.orderDetailsSchedule?.amountRemain;
-    //   this.payForm.amount = String(res.orderDetailsSchedule?.monthPayment);
-    // })
-
+  getActiveLoan() {
     this.auth.accountLoans({iin: this.payForm.clientRef}).subscribe(res => {
       if(res.loans.length){
         this.payForm.contractNumber = res.loans[0].contractNumber;
@@ -71,19 +63,20 @@ export class PaymentComponent implements OnInit {
     })
   }
 
-  payCredit(){
+  payCredit() {
     this.auth.payment(this.payForm).subscribe(res => {
       this.router.navigate(['/cabinet']);
     })
   }
 
-  setAmout(){
+  setAmount() {
     if(this.payForm.loanRepayType == 'PLANNED_REPAYMENT'){
       this.payForm.amount = String(this.payForm.monthPayment);
     }else{
       this.payForm.amount = String(this.payForm.amountRemain);
     }
   }
+
   tryPayLoan() {
     let eventProperties = {
       "amount": this.payForm.amount,
