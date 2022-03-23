@@ -1,6 +1,10 @@
 <ng-container *transloco="let text; read:'landing'">
   <div class="block-one" id="block-one">
-  <div class="carousel" aria-label="carousel" Tabindex="0">
+  <div class="carousel" aria-label="carousel">
+    <div class="carousel__nav_mob">
+      <a class="slider-nav-left" href="#slide-1" aria-label="Go to slide 1">До 150 000 Т</a>
+      <a class="slider-nav-right" href="#slide-2" aria-label="Go to slide 2">До 500 000 Т</a>
+    </div>
     <div class="slides">
       <div class="slides-item slide-1" id="slide-1">
         <main class="main">
@@ -57,10 +61,10 @@
         <a class="slider-nav-2" href="#slide-2" aria-label="Go to slide 2">{{text('before2')}}</a>
       </div>
     </div>
-    <div class="carousel__nav_mob">
-      <a class="slider-nav" href="#slide-1" aria-label="Go to slide 1">1</a>
-      <a class="slider-nav" href="#slide-2" aria-label="Go to slide 2">2</a>
-    </div>
+    <!-- <div class="carousel__nav_mob">
+      <a class="slider-nav-left" href="#slide-1" aria-label="Go to slide 1">До 150 000 Т</a>
+      <a class="slider-nav-right" href="#slide-2" aria-label="Go to slide 2">До 500 000 Т</a>
+    </div> -->
   </div>
 </div>
 

@@ -1,28 +1,74 @@
 .step-progress {
   max-width: 400px;
   margin: 0 auto 20px;
+
   p {
     font-size: 14px;
     line-height: 17px;
     color: rgba(0, 0, 0, 0.6);
     margin-bottom: 10px;
   }
+
   .progress {
     border: 1px solid rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
     border-radius: 10px;
     height: 10px;
+
     span {
       height: 10px;
       background: #42A8FA;
       border-radius: 10px;
       display: block;
-      transition: all .3s ease-in-out;
+      transition: all 0.3s ease-in-out;
     }
   }
 }
 
-.resend-pass{
+.upload-file {
+  margin-bottom: 20px;
+
+  .upload-text {
+    font-size: 16px;
+    line-height: 26px;
+    letter-spacing: -0.355556px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .file-upload {
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  #file-upload-button {
+    background-color: red;
+  }
+
+  .attachment-img {
+    // border-style: none;
+    background: none;
+    font-size: 16px;
+    background: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    box-sizing: border-box;
+    border-radius: 6px;
+    margin-right: 12px;
+    padding: 5px;
+  }
+
+  .attachment-btn {
+    font-size: 16px;
+    color: #fff;
+    background: #42A8FA;
+    border: 1px solid #fff;
+    box-sizing: border-box;
+    border-radius: 6px;
+    padding: 7px 6px 6px 6px;
+  }
+}
+
+.resend-pass {
   cursor: pointer;
 }
 
@@ -48,7 +94,6 @@
   text-align: center;
   border-radius: 6px;
   padding: 5px;
-
   /* Position the tooltip */
   position: absolute;
   z-index: 1;
@@ -66,27 +111,24 @@
   gap: 10px;
 }
 
-p.info-text{
+p.info-text {
   text-align: left;
   margin-bottom: 20px;
-  span{
+
+  span {
     color: #42A8FA;
     font-weight: 600;
   }
 }
 
-
-.back-btn{
+.back-btn {
   display: inline-flex;
-  gap:12px;
+  gap: 12px;
   font-size: 18px;
   line-height: 22px;
   margin-bottom: 20px;
 }
-
-
 // PAYMENTS
-
 .progress-ring__circle {
   transition: 0.35s stroke-dashoffset;
   transform: rotate(-90deg);
@@ -96,14 +138,16 @@ p.info-text{
 .loader {
   text-align: center;
 }
-.loader{
-  h2{
+
+.loader {
+  h2 {
     letter-spacing: -0.4px;
     color: #040415;
     font-size: 24px;
     font-weight: 600;
   }
-  p{
+
+  p {
     font-size: 14px;
     line-height: 24px;
     text-align: center;
@@ -111,6 +155,7 @@ p.info-text{
     color: rgba(4, 4, 21, 0.6);
   }
 }
+
 .top {
   display: inline-flex;
   position: relative;
@@ -134,17 +179,20 @@ p.info-text{
   border-radius: 50%;
 }
 
-.top svg{
+.top svg {
   position: relative;
-  z-index:10;
+  z-index: 10;
 }
 
-.error-result, .success-result, .alternative-result {
+.alternative-result,
+.error-result,
+.success-result {
   text-align: center;
   max-width: 400px;
   margin: 0 auto;
-  p{
-    b{
+
+  p {
+    b {
       font-size: 18px;
       line-height: 28px;
       text-align: center;
@@ -165,6 +213,7 @@ p.info-text{
     border-radius: 16px;
     padding: 15px;
     cursor: pointer;
+
     span {
       font-size: 14px;
       line-height: 24px;
@@ -188,15 +237,15 @@ p.info-text{
     }
   }
 
-
-  .info-text{
+  .info-text {
     font-size: 15px;
     line-height: 26px;
     letter-spacing: -0.355556px;
     color: rgba(4, 4, 21, 0.4);
     margin-bottom: 20px;
   }
-  .file{
+
+  .file {
     letter-spacing: -0.3px;
     text-decoration-line: underline;
     color: #42A8FA;
@@ -204,17 +253,21 @@ p.info-text{
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    gap:12px;
+    gap: 12px;
     text-align: left;
     cursor: pointer;
-    p, img{
+
+    img,
+    p {
       margin: 0;
     }
   }
+
   img {
     display: inline-flex;
     margin-bottom: 30px;
   }
+
   h2 {
     font-size: 22px;
     line-height: 32px;
@@ -224,6 +277,7 @@ p.info-text{
     font-weight: 600;
     margin-bottom: 20px;
   }
+
   .btn {
     display: inline-flex;
     background: #42A8FA;
@@ -236,7 +290,8 @@ p.info-text{
     padding: 10px;
     margin-bottom: 20px;
     cursor: pointer;
-    &.btn-default{
+
+    &.btn-default {
       background: rgba(0, 0, 0, 0.1);
       color: #000000;
       letter-spacing: -0.3px;
@@ -244,15 +299,16 @@ p.info-text{
   }
 }
 
-.modal-content{
+.modal-content {
   background: #fff;
   padding: 30px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+
   .form-top {
-    p{
-    }
-    h2{
+    p {}
+
+    h2 {
       font-size: 22px;
       line-height: 32px;
       text-align: center;
@@ -260,8 +316,9 @@ p.info-text{
       color: #040415;
     }
   }
-  .form-content{
-    .resend-pass{
+
+  .form-content {
+    .resend-pass {
       font-size: 18px;
       line-height: 22px;
       text-align: center;
@@ -269,20 +326,24 @@ p.info-text{
       color: #42A8FA;
       font-weight: 600;
     }
-    .text-center{
+
+    .text-center {
       text-align: center;
       max-width: 170px;
       margin: 0 auto;
-      .btn{
+
+      .btn {
         width: 100%;
       }
-      h3{
+
+      h3 {
         margin-top: 20px;
         font-size: 25px;
         font-weight: 600;
         margin-bottom: 20px;
       }
-      input{
+
+      input {
         font-weight: 600;
         font-size: 25px;
         text-align: center;
@@ -290,9 +351,10 @@ p.info-text{
     }
   }
 }
-
 @media screen and (max-width: 480px) {
-  .error-result, .success-result, .alternative-result {
+  .alternative-result,
+  .error-result,
+  .success-result {
     .btn {
       max-width: 328px;
       width: 100%;

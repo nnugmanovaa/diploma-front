@@ -193,6 +193,22 @@
           <p class="info-text">{{text('take-loan')}} <span>{{text('30credit')}}</span>{{text('allpol')}}</p>
         </div>
 
+        <!-- <div class="label-toggle">
+          <p class="upload-text">Если Вы используете Kaspi банк, загрузите выписку за последние 3, 6, 12 месяцев, для увеличения вероятности выдачи займа.</p>
+          <label>
+            <input type="checkbox" name="kaspiStatement" [(ngModel)]="kaspiStatement">
+            <span></span>
+          </label>
+        </div>
+
+        <ng-container *ngIf="kaspiStatement">
+          <div class="upload-file">
+            <input style="display: none" type="file" class="file-upload" (change)="onFileSelected($event)" #fileInput>
+            <button class="attachment-img" type="button" (click)="fileInput.click()">📂 Выбрать файл</button>
+            <button class="attachment-btn" type="button" (click)="onUpload()">Загрузить файл</button>
+          </div>
+        </ng-container> -->
+
         <div class="label-input">
           <label>{{text('edu')}}</label>
           <select name="education" [(ngModel)]="data.personalInfo.education">
@@ -282,26 +298,26 @@
         </div>
 
         <ng-container *ngIf="incomeToggle">
-        <div class="label-input">
-          <label>2-ой месяц</label>
-          <input type="tel" name="monthlyIncomesInfo.secondMonth" [unmask]="true" [(ngModel)]="data.personalInfo.monthlyIncomesInfo.secondMonth" [imask]="priceMask">
-        </div>
-        <div class="label-input">
-          <label>3-ий месяц</label>
-          <input type="tel" name="monthlyIncomesInfo.thirdMonth" [unmask]="true" [(ngModel)]="data.personalInfo.monthlyIncomesInfo.thirdMonth" [imask]="priceMask">
-        </div>
-        <div class="label-input">
-          <label>4-ый месяц</label>
-          <input type="tel" name="monthlyIncomesInfo.fourthMonth" [unmask]="true" [(ngModel)]="data.personalInfo.monthlyIncomesInfo.fourthMonth" [imask]="priceMask">
-        </div>
-        <div class="label-input">
-          <label>5-ый месяц</label>
-          <input type="tel" name="monthlyIncomesInfo.fifthMonth" [unmask]="true" [(ngModel)]="data.personalInfo.monthlyIncomesInfo.fifthMonth" [imask]="priceMask">
-        </div>
-        <div class="label-input">
-          <label>6-ой месяц</label>
-          <input type="tel" name="monthlyIncomesInfo.sixthMonth" [unmask]="true" [(ngModel)]="data.personalInfo.monthlyIncomesInfo.sixthMonth" [imask]="priceMask">
-        </div>
+          <div class="label-input">
+            <label>2-ой месяц</label>
+            <input type="tel" name="monthlyIncomesInfo.secondMonth" [unmask]="true" [(ngModel)]="data.personalInfo.monthlyIncomesInfo.secondMonth" [imask]="priceMask">
+          </div>
+          <div class="label-input">
+            <label>3-ий месяц</label>
+            <input type="tel" name="monthlyIncomesInfo.thirdMonth" [unmask]="true" [(ngModel)]="data.personalInfo.monthlyIncomesInfo.thirdMonth" [imask]="priceMask">
+          </div>
+          <div class="label-input">
+            <label>4-ый месяц</label>
+            <input type="tel" name="monthlyIncomesInfo.fourthMonth" [unmask]="true" [(ngModel)]="data.personalInfo.monthlyIncomesInfo.fourthMonth" [imask]="priceMask">
+          </div>
+          <div class="label-input">
+            <label>5-ый месяц</label>
+            <input type="tel" name="monthlyIncomesInfo.fifthMonth" [unmask]="true" [(ngModel)]="data.personalInfo.monthlyIncomesInfo.fifthMonth" [imask]="priceMask">
+          </div>
+          <div class="label-input">
+            <label>6-ой месяц</label>
+            <input type="tel" name="monthlyIncomesInfo.sixthMonth" [unmask]="true" [(ngModel)]="data.personalInfo.monthlyIncomesInfo.sixthMonth" [imask]="priceMask">
+          </div>
         </ng-container>
 
         <div class="label-input">
@@ -320,26 +336,26 @@
         </div>
 
         <ng-container *ngIf="additionalIncomeToggle">
-        <div class="label-input">
-          <label>2-ой месяц</label>
-          <input type="tel" name="additionalMonthlyIncomesInfo.secondMonth" [unmask]="true" [(ngModel)]="data.personalInfo.additionalMonthlyIncomesInfo.secondMonth" [imask]="priceMask">
-        </div>
-        <div class="label-input">
-          <label>3-ий месяц</label>
-          <input type="tel" name="additionalMonthlyIncomesInfo.thirdMonth" [unmask]="true" [(ngModel)]="data.personalInfo.additionalMonthlyIncomesInfo.thirdMonth" [imask]="priceMask">
-        </div>
-        <div class="label-input">
-          <label>4-ый месяц</label>
-          <input type="tel" name="additionalMonthlyIncomesInfo.fourthMonth" [unmask]="true" [(ngModel)]="data.personalInfo.additionalMonthlyIncomesInfo.fourthMonth" [imask]="priceMask">
-        </div>
-        <div class="label-input">
-          <label>5-ый месяц</label>
-          <input type="tel" name="additionalMonthlyIncomesInfo.fifthMonth" [unmask]="true" [(ngModel)]="data.personalInfo.additionalMonthlyIncomesInfo.fifthMonth" [imask]="priceMask">
-        </div>
-        <div class="label-input">
-          <label>6-ой месяц</label>
-          <input type="tel" name="additionalMonthlyIncomesInfo.sixthMonth" [unmask]="true" [(ngModel)]="data.personalInfo.additionalMonthlyIncomesInfo.sixthMonth" [imask]="priceMask">
-        </div>
+          <div class="label-input">
+            <label>2-ой месяц</label>
+            <input type="tel" name="additionalMonthlyIncomesInfo.secondMonth" [unmask]="true" [(ngModel)]="data.personalInfo.additionalMonthlyIncomesInfo.secondMonth" [imask]="priceMask">
+          </div>
+          <div class="label-input">
+            <label>3-ий месяц</label>
+            <input type="tel" name="additionalMonthlyIncomesInfo.thirdMonth" [unmask]="true" [(ngModel)]="data.personalInfo.additionalMonthlyIncomesInfo.thirdMonth" [imask]="priceMask">
+          </div>
+          <div class="label-input">
+            <label>4-ый месяц</label>
+            <input type="tel" name="additionalMonthlyIncomesInfo.fourthMonth" [unmask]="true" [(ngModel)]="data.personalInfo.additionalMonthlyIncomesInfo.fourthMonth" [imask]="priceMask">
+          </div>
+          <div class="label-input">
+            <label>5-ый месяц</label>
+            <input type="tel" name="additionalMonthlyIncomesInfo.fifthMonth" [unmask]="true" [(ngModel)]="data.personalInfo.additionalMonthlyIncomesInfo.fifthMonth" [imask]="priceMask">
+          </div>
+          <div class="label-input">
+            <label>6-ой месяц</label>
+            <input type="tel" name="additionalMonthlyIncomesInfo.sixthMonth" [unmask]="true" [(ngModel)]="data.personalInfo.additionalMonthlyIncomesInfo.sixthMonth" [imask]="priceMask">
+          </div>
         </ng-container>
 
         <div class="label-input">
