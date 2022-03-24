@@ -65,7 +65,8 @@ export class PaymentComponent implements OnInit {
 
   payCredit() {
     this.auth.payment(this.payForm).subscribe(res => {
-      this.router.navigate(['/cabinet']);
+      window.open(res.url, "_self")
+      // this.router.navigate(['/cabinet']);
     })
   }
 

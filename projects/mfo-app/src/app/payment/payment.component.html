@@ -24,10 +24,10 @@
           <label>{{text('chooce')}}</label>
           <select name="loanRepayType" [(ngModel)]="payForm.loanRepayType" (ngModelChange)="setAmount()">
             <option value="PLANNED_REPAYMENT">{{text('pla')}}</option>
-            <option value="FULL_REPAYMENT">{{text('pol')}}</option>
+            <option value="TOTAL_REPAYMENT">{{text('pol')}}</option>
           </select>
         </div>
-
+        
         <h3>{{text('sumopt')}}
           <b *ngIf="payForm.loanRepayType == 'PLANNED_REPAYMENT'">{{ payForm.monthPayment | currency: '':'₸' }}</b>
           <b *ngIf="payForm.loanRepayType != 'PLANNED_REPAYMENT'">{{ payForm.amountRemain | currency: '':'₸' }}</b>
