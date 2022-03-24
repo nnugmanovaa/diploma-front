@@ -11,11 +11,11 @@
           <input type="tel" [unmask]="true" [imask]="{mask: '+{7}0000000000',lazy: false}" [(ngModel)]="registerForm.msisdn" name="msisdn">
         </div>
         <div class="label-input">
-          <label for="">{{text('lastname')}}</label>
+          <label for="">{{text('lastname')}} <i>*</i></label>
           <input type="text" required name="lastName" [(ngModel)]="pdfForm.lastName">
         </div>
         <div class="label-input">
-          <label for="">{{text('name')}}</label>
+          <label for="">{{text('name')}} <i>*</i></label>
           <input type="text" required name="firstName" [(ngModel)]="pdfForm.firstName">
         </div>
         <div class="label-input">
@@ -23,7 +23,7 @@
           <input type="text" name="patronymic" [(ngModel)]="pdfForm.patronymic">
         </div>
         <div class="label-input">
-          <label for="">{{text('iin')}}</label>
+          <label for="">{{text('iin')}} <i>*</i></label>
           <input type="tel" name="iin" [(ngModel)]="pdfForm.iin" required [imask]="{mask: '000000000000',placeholderChar: '_',lazy: true}" minlength="12">
         </div>
         <div class="label-checkbox">

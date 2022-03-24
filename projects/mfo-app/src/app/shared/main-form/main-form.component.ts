@@ -54,7 +54,7 @@ export class MainFormComponent implements OnInit {
   }
 
   disableButton() {
-    (document.getElementById("theButton") as HTMLButtonElement).disabled = true;
+    (document.getElementById("theButton2") as HTMLButtonElement).disabled = true;
   }
 
   calculateForm() {
