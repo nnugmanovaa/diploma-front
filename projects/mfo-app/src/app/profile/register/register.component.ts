@@ -106,17 +106,26 @@ export class RegisterComponent implements OnInit {
   checkUser() {
     amplitude.getInstance().logEvent("clicked register");
     var currentAge = this.pdfForm.iin.slice(0, 2);
+    var bornAge = this.pdfForm.iin.slice(6, 7);
+    if ((bornAge == 1) || (bornAge == 2)) {
+      var birthYear = 18 + currentAge;
+    } else if ((bornAge == 3) || (bornAge == 4)) {
+      var birthYear = 19 + currentAge;
+    } else {
+      var birthYear = 20 + currentAge;
+    }
+    var userAge = 2022 - birthYear;
+    console.log(userAge);
     this.registerService.checkUser(this.registerForm.msisdn).subscribe(res => {
-      if (currentAge < 22) {
+      if ((userAge < 21) || (userAge > 63)) {
         this.toastr.error('Минимальный возраст для получения займа - 21 год.', 'Ошибка!');
-        console.log(currentAge)
       } else if (!res.exist) {
         gtag('event', 'conversion', {'send_to': 'AW-10848684799/3LsACL6H65cDEP-Vh7Uo'});
         this.registerUser()
       } else {
         this.toastr.error('Пользователь с таким номером уже зарегистрирован', 'Ошибка!');
       }
-    })
+    });
   }
 
   registerUser() {
