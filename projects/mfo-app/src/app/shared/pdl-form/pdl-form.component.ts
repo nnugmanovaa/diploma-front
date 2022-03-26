@@ -45,7 +45,7 @@ export class PdlFormComponent implements OnInit {
   }
 
   validateTime() {
-    if (this.today.getHours() >= 24 || this.today.getHours() <= 6) {
+    if (this.today.getHours() >= 21 || this.today.getHours() <= 8) {
       alert("Сервис недоступен в данный момент, попробуйте ещё раз в 06:00. Спасибо, что используете наш сервис.");
       this.disableButton();
     } else {
