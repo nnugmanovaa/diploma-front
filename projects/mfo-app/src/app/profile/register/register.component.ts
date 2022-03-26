@@ -117,8 +117,10 @@ export class RegisterComponent implements OnInit {
     var userAge = 2022 - birthYear;
     console.log(userAge);
     this.registerService.checkUser(this.registerForm.msisdn).subscribe(res => {
-      if ((userAge < 21) || (userAge > 63)) {
+      if (userAge < 21) {
         this.toastr.error('Минимальный возраст для получения займа - 21 год.', 'Ошибка!');
+      } else if (userAge > 63) {
+        this.toastr.error('Максимальный возраст для получения займа - 63 года.', 'Ошибка!');
       } else if (!res.exist) {
         gtag('event', 'conversion', {'send_to': 'AW-10848684799/3LsACL6H65cDEP-Vh7Uo'});
         this.registerUser()
