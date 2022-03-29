@@ -1,5 +1,5 @@
 <ng-container *transloco="let text; read:'landing'">
-  <main class="main">
+  <main class="main" id="main">
     <div class="container">
       <div class="main-left">
         <h1>{{text('creditonline')}}<br>{{text('before')}}</h1>
@@ -106,8 +106,7 @@
         </li>
       </ul>
       <!-- <div class="btn" (click)="validateTime()" (click)="takeLoan()">{{text('loan')}}</div> -->
-      <div class="btn" [routerLink]="['/']" fragment="block-one">{{text('loan')}}</div>
-
+      <div class="btn" [routerLink]="['/']" fragment="main">{{text('loan')}}</div>
     </div>
   </section>
 

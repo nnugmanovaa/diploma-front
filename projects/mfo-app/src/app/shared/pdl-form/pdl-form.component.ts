@@ -61,26 +61,15 @@ export class PdlFormComponent implements OnInit {
     this.paymentPerMonth = this.getPayment(this.form.amount, this.form.period, 0.25)
   }
 
-  // getPayment(sum: any, period: any, rate: any) {
-  //   // console.log(sum, period)
-  //   var i,
-  //     koef,
-  //     result;
-  //   i = (rate);
-  //
-  //   koef = (i * (Math.pow(1 + i, period))) / (Math.pow(1 + i, period) - 1);
-  //   result = sum * koef;
-  //   return result.toFixed();
-  // };
-
   getPayment(sum: any, period: any, rate: any) {
     // console.log(sum, period)
     var i,
       koef,
       result;
     i = (rate);
-
-    koef = 0.0083 * period;
+  
+    // koef = (i * (Math.pow(1 + i, period))) / (Math.pow(1 + i, period) - 1);
+    koef = (20 + 1/4 * (period - 10)) / 100;
     result = sum * koef;
     return result.toFixed();
   };
