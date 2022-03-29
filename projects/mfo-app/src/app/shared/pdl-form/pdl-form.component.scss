@@ -8,6 +8,19 @@
     margin: auto auto auto 0;
   }
 
+  .fullPrice {
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+
+    p {}
+
+    b {
+      font-weight: 600;
+      font-size: 24px;
+    }
+  }
+
   h2 {
     font-weight: bold;
     font-size: 28px;

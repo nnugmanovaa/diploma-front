@@ -33,6 +33,7 @@ export class PdlFormComponent implements OnInit {
   }
 
   paymentPerMonth: any = null;
+  fullAmount: any = null;
 
   today = new Date();
 
@@ -41,6 +42,7 @@ export class PdlFormComponent implements OnInit {
     public authService: AuthService) { }
 
   ngOnInit(): void {
+    // this.calculateAmount();
     this.calculateForm();
   }
 
@@ -59,6 +61,10 @@ export class PdlFormComponent implements OnInit {
 
   calculateForm() {
     this.paymentPerMonth = this.getPayment(this.form.amount, this.form.period, 0.25)
+  }
+
+  calculateAmount() {
+    this.fullAmount = Number(this.paymentPerMonth) + this.form.amount;
   }
 
   getPayment(sum: any, period: any, rate: any) {
