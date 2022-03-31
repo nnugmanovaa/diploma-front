@@ -6,7 +6,7 @@
       <p><b>{{text('month')}}</b> {{ loan.orderDetailsSchedule?.monthPayment| currency: '':'₸' }}</p>
       <p><b>{{text('sum')}}</b> {{ loan.orderDetailsSchedule?.totalAmount | currency: '':'₸' }}</p>
       <p><b>{{text('date')}}</b> {{ loan.orderDetailsSchedule?.contractDate | date }}</p>
-      <p><b>{{text('term')}}</b> {{ loan.orderDetailsSchedule?.period }} месяца</p>
+      <p><b>{{text('term')}}</b> {{ loan.orderDetailsSchedule?.period }} дней</p>
       <p><b>{{text('loan')}}</b> {{ loan.orderDetailsSchedule?.amountRemain | currency: '':'₸' }}</p>
       <p><b>{{text('period')}}</b> {{ loan.orderDetailsSchedule?.amountOverPayment | currency: '':'₸' }}</p>
       <br>
