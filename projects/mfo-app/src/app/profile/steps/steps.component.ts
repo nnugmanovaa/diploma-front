@@ -216,7 +216,7 @@ export class StepsComponent implements OnInit {
     var formData = new FormData();
     formData.append('pdf', this.selectedFile, this.selectedFile.name);
     formData.append('iin', this.userInfo.passportInfoDto.iin);
-    this.http.post('http://mfo-scoring.pitech.ext:5001/extract', formData)
+    this.http.post('https://mfo-scoring.pitech.ext:5001/extract', formData)
       .subscribe(res => {
         this.toastr.success('Файл успешно загружен');
       },
