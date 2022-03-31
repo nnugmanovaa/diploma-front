@@ -15,7 +15,8 @@ export class PdlFormComponent implements OnInit {
     amount: 80000,
     type: 'REPAYMENT_DEBT_INTEREST_END_PERIOD'
   }
-  value: number = 20;
+
+  // value: number = 20;
   monthOptions: Options = {
     floor: 10,
     ceil: 30,
@@ -36,19 +37,35 @@ export class PdlFormComponent implements OnInit {
   fullAmount: any = null;
 
   today = new Date();
+  paymentDay: any = null;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
     public authService: AuthService) { }
 
   ngOnInit(): void {
-    // this.calculateAmount();
     this.calculateForm();
+    
+  }
+
+  ngAfterContentChecked() {
+    this.calculateAmount();
+    this.calculateDay();
+  }
+
+  calculateDay() {
+    this.paymentDay = this.addDays(this.form.period);
+  }
+
+  addDays(period : any): Date{
+    var futureDate = new Date();
+    futureDate.setDate(futureDate.getDate() + this.form.period);
+    return futureDate;
   }
 
   validateTime() {
     if (this.today.getHours() >= 21 || this.today.getHours() <= 8) {
-      alert("Сервис недоступен в данный момент, попробуйте ещё раз в 06:00. Спасибо, что используете наш сервис.");
+      alert("Сервис недоступен в данный момент, попробуйте ещё раз в 08:00. Спасибо, что используете наш сервис.");
       this.disableButton();
     } else {
       this.createRequest();
@@ -68,12 +85,10 @@ export class PdlFormComponent implements OnInit {
   }
 
   getPayment(sum: any, period: any, rate: any) {
-    // console.log(sum, period)
     var i,
       koef,
       result;
     i = (rate);
-  
     // koef = (i * (Math.pow(1 + i, period))) / (Math.pow(1 + i, period) - 1);
     koef = (20 + 1/4 * (period - 10)) / 100;
     result = sum * koef;

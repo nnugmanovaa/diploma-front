@@ -36,7 +36,7 @@ import {
 export class AppComponent implements OnInit {
   media: boolean = false;
   contact: boolean = false;
-  img: string = "call-ico.svg";
+  img: string = "message.png";
   title = 'mfo-app';
 
   get stateName() {
@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
   }
   toggle() {
     this.media = !this.media;
-    this.img = this.media ? 'close-button.png' : 'call-ico.svg';
+    this.img = this.media ? 'close-button.png' : 'message.png';
   }
 
   setContact = function(route: string): boolean {
@@ -53,19 +53,6 @@ export class AppComponent implements OnInit {
     }
     return false;
   }
-
-  // constructor(public router: Router) {
-  //   this.router.events.subscribe(event => {
-  //     if (event instanceof NavigationEnd) {
-  //       gtag('config', 'UA-174917766-1',
-  //         {
-  //           'page_path': event.urlAfterRedirects
-  //         }
-  //       );
-  //     }
-  //   }
-  //   )
-  // }
 
   constructor(private router: Router, private auth: AuthService, public translateService: TranslocoService) {
     this.router.events.subscribe(

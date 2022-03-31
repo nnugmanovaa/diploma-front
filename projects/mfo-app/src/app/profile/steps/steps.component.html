@@ -94,11 +94,6 @@
           </select>
         </div>
 
-        <!-- <div class="label-input">
-        <label>Индекс</label>
-        <input type="text" required name="postalCode" [(ngModel)]="data.personalInfo.registrationAddress.postalCode">
-      </div> -->
-
         <div class="label-input">
           <label>{{text('street')}}</label>
           <input type="text" required name="street" [(ngModel)]="data.personalInfo.registrationAddress.street">
@@ -147,11 +142,6 @@
             </select>
           </div>
 
-          <!-- <div class="label-input">
-          <label>Индекс</label>
-          <input type="text" required name="residenceAddresspostalCode" [(ngModel)]="data.personalInfo.residenceAddress.postalCode">
-        </div> -->
-
           <div class="label-input">
             <label>{{text('street')}}</label>
             <input type="text" required name="residenceAddressstreet" [(ngModel)]="data.personalInfo.residenceAddress.street">
@@ -193,8 +183,8 @@
           <p class="info-text">{{text('take-loan')}} <span>{{text('30credit')}}</span>{{text('allpol')}}</p>
         </div>
 
-        <!-- <div class="label-toggle">
-          <p class="upload-text">Если Вы используете Kaspi банк, загрузите выписку за последние 3, 6, 12 месяцев, для увеличения вероятности выдачи займа.</p>
+        <div class="label-toggle">
+          <p class="upload-text">Если Вы используете Kaspi банк, загрузите выписку за последние 3, 6 или 12 месяцев, для увеличения вероятности получения займа.</p>
           <label>
             <input type="checkbox" name="kaspiStatement" [(ngModel)]="kaspiStatement">
             <span></span>
@@ -203,11 +193,11 @@
 
         <ng-container *ngIf="kaspiStatement">
           <div class="upload-file">
-            <input style="display: none" type="file" class="file-upload" (change)="onFileSelected($event)" #fileInput>
+            <input style="display: none" type="file" class="file-upload" (change)="onFileSelected($event)" #fileInput requiredFileType="application/pdf" accept=".pdf">
             <button class="attachment-img" type="button" (click)="fileInput.click()">📂 Выбрать файл</button>
             <button class="attachment-btn" type="button" (click)="onUpload()">Загрузить файл</button>
           </div>
-        </ng-container> -->
+        </ng-container>
 
         <div class="label-input">
           <label>{{text('edu')}}</label>
@@ -423,7 +413,7 @@
       <div class="btn btn-default" [routerLink]="['/cabinet/history']">{{text('cancel-loan')}}</div>
     </div>
     <div class="alternative-result" *ngIf="alternativeResult">
-      <img src="assets/img/error.svg" alt="">
+      <img src="assets/img/success.svg" alt="">
       <h2>{{text('unfortun')}}</h2>
       <p><b>{{text('alternative')}}</b></p>
       <ul>

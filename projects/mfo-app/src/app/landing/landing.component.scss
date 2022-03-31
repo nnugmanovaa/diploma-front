@@ -27,7 +27,7 @@ $scolor: #34BE82;
       margin-bottom: 40px;
       li{
         background: url(/assets/img/main-list.svg) left center no-repeat;
-        margin-bottom: 20px;
+        margin-bottom: 124px;
         min-height: 24px;
         font-size: 20px;
         line-height: 24px;
@@ -375,7 +375,12 @@ footer {
           font-size: 26px;
           margin-bottom: 20px;
         }
-
+        ul {
+          margin-bottom: 20px;
+          li {
+            margin-bottom: 20px;
+          }
+        }
       }
     }
   }

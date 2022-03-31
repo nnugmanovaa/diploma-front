@@ -122,7 +122,7 @@
           <span class="mobile">ZAIMEM.KZ</span>
         </a>
         <div class="hb-btns" *ngIf="this.authService.isLoggedIn">
-          <div class="hb-btn hb-pay" (click)="takePDL()" (click)="validateTimePDL()">До 150 000 ₸</div>
+          <div class="hb-btn hb-pay" (click)="takePDL()" (click)="validateTimePDL()">Взять займ</div>
           <!-- <div class="hb-btn hb-pay" (click)="takeLoan()" (click)="validateTime()">До 500 000 ₸</div> -->
           <a [routerLink]="['/cabinet']" class="hb-btn hb-login" *ngIf="this.authService.isLoggedIn">Кабинет</a>
           <div (click)="signIn()">

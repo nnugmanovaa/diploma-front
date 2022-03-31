@@ -6,6 +6,8 @@ import { RegisterService } from '../../core/services/register.service';
 import { AuthService } from '../../core/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import amplitude from 'amplitude-js';
+import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
 
 declare const gtag: Function;
 
@@ -19,6 +21,9 @@ export class StepsComponent implements OnInit {
 
   incomeToggle: boolean = false;
   additionalIncomeToggle: boolean = false;
+
+  kaspiStatement: boolean = true;
+  selectedFile!: File;
 
   step: any = 1;
   data = {
@@ -179,11 +184,14 @@ export class StepsComponent implements OnInit {
   code: any = null;
   clientId: any = null;
   hasdata: boolean = false;
+
   constructor(public stepService: StepService,
     private route: ActivatedRoute,
     private router: Router,
     private registerService: RegisterService,
-    public authService: AuthService) {
+    public authService: AuthService,
+    private http: HttpClient,
+    private toastr: ToastrService) {
 
   }
 
@@ -197,6 +205,24 @@ export class StepsComponent implements OnInit {
         this.data.preScoreRequestId = queryParams.requestId;
       }
     });
+  }
+
+  onFileSelected(event: any) {
+    this.selectedFile = <File>event.target.files[0];
+    console.log(this.selectedFile);
+  }
+
+  onUpload() {
+    var formData = new FormData();
+    formData.append('pdf', this.selectedFile, this.selectedFile.name);
+    formData.append('iin', this.userInfo.passportInfoDto.iin);
+    this.http.post('http://mfo-scoring.pitech.ext:5001/extract', formData)
+      .subscribe(res => {
+        this.toastr.success('Файл успешно загружен');
+      },
+        (err) => {
+        this.toastr.error(err.error);
+      });
   }
 
   scrollToTop() {
