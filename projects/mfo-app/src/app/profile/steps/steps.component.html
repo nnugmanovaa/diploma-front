@@ -5,7 +5,8 @@
         <div id="top"></div>
         <div class="back-btn" *ngIf="step > 1" (click)="step = step - 1">
           <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M11.67 1.8701L9.9 0.100098L0 10.0001L9.9 19.9001L11.67 18.1301L3.54 10.0001L11.67 1.8701Z" fill="black" />
+            <path d="M11.67 1.8701L9.9 0.100098L0 10.0001L9.9 19.9001L11.67 18.1301L3.54 10.0001L11.67 1.8701Z"
+              fill="black" />
           </svg>
           {{text('Back')}}
         </div>
@@ -81,7 +82,8 @@
         </div>
         <div class="label-input">
           <label>{{text('state')}}</label>
-          <select required name="region" [(ngModel)]="data.personalInfo.registrationAddress.region" (ngModelChange)="getDistrictById()">
+          <select required name="region" [(ngModel)]="data.personalInfo.registrationAddress.region"
+            (ngModelChange)="getDistrictById()">
             <option [value]="">{{text('select')}}</option>
             <option *ngFor="let item of districts" value="{{item.code}}">{{ item.name_ru }}</option>
           </select>
@@ -129,14 +131,16 @@
 
           <div class="label-input">
             <label>{{text('state')}}</label>
-            <select required name="residenceAddressRegion" [(ngModel)]="data.personalInfo.residenceAddress.region" (ngModelChange)="getResDistrictByID()">
+            <select required name="residenceAddressRegion" [(ngModel)]="data.personalInfo.residenceAddress.region"
+              (ngModelChange)="getResDistrictByID()">
               <option [value]="">{{text('select')}}</option>
               <option *ngFor="let item of districts" value="item.code">{{ item.name_ru }}</option>
             </select>
           </div>
           <div class="label-input">
             <label [class.disabled]="!cities">{{text('city')}}</label>
-            <select required name="residenceAddresscity" [(ngModel)]="data.personalInfo.residenceAddress.city" [disabled]="!cities">
+            <select required name="residenceAddresscity" [(ngModel)]="data.personalInfo.residenceAddress.city"
+              [disabled]="!cities">
               <option [value]="">{{text('select')}}</option>
               <option *ngFor="let item of citiesres" [ngValue]="item.name_ru">{{ item.name_ru }}</option>
             </select>
@@ -144,18 +148,21 @@
 
           <div class="label-input">
             <label>{{text('street')}}</label>
-            <input type="text" required name="residenceAddressstreet" [(ngModel)]="data.personalInfo.residenceAddress.street">
+            <input type="text" required name="residenceAddressstreet"
+              [(ngModel)]="data.personalInfo.residenceAddress.street">
           </div>
 
           <div class="half-form">
             <div class="label-input">
               <label>{{text('home-num')}}</label>
-              <input type="text" required name="residenceAddresshouse" [(ngModel)]="data.personalInfo.residenceAddress.house">
+              <input type="text" required name="residenceAddresshouse"
+                [(ngModel)]="data.personalInfo.residenceAddress.house">
             </div>
 
             <div class="label-input">
               <label>{{text('kv')}}</label>
-              <input type="text" name="residenceAddressapartment" [(ngModel)]="data.personalInfo.residenceAddress.apartment">
+              <input type="text" name="residenceAddressapartment"
+                [(ngModel)]="data.personalInfo.residenceAddress.apartment">
             </div>
           </div>
         </ng-container>
@@ -184,7 +191,8 @@
         </div>
 
         <!-- <div class="label-toggle">
-          <p class="upload-text">Если Вы используете Kaspi банк, загрузите выписку за последние 3, 6 или 12 месяцев, для увеличения вероятности получения займа.</p>
+          <p class="upload-text">Если Вы используете Kaspi банк, загрузите выписку за последние 3, 6 или 12 месяцев, для
+            увеличения вероятности получения займа.</p>
           <label>
             <input type="checkbox" name="kaspiStatement" [(ngModel)]="kaspiStatement">
             <span></span>
@@ -193,7 +201,8 @@
 
         <ng-container *ngIf="kaspiStatement">
           <div class="upload-file">
-            <input style="display: none" type="file" class="file-upload" (change)="onFileSelected($event)" #fileInput requiredFileType="application/pdf" accept=".pdf">
+            <input style="display: none" type="file" class="file-upload" (change)="onFileSelected($event)" #fileInput
+              requiredFileType="application/pdf" accept=".pdf">
             <button class="attachment-img" type="button" (click)="fileInput.click()">📂 Выбрать файл</button>
             <button class="attachment-btn" type="button" (click)="onUpload()">Загрузить файл</button>
           </div>
@@ -274,7 +283,8 @@
 
         <div class="label-input">
           <label>{{text('month-income')}}</label>
-          <input type="tel" name="monthlyIncome" [unmask]="true" [(ngModel)]="data.personalInfo.monthlyIncome" [imask]="priceMask">
+          <input type="tel" name="monthlyIncome" [unmask]="true" [(ngModel)]="data.personalInfo.monthlyIncome"
+            [imask]="priceMask">
         </div>
 
         <div class="label-toggle">
@@ -290,29 +300,35 @@
         <ng-container *ngIf="incomeToggle">
           <div class="label-input">
             <label>2-ой месяц</label>
-            <input type="tel" name="monthlyIncomesInfo.secondMonth" [unmask]="true" [(ngModel)]="data.personalInfo.monthlyIncomesInfo.secondMonth" [imask]="priceMask">
+            <input type="tel" name="monthlyIncomesInfo.secondMonth" [unmask]="true"
+              [(ngModel)]="data.personalInfo.monthlyIncomesInfo.secondMonth" [imask]="priceMask">
           </div>
           <div class="label-input">
             <label>3-ий месяц</label>
-            <input type="tel" name="monthlyIncomesInfo.thirdMonth" [unmask]="true" [(ngModel)]="data.personalInfo.monthlyIncomesInfo.thirdMonth" [imask]="priceMask">
+            <input type="tel" name="monthlyIncomesInfo.thirdMonth" [unmask]="true"
+              [(ngModel)]="data.personalInfo.monthlyIncomesInfo.thirdMonth" [imask]="priceMask">
           </div>
           <div class="label-input">
             <label>4-ый месяц</label>
-            <input type="tel" name="monthlyIncomesInfo.fourthMonth" [unmask]="true" [(ngModel)]="data.personalInfo.monthlyIncomesInfo.fourthMonth" [imask]="priceMask">
+            <input type="tel" name="monthlyIncomesInfo.fourthMonth" [unmask]="true"
+              [(ngModel)]="data.personalInfo.monthlyIncomesInfo.fourthMonth" [imask]="priceMask">
           </div>
           <div class="label-input">
             <label>5-ый месяц</label>
-            <input type="tel" name="monthlyIncomesInfo.fifthMonth" [unmask]="true" [(ngModel)]="data.personalInfo.monthlyIncomesInfo.fifthMonth" [imask]="priceMask">
+            <input type="tel" name="monthlyIncomesInfo.fifthMonth" [unmask]="true"
+              [(ngModel)]="data.personalInfo.monthlyIncomesInfo.fifthMonth" [imask]="priceMask">
           </div>
           <div class="label-input">
             <label>6-ой месяц</label>
-            <input type="tel" name="monthlyIncomesInfo.sixthMonth" [unmask]="true" [(ngModel)]="data.personalInfo.monthlyIncomesInfo.sixthMonth" [imask]="priceMask">
+            <input type="tel" name="monthlyIncomesInfo.sixthMonth" [unmask]="true"
+              [(ngModel)]="data.personalInfo.monthlyIncomesInfo.sixthMonth" [imask]="priceMask">
           </div>
         </ng-container>
 
         <div class="label-input">
           <label>{{text('month-extra-income')}}</label>
-          <input type="tel" name="additionalMonthlyIncome" [unmask]="true" [(ngModel)]="data.personalInfo.additionalMonthlyIncome" [imask]="priceMask">
+          <input type="tel" name="additionalMonthlyIncome" [unmask]="true"
+            [(ngModel)]="data.personalInfo.additionalMonthlyIncome" [imask]="priceMask">
         </div>
 
         <div class="label-toggle">
@@ -328,23 +344,28 @@
         <ng-container *ngIf="additionalIncomeToggle">
           <div class="label-input">
             <label>2-ой месяц</label>
-            <input type="tel" name="additionalMonthlyIncomesInfo.secondMonth" [unmask]="true" [(ngModel)]="data.personalInfo.additionalMonthlyIncomesInfo.secondMonth" [imask]="priceMask">
+            <input type="tel" name="additionalMonthlyIncomesInfo.secondMonth" [unmask]="true"
+              [(ngModel)]="data.personalInfo.additionalMonthlyIncomesInfo.secondMonth" [imask]="priceMask">
           </div>
           <div class="label-input">
             <label>3-ий месяц</label>
-            <input type="tel" name="additionalMonthlyIncomesInfo.thirdMonth" [unmask]="true" [(ngModel)]="data.personalInfo.additionalMonthlyIncomesInfo.thirdMonth" [imask]="priceMask">
+            <input type="tel" name="additionalMonthlyIncomesInfo.thirdMonth" [unmask]="true"
+              [(ngModel)]="data.personalInfo.additionalMonthlyIncomesInfo.thirdMonth" [imask]="priceMask">
           </div>
           <div class="label-input">
             <label>4-ый месяц</label>
-            <input type="tel" name="additionalMonthlyIncomesInfo.fourthMonth" [unmask]="true" [(ngModel)]="data.personalInfo.additionalMonthlyIncomesInfo.fourthMonth" [imask]="priceMask">
+            <input type="tel" name="additionalMonthlyIncomesInfo.fourthMonth" [unmask]="true"
+              [(ngModel)]="data.personalInfo.additionalMonthlyIncomesInfo.fourthMonth" [imask]="priceMask">
           </div>
           <div class="label-input">
             <label>5-ый месяц</label>
-            <input type="tel" name="additionalMonthlyIncomesInfo.fifthMonth" [unmask]="true" [(ngModel)]="data.personalInfo.additionalMonthlyIncomesInfo.fifthMonth" [imask]="priceMask">
+            <input type="tel" name="additionalMonthlyIncomesInfo.fifthMonth" [unmask]="true"
+              [(ngModel)]="data.personalInfo.additionalMonthlyIncomesInfo.fifthMonth" [imask]="priceMask">
           </div>
           <div class="label-input">
             <label>6-ой месяц</label>
-            <input type="tel" name="additionalMonthlyIncomesInfo.sixthMonth" [unmask]="true" [(ngModel)]="data.personalInfo.additionalMonthlyIncomesInfo.sixthMonth" [imask]="priceMask">
+            <input type="tel" name="additionalMonthlyIncomesInfo.sixthMonth" [unmask]="true"
+              [(ngModel)]="data.personalInfo.additionalMonthlyIncomesInfo.sixthMonth" [imask]="priceMask">
           </div>
         </ng-container>
 
@@ -382,7 +403,8 @@
     <div class="loader">
       <div class="top">
         <svg class="progress-ring" width="270" height="270">
-          <circle class="progress-ring__circle" stroke="#34BE82" stroke-width="15" fill="transparent" r="120" cx="135" cy="135" style="{{stroke}}" />
+          <circle class="progress-ring__circle" stroke="#34BE82" stroke-width="15" fill="transparent" r="120" cx="135"
+            cy="135" style="{{stroke}}" />
         </svg>
         <div class="percent">{{ percent }}%</div>
       </div>
@@ -417,7 +439,8 @@
       <h2>{{text('unfortun')}}</h2>
       <p><b>{{text('alternative')}}</b></p>
       <ul>
-        <li *ngFor="let item of alternativeChoices" (click)="selectedChoice = item" [class.active]="selectedChoice == item">
+        <li *ngFor="let item of alternativeChoices" (click)="selectedChoice = item"
+          [class.active]="selectedChoice == item">
           <div class="left">
             <span>{{text('sum-loan')}}</span>
             <p>{{ item.loanAmount | currency: 'CLP':'₸' }}</p>
@@ -428,6 +451,9 @@
           </div>
         </li>
       </ul>
+      <div class="file" (click)="getAltAnketa()"><img src="assets/img/dot.svg" alt="">{{text('statement')}}</div>
+      <div class="file" (click)="getAltContract()"><img src="assets/img/dot.svg" alt="">{{text('pay-schedule')}}</div>
+      <br>
       <button class="btn" (click)="createNewReq()" [disabled]="!selectedChoice">{{text('conditions')}}</button>
       <div class="btn btn-default" [routerLink]="['/cabinet']">{{text('cancel-loan')}}</div>
     </div>
@@ -445,7 +471,8 @@
             <div class="text-center">
               <h3>SMS-код</h3>
               <div class="label-input">
-                <input type="tel" name="code" [imask]="{mask: '000000',lazy: false, placeholderChar: '-'}" [(ngModel)]="code">
+                <input type="tel" name="code" [imask]="{mask: '000000',lazy: false, placeholderChar: '-'}"
+                  [(ngModel)]="code">
               </div>
             </div>
             <button type="submit" class="btn">{{text('Confirm')}}</button>

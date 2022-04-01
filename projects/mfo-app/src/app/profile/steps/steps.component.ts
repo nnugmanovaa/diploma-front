@@ -7,7 +7,6 @@ import { AuthService } from '../../core/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import amplitude from 'amplitude-js';
 import { HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
 
 declare const gtag: Function;
 
@@ -216,7 +215,7 @@ export class StepsComponent implements OnInit {
     var formData = new FormData();
     formData.append('pdf', this.selectedFile, this.selectedFile.name);
     formData.append('iin', this.userInfo.passportInfoDto.iin);
-    this.http.post('https://mfo-scoring.pitech.ext:5001/extract', formData)
+    this.http.post('http://mfo-scoring.pitech.ext:5001/extract', formData)
       .subscribe(res => {
         this.toastr.success('Файл успешно загружен');
       },
@@ -235,6 +234,13 @@ export class StepsComponent implements OnInit {
 
   getAnketa() {
     this.stepService.getAnketa(this.loanID).subscribe(res => {
+      let file = URL.createObjectURL(res);
+      window.open(file);
+    });
+  }
+
+  getAltAnketa() {
+    this.stepService.getAnketa(this.selectedChoice.orderId).subscribe(res => {
       let file = URL.createObjectURL(res);
       window.open(file);
     });
@@ -265,7 +271,6 @@ export class StepsComponent implements OnInit {
         this.userInfo.addressInfoDto = res.addressInfoDto;
         this.data.personalInfo.registrationAddress.region = this.userInfo.addressInfoDto.region;
         this.data.personalInfo.registrationAddress.city = this.userInfo.addressInfoDto.city;
-        // this.data.personalInfo.registrationAddress.postalCode = this.userInfo.addressInfoDto.postalCode;
         this.data.personalInfo.registrationAddress.street = this.userInfo.addressInfoDto.street;
         this.data.personalInfo.registrationAddress.house = this.userInfo.addressInfoDto.house;
         this.data.personalInfo.registrationAddress.apartment = this.userInfo.addressInfoDto.apartment;
@@ -308,8 +313,14 @@ export class StepsComponent implements OnInit {
     });
   }
 
+  getAltContract() {
+    this.stepService.getContract(this.selectedChoice.orderId).subscribe(res => {
+      let file = URL.createObjectURL(res);
+      window.open(file);
+    });
+  }
+
   createNewReq() {
-    // console.log(this.selectedChoice)
     this.loanID = this.selectedChoice.orderId;
     this.data.loanAmount = this.selectedChoice.loanAmount;
     this.data.loanPeriod = this.selectedChoice.loanMonthPeriod;
@@ -362,7 +373,6 @@ export class StepsComponent implements OnInit {
       } else {
         this.data.personalInfo.gender = 'Женский';
       }
-      // this.data.personalInfo.gender = dinfo.gender;
       this.data.personalInfo.registrationAddress.street = dinfo ?.registrationAddress ?.street;
       this.data.personalInfo.registrationAddress.house = dinfo ?.registrationAddress ?.building;
       this.data.personalInfo.registrationAddress.apartment = dinfo ?.registrationAddress ?.flat;
@@ -378,7 +388,6 @@ export class StepsComponent implements OnInit {
     if (selected) {
       this.data.personalInfo.registrationAddress.region = selected.code;
       this.data.personalInfo.registrationAddress.city = (address.region ?.charAt(0) + address.region ?.slice(1).toLowerCase()).replace('р-н', 'район');
-      // console.log(this.data.personalInfo.registrationAddress.city)
       this.getDistrictById();
     }
   }
@@ -499,7 +508,6 @@ export class StepsComponent implements OnInit {
       this.data.personalInfo.residenceAddress = this.data.personalInfo.registrationAddress
     }
 
-    // console.log("this data 1:", this.data);
     if (!this.data.preScoreRequestId) {
       amplitude.getInstance().logEvent("started scoring process", { "first time": true })
       this.createRequest();
@@ -526,7 +534,6 @@ export class StepsComponent implements OnInit {
     var effectiveRate = 54.9
     var ownScore: null = null
     var rejectText: null = null
-    // console.log("this.data", this.data);
     this.stepService.submitStep(this.data).subscribe(res => {
       scoringStatus = res ?.result
       decil = res.scoringInfo.decil
@@ -547,7 +554,6 @@ export class StepsComponent implements OnInit {
         this.successResult = true;
         this.loanID = res.orderId;
         this.loading = false;
-        // console.log("asd", rejectText)
         amplitude.getInstance().logEvent("finished scoring", { "status": scoringStatus, "rejectText": rejectText, "decil": decil, "kdn": kdn, "newKdn": newKdn, "effective rate": effectiveRate, "ownScore": ownScore })
       } else if (res ?.result == 'ALTERNATIVE') {
         gtag('event', 'conversion', {
@@ -626,7 +632,6 @@ export class StepsComponent implements OnInit {
   createAdressInfo() {
     this.userInfo.addressInfoDto.region = this.data.personalInfo ?.registrationAddress ?.region
     this.userInfo.addressInfoDto.city = this.data.personalInfo ?.registrationAddress ?.city
-    // this.userInfo.addressInfoDto.postalCode = this.data.personalInfo?.registrationAddress?.postalCode
     this.userInfo.addressInfoDto.street = this.data.personalInfo ?.registrationAddress ?.street
     this.userInfo.addressInfoDto.house = this.data.personalInfo ?.registrationAddress ?.house
     this.userInfo.addressInfoDto.apartment = this.data.personalInfo ?.registrationAddress ?.apartment
