@@ -39,7 +39,14 @@ export class AuthInterceptor implements HttpInterceptor {
         }
 
         if(err.error?.message){
-          this.toastr.error(err.error?.message, 'Ошибка!');
+          if (err.error?.message.includes("[") & err.error?.message.includes("]")) {
+            var index1 = err.error.message.indexOf( "[" );
+            var index2 = err.error.message.indexOf( "]" );
+            let errorMessage = err.error.message.substring(index1+1, index2)
+            this.toastr.error(errorMessage);
+          } else {
+            this.toastr.error(err.error?.message, 'Ошибка!');
+          }
           return;
         }
       }

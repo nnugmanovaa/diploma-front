@@ -41,4 +41,8 @@ export class StepService {
   changeCardStatus(id:any){
     return this.httpClient.put<any>(`${this.LOAN_URL}/orders/${id}/approve`,{});
   }
+
+  extract(iin:any, data:any){
+    return this.httpClient.post<any>(`${this.LOAN_URL}/extract/` + iin, data);
+  }
 }

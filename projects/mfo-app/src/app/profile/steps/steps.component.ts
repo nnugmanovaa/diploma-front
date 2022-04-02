@@ -213,15 +213,19 @@ export class StepsComponent implements OnInit {
 
   onUpload() {
     var formData = new FormData();
-    formData.append('pdf', this.selectedFile, this.selectedFile.name);
-    formData.append('iin', this.userInfo.passportInfoDto.iin);
-    this.http.post('http://mfo-scoring.pitech.ext:5001/extract', formData)
+    formData.append('file', this.selectedFile, this.selectedFile.name);
+    this.stepService.extract(this.userInfo.passportInfoDto.iin, formData)
       .subscribe(res => {
         this.toastr.success('Файл успешно загружен');
       },
-        (err) => {
-        this.toastr.error(err.error);
-      });
+        // (err) => {
+          // var index1 = err.error.message.indexOf( "[" );
+          // var index2 = err.error.message.indexOf( "]" );
+          // let errorMessage = err.error.message.substring(index1+1, index2)
+
+          // this.toastr.error(errorMessage);
+      // }
+      );
   }
 
   scrollToTop() {
