@@ -27,7 +27,7 @@ $scolor: #34BE82;
       margin-bottom: 40px;
       li{
         background: url(/assets/img/main-list.svg) left center no-repeat;
-        margin-bottom: 124px;
+        margin-bottom: 104px;
         min-height: 24px;
         font-size: 20px;
         line-height: 24px;
@@ -360,6 +360,16 @@ footer {
       width: 95%;
     }
   }
+
+  .how-to-checkout {
+    ul {
+      li {
+        p {
+          height: 50px;
+        }
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -423,6 +433,11 @@ footer {
 
   .how-to-checkout {
     padding: 20px 0;
+
+    h4 {
+      max-height: 40px;
+      height: 100%;
+    }
 
     p {
       font-size: 15px;
