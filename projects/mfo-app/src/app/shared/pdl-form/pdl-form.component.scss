@@ -9,15 +9,13 @@
   }
 
   .fullPrice {
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
-
-    p {}
-
+    font-size: 14px;
+    opacity: 0.5;
     b {
       font-weight: 600;
-      font-size: 18px;
     }
   }
 
@@ -47,12 +45,12 @@
     margin-bottom: 12px;
     display: flex;
     justify-content: space-between;
-
+    font-size: 14px;
+    opacity: 0.5;
     p {}
 
     b {
       font-weight: 600;
-      font-size: 18px;
     }
   }
 

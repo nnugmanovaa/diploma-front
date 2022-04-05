@@ -147,32 +147,38 @@ header {
 
 .ru {
   margin-right: 10px;
-  margin-left: 8px;
+  // margin-left: 8px;
   border-radius: 10px;
   border-style: none;
-  padding: 10px;
+  background-color: transparent;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .kz {
   margin-left: auto;
   border-radius: 10px;
   border-style: none;
-  padding: 10px;
+  background-color: transparent;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
-.kz:active,
-.ru:active {
-  background-color: #42A8FA;
+.icon.kz {
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-right: 10px;
 }
 
-.kz:hover,
-.ru:hover {
-  background-color: #42A8FA;
-}
+// .kz:active,
+// .ru:active {
+//   background-color: #42A8FA;
+// }
 
 .mobile-nav {
   display: none;
 }
+
 @media (max-width: 600px) {
   .container {
     padding: 5px;
@@ -207,6 +213,18 @@ header {
 
   .mobile-nav li {
     margin-bottom: 12px;
+
+    .ru-mob {
+      font-size: 1.5rem;
+      cursor: pointer;
+      margin-left: 8px;
+    }
+
+    .kz-mob {
+      font-size: 1.5rem;
+      cursor: pointer;
+      margin-right: 8px;
+    }
   }
 
   .mobile-nav .close {
@@ -265,11 +283,13 @@ header {
     }
   }
 }
+
 @media (max-width: 600px) {
   .desctop {
     display: none;
   }
 }
+
 @media (max-width:400px) {
   header {
     .hb {
@@ -284,6 +304,7 @@ header {
     }
   }
 }
+
 @media (max-width: 340px) {
   body {
     font-size: 14px;

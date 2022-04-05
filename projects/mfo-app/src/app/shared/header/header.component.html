@@ -43,8 +43,8 @@
           </li>
         </ul>
 
-        <button class="kz" (click)="langKZ()">KZ</button>
-        <button class="ru" (click)="langRU()">RU</button>
+        <button class="kz" (click)="langKZ()">🇰🇿</button>
+        <button class="ru" (click)="langRU()">🇷🇺</button>
 
         <a href="tel:+7 (777) 010-58-00" class="ht-phone">
           <img src="assets/img/call-ico.svg" width="52" height="52" alt="">
@@ -63,8 +63,8 @@
           <ng-container *ngIf="!this.authService.isLoggedIn">
             <ul>
               <li (click)="showNav = false">
-                <a class="kz" (click)="langKZ()">Каз</a>
-                <a class="kz" (click)="langRU()">Рус</a>
+                <a class="kz-mob" (click)="langKZ()">🇰🇿</a>
+                <a class="ru-mob" (click)="langRU()">🇷🇺</a>
               </li>
               <li (click)="showNav = false">
                 <a [routerLink]="['/']" fragment="Checkout">{{text('header.HowToGet')}}</a>
