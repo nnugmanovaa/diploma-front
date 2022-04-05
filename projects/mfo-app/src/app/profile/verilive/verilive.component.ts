@@ -46,7 +46,7 @@ export class VeriliveComponent implements OnInit {
       this.qparams = queryParams;
     });
     this.createRequest();
-    this.loadScript('https://s3.eu-central-1.amazonaws.com/verilive-statics.verigram.ai/verilive.js');
+    this.loadScript('https://s3.eu-central-1.amazonaws.com/verilive-statics.verigram.ai/verilive-v1.12.x.js');
     this.loadScript('../assets/js/verilive.js');
     fromEvent(window, 'build').subscribe((event: any) => {
       this.showSignUP(),
