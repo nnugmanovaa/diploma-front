@@ -27,6 +27,7 @@
 
 .upload-file {
   margin-bottom: 20px;
+  display: flex;
 
   .upload-text {
     font-size: 16px;
@@ -37,35 +38,28 @@
   }
 
   .file-upload {
-    font-size: 14px;
+    font-size: 16px;
     font-family: 'Inter', sans-serif;
   }
 
-  #file-upload-button {
-    background-color: red;
-  }
-
-  .attachment-img {
-    height: 40px;
-    background: none;
+  label {
     font-size: 16px;
-    background: #FFFFFF;
-    border: 1px solid #CCCCCC;
-    box-sizing: border-box;
-    border-radius: 6px;
-    margin-right: 12px;
-    padding: 5px;
-  }
-
-  .attachment-btn {
-    height: 40px;
-    font-size: 16px;
-    color: #fff;
-    background: #42A8FA;
-    border: 1px solid #fff;
+    margin-right: 20px;
+    color: #000;
+    background: #fff;
+    border: 1px solid rgb(0, 0, 0, 0.2);
     box-sizing: border-box;
     border-radius: 6px;
     padding: 7px 6px 6px 6px;
+  }
+
+  #file-chosen {
+    margin-left: 20px;
+  }
+
+  .file-name {
+    font-size: 16px;
+    margin: auto 0;
   }
 }
 
@@ -129,6 +123,7 @@ p.info-text {
   line-height: 22px;
   margin-bottom: 20px;
 }
+
 // PAYMENTS
 .progress-ring__circle {
   transition: 0.35s stroke-dashoffset;
@@ -352,7 +347,9 @@ p.info-text {
     }
   }
 }
+
 @media screen and (max-width: 480px) {
+
   .alternative-result,
   .error-result,
   .success-result {

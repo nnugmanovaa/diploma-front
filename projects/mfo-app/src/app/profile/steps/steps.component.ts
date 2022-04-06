@@ -21,9 +21,6 @@ export class StepsComponent implements OnInit {
   incomeToggle: boolean = false;
   additionalIncomeToggle: boolean = false;
 
-  kaspiStatement: boolean = true;
-  selectedFile!: File;
-
   step: any = 1;
   data = {
     "iin": null,
@@ -184,6 +181,10 @@ export class StepsComponent implements OnInit {
   clientId: any = null;
   hasdata: boolean = false;
 
+  kaspiStatement: boolean = true;
+  selectedFile!: File;
+  public documentList: any[] = [];
+
   constructor(public stepService: StepService,
     private route: ActivatedRoute,
     private router: Router,
@@ -208,7 +209,9 @@ export class StepsComponent implements OnInit {
 
   onFileSelected(event: any) {
     this.selectedFile = <File>event.target.files[0];
+    this.documentList = event.target.files;
     console.log(this.selectedFile);
+    this.onUpload();
   }
 
   onUpload() {

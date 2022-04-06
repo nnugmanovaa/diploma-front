@@ -201,10 +201,12 @@
 
         <ng-container *ngIf="kaspiStatement">
           <div class="upload-file">
-            <input style="display: none" type="file" class="file-upload" (change)="onFileSelected($event)" #fileInput
-              requiredFileType="application/pdf" accept=".pdf">
-            <button class="attachment-img" type="button" (click)="fileInput.click()">📂 Выбрать файл</button>
-            <button class="attachment-btn" type="button" (click)="onUpload()">Загрузить файл</button>
+            <input type="file" id="actual-btn" class="file-upload" (change)="onFileSelected($event)" #fileInput
+              requiredFileType="application/pdf" accept=".pdf" hidden/>
+              <label for="actual-btn">Выбрать файл</label>
+              <div class="file-name" *ngFor="let document of documentList; let i = index">
+                {{document.name}}
+             </div>
           </div>
         </ng-container>
 
