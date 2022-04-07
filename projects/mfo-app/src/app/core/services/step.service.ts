@@ -42,7 +42,7 @@ export class StepService {
     return this.httpClient.put<any>(`${this.LOAN_URL}/orders/${id}/approve`,{});
   }
 
-  extract(iin:any, data:any){
-    return this.httpClient.post<any>(`${this.LOAN_URL}/extract/` + iin, data);
+  extract(iin:any, name:any, data:any){
+    return this.httpClient.post<any>(`${this.LOAN_URL}/extract?iin=` + iin + "&name=" + name, data);
   }
 }

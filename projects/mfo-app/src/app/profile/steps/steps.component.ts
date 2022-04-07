@@ -81,7 +81,17 @@ export class StepsComponent implements OnInit {
       "workPhoneNum": null,
       "maritalStatus": "",
       "gender": "",
-      "numberOfKids": 0
+      "numberOfKids": 0,
+      // "contacts": [{
+      //   "contactName": "",
+      //   "contactPhone": "",
+      //   "contactLevel": null
+      //   },
+      //   {
+      //   "contactName": "",
+      //   "contactPhone": "",
+      //   "contactLevel": null
+      //   }]
     },
     "loanAmount": 0,
     "loanPeriod": 0,
@@ -216,19 +226,12 @@ export class StepsComponent implements OnInit {
 
   onUpload() {
     var formData = new FormData();
+    var clientName = this.userInfo.passportInfoDto.lastName + " " + this.userInfo.passportInfoDto.firstName;
     formData.append('file', this.selectedFile, this.selectedFile.name);
-    this.stepService.extract(this.userInfo.passportInfoDto.iin, formData)
+    this.stepService.extract(this.userInfo.passportInfoDto.iin, clientName, formData)
       .subscribe(res => {
         this.toastr.success('Файл успешно загружен');
-      },
-        // (err) => {
-          // var index1 = err.error.message.indexOf( "[" );
-          // var index2 = err.error.message.indexOf( "]" );
-          // let errorMessage = err.error.message.substring(index1+1, index2)
-
-          // this.toastr.error(errorMessage);
-      // }
-      );
+      });
   }
 
   scrollToTop() {
