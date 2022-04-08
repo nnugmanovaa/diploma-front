@@ -113,11 +113,13 @@ const url = "https://services.verigram.ai:8443/verilive/verilive"
     }
 
     function onInitButtonClick() {
-        // console.log(verilive.started)
-        // if(verilive.started){
+        console.log(verilive.started)
+        if(verilive.started == false){
+          runVerilive();
+        }
+        if(verilive.started){
           verilive.dispose();
-        // }
-        runVerilive();
+        }
         document.getElementById("ChangeText").innerHTML = 'Попробовать еще раз';
       }
 
@@ -129,12 +131,8 @@ const url = "https://services.verigram.ai:8443/verilive/verilive"
       document.getElementById("vfInfo").hidden = true;
       // console.log(data)
       // document.getElementById("results").value = JSON.stringify(data, undefined, 2).replace(/</g, "&lt;");
-      try {
-        document.getElementById("results").value = data?.bestFrame.replace('data:image/jpeg;base64,','');
-      }
-      catch (error) {
+      if (data != undefined && data != null) {
         document.getElementById("results").value = data.bestFrame.replace('data:image/jpeg;base64,','');
-        console.log(error);
       }
       verilive.dispose();
       var event = new Event('build',{ data: 'run' });
