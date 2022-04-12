@@ -29,9 +29,9 @@
 
     <p class="empty" *ngIf="list?.empty">{{text('nodata')}}</p>
 
-    <pagination-controls *ngIf="list.totalPages > 1" (pageChange)="changePage($event)" previousLabel="" nextLabel=""></pagination-controls>
+    <!-- <pagination-controls *ngIf="list.totalPages > 1" (pageChange)="changePage($event)" previousLabel="" nextLabel=""></pagination-controls> -->
 
-    <!-- <div class="pagination" *ngIf="list.totalPages > 1">
+    <div class="pagination" *ngIf="list.totalPages > 1">
     <ol>
       <li (click)="changePage(params.page - 1, !list.first)">
         <svg width="10" height="17" viewBox="0 0 10 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -47,7 +47,7 @@
         </svg>
       </li>
     </ol>
-  </div> -->
+  </div>
   </div>
 
 
