@@ -1,0 +1,11 @@
+<div [class]="class" (click)="toggleDropdown()">
+    <div class="selection">
+        <p>{{option}}</p>
+        <img src="assets/img/dropdown.svg" alt=""/>
+    </div>
+    <div *ngIf="dropdown" [@slideInOut]>
+        <ul class="content" *ngFor="let item of list">
+            <li (click)="setOption(item)">{{item}}</li>
+        </ul>
+    </div>
+</div>

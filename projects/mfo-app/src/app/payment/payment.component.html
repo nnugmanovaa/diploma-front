@@ -15,9 +15,15 @@
           <input [unmask]="true" type="text" name="clientRef" required [imask]="{mask: '000000000000',placeholderChar: '_',lazy: false}" [(ngModel)]="payForm.clientRef">
         </div>
 
-        <div class="label-input">
+        <!-- <div class="label-input">
           <label for="">{{text('numdog')}}</label>
           <input type="text" required [imask]="{mask: '0-000000000',lazy: false, autoclear: true}" [(ngModel)]="payForm.contractNumber" name="contractNumber">
+        </div> -->
+
+        <div class="label-input">
+          <label for="">Номер договора</label>
+          <mfo-dropdown [list]="orders" [class]="'dropdown-form'" (selection)="handleOrder($event)"></mfo-dropdown>
+          <!-- <input type="number" required [imask]="{mask: '0-000000000',lazy: false, autoclear: true}" [(ngModel)]="payForm.contractNumber" name="contractNumber"> -->
         </div>
 
         <div class="label-input">
@@ -29,8 +35,9 @@
         </div>
         
         <h3>{{text('sumopt')}}
-          <b *ngIf="payForm.loanRepayType == 'PLANNED_REPAYMENT'">{{ payForm.monthPayment | currency: '':'₸' }}</b>
-          <b *ngIf="payForm.loanRepayType != 'PLANNED_REPAYMENT'">{{ payForm.amountRemain | currency: '':'₸' }}</b>
+          <b> {{payForm.amount | currency: '':'₸' }}</b>
+          <!-- <b *ngIf="payForm.loanRepayType == 'PLANNED_REPAYMENT'">{{ payForm.monthPayment | currency: '':'₸' }}</b>
+          <b *ngIf="payForm.loanRepayType != 'PLANNED_REPAYMENT'">{{ payForm.amountRemain | currency: '':'₸' }}</b> -->
         </h3>
 
         <div class="label-input">

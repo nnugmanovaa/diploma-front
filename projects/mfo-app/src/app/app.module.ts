@@ -25,6 +25,7 @@ import { MainFormModule } from './shared/main-form/main-form.module';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { TranslocoRootModule } from './transloco-root.module';
 import { PdlFormModule } from './shared/pdl-form/pdl-form.module';
+// import { DropdownComponent } from './shared/dropdown/dropdown.component';
 
 registerLocaleData(localeRu, 'ru');
 
@@ -32,6 +33,7 @@ registerLocaleData(localeRu, 'ru');
   declarations: [
     AppComponent,
     HeaderComponent,
+    // DropdownComponent,
   ],
   exports:[],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
