@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
 export class CabinetService {
 
   private REST_API_SERVER = environment.LOAN_URL;
-  
+
   user:any;
 
   constructor(private  httpClient:  HttpClient, private router: Router) {}
@@ -19,7 +19,7 @@ export class CabinetService {
   }
 
   getActiveOrders(data:any){
-    return this.httpClient.post<any>(`${this.REST_API_SERVER}/loans/account-loans`, data);
+    return this.httpClient.post<any>(`${this.REST_API_SERVER}/score/account-loans`, data);
   }
 
   getSchedule(){

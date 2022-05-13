@@ -3,9 +3,6 @@
     <div class="sidebar">
       <ul>
         <li>
-          <a [routerLink]="['/cabinet/cashed-out']" routerLinkActive="active">{{text('open')}}</a>
-        </li>
-        <li>
           <a [routerLink]="['/cabinet/history']" routerLinkActive="active">{{text('history')}}</a>
         </li>
         <li>
@@ -16,9 +13,6 @@
         </li>
         <li>
           <a [routerLink]="['/cabinet/payment-types']" routerLinkActive="active">{{text('repay')}}</a>
-        </li>
-        <li>
-          <a [routerLink]="['/cabinet/deferred-payment']" routerLinkActive="active">{{text('microcredit')}}</a>
         </li>
         <li>
           <a [routerLink]="['/cabinet/settings']" routerLinkActive="active">{{text('setprof')}} </a>
@@ -32,5 +26,5 @@
       <router-outlet></router-outlet>
     </div>
   </div>
-  <footer>Copyright © 2022 ТОО "МФО Payintech”</footer>
+  <footer>Copyright © 2022 KBTU</footer>
 </ng-container>

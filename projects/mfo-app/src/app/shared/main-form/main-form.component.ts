@@ -44,15 +44,6 @@ export class MainFormComponent implements OnInit {
     this.calculateForm();
   }
 
-  validateTime() {
-    if (this.today.getHours() >= 24 || this.today.getHours() <= 6) {
-      alert("Сервис недоступен в данный момент, попробуйте ещё раз в 06:00. Спасибо, что используете наш сервис.");
-      this.disableButton();
-    } else {
-      this.createRequest();
-    }
-  }
-
   disableButton() {
     (document.getElementById("theButton2") as HTMLButtonElement).disabled = true;
   }

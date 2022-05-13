@@ -405,11 +405,7 @@ export class StepsComponent implements OnInit {
   getLocations() {
     this.stepService.getLocations().subscribe(res => {
       this.districts = res;
-      if (!this.data.preScoreRequestId) {
-        this.getPersonalData();
-      } else {
-        this.fillData();
-      }
+      this.getPersonalData();
     })
   }
 
@@ -478,12 +474,13 @@ export class StepsComponent implements OnInit {
         msisdn: this.authService ?.getUser ?.username
       }
       this.stepService.changeCardStatus(this.loanID).subscribe(res => {
+        console.log('LOAN ORDER ID ', this.loanID);
         this.registerService.checkOTP(data).subscribe(res => {
           amplitude.getInstance().logEvent("sms entered", { "success": true })
           let order = {
             orderId: this.loanID,
-            "backSuccessLink": "https://zaimem.kz/cabinet/cashed-out",
-            "backFailureLink": "https://zaimem.kz/cabinet/cashed-out"
+            "backSuccessLink": "http://localhost:4200/cabinet/history",
+            "backFailureLink": "http://localhost:4200/cabinet/history"
           }
           this.stepService.payoutCard(order).subscribe(res => {
             window.open(res.url, "_self")

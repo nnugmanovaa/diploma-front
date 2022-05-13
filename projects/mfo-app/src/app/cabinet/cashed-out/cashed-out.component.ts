@@ -18,9 +18,7 @@ export class CashedOutComponent implements OnInit {
   }
 
   getSchedule(){
-    this.cabinet.getSchedule().subscribe(res => {
-      this.loan = res;
-    })
+    console.log('inside cabinet');
   }
 
 }

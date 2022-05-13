@@ -190,25 +190,6 @@
           <p class="info-text">{{text('take-loan')}} <span>{{text('30credit')}}</span>{{text('allpol')}}</p>
         </div>
 
-        <div class="label-toggle">
-          <p class="upload-text">Если Вы используете Kaspi банк, загрузите выписку за последние 3, 6 или 12 месяцев, для
-            увеличения вероятности получения займа.</p>
-          <label>
-            <input type="checkbox" name="kaspiStatement" [(ngModel)]="kaspiStatement">
-            <span></span>
-          </label>
-        </div>
-
-        <ng-container *ngIf="kaspiStatement">
-          <div class="upload-file">
-            <input type="file" id="actual-btn" class="file-upload" (change)="onFileSelected($event)" #fileInput
-              requiredFileType="application/pdf" accept=".pdf" hidden/>
-              <label for="actual-btn">Выбрать файл</label>
-              <div class="file-name" *ngFor="let document of documentList; let i = index">
-                {{document.name}}
-             </div>
-          </div>
-        </ng-container>
 
         <div class="label-input">
           <label>{{text('edu')}}</label>
@@ -429,9 +410,6 @@
         {{text('term-loan')}} {{ data.loanPeriod }} {{text('term-month')}}
       </h2>
       <p class="info-text">{{text('write-password')}}</p>
-
-      <div class="file" (click)="getAnketa()"><img src="assets/img/dot.svg" alt="">{{text('statement')}}</div>
-      <div class="file" (click)="getContract()"><img src="assets/img/dot.svg" alt="">{{text('pay-schedule')}}</div>
       <br>
       <div class="btn" (click)="sendOTP()">{{text('subscribe')}}</div>
       <div class="btn btn-default" [routerLink]="['/cabinet/history']">{{text('cancel-loan')}}</div>

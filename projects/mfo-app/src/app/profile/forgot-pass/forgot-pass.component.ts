@@ -18,7 +18,7 @@ export class ForgotPassComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private auth:AuthService) { 
+              private auth:AuthService) {
 
   }
 
@@ -36,16 +36,18 @@ export class ForgotPassComponent implements OnInit {
 
   sendSmsCode(){
     let data = {
-      msisdn: this.msisdn,
+      clientName: this.msisdn,
       code: this.code,
-      newPassword: this.newPassword
+      password: this.newPassword
     }
     this.auth.sendSmsCode(data).subscribe(res => {
       if(res){
-        amplitude.getInstance().logEvent("sms entered", {"success": true})
-        amplitude.getInstance().logEvent("restored password")
+        console.log("response ");
+        console.log(res)
+        amplitude.getInstance().logEvent("sms entered", {"success": true});
+        amplitude.getInstance().logEvent("restored password");
         this.auth.saveUser(res);
-        this.router.navigate(['/cabinet'])
+        this.router.navigate(['/cabinet']);
       }
     },
     error => {

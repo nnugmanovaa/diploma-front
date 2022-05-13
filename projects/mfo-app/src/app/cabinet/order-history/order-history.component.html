@@ -83,7 +83,7 @@
           </li>
           <li>
             <h3>{{text('ada')}}</h3>
-            <p>{{ selectedItem.loanPeriodMonths }} мес.</p>
+            <p>{{ selectedItem.loanPeriodMonths }} дней</p>
           </li>
           <!-- <li>
           <h3>Остаток по займу</h3>
@@ -94,9 +94,6 @@
           <p>{{ selectedItem.contractExtRefId | currency: 'CLP':'₸' }}</p>
         </li> -->
         </ul>
-        <div class="text-center">
-          <div class="link" (click)="getContract()">{{text('download')}}</div>
-        </div>
         <button class="btn" (click)="infoModal = false;">{{text('close')}}</button>
       </div>
     </div>

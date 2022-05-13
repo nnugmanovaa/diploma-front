@@ -49,24 +49,6 @@ export class HeaderComponent implements OnInit {
     this.checkLogin();
   }
 
-  validateTime() {
-    if (this.today.getHours() >= 24 || this.today.getHours() <= 6) {
-      alert("Сервис недоступен в данный момент, попробуйте ещё раз в 06:00. Спасибо, что используете наш сервис.");
-      this.headerModal = false;
-    } else {
-      this.takeLoan();
-    }
-  }
-
-  validateTimePDL() {
-    if (this.today.getHours() >= 24 || this.today.getHours() <= 6) {
-      alert("Сервис недоступен в данный момент, попробуйте ещё раз в 06:00. Спасибо, что используете наш сервис.");
-      this.headerModalPDL = false;
-    } else {
-      this.takePDL();
-    }
-  }
-
   checkLogin() {
     // console.log("1:" + this.authService.getUserName);
     if (this.authService.getUserName == false) {

@@ -17,17 +17,17 @@ export class AuthService {
   constructor(private  httpClient:  HttpClient, private router: Router) {}
 
   login(data: any){
-    return this.httpClient.post<any>(`${this.REST_API_SERVER}/v1/auth/signin/`, data);
+    return this.httpClient.post<any>(`${this.LOAN_URL}/auth/signin/`, data);
   }
 
   public saveUser(user:any){
     this.user = user;
-    localStorage.setItem('token', this.user.type + ' ' + this.user.token);
+    localStorage.setItem('token', this.user.type + ' ' + this.user.accessToken);
     localStorage.setItem('user', JSON.stringify(this.user));
   }
 
   public resetPassword(data:any){
-     return this.httpClient.post(`${this.ADMIN_URL}/users/change-password/`, data);
+     return this.httpClient.post(`${this.LOAN_URL}/clients/change-password/`, data);
   }
 
   public changePassword(data:any){
@@ -35,11 +35,11 @@ export class AuthService {
   }
 
   public payment(data:any){
-    return this.httpClient.post<any>(`${this.LOAN_URL}/loans/init-payment`, data);
+    return this.httpClient.post<any>(`${this.LOAN_URL}/score/init-payment`, data);
   }
 
   public accountLoans(data:any){
-    return this.httpClient.post<any>(`${this.LOAN_URL}/loans/account-loans`, data);
+    return this.httpClient.post<any>(`${this.LOAN_URL}/score/account-loans`, data);
   }
 
   public sendSms(data:any){
@@ -47,7 +47,7 @@ export class AuthService {
   }
 
   public sendSmsCode(data:any){
-    return this.httpClient.put(`${this.REST_API_SERVER}/v1/auth/pass-reset`, data);
+    return this.httpClient.post(`${this.LOAN_URL}/auth/password-reset`, data);
   }
 
   public getUserId(phone:any){
@@ -57,23 +57,23 @@ export class AuthService {
   public CreateUserPasport(data:any){
     var lastN = JSON.stringify(data.lastName);
     localStorage.setItem('name', lastN.substr(1, lastN.length-2)+" "+JSON.stringify(data.firstName)[1]+".");
-    return this.httpClient.post<any>(`${this.REST_API_SERVER}/v1/clients/passport-info`, data);
+    return this.httpClient.post<any>(`${this.LOAN_URL}/clients/passport-info`, data);
   }
 
   public CreateUserJobDetails(data:any){
-    return this.httpClient.post<any>(`${this.REST_API_SERVER}/v1/clients/job-details`, data);
+    return this.httpClient.post<any>(`${this.LOAN_URL}/clients/job-details`, data);
   }
 
   public CreateUserAdress(data:any){
-    return this.httpClient.post<any>(`${this.REST_API_SERVER}/v1/clients/address-info`, data);
+    return this.httpClient.post<any>(`${this.LOAN_URL}/clients/address-info`, data);
   }
 
   public getUserDataById(){
-    return this.httpClient.get<any>(`${this.REST_API_SERVER}/v1/clients/full-personal-info`);
+    return this.httpClient.get<any>(`${this.LOAN_URL}/clients/full-personal-info`);
   }
 
   public updateUser(data:any){
-    return this.httpClient.put<any>(`${this.REST_API_SERVER}/v1/clients/update-personal-info`,data);
+    return this.httpClient.put<any>(`${this.LOAN_URL}/clients/update-personal-info`,data);
   }
 
   get isLoggedIn(): boolean {

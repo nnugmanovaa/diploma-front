@@ -33,6 +33,7 @@ export class ChangePasswordComponent implements OnInit {
     }
     this.auth.resetPassword(this.passwordForm).subscribe(res => {
       this.toastr.success('Пароль изменён');
+      this.refresh();
       if(res){
         this.auth.saveUser(res);
         this.toastr.success('Пароль изменён', 'Персональные данные');
@@ -41,4 +42,7 @@ export class ChangePasswordComponent implements OnInit {
     })
   }
 
+  refresh(): void {
+    window.location.reload();
+  }
 }

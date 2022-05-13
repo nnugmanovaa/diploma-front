@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
   signUpShow: boolean = false;
   singUpForm: any = {
     "code": null,
-    "msisdn": null,
+    "clientName": null,
     "password": null,
     "confirmPassword": null,
     "firstName": null,
@@ -83,7 +83,7 @@ export class RegisterComponent implements OnInit {
       return;
     }
     this.singUpForm.code = this.code;
-    this.singUpForm.msisdn = this.registerForm.msisdn;
+    this.singUpForm.clientName = this.registerForm.msisdn;
 
     this.singUpForm.firstName = this.pdfForm.firstName;
     this.singUpForm.lastName = this.pdfForm.lastName;
@@ -92,11 +92,7 @@ export class RegisterComponent implements OnInit {
 
     this.disabled = true;
     this.registerService.signUp(this.singUpForm).subscribe(res => {
-      if (res) {
-        amplitude.getInstance().logEvent("registered");
-        this.auth.saveUser(res);
-        this.router.navigate(['/profile/verilive'], { queryParams: { ...this.qparams } })
-      }
+      this.router.navigate(['/profile/login']);
       this.disabled = false;
     }, error => {
       this.disabled = false;
@@ -116,18 +112,7 @@ export class RegisterComponent implements OnInit {
     }
     var userAge = 2022 - birthYear;
     // console.log(userAge);
-    this.registerService.checkUser(this.registerForm.msisdn).subscribe(res => {
-      if (userAge < 21) {
-        this.toastr.error('Минимальный возраст для получения займа - 21 год.', 'Ошибка!');
-      } else if (userAge > 63) {
-        this.toastr.error('Максимальный возраст для получения займа - 63 года.', 'Ошибка!');
-      } else if (!res.exist) {
-        gtag('event', 'conversion', {'send_to': 'AW-10848684799/3LsACL6H65cDEP-Vh7Uo'});
-        this.registerUser()
-      } else {
-        this.toastr.error('Пользователь с таким номером уже зарегистрирован', 'Ошибка!');
-      }
-    });
+    this.registerUser();
   }
 
   registerUser() {

@@ -24,7 +24,7 @@ header {
         gap: 10px;
 
         &.active {
-          background: #42A8FA;
+          background: #26A06A;
           color: #fff;
           position: relative;
 
@@ -33,7 +33,7 @@ header {
             content: '';
             bottom: -10px;
             left: calc(50% - 5px);
-            border-top: 10px solid #42A8FA;
+            border-top: 10px solid #26A06A;
             border-left: 5px solid transparent;
             border-right: 5px solid transparent;
           }
@@ -53,7 +53,7 @@ header {
     &-phone {
       display: flex;
       align-items: center;
-      background: #42A8FA;
+      background: #26A06A;
       border-radius: 0 0 20px 20px;
       color: #fff;
       padding: 11px 21px;
@@ -78,10 +78,15 @@ header {
         span {
           font-size: 11px;
           line-height: 15px;
-          color: #E4E4E4;
+          color: #FFFFFF;
         }
       }
     }
+  }
+
+  #easylogo {
+    width: 120px;
+    height: 61px;
   }
 
   .hb {
@@ -118,11 +123,11 @@ header {
         }
 
         &.hb-login {
-          color: #427BF6;
-          border: 2px solid #427BF6;
+          color: #42A8FA;
+          border: 2px solid #42A8FA;
 
           &:hover {
-            background: #427BF6;
+            background: #42A8FA;
             color: #fff;
           }
         }
@@ -142,7 +147,7 @@ header {
 }
 
 .header-text:hover {
-  color: #42A8FA;
+  color: #26A06A;
 }
 
 .ru {
@@ -172,7 +177,7 @@ header {
 
 // .kz:active,
 // .ru:active {
-//   background-color: #42A8FA;
+//   background-color: #26A06A;
 // }
 
 .mobile-nav {
@@ -207,7 +212,7 @@ header {
     }
 
     a.active {
-      color: #42A8FA;
+      color: #26A06A;
     }
   }
 

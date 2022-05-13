@@ -91,7 +91,7 @@ export class VeriliveComponent implements OnInit {
       if (res.identified) {
         amplitude.getInstance().logEvent("finished identification", { "success": true })
         this.changeStatus();
-        this.getPersData();
+        this.getPersonalData();
         this.disabled = false;
       } else {
         this.disabled = false;
@@ -102,7 +102,7 @@ export class VeriliveComponent implements OnInit {
         if (res.identified) {
           amplitude.getInstance().logEvent("finished identification", { "success": true })
           this.changeStatus();
-          this.getPersData();
+          this.getPersonalData();
           this.disabled = false;
         } else {
           this.disabled = false;
@@ -118,6 +118,13 @@ export class VeriliveComponent implements OnInit {
   getPersData() {
     this.registerService.getInfoByIIN(this.requestId).subscribe(res => {
       localStorage.setItem('pinfo', JSON.stringify(res));
+      this.router.navigate(['/profile/steps'], { queryParams: { ...this.qparams, requestId: this.requestId } })
+    });
+  }
+
+  getPersonalData() {
+    this.auth.getUserDataById().subscribe(res => {
+      // localStorage.setItem('pinfo', JSON.stringify(res));
       this.router.navigate(['/profile/steps'], { queryParams: { ...this.qparams, requestId: this.requestId } })
     });
   }

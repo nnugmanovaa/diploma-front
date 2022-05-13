@@ -30,15 +30,6 @@ export class LandingComponent implements OnInit {
     console.log(this.today.getHours());
   }
 
-  validateTime() {
-    if (this.today.getHours() >= 24 || this.today.getHours() <= 6) {
-      alert("Сервис недоступен в данный момент, попробуйте ещё раз в 06:00. Спасибо, что используете наш сервис.");
-      this.modal = false;
-    } else {
-      this.takeLoan();
-    }
-  }
-
   takeLoan() {
     if (this.today.getHours() > 22 || this.today.getHours() <= 7) {
       this.modal = false;

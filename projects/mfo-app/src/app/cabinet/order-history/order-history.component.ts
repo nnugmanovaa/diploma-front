@@ -13,7 +13,8 @@ export enum Status {
   CLOSED = 'Закрыто',
   PENDING = 'Погасить',
   PAID = 'Оплачен',
-  EXPIRED = 'Просрочено'
+  EXPIRED = 'Просрочено',
+  CONFIRMED = 'Подтверждено'
 }
 
 @Component({
@@ -28,7 +29,7 @@ export class OrderHistoryComponent implements OnInit {
     endDate:'',
     page:0,
     size:6,
-    states:'CASHED_OUT_CARD,REJECTED',
+    states:'CASHED_OUT_CARD,REJECTED,APPROVED,CONFIRMED,CLOSED',
     sort: 'orderId,desc'
     // states=CASHED_OUT_CARD,APPROVED,REJECTED&sort=orderId,desc
   }
@@ -50,6 +51,7 @@ export class OrderHistoryComponent implements OnInit {
     start.setMonth(currentDate.getMonth()-12)
     this.params.startDate = start.toISOString().split('T')[0]
     this.params.endDate = currentDate.toISOString().split('T')[0]
+    console.log('CURRENT DATE ', currentDate)
     this.getOrders();
   }
 

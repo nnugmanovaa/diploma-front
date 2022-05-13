@@ -10,7 +10,7 @@ export class RegisterService {
 
   private REST_API_SERVER = environment.API_URL;
   private LOAN_URL = environment.LOAN_URL;
-  
+
   user:any;
 
   constructor(private  httpClient:  HttpClient, private router: Router) {}
@@ -20,7 +20,7 @@ export class RegisterService {
   }
 
   signUp(data: any){
-    return this.httpClient.post<any>(`${this.REST_API_SERVER}/v1/auth/signup`, data);
+    return this.httpClient.post<any>(`${this.LOAN_URL}/clients/create`, data);
   }
 
   checkOTP(data: any){
@@ -28,11 +28,11 @@ export class RegisterService {
   }
 
   getConsent(params: any){
-    return this.httpClient.get(`${this.REST_API_SERVER}/v1/loan/consent`, {params, responseType: 'blob'});    
+    return this.httpClient.get(`${this.REST_API_SERVER}/v1/loan/consent`, {params, responseType: 'blob'});
   }
 
   getLoanRequestId(data:any){
-    return this.httpClient.post<any>(`${this.REST_API_SERVER}/v1/loan`, data);
+    return this.httpClient.post<any>(`${this.LOAN_URL}/clients/requestId`, data);
   }
 
   getInfoByIIN(reqid:any){
@@ -44,10 +44,9 @@ export class RegisterService {
   }
 
   resendImage(reqid:any, image:any){
-    return this.httpClient.put<any>(`${this.REST_API_SERVER}/v1/loan/${reqid}/identity/result`, image);
+    return this.httpClient.put<any>(`${this.REST_API_SERVER}/v1/loan/req_y0iihjyssn/identity/result`, image);
   }
 
   checkUser(number:any){
-    return this.httpClient.get<any>(`${this.LOAN_URL}/public/client/${number}`);
   }
 }
